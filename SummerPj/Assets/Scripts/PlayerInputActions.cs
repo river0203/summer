@@ -10,7 +10,8 @@ public class PlayerInputActions : MonoBehaviour
     public bool dodge;
     public bool attack;
     public bool parry;
-
+    public bool LockOn;
+    
     public void OnMove(InputValue value)
     {
         MoveInput(value.Get<Vector2>());
@@ -38,6 +39,10 @@ public class PlayerInputActions : MonoBehaviour
     public void OnParry(InputValue value)
     {
         ParryInput(value.isPressed);
+    }
+    public void OnLockOn(InputValue value)
+    {
+        LockOnInput(value.isPressed);
     }
 
     public void MoveInput(Vector2 newMoveDirection)
@@ -67,5 +72,9 @@ public class PlayerInputActions : MonoBehaviour
     public void ParryInput(bool newParryState)
     {
         parry = newParryState;
+    }
+    public void LockOnInput(bool newLockOnState)
+    {
+        LockOn = newLockOnState;
     }
 }

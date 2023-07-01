@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,22 +11,22 @@ public class PlayerController : MonoBehaviour
 
     public GameObject CameraTarget;
     public GameObject _mainCamera;
-
+    
     #region  Status
     [Header("Status")]
-    public float MaxHp;
-    public float MaxStamina;
+    public float MaxHp = 100;
+    public float MaxStamina = 50;
 
-    float Hp;
-    float Stamina;
+    float _hp;
+    float _stamina;
     #endregion
 
     #region  Camera
     [Header("Camera")]
-    [Tooltip("Ä«¸Ş¶ó ÇÏ´Ü ÃÖ´ë ¹üÀ§")]
+    [Tooltip("ì¹´ë©”ë¼ í•˜ë‹¨ ìµœëŒ€ ë²”ìœ„")]
     [SerializeField]float BottomClamp = -30.0f;
 
-    [Tooltip("Ä«¸Ş¶ó »ó´Ü ÃÖ´ë ¹üÀ§")]
+    [Tooltip("ì¹´ë©”ë¼ ìƒë‹¨ ìµœëŒ€ ë²”ìœ„")]
     [SerializeField]float TopClamp = 70.0f;
 
     float _cinemachineTargetYaw;
@@ -35,19 +35,19 @@ public class PlayerController : MonoBehaviour
 
     #region  Move
     [Header("Move")]
-    [Tooltip("ÇöÀç ÀÌµ¿ ¼Óµµ")]
+    [Tooltip("í˜„ì¬ ì´ë™ ì†ë„")]
     [SerializeField]float Speed;
 
-    [Tooltip("±âº» ÀÌµ¿ ¼Óµµ m/s")]
+    [Tooltip("ê¸°ë³¸ ì´ë™ ì†ë„ m/s")]
     [SerializeField]float MoveSpeed = 2f;
 
-    [Tooltip("´Ş¸®±â ¼Óµµ m/s")]
+    [Tooltip("ë‹¬ë¦¬ê¸° ì†ë„ m/s")]
     [SerializeField]float SprintSpeed = 5f;
 
-    [Tooltip("º¯°æ ÀÌµ¿¼Óµµ µµ´Ş ½Ã°£")]
+    [Tooltip("ë³€ê²½ ì´ë™ì†ë„ ë„ë‹¬ ì‹œê°„")]
     [SerializeField]float SpeedChangeRate = 10.0f;
 
-    [Tooltip("¹æÇâ ÀüÈ¯ ½Ã°£")]
+    [Tooltip("ë°©í–¥ ì „í™˜ ì‹œê°„")]
     [SerializeField]float RotationSmoothTime = 0.12f;
     
 
@@ -58,19 +58,19 @@ public class PlayerController : MonoBehaviour
 
     #region  Jump
     [Header("Jump")]
-    [Tooltip("Á¡ÇÁ Àç»ç¿ë ´ë±â½Ã°£")]
+    [Tooltip("ì í”„ ì¬ì‚¬ìš© ëŒ€ê¸°ì‹œê°„")]
     [SerializeField]float JumpTimeout = 0.5f;
 
-    [Tooltip("³«ÇÏ »óÅÂ¿¡ µµ´ŞÇÏ±â±îÁö ½Ã°£")]
+    [Tooltip("ë‚™í•˜ ìƒíƒœì— ë„ë‹¬í•˜ê¸°ê¹Œì§€ ì‹œê°„")]
     [SerializeField] float FallTimeout = 0.15f;
 
-    [Tooltip("Á¡ÇÁ ³ôÀÌ")]
+    [Tooltip("ì í”„ ë†’ì´")]
     [SerializeField] float JumpHeight = 1.2f;
 
-    [Tooltip("Ä³¸¯ÅÍ ÀÚÃ¼ Áß·Â")]
+    [Tooltip("ìºë¦­í„° ìì²´ ì¤‘ë ¥")]
     [SerializeField] float Gravity = -15f;
 
-    [Tooltip("¹Ù´ÚÀ¸·Î »ç¿ëÇÒ ·¹ÀÌ¾î")]
+    [Tooltip("ë°”ë‹¥ìœ¼ë¡œ ì‚¬ìš©í•  ë ˆì´ì–´")]
     [SerializeField] LayerMask GroundLayers;
     
     bool Grounded = true;
@@ -85,20 +85,24 @@ public class PlayerController : MonoBehaviour
 
     #region  Dodge
     [Header("Dodge")]
-    [Tooltip("±¸¸£±â Áö¼Ó½Ã°£")]
+    [Tooltip("êµ¬ë¥´ê¸° ì§€ì†ì‹œê°„")]
     [SerializeField]float dodgeTime = 3f;
 
-    [Tooltip("±¸¸£±â ¼Óµµ Áõ°¡ ½Ã°£")]
-    [SerializeField] float DodgeLerpTime = 3f;
-
-    [Tooltip("±¸¸£±â ÄğÅ¸ÀÓ")]
+    [Tooltip("êµ¬ë¥´ê¸° ì¿¨íƒ€ì„")]
     [SerializeField]float DodgeCoolDown = 10f;
 
+    [Tooltip("êµ¬ë¥´ê¸° ì†ë„ ì¦ê°€ ì‹œê°„")]
+    [SerializeField] float DodgeLerpTime = 3f;
+ 
+    [Tooltip("êµ¬ë¥´ê¸° ì‹œì‘ ì†ë„")]
+    float DodgeStartSpeed = 8f;
+    
+    [Tooltip("êµ¬ë¥´ê¸° ëª©í‘œ ì†ë„")]
+    float DodgetargetSpeed = 8f;
+    
     float _dodgeCoolDownDelta;
     float DodgeSpeedChangeRate;
     float DodgecurrentTime;
-    float DodgeStartSpeed = 2f;
-    float DodgetargetSpeed = 5f;
     float DodgeSpeed;
     Vector3 dodgeTargetdirection;
     #endregion
@@ -122,6 +126,9 @@ public class PlayerController : MonoBehaviour
         _cinemachineTargetYaw = CameraTarget.transform.rotation.eulerAngles.y;
         _jumpTimeoutDelta = JumpTimeout;
         _fallTimeoutDelta = FallTimeout;
+
+        _hp = MaxHp;
+        _stamina = MaxStamina;
     }
     private void Update()
     {
@@ -129,12 +136,13 @@ public class PlayerController : MonoBehaviour
         GroundedCheck();
         Move();
         Dodge();
+        Debug.Log(Grounded);
     }
     private void LateUpdate()
     {
         CameraRotation();
     }
- 
+
     void Dodge()
     {
         if (!_input.dodge) { dodgeTargetdirection = Move(); _dodgeCoolDownDelta -= Time.deltaTime; }
