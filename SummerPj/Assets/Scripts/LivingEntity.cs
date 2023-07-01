@@ -14,13 +14,17 @@ public class LivingEntity : MonoBehaviour
         Run,
         Attack,
         Dead,
-        Stay
+        Stay,
+        IsHitting
     }
     private State state;
 
     private void OnDamage()
     {
-        health -= damage;
+        if(state == State.IsHitting)
+        {
+            health -= damage;
+        }
         if(health <= 0)
         {
             state = State.Dead;
