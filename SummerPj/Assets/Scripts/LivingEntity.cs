@@ -21,10 +21,7 @@ public class LivingEntity : MonoBehaviour
 
     private void OnDamage()
     {
-        if(state == State.IsHitting)
-        {
-            health -= damage;
-        }
+        health -= damage;
         if(health <= 0)
         {
             state = State.Dead;
