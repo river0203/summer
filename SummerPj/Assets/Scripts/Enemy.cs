@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -22,10 +24,16 @@ public class Enemy : LivingEntity
     //랜덤 스킬
     private List<string> skill_list = new List<string>() { "skill_1", "skill_2", "skill_3", "skill_4" };
 
+    [SerializeField]
+    private float starting_hp = 100.0f;
+    private float hp;
+    //private float damage;
+
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        setUp();
     }
 
     // Update is called once per frame
@@ -48,8 +56,11 @@ public class Enemy : LivingEntity
 
     private void setUp()
     {
+        //setup때는 멈추기 범위에 존재했을 때 움직임
         state = State.Idle;
-        health = startingHealth;
+        starting_hp = hp;
+        agent.isStopped = true;
+        
     }
 
     IEnumerator Attack_Delay()
@@ -128,5 +139,25 @@ public class Enemy : LivingEntity
             agent.isStopped = true;
             agent.enabled = false;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //무기 태그와 충돌 하였을 때 발동
+        if(collision.collider.gameObject.CompareTag("Weapon"))
+        {
+            Debug.Log("onDamage");
+            state = State.IsHitting;
+            //hp -= damage;
+
+            if(hp <= 0)
+            {
+                state = State.Dead;
+                Die();
+
+            }
+
+        }
+
     }
 }
