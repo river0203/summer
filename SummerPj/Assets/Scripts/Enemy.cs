@@ -27,7 +27,7 @@ public class Enemy : LivingEntity
     [SerializeField]
     private float starting_hp = 100.0f;
     private float hp;
-    //private float damage;
+    private float damage = 10; 
     private Rigidbody rigid;
 
     // Start is called before the first frame update
@@ -35,6 +35,7 @@ public class Enemy : LivingEntity
     {
         agent = GetComponent<NavMeshAgent>();
         rigid = GetComponent<Rigidbody>();
+        hp = starting_hp;
     }
 
     // Update is called once per frame
@@ -139,19 +140,6 @@ public class Enemy : LivingEntity
         }
     }
 
-    private void Die()
-    {
-        Collider[] enemyColliders = GetComponents<Collider>();
-        if (state == State.Dead)
-        {
-            StopCoroutine("Attack_Delay");
-            //움직임 차단
-            //play dead anim
-            agent.isStopped = true;
-            agent.enabled = false;
-        }
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         //무기 태그와 충돌 하였을 때 발동
@@ -162,17 +150,31 @@ public class Enemy : LivingEntity
             if (state == State.IsHitting)
             {
                 //play stage2 anim
-
+                StartCoroutine("hitting_delay");
+                hp -= damage;
+            
                 if (hp <= 0)
                 {
                     state = State.Dead;
                     if(state == State.Dead)
                     {
-                        //Die();
+                        agent.isStopped = true;
+                        agent.enabled = false;
+                        
                     }
                 }
             }
+           
         }
 
+    }
+
+    IEnumerator hitting_delay()
+    {
+        agent.enabled = false;
+        yield return new WaitForSeconds(3f);
+        state = State.Run;
+        agent.enabled = true;
+        StopCoroutine(hitting_delay());
     }
 }
