@@ -37,7 +37,6 @@ public class Enemy : LivingEntity
         hp = starting_hp;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (enemy_state == State.Idle)
