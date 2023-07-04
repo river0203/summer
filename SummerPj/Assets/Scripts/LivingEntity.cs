@@ -21,5 +21,4 @@ public class LivingEntity : MonoBehaviour
         skell_skill_4 = 25,
         skell_skill_5 = 100
     }
-    private State state;
 }
