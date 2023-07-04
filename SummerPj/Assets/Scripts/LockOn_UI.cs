@@ -6,17 +6,20 @@ public class LockOn_UI : MonoBehaviour
 {
     [SerializeField]GameObject _player;
     EnemyLockOn _enemyLockOn;
-    float _currentYOffset = 0.5f;
+    [SerializeField] Transform LockOn_Image;
+    [SerializeField] float _currentYOffset = 0.5f;
+    Transform _camera;
     void Start()
     {
-        gameObject.SetActive(false);
+        _camera = Camera.main.transform;
         _enemyLockOn = _player.GetComponent<EnemyLockOn>();
     }
 
     void Update()
     {
-        transform.position = new Vector3(_enemyLockOn._currentTarget.transform.position.x, _enemyLockOn._currentTarget.transform.position.y + _currentYOffset, _enemyLockOn._currentTarget.transform.position.z);
-        Vector3 _dir = _enemyLockOn._currentTarget.position - transform.position;
-        transform.rotation = Quaternion.LookRotation(_dir);
+        LockOn_Image.transform.position = new Vector3(_enemyLockOn._currentTarget.transform.position.x, _enemyLockOn._currentTarget.transform.position.y + _currentYOffset, _enemyLockOn._currentTarget.transform.position.z);
+        Debug.Log(LockOn_Image.transform.position);
+        Vector3 _dir = _enemyLockOn._currentTarget.position - _camera.transform.position;
+        LockOn_Image.transform.rotation = Quaternion.LookRotation(_dir);
     }
 }

@@ -44,7 +44,6 @@ public class EnemyLockOn : MonoBehaviour
             if (_currentTarget == null)
             {
                 _currentTarget = Scan();
-
                 FoundTarget();
             }
             else
@@ -54,16 +53,13 @@ public class EnemyLockOn : MonoBehaviour
 
             _input.LockOn = false;
         }
+
+        if (_currentTarget != null)
+        {
+            if(!TargetOnRange() || Blocked()) ResetTarget();
+        }
     }
         
-    void LookAtTarget()
-    {
-        LockOn_UI.position = _currentTarget.position;
-        LockOn_CameraTarget.position = Scan().position;
-
-        Vector3 _dir = _currentTarget.position - transform.position;
-        LockOn_UI.rotation = Quaternion.LookRotation(_dir);
-    }
     Transform Scan()
     {
             Collider[] nearbyTargets = Physics.OverlapSphere(transform.position, noticeZone, targetLayers);
@@ -85,14 +81,14 @@ public class EnemyLockOn : MonoBehaviour
             }
             if(!currentTarget) return null;
 
-            float height = currentTarget.GetComponent<CapsuleCollider>().height * currentTarget.localScale.y;
-            float half_height = (height / 2) / 2;
-            Vector3 targetPosition = currentTarget.position + new Vector3(0, height - half_height, 0);
-            if (Blocked(targetPosition)) return null;
             return currentTarget;
         }
-    bool Blocked(Vector3 targetPosition)
+    bool Blocked()
     {
+        float height = _currentTarget.GetComponent<CapsuleCollider>().height * _currentTarget.localScale.y;
+        float half_height = (height / 2) / 2;
+        Vector3 targetPosition = _currentTarget.position + new Vector3(0, height - half_height, 0);
+       
         RaycastHit hit;
         if (Physics.Linecast(transform.position + Vector3.up * 0.5f, targetPosition, out hit))
         {
