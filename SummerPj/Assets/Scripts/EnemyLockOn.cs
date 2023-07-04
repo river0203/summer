@@ -1,10 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro.EditorUtilities;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.PackageManager.Requests;
-using UnityEngine;
-using static UnityEditor.PlayerSettings;
+﻿using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 public class EnemyLockOn : MonoBehaviour
 {
@@ -12,10 +7,10 @@ public class EnemyLockOn : MonoBehaviour
     [Header("Lock On")]
 
     [Tooltip("락온 탐지 범위")]
-    [SerializeField] float noticeZone = 10;
+    [SerializeField] float noticeZone = 10f;
 
     [Tooltip("최대 탐지 범위")]
-    [SerializeField] float maxNoticeAngle = 60;
+    [SerializeField] float maxNoticeAngle = 60f;
     
     [Tooltip("락온 타겟 레이어")]
     [SerializeField] LayerMask targetLayers;
@@ -23,45 +18,57 @@ public class EnemyLockOn : MonoBehaviour
     [Tooltip("락온 UI")]
     [SerializeField] Transform LockOn_UI;
 
-    bool TargetLockOn;
-    Transform currentTarget;
+    [Tooltip("락온 대상과의 최대 거리")]
+    [SerializeField] float maxDistance = 10f;
+
+    [Tooltip("락온 카메라 위치")]
+    [SerializeField] Transform LockOn_CameraTarget;
+
+    public Transform _currentTarget;
     Transform _camera;
-    float currentYOffset;
+
     PlayerInputActions _input;
-    Vector3 position;
     #endregion
+
     void Start()
     {
         _camera = Camera.main.transform;
         _input = GetComponent<PlayerInputActions>();
+        LockOn_UI.gameObject.SetActive(false);
     }
     
     void Update()
     {
         if(_input.LockOn)
         {
-            if (currentTarget)
+            if (_currentTarget == null)
+            {
+                _currentTarget = Scan();
+
+                FoundTarget();
+            }
+            else
             {
                 ResetTarget();
-                return;
             }
-            
-            if (currentTarget = Scan()) FoundTarget(); else ResetTarget();
+
             _input.LockOn = false;
         }
-
-        if(TargetLockOn) 
-        { 
-            if (!TargetOnRange()) ResetTarget();
-            // Target방향 쳐다보기 & 락온UI 위치 변경
-        }
     }
+        
+    void LookAtTarget()
+    {
+        LockOn_UI.position = _currentTarget.position;
+        LockOn_CameraTarget.position = Scan().position;
 
+        Vector3 _dir = _currentTarget.position - transform.position;
+        LockOn_UI.rotation = Quaternion.LookRotation(_dir);
+    }
     Transform Scan()
     {
             Collider[] nearbyTargets = Physics.OverlapSphere(transform.position, noticeZone, targetLayers);
             float closestAngle = maxNoticeAngle;
-            Transform closestTarget = null;
+            Transform currentTarget = null;
             if (nearbyTargets.Length <= 0) return null;
 
             for (int i = 0; i < nearbyTargets.Length; i++)
@@ -72,18 +79,17 @@ public class EnemyLockOn : MonoBehaviour
 
                 if (_angle < closestAngle)
                 {
-                    closestTarget = nearbyTargets[i].transform;
+                    currentTarget = nearbyTargets[i].transform;
                     closestAngle = _angle;
                 }
             }
-            if(!closestTarget) return null;
+            if(!currentTarget) return null;
 
-            float height = closestTarget.GetComponent<CapsuleCollider>().height * closestTarget.localScale.y;
+            float height = currentTarget.GetComponent<CapsuleCollider>().height * currentTarget.localScale.y;
             float half_height = (height / 2) / 2;
-
-            Vector3 targetPosition = closestTarget.position + new Vector3(0, height - half_height, 0);
+            Vector3 targetPosition = currentTarget.position + new Vector3(0, height - half_height, 0);
             if (Blocked(targetPosition)) return null;
-            return closestTarget;
+            return currentTarget;
         }
     bool Blocked(Vector3 targetPosition)
     {
@@ -96,19 +102,17 @@ public class EnemyLockOn : MonoBehaviour
     }
     bool TargetOnRange()
     {
-        float distance = (transform.position - position).magnitude;
-        if (distance / 2 > noticeZone) return false; else return true;
+        float distance = (transform.position - _currentTarget.position).magnitude;
+        if (distance / 2 > maxDistance) return false; else return true;
     }
     void FoundTarget()
     {
         LockOn_UI.gameObject.SetActive(true);
-        TargetLockOn = true;
     }
     void ResetTarget()
     {
         LockOn_UI.gameObject.SetActive(false);
-        currentTarget = null;
-        TargetLockOn = false;
+        _currentTarget = null;
     }
     private void OnDrawGizmos()
     {
