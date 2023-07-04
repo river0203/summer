@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputActions : MonoBehaviour
 {
+    #region  Action
     public Vector2 move;
     public Vector2 look;
     public bool jump;
@@ -11,7 +12,8 @@ public class PlayerInputActions : MonoBehaviour
     public bool attack;
     public bool parry;
     public bool LockOn;
-    
+    #endregion 
+
     public void OnMove(InputValue value)
     {
         MoveInput(value.Get<Vector2>());
