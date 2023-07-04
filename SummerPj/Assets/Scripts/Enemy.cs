@@ -28,11 +28,13 @@ public class Enemy : LivingEntity
     private float starting_hp = 100.0f;
     private float hp;
     //private float damage;
+    private Rigidbody rigid;
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        rigid = GetComponent<Rigidbody>();
         //setUp();
     }
 
@@ -54,22 +56,43 @@ public class Enemy : LivingEntity
 
     }
 
-    private void setUp()
+    void freeze_velocity()
+    {
+        rigid.velocity = Vector3.zero;
+        rigid.angularVelocity = Vector3.zero;  
+    }
+
+    private void FixedUpdate()
+    {
+        freeze_velocity(); 
+    }
+
+    /*private void setUp()
     {
         //setup때는 멈추기 범위에 존재했을 때 움직임
         state = State.Idle;
         starting_hp = hp;
         agent.isStopped = true;
+        float distance = Vector3.Distance(transform.position, target.transform.position);
+        Debug.Log("isWaitting");
 
-    }
+        if(distance <= 2)
+        {
+            //play anim 'IN'
+            agent.isStopped = false;
+            state = State.Run;
+            Debug.Log("Run");
+        }
+
+    }*/
 
     IEnumerator Attack_Delay()
     {
         _isAttack = true;
-        yield return new WaitForSeconds(3f);
 
         int rand = UnityEngine.Random.Range(0, skill_list.Count); //* 필기 필요
         Debug.Log(skill_list[rand]);
+        yield return new WaitForSeconds(3f);
         _isAttack = false;
     }
     private bool _isAttack = false;
@@ -118,13 +141,21 @@ public class Enemy : LivingEntity
         agent.speed = 0;
         //생성될때 목적지(Player)를 찿는다.
         target = GameObject.Find("Player").transform;
+        starting_hp = hp;
+        agent.isStopped = false;
+        float distance = Vector3.Distance(transform.position, target.transform.position);
+        Debug.Log("isWaitting");
         //target을 찾으면 Run상태로 전이하고 싶다.
-        if (target != null)
+        if (distance <= 5)
         {
             state = State.Run;
-            //이렇게 state값을 바꿨다고 animation까지 바뀔까? no! 동기화를 해줘야한다.
-            //anim.SetTrigger("Run");
-            Debug.Log("Run");
+            if (target != null)
+            {
+                state = State.Run;
+                //이렇게 state값을 바꿨다고 animation까지 바뀔까? no! 동기화를 해줘야한다.
+                //anim.SetTrigger("Run");
+                Debug.Log("Run");
+            }
         }
     }
 
@@ -135,7 +166,7 @@ public class Enemy : LivingEntity
         {
             StopCoroutine("Attack_Delay");
             //움직임 차단
-            //애니메이션
+            //play dead anim
             agent.isStopped = true;
             agent.enabled = false;
         }
@@ -148,15 +179,17 @@ public class Enemy : LivingEntity
         {
             Debug.Log("onDamage");
             state = State.IsHitting;
-            //hp -= damage;
-
-            if (hp <= 0)
+            if (state == State.IsHitting)
             {
-                state = State.Dead;
-                //Die();
+                //play stage2 anim
 
+                if (hp <= 0)
+                {
+                    state = State.Dead;
+                    //Die();
+
+                }
             }
-
         }
 
     }
