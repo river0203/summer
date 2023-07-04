@@ -30,7 +30,6 @@ public class Enemy : LivingEntity
     private float damage = 10; 
     private Rigidbody rigid;
 
-    // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -167,7 +166,7 @@ public class Enemy : LivingEntity
 
     IEnumerator hitting_delay()
     {
-        agent.GetComponent<CapsuleCollider>().isTrigger = true;
+        agent.GetComponent<CapsuleCollider>().isTrigger = true; // <= 스켈레톤 전용
         yield return new WaitForSeconds(3f);
         enemy_state = State.Run;
         agent.GetComponent<CapsuleCollider>().isTrigger = false;
