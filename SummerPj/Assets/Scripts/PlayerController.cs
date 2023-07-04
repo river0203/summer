@@ -14,11 +14,6 @@ public class PlayerController : MonoBehaviour
     
     #region  Status
     [Header("Status")]
-    public float MaxHp = 100;
-    public float MaxStamina = 50;
-
-    float _hp;
-    float _stamina;
     #endregion
 
     #region  Camera
@@ -126,9 +121,6 @@ public class PlayerController : MonoBehaviour
         _cinemachineTargetYaw = CameraTarget.transform.rotation.eulerAngles.y;
         _jumpTimeoutDelta = JumpTimeout;
         _fallTimeoutDelta = FallTimeout;
-
-        _hp = MaxHp;
-        _stamina = MaxStamina;
     }
     private void Update()
     {
@@ -136,8 +128,7 @@ public class PlayerController : MonoBehaviour
         GroundedCheck();
         Move();
         Dodge();
-        Debug.Log(Grounded);
-    }
+    } 
     private void LateUpdate()
     {
         CameraRotation();
@@ -259,7 +250,6 @@ public class PlayerController : MonoBehaviour
         if (lfAngle > 360f) lfAngle -= 360f;
         return Mathf.Clamp(lfAngle, lfMin, lfMax);
     }
-
     IEnumerator StopDodge()
     {
         yield return new WaitForSeconds(dodgeTime);
