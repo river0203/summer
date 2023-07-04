@@ -33,7 +33,7 @@ public class Enemy : LivingEntity
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        setUp();
+        //setUp();
     }
 
     // Update is called once per frame
@@ -60,7 +60,7 @@ public class Enemy : LivingEntity
         state = State.Idle;
         starting_hp = hp;
         agent.isStopped = true;
-        
+
     }
 
     IEnumerator Attack_Delay()
@@ -144,16 +144,16 @@ public class Enemy : LivingEntity
     private void OnCollisionEnter(Collision collision)
     {
         //무기 태그와 충돌 하였을 때 발동
-        if(collision.collider.gameObject.CompareTag("Weapon"))
+        if (collision.collider.gameObject.CompareTag("Weapon"))
         {
             Debug.Log("onDamage");
             state = State.IsHitting;
             //hp -= damage;
 
-            if(hp <= 0)
+            if (hp <= 0)
             {
                 state = State.Dead;
-                Die();
+                //Die();
 
             }
 
