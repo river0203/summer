@@ -10,11 +10,12 @@ Material:
   m_Name: Sword_M
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords:
+  - _EMISSION
   - _NORMALMAP
   m_InvalidKeywords:
   - _DIFFUSE_ADJUST
   - _SPECULAR_PHONG
-  m_LightmapFlags: 5
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -85,7 +86,9 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _FresnelIntensity: 0.67
+    - _GlossMapScale: 1
     - _Glossiness: 0.814
+    - _GlossyReflections: 1
     - _Metallic: 0.1
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -93,6 +96,8 @@ Material:
     - _ReflectionMips: 4.086544
     - _RimInner: -1
     - _Smoothness: 0.41
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
     - _SpecularIntensity: 1.84
     - _SrcBlend: 1
     - _UVSec: 0
