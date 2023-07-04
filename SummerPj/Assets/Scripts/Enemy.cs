@@ -35,7 +35,6 @@ public class Enemy : LivingEntity
     {
         agent = GetComponent<NavMeshAgent>();
         rigid = GetComponent<Rigidbody>();
-        //setUp();
     }
 
     // Update is called once per frame
@@ -66,25 +65,6 @@ public class Enemy : LivingEntity
     {
         freeze_velocity(); 
     }
-
-    /*private void setUp()
-    {
-        //setup때는 멈추기 범위에 존재했을 때 움직임
-        state = State.Idle;
-        starting_hp = hp;
-        agent.isStopped = true;
-        float distance = Vector3.Distance(transform.position, target.transform.position);
-        Debug.Log("isWaitting");
-
-        if(distance <= 2)
-        {
-            //play anim 'IN'
-            agent.isStopped = false;
-            state = State.Run;
-            Debug.Log("Run");
-        }
-
-    }*/
 
     IEnumerator Attack_Delay()
     {
@@ -129,7 +109,7 @@ public class Enemy : LivingEntity
         }
 
         //타겟 방향으로 이동하다가
-        agent.speed = 3.5f;
+        agent.speed = (3.5f );
         //요원에게 목적지를 알려준다.
         agent.destination = target.transform.position;
         Debug.Log("Run");
@@ -146,7 +126,7 @@ public class Enemy : LivingEntity
         float distance = Vector3.Distance(transform.position, target.transform.position);
         Debug.Log("isWaitting");
         //target을 찾으면 Run상태로 전이하고 싶다.
-        if (distance <= 5)
+        if (distance <= 10)
         {
             state = State.Run;
             if (target != null)
@@ -186,8 +166,10 @@ public class Enemy : LivingEntity
                 if (hp <= 0)
                 {
                     state = State.Dead;
-                    //Die();
-
+                    if(state == State.Dead)
+                    {
+                        //Die();
+                    }
                 }
             }
         }
