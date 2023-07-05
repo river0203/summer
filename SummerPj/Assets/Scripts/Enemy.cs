@@ -6,8 +6,9 @@ using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using static LivingEntity;
 //Enemy2
-//요원(agent=enemy)에게 목적지를 알려줘서 목적지로 이동하게 한다.
+//요원(_agent=enemy)에게 목적지를 알려줘서 목적지로 이동하게 한다.
 //상태를 만들어서 제어하고 싶다.
 // Idle : Player를 찾는다, 찾았으면 Run상태로 전이하고 싶다.
 //Run : 타겟방향으로 이동(요원)
@@ -16,194 +17,109 @@ using UnityEngine.UI;
 //스킬 랜덤 -> 가중치 랜덤
 //state가 dead면 코루틴 중지
 
-public class Enemy : LivingEntity
+public class Enemy : MonoBehaviour
 {
-    public Transform target;
-    NavMeshAgent agent;
-    private State enemy_state;
-    //랜덤 스킬
-    private List<string> skill_list = new List<string>() { "skill_1", "skill_2", "skill_3", "skill_4", "skill_5" };
+    public Transform _target;
+    
+    private State _enemyState = State.Idle;
+    private List<string> _skillList = new List<string>() { "skill_1", "skill_2", "skill_3", "skill_4", "skill_5" };
 
     [SerializeField]
-    private float starting_hp;
-    private float hp;
-    private float damage = 10; 
-    private Rigidbody rigid;
+    private float _checkingRange; //몬스터 인식 범위
     [SerializeField]
-    private float checking_range; //몬스터 인식 범위
-    [SerializeField]
-    private float attack_range; // 몬스터 공격 범위 
+    private float _attackRange; // 몬스터 공격 범위 
+
+    bool _isAttack = false;
+
+    Rigidbody _rigid;
+    NavMeshAgent _agent;
+    Animator _anim;
+
+    State EnemyState 
+    { 
+        get { return _enemyState; } 
+        set 
+        {
+            if (_enemyState == value)
+                return;
+            
+            _enemyState = value;
+            Debug.Log(_enemyState);
+
+            string currentState = Enum.GetName(typeof(State), _enemyState);
+            _anim.CrossFade(currentState, 0.1f);
+        } 
+    }
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        rigid = GetComponent<Rigidbody>();
-        hp = starting_hp;
-    }
-
-    void Update()
-    {
-        if (enemy_state == State.Idle)
-        {
-            UpdateIdle();
-        }
-        else if (enemy_state == State.Run)
-        {
-            UpdateRun();
-        }
-        else if (enemy_state == State.Attack)
-        {
-            UpdateAttack();
-        }
-
-    }
-
-    void freeze_velocity()
-    {
-        rigid.velocity = Vector3.zero;
-        rigid.angularVelocity = Vector3.zero;  
-    }
-
-    private void FixedUpdate()
-    {
-        freeze_velocity(); 
-    }
-
-    IEnumerator Attack_Delay()
-    {
-        _isAttack = true;
-
-        int rand = UnityEngine.Random.Range(0, skill_list.Count); //* 필기 필요
-        Debug.Log(skill_list[rand]);
-        if (skill_list[rand] == "skill_1")
-        {
-            enemy_state = State.skell_skill_2;
-            Debug.Log(enemy_state);
-        }
-        else if (skill_list[rand] == "skill_2")
-        {
-            enemy_state = State.skell_skill_2;
-            Debug.Log(enemy_state);
-        }
-        else if (skill_list[rand] == "skill_3")
-        {
-            enemy_state = State.skell_skill_2;
-            Debug.Log(enemy_state);
-        }
-        else if (skill_list[rand] == "skill_4")
-        {
-            enemy_state = State.skell_skill_2;
-            Debug.Log(enemy_state);
-        }
-        else if (skill_list[rand] == "skill_5")
-        {
-            enemy_state = State.skell_skill_2;
-            Debug.Log(enemy_state);
-        }
-        yield return new WaitForSeconds(3f);
-        _isAttack = false;
-    }
-    private bool _isAttack = false;
-    private void UpdateAttack()
-    {
-        agent.speed = 0;
-        float distance = Vector3.Distance(transform.position, target.transform.position);
-
-        if (enemy_state == State.Attack && !_isAttack)
-        {
-            StartCoroutine("Attack_Delay");
-        }
-        if (distance > attack_range)
-        {
-            enemy_state = State.Run;
-            //anim.SetTrigger("Run");
-            Debug.Log("Run");
-        }
-    }
-
-    private void UpdateRun()
-    {
-        //남은 거리가 2미터라면 공격한다.
-        float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance <= attack_range)
-        {
-            enemy_state = State.Attack;
-            if (enemy_state == State.Attack)
-            {
-                StartCoroutine("Attack_Delay");
-            }
-            //anim.SetTrigger("Attack");
-        }
-
-        //타겟 방향으로 이동하다가
-        agent.speed = (3.5f );
-        //요원에게 목적지를 알려준다.
-        agent.destination = target.transform.position;
-        Debug.Log("Run");
-
+        _agent = GetComponent<NavMeshAgent>();
+        _rigid = GetComponent<Rigidbody>();
+        _anim = GetComponent<Animator>();
     }
 
     private void UpdateIdle()
     {
-        agent.speed = 0;
-        //생성될때 목적지(Player)를 찿는다.
-        target = GameObject.Find("Player").transform;
-        starting_hp = hp;
-        agent.isStopped = false;
-        float distance = Vector3.Distance(transform.position, target.transform.position);
-        Debug.Log("isWaitting");
-        //target을 찾으면 Run상태로 전이하고 싶다.
-        if (distance <= checking_range)
+        EnemyState = State.Idle;
+    }
+    private void UpdateRun()
+    {
+        _agent.destination = _target.transform.position;
+        EnemyState = State.Run;
+    }
+
+    private void UpdateAttack()
+    {
+        if (!_isAttack)
         {
-            if (target != null)
+            _isAttack = true;
+            int rand = UnityEngine.Random.Range(0, _skillList.Count);
+
+            if (_skillList[rand] == "skill_1")
             {
-                //StartCoroutine("play_wakeUp");
-                enemy_state = State.Run;
-                //anim.SetTrigger("Run");
-                Debug.Log("Run");
+                EnemyState = State.Skill1;
+            }
+            else if (_skillList[rand] == "skill_2")
+            {
+                EnemyState = State.Skill2;
+            }
+            else if (_skillList[rand] == "skill_3")
+            {
+                EnemyState = State.Skill3;
+            }
+            else if (_skillList[rand] == "skill_4")
+            {
+                EnemyState = State.Skill4;
+            }
+            else if (_skillList[rand] == "skill_5")
+            {
+                EnemyState = State.Skill5;
             }
         }
     }
-
-    /*IEnumerator play_wakeUp()
+    public void AttackFinish()
     {
-        yield return new WaitForSeconds(3);//초는 in 시간에 맞춰 변경하시면 됩니다.
-        //play IN anim
-        Debug.Log("WakeUP");
-        enemy_state = State.Run;
-    }*/
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //무기 태그와 충돌 하였을 때 발동
-        if (collision.collider.gameObject.CompareTag("Weapon"))
-        {
-            Debug.Log("onDamage");
-            hp -= damage;
-            Debug.Log(hp);
-            enemy_state = State.IsHitting;
-            if (enemy_state == State.IsHitting)
-            {
-                //play stage2 anim
-                StartCoroutine("hitting_delay");
-            
-                if (hp <= 0)
-                {
-                    //play anim dead
-                    Destroy(this.gameObject); //즉시 삭제
-                }
-            }
-           
-        }
-
+        _isAttack = false;
     }
 
-    IEnumerator hitting_delay()
+    void Update()
     {
-        agent.GetComponent<CapsuleCollider>().isTrigger = true; // <= 스켈레톤 전용
-        yield return new WaitForSeconds(3f);
-        enemy_state = State.Run;
-        agent.GetComponent<CapsuleCollider>().isTrigger = false;
-        StopCoroutine(hitting_delay());
+        float distance = Vector3.Distance(transform.position, _target.transform.position);
+
+        if (_isAttack)
+            return;
+
+        if (distance < _attackRange) 
+        {
+            UpdateAttack();
+        }
+        else if (distance < _checkingRange)
+        {
+            UpdateRun();
+        }
+        else if (distance > _checkingRange)
+        {
+            UpdateIdle();
+        }
     }
 }
