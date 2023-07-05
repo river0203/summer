@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
+using Cinemachine;
 
 public class EnemyLockOn : MonoBehaviour
 {
@@ -24,14 +24,16 @@ public class EnemyLockOn : MonoBehaviour
     [Tooltip("락온 카메라 위치")]
     [SerializeField] Transform LockOn_CameraTarget;
 
-    public Transform _currentTarget;
+    [HideInInspector]public Transform _currentTarget;
     Transform _camera;
 
     PlayerInputActions _input;
+    [SerializeField] CinemachineVirtualCamera _cinemachine;
     #endregion
 
     void Start()
     {
+        _cinemachine = GetComponent<CinemachineVirtualCamera>();
         _camera = Camera.main.transform;
         _input = GetComponent<PlayerInputActions>();
         LockOn_UI.gameObject.SetActive(false);
@@ -56,6 +58,7 @@ public class EnemyLockOn : MonoBehaviour
 
         if (_currentTarget != null)
         {
+            _cinemachine.LookAt = _currentTarget;
             if(!TargetOnRange() || Blocked()) ResetTarget();
         }
     }

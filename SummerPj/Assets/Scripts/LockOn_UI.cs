@@ -18,7 +18,6 @@ public class LockOn_UI : MonoBehaviour
     void Update()
     {
         LockOn_Image.transform.position = new Vector3(_enemyLockOn._currentTarget.transform.position.x, _enemyLockOn._currentTarget.transform.position.y + _currentYOffset, _enemyLockOn._currentTarget.transform.position.z);
-        Debug.Log(LockOn_Image.transform.position);
         Vector3 _dir = _enemyLockOn._currentTarget.position - _camera.transform.position;
         LockOn_Image.transform.rotation = Quaternion.LookRotation(_dir);
     }
