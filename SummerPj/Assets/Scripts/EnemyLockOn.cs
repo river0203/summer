@@ -26,14 +26,12 @@ public class EnemyLockOn : MonoBehaviour
 
     [HideInInspector]public Transform _currentTarget;
     Transform _camera;
-
     PlayerInputActions _input;
     [SerializeField] CinemachineVirtualCamera _cinemachine;
     #endregion
 
     void Start()
     {
-        _cinemachine = GetComponent<CinemachineVirtualCamera>();
         _camera = Camera.main.transform;
         _input = GetComponent<PlayerInputActions>();
         LockOn_UI.gameObject.SetActive(false);
@@ -46,6 +44,8 @@ public class EnemyLockOn : MonoBehaviour
             if (_currentTarget == null)
             {
                 _currentTarget = Scan();
+                Debug.Log(Scan());
+
                 FoundTarget();
             }
             else
@@ -59,8 +59,9 @@ public class EnemyLockOn : MonoBehaviour
         if (_currentTarget != null)
         {
             _cinemachine.LookAt = _currentTarget;
-            if(!TargetOnRange() || Blocked()) ResetTarget();
+            if (!TargetOnRange() || Blocked()) ResetTarget();
         }
+        else _cinemachine.LookAt = null;
     }
         
     Transform Scan()
