@@ -75,6 +75,31 @@ public class Enemy : LivingEntity
 
         int rand = UnityEngine.Random.Range(0, skill_list.Count); //* 필기 필요
         Debug.Log(skill_list[rand]);
+        if (skill_list[rand] == "skill_1")
+        {
+            enemy_state = State.skell_skill_2;
+            Debug.Log(enemy_state);
+        }
+        else if (skill_list[rand] == "skill_2")
+        {
+            enemy_state = State.skell_skill_2;
+            Debug.Log(enemy_state);
+        }
+        else if (skill_list[rand] == "skill_3")
+        {
+            enemy_state = State.skell_skill_2;
+            Debug.Log(enemy_state);
+        }
+        else if (skill_list[rand] == "skill_4")
+        {
+            enemy_state = State.skell_skill_2;
+            Debug.Log(enemy_state);
+        }
+        else if (skill_list[rand] == "skill_5")
+        {
+            enemy_state = State.skell_skill_2;
+            Debug.Log(enemy_state);
+        }
         yield return new WaitForSeconds(3f);
         _isAttack = false;
     }
