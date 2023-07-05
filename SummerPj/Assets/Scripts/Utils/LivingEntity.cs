@@ -11,6 +11,7 @@ public class LivingEntity
         Attack,
         Dead,
         IsHitting,
+        Waiting,
 
         //½ºÄÌ·¹Åæ ½ºÅ³
         Skill1 = 10,
