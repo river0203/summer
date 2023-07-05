@@ -22,13 +22,17 @@ public class Enemy : LivingEntity
     NavMeshAgent agent;
     private State enemy_state;
     //랜덤 스킬
-    private List<string> skill_list = new List<string>() { "skill_1", "skill_2", "skill_3", "skill_4" };
+    private List<string> skill_list = new List<string>() { "skill_1", "skill_2", "skill_3", "skill_4", "skill_5" };
 
     [SerializeField]
     private float starting_hp;
     private float hp;
     private float damage = 10; 
     private Rigidbody rigid;
+    [SerializeField]
+    private float checking_range; //몬스터 인식 범위
+    [SerializeField]
+    private float attack_range; // 몬스터 공격 범위 
 
     void Start()
     {
@@ -84,7 +88,7 @@ public class Enemy : LivingEntity
         {
             StartCoroutine("Attack_Delay");
         }
-        if (distance > 2)
+        if (distance > attack_range)
         {
             enemy_state = State.Run;
             //anim.SetTrigger("Run");
@@ -96,7 +100,7 @@ public class Enemy : LivingEntity
     {
         //남은 거리가 2미터라면 공격한다.
         float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance <= 2)
+        if (distance <= attack_range)
         {
             enemy_state = State.Attack;
             if (enemy_state == State.Attack)
@@ -104,7 +108,6 @@ public class Enemy : LivingEntity
                 StartCoroutine("Attack_Delay");
             }
             //anim.SetTrigger("Attack");
-            Debug.Log("attack");
         }
 
         //타겟 방향으로 이동하다가
@@ -125,18 +128,25 @@ public class Enemy : LivingEntity
         float distance = Vector3.Distance(transform.position, target.transform.position);
         Debug.Log("isWaitting");
         //target을 찾으면 Run상태로 전이하고 싶다.
-        if (distance <= 10)
+        if (distance <= checking_range)
         {
-            enemy_state = State.Run;
             if (target != null)
             {
+                //StartCoroutine("play_wakeUp");
                 enemy_state = State.Run;
-                //이렇게 state값을 바꿨다고 animation까지 바뀔까? no! 동기화를 해줘야한다.
                 //anim.SetTrigger("Run");
                 Debug.Log("Run");
             }
         }
     }
+
+    /*IEnumerator play_wakeUp()
+    {
+        yield return new WaitForSeconds(3);//초는 in 시간에 맞춰 변경하시면 됩니다.
+        //play IN anim
+        Debug.Log("WakeUP");
+        enemy_state = State.Run;
+    }*/
 
     private void OnCollisionEnter(Collision collision)
     {
