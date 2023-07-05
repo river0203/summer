@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EnemySystem : MonoBehaviour
 {
+    [SerializeField]
+    float _startingHp;
+
+    float hp;
+    float damage = 10;
     Rigidbody rigid;
 
     private void Start()
@@ -29,5 +34,39 @@ public class EnemySystem : MonoBehaviour
         enemy_state = State.Run;
     }*/
 
-    
+    private void OnCollisionEnter(Collision collision)
+    {
+        //무기 태그와 충돌 하였을 때 발동
+        if (collision.collider.gameObject.CompareTag("Weapon"))
+        {
+            Debug.Log("onDamage");
+            hp -= damage;
+            Debug.Log(hp);
+            EnemyState = State.Stage2;
+            if (EnemyState == State.Stage2)
+            {
+                //play stage2 anim
+                StartCoroutine("hitting_delay");
+
+                if (hp <= 0)
+                {
+                    //play anim dead
+                    Destroy(this.gameObject); //즉시 삭제
+                }
+            }
+
+        }
+
+    }
+
+    IEnumerator hitting_delay()
+    {
+        _agent.GetComponent<CapsuleCollider>().isTrigger = true; // <= 스켈레톤 전용
+        yield return new WaitForSeconds(3f);
+        EnemyState = State.Run;
+        _agent.GetComponent<CapsuleCollider>().isTrigger = false;
+        StopCoroutine(hitting_delay());
+    }
+
+
 }

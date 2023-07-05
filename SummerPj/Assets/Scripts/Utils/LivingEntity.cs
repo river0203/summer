@@ -10,7 +10,7 @@ public class LivingEntity
         Run,
         Attack,
         Dead,
-        IsHitting,
+        Stage2, // isHitting
         Waiting,
 
         //½ºÄÌ·¹Åæ ½ºÅ³

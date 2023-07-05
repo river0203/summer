@@ -69,6 +69,7 @@ public class Enemy : MonoBehaviour
     private void UpdateRun()
     {
         _agent.destination = _target.transform.position;
+        _agent.enabled = true;
         EnemyState = State.Run;
     }
 
@@ -114,8 +115,8 @@ public class Enemy : MonoBehaviour
             Debug.Log("onDamage");
             hp -= damage;
             Debug.Log(hp);
-            EnemyState = State.IsHitting;
-            if (EnemyState == State.IsHitting)
+            EnemyState = State.Stage2;
+            if (EnemyState == State.Stage2)
             {
                 //play stage2 anim
                 StartCoroutine("hitting_delay");
