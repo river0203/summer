@@ -19,7 +19,6 @@ using static LivingEntity;
 
 public class Enemy : MonoBehaviour
 {
-    public Transform _target;
     
     private State _enemyState = State.Idle;
     private List<string> _skillList = new List<string>() { "skill_1", "skill_2", "skill_3", "skill_4", "skill_5" };
@@ -28,12 +27,17 @@ public class Enemy : MonoBehaviour
     private float _checkingRange; //몬스터 인식 범위
     [SerializeField]
     private float _attackRange; // 몬스터 공격 범위 
+    [SerializeField]
+    float _startingHp;
 
+    float hp;
+    float damage = 10;
     bool _isAttack = false;
 
     Rigidbody _rigid;
     NavMeshAgent _agent;
     Animator _anim;
+    Transform _target;
 
     State EnemyState 
     { 
@@ -100,6 +104,40 @@ public class Enemy : MonoBehaviour
     public void AttackFinish()
     {
         _isAttack = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //무기 태그와 충돌 하였을 때 발동
+        if (collision.collider.gameObject.CompareTag("Weapon"))
+        {
+            Debug.Log("onDamage");
+            hp -= damage;
+            Debug.Log(hp);
+            EnemyState = State.IsHitting;
+            if (EnemyState == State.IsHitting)
+            {
+                //play stage2 anim
+                StartCoroutine("hitting_delay");
+
+                if (hp <= 0)
+                {
+                    //play anim dead
+                    Destroy(this.gameObject); //즉시 삭제
+                }
+            }
+
+        }
+
+    }
+
+    IEnumerator hitting_delay()
+    {
+        _agent.GetComponent<CapsuleCollider>().isTrigger = true; // <= 스켈레톤 전용
+        yield return new WaitForSeconds(3f);
+        EnemyState = State.Run;
+        _agent.GetComponent<CapsuleCollider>().isTrigger = false;
+        StopCoroutine(hitting_delay());
     }
 
     void Update()
