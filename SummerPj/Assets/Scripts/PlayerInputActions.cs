@@ -9,7 +9,8 @@ public class PlayerInputActions : MonoBehaviour
     public bool jump;
     public bool sprint;
     public bool dodge;
-    public bool attack;
+    public bool weakAttack;
+    public bool strongAttack;
     public bool parry;
     public bool LockOn;
     #endregion 
@@ -34,10 +35,6 @@ public class PlayerInputActions : MonoBehaviour
     {
         DodgeInput(value.isPressed);
     }
-    public void OnAttack(InputValue value)
-    {
-        AttackInput(value.isPressed);
-    }
     public void OnParry(InputValue value)
     {
         ParryInput(value.isPressed);
@@ -46,7 +43,14 @@ public class PlayerInputActions : MonoBehaviour
     {
         LockOnInput(value.isPressed);
     }
-
+    public void OnWeakAttack(InputValue value)
+    {
+        LockOnInput(value.isPressed);
+    }
+    public void OnStrongAttack(InputValue value)
+    {
+        LockOnInput(value.isPressed);
+    }
     public void MoveInput(Vector2 newMoveDirection)
     {
         move = newMoveDirection;
@@ -67,10 +71,6 @@ public class PlayerInputActions : MonoBehaviour
     {
         dodge = newDodgeState;
     }
-    public void AttackInput(bool newAttackState)
-    {
-        attack = newAttackState;
-    }
     public void ParryInput(bool newParryState)
     {
         parry = newParryState;
@@ -78,5 +78,13 @@ public class PlayerInputActions : MonoBehaviour
     public void LockOnInput(bool newLockOnState)
     {
         LockOn = newLockOnState;
+    }
+    public void weakAttackInput(bool newWeakAttackState)
+    {
+        weakAttack = newWeakAttackState;
+    }
+    public void strongAttackInput(bool newStrongAttackState)
+    {
+        strongAttack = newStrongAttackState;
     }
 }

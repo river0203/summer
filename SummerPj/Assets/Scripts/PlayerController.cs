@@ -128,12 +128,19 @@ public class PlayerController : MonoBehaviour
         GroundedCheck();
         Move();
         Dodge();
+        Attack();
     } 
     private void LateUpdate()
     {
         CameraRotation();
     }
+    void Attack()
+    {
+        if(_input.weakAttack)
+        {
 
+        }
+    }
     void Dodge()
     {
         if (!_input.dodge) { dodgeTargetdirection = Move(); _dodgeCoolDownDelta -= Time.deltaTime; }
@@ -146,7 +153,7 @@ public class PlayerController : MonoBehaviour
 
                 DodgecurrentTime += Time.deltaTime;
 
-                if (DodgecurrentTime >= DodgeLerpTime)
+/*                if (DodgecurrentTime >= DodgeLerpTime)
                 {
                     DodgecurrentTime = DodgeLerpTime;
                 }
@@ -154,7 +161,7 @@ public class PlayerController : MonoBehaviour
 
                 DodgeSpeed = Mathf.Lerp(DodgeStartSpeed, DodgetargetSpeed, DodgeSpeedChangeRate);
                 DodgeSpeed = Mathf.Round(DodgeSpeed * 1000f) / 1000f;
-                StartCoroutine(StopDodge());
+                StartCoroutine(StopDodge());*/
             }
             else { _input.dodge = false; return; }
         }
