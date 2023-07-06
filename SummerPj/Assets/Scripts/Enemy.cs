@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -27,13 +28,16 @@ public class Enemy : MonoBehaviour
     private float _checkingRange; //몬스터 인식 범위
     [SerializeField]
     private float _attackRange; // 몬스터 공격 범위 
+    [SerializeField]
+    Transform _target;
+    
     bool _isAttack = false;
+    float _distance = 0f;
 
     Rigidbody _rigid;
     NavMeshAgent _agent;
     Animator _anim;
-    [SerializeField]
-    Transform _target;
+    GameObject _playerObj = null;    
 
     State EnemyState 
     { 
@@ -56,17 +60,23 @@ public class Enemy : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _rigid = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
+        _playerObj = GameObject.Find("Player");
     }
 
     private void UpdateIdle()
     {
         EnemyState = State.Idle;
+        _agent.enabled = false;
     }
     private void UpdateRun()
     {
-        _agent.destination = _target.transform.position;
-        _agent.enabled = true;
         EnemyState = State.Run;
+        _distance = Vector3.Distance(transform.position, _playerObj.transform.position);
+        if(_distance < _checkingRange)
+        {
+            _agent.destination = _playerObj.transform.position;
+        }
+        _agent.transform.LookAt(_target.position);
     }
     private void UpdateAttack()
     {
@@ -108,22 +118,23 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, _target.transform.position);
+        /*float distance1 = Vector3.Distance(transform.position, _target.transform.position);
 
         if (_isAttack)
             return;
 
-        if (distance < _attackRange ) 
+        if (distance1 < _attackRange ) 
         {
             UpdateAttack();
         }
-        else if (distance < _checkingRange )
+        else if (distance1 < _checkingRange )
         {
             UpdateRun();
         }
-        else if (distance > _checkingRange )
+        else if (distance1 > _checkingRange )
         {
             UpdateIdle();
-        }
+        }*/
+        UpdateRun();
     }
 }
