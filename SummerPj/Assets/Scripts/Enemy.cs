@@ -110,18 +110,18 @@ public class Enemy : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, _target.transform.position);
 
-        if (!_isAttack)
+        if (_isAttack)
             return;
 
-        if (distance < _attackRange && !_isAttack) 
+        if (distance < _attackRange ) 
         {
             UpdateAttack();
         }
-        else if (distance < _checkingRange && !_isAttack)
+        else if (distance < _checkingRange )
         {
             UpdateRun();
         }
-        else if (distance > _checkingRange && !_isAttack)
+        else if (distance > _checkingRange )
         {
             UpdateIdle();
         }

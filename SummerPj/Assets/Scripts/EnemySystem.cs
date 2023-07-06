@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,13 +26,13 @@ public class EnemySystem : MonoBehaviour
         freeze_velocity();
     }
 
-    /*IEnumerator play_wakeUp()
+    IEnumerator play_wakeUp()
     {
         yield return new WaitForSeconds(3);//초는 in 시간에 맞춰 변경하시면 됩니다.
         //play IN anim
         Debug.Log("WakeUP");
         enemy_state = State.Run;
-    }*/
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -69,4 +69,4 @@ public class EnemySystem : MonoBehaviour
     }
 
 
-}
+}*/
