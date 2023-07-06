@@ -18,7 +18,7 @@ using static LivingEntity;
 //스킬 랜덤 -> 가중치 랜덤
 //state가 dead면 코루틴 중지
 
-public class Enemy : MonoBehaviour
+public class EnemyAnim : MonoBehaviour
 {
     
     private State _enemyState = State.Idle;
@@ -34,8 +34,8 @@ public class Enemy : MonoBehaviour
     bool _isAttack = false;
     float _distance = 0f;
 
+    public NavMeshAgent _agent;
     Rigidbody _rigid;
-    NavMeshAgent _agent;
     Animator _anim;
     GameObject _playerObj = null;    
 
@@ -72,10 +72,7 @@ public class Enemy : MonoBehaviour
     {
         EnemyState = State.Run;
         _distance = Vector3.Distance(transform.position, _playerObj.transform.position);
-        if(_distance < _checkingRange)
-        {
-            _agent.destination = _playerObj.transform.position;
-        }
+
         _agent.transform.LookAt(_target.position);
     }
     private void UpdateAttack()
@@ -118,7 +115,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        /*float distance1 = Vector3.Distance(transform.position, _target.transform.position);
+        float distance1 = Vector3.Distance(transform.position, _target.transform.position);
 
         if (_isAttack)
             return;
@@ -134,7 +131,7 @@ public class Enemy : MonoBehaviour
         else if (distance1 > _checkingRange )
         {
             UpdateIdle();
-        }*/
-        UpdateRun();
+        }
+
     }
 }
