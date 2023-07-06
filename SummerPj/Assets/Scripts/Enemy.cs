@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour
     Rigidbody _rigid;
     NavMeshAgent _agent;
     Animator _anim;
+    [SerializeField]
     Transform _target;
 
     State EnemyState 
@@ -78,18 +79,22 @@ public class Enemy : MonoBehaviour
             if (_skillList[rand] == "skill_1")
             {
                 EnemyState = State.Skill1;
+                
             }
             else if (_skillList[rand] == "skill_2")
             {
                 EnemyState = State.Skill2;
+                
             }
             else if (_skillList[rand] == "skill_3")
             {
                 EnemyState = State.Skill3;
+                
             }
             else if (_skillList[rand] == "skill_4")
             {
                 EnemyState = State.Skill4;
+                
             }
             else if (_skillList[rand] == "skill_5")
             {
@@ -105,19 +110,20 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         float distance = Vector3.Distance(transform.position, _target.transform.position);
+        if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        {
+            AttackFinish();
+        }
 
-        if (_isAttack)
-            return;
-
-        if (distance < _attackRange) 
+        if (distance < _attackRange && !_isAttack) 
         {
             UpdateAttack();
         }
-        else if (distance < _checkingRange)
+        else if (distance < _checkingRange && !_isAttack)
         {
             UpdateRun();
         }
-        else if (distance > _checkingRange)
+        else if (distance > _checkingRange && !_isAttack)
         {
             UpdateIdle();
         }
