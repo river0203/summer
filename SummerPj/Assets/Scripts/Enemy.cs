@@ -68,7 +68,6 @@ public class Enemy : MonoBehaviour
         _agent.enabled = true;
         EnemyState = State.Run;
     }
-
     private void UpdateAttack()
     {
         if (!_isAttack)
@@ -110,10 +109,9 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         float distance = Vector3.Distance(transform.position, _target.transform.position);
-        if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
-        {
-            AttackFinish();
-        }
+
+        if (!_isAttack)
+            return;
 
         if (distance < _attackRange && !_isAttack) 
         {
