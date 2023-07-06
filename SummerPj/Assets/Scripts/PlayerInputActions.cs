@@ -45,11 +45,11 @@ public class PlayerInputActions : MonoBehaviour
     }
     public void OnWeakAttack(InputValue value)
     {
-        LockOnInput(value.isPressed);
+        WeakAttackInput(value.isPressed);
     }
     public void OnStrongAttack(InputValue value)
     {
-        LockOnInput(value.isPressed);
+        StrongAttackInput(value.isPressed);
     }
     public void MoveInput(Vector2 newMoveDirection)
     {
@@ -79,11 +79,11 @@ public class PlayerInputActions : MonoBehaviour
     {
         LockOn = newLockOnState;
     }
-    public void weakAttackInput(bool newWeakAttackState)
+    public void WeakAttackInput(bool newWeakAttackState)
     {
         weakAttack = newWeakAttackState;
     }
-    public void strongAttackInput(bool newStrongAttackState)
+    public void StrongAttackInput(bool newStrongAttackState)
     {
         strongAttack = newStrongAttackState;
     }
