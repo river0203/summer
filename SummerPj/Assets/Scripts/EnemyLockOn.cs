@@ -39,7 +39,7 @@ public class EnemyLockOn : MonoBehaviour
     
     void Update()
     {
-        if(_input.LockOn)
+        if(_input.lockOn)
         {
             if (_currentTarget == null)
             {
@@ -53,7 +53,7 @@ public class EnemyLockOn : MonoBehaviour
                 ResetTarget();
             }
 
-            _input.LockOn = false;
+            _input.lockOn = false;
         }
 
         if (_currentTarget != null)
