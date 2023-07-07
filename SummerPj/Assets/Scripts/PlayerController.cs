@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         CameraTarget = GameObject.Find("PlayerCameraRoot");
-        _mainCamera = GameObject.Find("Main Camera");
+        _mainCamera = GameObject.Find("PlayerCamera");
         _anim = GetComponent<Animator>();
         _input = GetComponent<PlayerInputActions>();
         _controller = GetComponent<CharacterController>();
@@ -249,8 +249,9 @@ public class PlayerController : MonoBehaviour
                     Speed = Mathf.Round(Speed * 1000f) / 1000f;
                 }
                 else Speed = targetSpeed;*/
+
         // Idle상태에서 이동하고 있을 때 달리기를 누르면 달리기 상태
-        if (PlayerState == State.Idle && _input.move != Vector2.zero && _input.sprint) PlayerState = State.Sprint;
+        if ((PlayerState == State.Idle || PlayerState == State.Walk) && _input.move != Vector2.zero && _input.sprint) PlayerState = State.Sprint;
         // Idle상태에서 이동하면 걷기 상태
         else if (PlayerState == State.Idle && _input.move != Vector2.zero) PlayerState = State.Walk;
         // 걷거나 뛰는 상태에서 입력이 없을 시 Idle
