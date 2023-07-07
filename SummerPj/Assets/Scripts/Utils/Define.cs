@@ -10,5 +10,6 @@ public class Define : MonoBehaviour
         Enemy = 6,
         LockOn_Layer = 7,
         Player = 8,
+        Weapon = 9,
     }
 }
