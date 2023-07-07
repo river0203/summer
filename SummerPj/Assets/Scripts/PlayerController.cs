@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,11 +10,27 @@ public class PlayerController : MonoBehaviour
     PlayerInputActions _input;
     CharacterController _controller;
     PlayerInput _playerInput;
-    Animator _animator;
+    Animator _anim;
 
     GameObject CameraTarget;
     GameObject _mainCamera;
     State _playerState = State.Idle;
+
+    State PlayerState
+    {
+        get { return _playerState; }
+        set
+        {
+            if (_playerState == value)
+                return;
+
+            _playerState = value;
+            Debug.Log(_playerState);
+
+            string currentState = Enum.GetName(typeof(State), _playerState);
+            _anim.CrossFade(currentState, 0.1f);
+        }
+    }
 
     #region  Status
     [Header("Status")]
@@ -123,7 +140,7 @@ public class PlayerController : MonoBehaviour
     {
         CameraTarget = GameObject.Find("PlayerCameraRoot");
         _mainCamera = GameObject.Find("Main Camera");
-        _animator = GetComponent<Animator>();
+        _anim = GetComponent<Animator>();
         _input = GetComponent<PlayerInputActions>();
         _controller = GetComponent<CharacterController>();
         _playerInput = GetComponent<PlayerInput>();
@@ -324,7 +341,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator ChangeState()
     {
-        if(_animator.GetCurrentAnimatorStateInfo(0).length >= 1)
+        if(_anim.GetCurrentAnimatorStateInfo(0).length >= 1)
         {
             _playerState = State.Idle;
         }
@@ -334,11 +351,11 @@ public class PlayerController : MonoBehaviour
     IEnumerator ResetComboTime()
     {
         // 공격 애니메이션일 경우 애니메이션이 끝나면 콤보 시간 활성화
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("WeakAttack_1") ||
-            _animator.GetCurrentAnimatorStateInfo(0).IsName("WeakAttack_1") ||
-            _animator.GetCurrentAnimatorStateInfo(0).IsName("WeakAttack_3"))
+        if (_anim.GetCurrentAnimatorStateInfo(0).IsName("WeakAttack_1") ||
+            _anim.GetCurrentAnimatorStateInfo(0).IsName("WeakAttack_1") ||
+            _anim.GetCurrentAnimatorStateInfo(0).IsName("WeakAttack_3"))
         {
-            if(_animator.GetCurrentAnimatorStateInfo(0).length >= 1f)comboTimeDelta = comboTime;
+            if(_anim.GetCurrentAnimatorStateInfo(0).length >= 1f)comboTimeDelta = comboTime;
         }
         yield break;
     }
