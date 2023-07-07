@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static PlayerState;
+using static PlayerStates;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     GameObject CameraTarget;
     GameObject _mainCamera;
-    State _playerState = State.Idle;
+    State PlayerStates = State.Idle;
 
     State PlayerState
     {
@@ -159,13 +159,13 @@ public class PlayerController : MonoBehaviour
         GroundedCheck();
 
         // Idle상태일 때 가능한 행동
-        if (_playerState == State.Idle)
+        if (PlayerState == State.Idle)
         {
             //이동 방향 결정
             Move();
         }
 
-        if (_playerState == State.Idle || _playerState == State.Walk || _playerState == State.Sprint)
+        if (PlayerState == State.Idle || PlayerState == State.Walk || PlayerState == State.Sprint)
         {
 
             //약공격
@@ -192,9 +192,9 @@ public class PlayerController : MonoBehaviour
             //콤보에 따라 플레이어 스테이트 변경
             switch (Combo)
             {
-                case 0: _playerState = State.WeakAttack_1; break;
-                case 1: _playerState = State.WeakAttack_2; break;
-                case 2: _playerState = State.WeakAttack_3; break;
+                case 0: PlayerState = State.WeakAttack_1; break;
+                case 1: PlayerState = State.WeakAttack_2; break;
+                case 2: PlayerState = State.WeakAttack_3; break;
                 default: break;
             }
             Combo++;
@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // 공격중이 아닐 때 콤보 지속 시간 감소
-        if ((_playerState != State.WeakAttack_1) && (_playerState != State.WeakAttack_2) && (_playerState != State.WeakAttack_3) && (comboTimeDelta > 0))
+        if ((PlayerState != State.WeakAttack_1) && (PlayerState != State.WeakAttack_2) && (PlayerState != State.WeakAttack_3) && (comboTimeDelta > 0))
         {
             comboTimeDelta -= Time.deltaTime;
         }
@@ -216,7 +216,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_input.strongAttack)
         {
-            if (_playerState == State.Idle || _playerState == State.Walk || _playerState == State.Sprint) _playerState = State.StrongAttack;
+            if (PlayerState == State.Idle || PlayerState == State.Walk || PlayerState == State.Sprint) PlayerState = State.StrongAttack;
             StartCoroutine(ChangeState());
 
             _input.strongAttack = false;
@@ -250,13 +250,13 @@ public class PlayerController : MonoBehaviour
                 }
                 else Speed = targetSpeed;*/
         // Idle상태에서 이동하고 있을 때 달리기를 누르면 달리기 상태
-        if (_playerState == State.Idle && _input.move != Vector2.zero && _input.sprint) _playerState = State.Sprint;
+        if (PlayerState == State.Idle && _input.move != Vector2.zero && _input.sprint) PlayerState = State.Sprint;
         // Idle상태에서 이동하면 걷기 상태
-        else if (_playerState == State.Idle && _input.move != Vector2.zero) _playerState = State.Walk;
+        else if (PlayerState == State.Idle && _input.move != Vector2.zero) PlayerState = State.Walk;
         // 걷거나 뛰는 상태에서 입력이 없을 시 Idle
-        else if (_playerState == State.Walk || _playerState == State.Sprint)
+        else if (PlayerState == State.Walk || PlayerState == State.Sprint)
         {
-            if (_input.move == Vector2.zero) _playerState = State.Idle;
+            if (_input.move == Vector2.zero) PlayerState = State.Idle;
         }
 
         Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
@@ -343,7 +343,7 @@ public class PlayerController : MonoBehaviour
     {
         if(_anim.GetCurrentAnimatorStateInfo(0).length >= 1)
         {
-            _playerState = State.Idle;
+            PlayerState = State.Idle;
         }
         yield break;
     }
