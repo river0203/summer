@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static PlayerState;
@@ -10,8 +11,8 @@ public class PlayerController : MonoBehaviour
     PlayerInput _playerInput;
     Animator _animator;
 
-    public GameObject CameraTarget;
-    public GameObject _mainCamera;
+    GameObject CameraTarget;
+    GameObject _mainCamera;
     State _playerState = State.Idle;
 
     #region  Status
@@ -117,13 +118,11 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        if (DodgeLerpTime > dodgeTime)
-        {
-            DodgeLerpTime = dodgeTime;
-        }
     }
     private void Start()
     {
+        CameraTarget = GameObject.Find("PlayerCameraRoot");
+        _mainCamera = GameObject.Find("Main Camera");
         _animator = GetComponent<Animator>();
         _input = GetComponent<PlayerInputActions>();
         _controller = GetComponent<CharacterController>();
