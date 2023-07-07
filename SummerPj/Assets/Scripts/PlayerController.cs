@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     GameObject CameraTarget;
     GameObject _mainCamera;
-    State PlayerStates = State.Idle;
+    State _playerState = State.Idle;
 
     State PlayerState
     {
