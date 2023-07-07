@@ -12,7 +12,8 @@ public class PlayerInputActions : MonoBehaviour
     public bool weakAttack;
     public bool strongAttack;
     public bool parry;
-    public bool LockOn;
+    public bool ultimate;
+    public bool lockOn;
     #endregion 
 
     public void OnMove(InputValue value)
@@ -51,6 +52,10 @@ public class PlayerInputActions : MonoBehaviour
     {
         StrongAttackInput(value.isPressed);
     }
+    public void OnUltimate(InputValue value)
+    {
+        UltimateInput(value.isPressed);
+    }
     public void MoveInput(Vector2 newMoveDirection)
     {
         move = newMoveDirection;
@@ -77,7 +82,7 @@ public class PlayerInputActions : MonoBehaviour
     }
     public void LockOnInput(bool newLockOnState)
     {
-        LockOn = newLockOnState;
+        lockOn = newLockOnState;
     }
     public void WeakAttackInput(bool newWeakAttackState)
     {
@@ -86,5 +91,9 @@ public class PlayerInputActions : MonoBehaviour
     public void StrongAttackInput(bool newStrongAttackState)
     {
         strongAttack = newStrongAttackState;
+    }
+    public void UltimateInput(bool newUltimateState)
+    {
+        ultimate = newUltimateState;
     }
 }
