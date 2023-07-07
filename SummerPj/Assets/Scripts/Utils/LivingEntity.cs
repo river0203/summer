@@ -14,6 +14,7 @@ public class LivingEntity
         Waiting,
 
         //½ºÄÌ·¹Åæ ½ºÅ³
+        In,
         Skill1 = 10,
         Skill2 = 15,
         Skill3 = 17,

@@ -20,10 +20,9 @@ using static LivingEntity;
 
 public class EnemyAnim : MonoBehaviour
 {
-    
     private State _enemyState = State.Idle;
     private List<string> _skillList = new List<string>() { "skill_1", "skill_2", "skill_3", "skill_4", "skill_5" };
-
+   
     [SerializeField]
     private float _checkingRange; //몬스터 인식 범위
     [SerializeField]
@@ -32,16 +31,20 @@ public class EnemyAnim : MonoBehaviour
     Transform _target;
     
     bool _isAttack = false;
-    float _distance = 0f;
+    float _objDistance = 0f;
 
-    public NavMeshAgent _agent;
+    NavMeshAgent _agent;
     Rigidbody _rigid;
     Animator _anim;
     GameObject _playerObj = null;    
 
-    State EnemyState 
+
+    public State EnemyState 
     { 
-        get { return _enemyState; } 
+        get 
+        {
+            return _enemyState; 
+        } 
         set 
         {
             if (_enemyState == value)
@@ -71,7 +74,7 @@ public class EnemyAnim : MonoBehaviour
     private void UpdateRun()
     {
         EnemyState = State.Run;
-        _distance = Vector3.Distance(transform.position, _playerObj.transform.position);
+        _objDistance = Vector3.Distance(transform.position, _playerObj.transform.position);
 
         _agent.transform.LookAt(_target.position);
     }
@@ -115,20 +118,19 @@ public class EnemyAnim : MonoBehaviour
 
     void Update()
     {
-        float distance1 = Vector3.Distance(transform.position, _target.transform.position);
-
+        float distance = Vector3.Distance(transform.position, _target.transform.position);
         if (_isAttack)
             return;
 
-        if (distance1 < _attackRange ) 
+        if (distance < _attackRange ) 
         {
             UpdateAttack();
         }
-        else if (distance1 < _checkingRange )
+        else if (distance < _checkingRange )
         {
             UpdateRun();
         }
-        else if (distance1 > _checkingRange )
+        else if (distance > _checkingRange )
         {
             UpdateIdle();
         }
