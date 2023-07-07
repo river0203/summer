@@ -5,9 +5,9 @@ using static PlayerState;
 
 public class PlayerController : MonoBehaviour
 {
-    PlayerInputActions _input; 
+    PlayerInputActions _input;
     CharacterController _controller;
-    PlayerInput _playerInput; 
+    PlayerInput _playerInput;
     Animator _animator;
 
     public GameObject CameraTarget;
@@ -21,10 +21,10 @@ public class PlayerController : MonoBehaviour
     #region  Camera
     [Header("Camera")]
     [Tooltip("카메라 하단 최대 범위")]
-    [SerializeField]float BottomClamp = -30.0f;
+    [SerializeField] float BottomClamp = -30.0f;
 
     [Tooltip("카메라 상단 최대 범위")]
-    [SerializeField]float TopClamp = 70.0f;
+    [SerializeField] float TopClamp = 70.0f;
 
     float _cinemachineTargetYaw;
     float _cinemachineTargetPitch;
@@ -32,21 +32,21 @@ public class PlayerController : MonoBehaviour
 
     #region  Move
     [Header("Move")]
-/*    [Tooltip("현재 이동 속도")]
-    [SerializeField]float Speed;
+    /*    [Tooltip("현재 이동 속도")]
+        [SerializeField]float Speed;
 
-    [Tooltip("기본 이동 속도 m/s")]
-    [SerializeField]float MoveSpeed = 2f;
+        [Tooltip("기본 이동 속도 m/s")]
+        [SerializeField]float MoveSpeed = 2f;
 
-    [Tooltip("달리기 속도 m/s")]
-    [SerializeField]float SprintSpeed = 5f;
+        [Tooltip("달리기 속도 m/s")]
+        [SerializeField]float SprintSpeed = 5f;
 
-    [Tooltip("변경 이동속도 도달 시간")]
-    [SerializeField]float SpeedChangeRate = 10.0f;*/
+        [Tooltip("변경 이동속도 도달 시간")]
+        [SerializeField]float SpeedChangeRate = 10.0f;*/
 
     [Tooltip("방향 전환 시간")]
-    [SerializeField]float RotationSmoothTime = 0.12f;
-    
+    [SerializeField] float RotationSmoothTime = 0.12f;
+
 
     float _targetRotation;
     float _rotationVelocity;
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     #region  Jump
     [Header("Jump")]
     [Tooltip("점프 재사용 대기시간")]
-    [SerializeField]float JumpTimeout = 0.5f;
+    [SerializeField] float JumpTimeout = 0.5f;
 
     [Tooltip("낙하 상태에 도달하기까지 시간")]
     [SerializeField] float FallTimeout = 0.15f;
@@ -69,11 +69,11 @@ public class PlayerController : MonoBehaviour
 
     [Tooltip("바닥으로 사용할 레이어")]
     [SerializeField] LayerMask GroundLayers;
-    
+
     bool Grounded = true;
     float GroundedOffset = -0.14f;
     float GroundedRadius = 0.28f;
-    
+
     float _fallTimeoutDelta;
     float _jumpTimeoutDelta;
     float _terminalVelocity = 53.0f;
@@ -83,20 +83,20 @@ public class PlayerController : MonoBehaviour
     #region  Dodge
     [Header("Dodge")]
     [Tooltip("구르기 지속시간")]
-    [SerializeField]float dodgeTime = 3f;
+    [SerializeField] float dodgeTime = 3f;
 
     [Tooltip("구르기 쿨타임")]
-    [SerializeField]float DodgeCoolDown = 10f;
+    [SerializeField] float DodgeCoolDown = 10f;
 
     [Tooltip("구르기 속도 증가 시간")]
     [SerializeField] float DodgeLerpTime = 3f;
- 
+
     [Tooltip("구르기 시작 속도")]
     float DodgeStartSpeed = 8f;
-    
+
     [Tooltip("구르기 목표 속도")]
     float DodgetargetSpeed = 8f;
-    
+
     float _dodgeCoolDownDelta;
     float DodgeSpeedChangeRate;
     float DodgecurrentTime;
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        if(DodgeLerpTime > dodgeTime)
+        if (DodgeLerpTime > dodgeTime)
         {
             DodgeLerpTime = dodgeTime;
         }
@@ -137,23 +137,32 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(_playerState.ToString());
         // 점프 및 중력
         JumpAndGravity();
         // 바닥 탐지
         GroundedCheck();
 
-        //이동 방향 결정
-        Move();
-        
+        // Idle상태일 때 가능한 행동
+        if (_playerState == State.Idle)
+        {
+            //이동 방향 결정
+            Move();
+        }
+
+        if (_playerState == State.Idle || _playerState == State.Walk || _playerState == State.Sprint)
+        {
+
+            //약공격
+            WeakAttack();
+            //강공격
+            StrongAttack();
+
+            //회복, 점프, 상호작용, 점프공격, 흘리기, 기모으기, 
+        }
         //구르기 방향 결정
         Dodge();
 
-        //약공격
-        WeakAttack();
-        //강공격
-        StrongAttack();
-    } 
+    }
     private void LateUpdate()
     {
         CameraRotation();
@@ -164,21 +173,17 @@ public class PlayerController : MonoBehaviour
         // 공격 및 콤보 관리
         if (_input.weakAttack)
         {
-            //Idle, Walk, Sprint 상태일 때만 공격 가능
-            if (_playerState == State.Idle || _playerState == State.Walk || _playerState == State.Sprint)
+            //콤보에 따라 플레이어 스테이트 변경
+            switch (Combo)
             {
-                //콤보에 따라 플레이어 스테이트 변경
-                switch (Combo)
-                {
-                    case 0: _playerState = State.WeakAttack_1; break;
-                    case 1: _playerState = State.WeakAttack_2; break;
-                    case 2: _playerState = State.WeakAttack_3; break;
-                    default: break;
-                }
-                Combo++;
-                StartCoroutine(ChangeState());
-                StartCoroutine(ResetComboTime());
+                case 0: _playerState = State.WeakAttack_1; break;
+                case 1: _playerState = State.WeakAttack_2; break;
+                case 2: _playerState = State.WeakAttack_3; break;
+                default: break;
             }
+            Combo++;
+            StartCoroutine(ChangeState());
+            StartCoroutine(ResetComboTime());
             _input.weakAttack = false;
         }
 
@@ -204,8 +209,8 @@ public class PlayerController : MonoBehaviour
     void Dodge()
     {
         if (!_input.dodge) { dodgeTargetdirection = Move(); _dodgeCoolDownDelta -= Time.deltaTime; }
-            
-        if (_input.dodge) 
+
+        if (_input.dodge)
         {
             if (Grounded && _dodgeCoolDownDelta < 0.0f)
             {
@@ -228,10 +233,18 @@ public class PlayerController : MonoBehaviour
                     Speed = Mathf.Round(Speed * 1000f) / 1000f;
                 }
                 else Speed = targetSpeed;*/
+        // Idle상태에서 이동하고 있을 때 달리기를 누르면 달리기 상태
         if (_playerState == State.Idle && _input.move != Vector2.zero && _input.sprint) _playerState = State.Sprint;
-        else if (_playerState == State.Idle && _input.move != Vector2.zero) _playerState = State.Walk; 
-            
+        // Idle상태에서 이동하면 걷기 상태
+        else if (_playerState == State.Idle && _input.move != Vector2.zero) _playerState = State.Walk;
+        // 걷거나 뛰는 상태에서 입력이 없을 시 Idle
+        else if (_playerState == State.Walk || _playerState == State.Sprint)
+        {
+            if (_input.move == Vector2.zero) _playerState = State.Idle;
+        }
+
         Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+
         if (_input.move != Vector2.zero)
         {
             _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
@@ -242,14 +255,14 @@ public class PlayerController : MonoBehaviour
         }
         Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
-        //if(!_input.dodge)_controller.Move(targetDirection.normalized * (Speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+        _controller.Move(new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
         return targetDirection;
     }
     void JumpAndGravity()
     {
         if (Grounded)
-        {
+        {   
             _fallTimeoutDelta = FallTimeout;
 
             if (_verticalVelocity < 0.0f)
