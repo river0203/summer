@@ -152,6 +152,8 @@ public class PlayerController : MonoBehaviour
         // 바닥 탐지
         GroundedCheck();
 
+        moveRotation();
+
         // Idle상태일 때 가능한 행동
         if (PlayerState == State.Idle)
         {
@@ -178,7 +180,24 @@ public class PlayerController : MonoBehaviour
         CameraRotation();
     }
 
-    
+    void moveRotation()
+    {
+
+        Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+
+        if (_input.move != Vector2.zero)
+        {
+            _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
+            float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
+                RotationSmoothTime);
+
+            transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+        }
+        Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+
+        //_controller.Move(new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
+    }
 
     void WeakAttack()
     {
@@ -226,7 +245,7 @@ public class PlayerController : MonoBehaviour
     void Dodge()
     {
     }
-    Vector3 Move()
+    void Move()
     {
         /*        float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
                 if (_input.move == Vector2.zero) targetSpeed = 0.0f;
@@ -251,22 +270,6 @@ public class PlayerController : MonoBehaviour
         {
             if (_input.move == Vector2.zero) PlayerState = State.Idle;
         }
-
-        Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-
-        if (_input.move != Vector2.zero)
-        {
-            _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
-            float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                RotationSmoothTime);
-
-            transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
-        }
-        Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-
-        _controller.Move(new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-
-        return targetDirection;
     }
     void JumpAndGravity()
     {
