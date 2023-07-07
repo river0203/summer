@@ -778,6 +778,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 140466453918404740, guid: da5c851cbe66b664198da849b11a74ca, type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 140466453918404894, guid: da5c851cbe66b664198da849b11a74ca, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -1082,6 +1086,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe114a8d3e82dd4cba5e99688a4d142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startingHP: 100
+  _damage: 10
 --- !u!1 &1933832747
 GameObject:
   m_ObjectHideFlags: 0
