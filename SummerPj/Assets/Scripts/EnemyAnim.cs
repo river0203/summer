@@ -69,7 +69,6 @@ public class EnemyAnim : MonoBehaviour
     private void UpdateIdle()
     {
         EnemyState = State.Idle;
-        _agent.enabled = false;
     }
     private void UpdateRun()
     {
