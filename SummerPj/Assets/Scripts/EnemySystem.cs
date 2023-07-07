@@ -4,32 +4,48 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using static LivingEntity;
+using static UnityEngine.GraphicsBuffer;
+using static UnityEngine.Rendering.DebugUI;
 
 public class EnemySystem : MonoBehaviour
 {
-    Transform _monster;
-    Transform _plyaer;
-    NavMeshAgent _agent;
-    Rigidbody _rigid;
-    State _enemyState;
+    public State _sysState;
+    Transform _player;
+    NavMeshAgent _sysAgent;
+    Rigidbody _sysRigid;
+    EnemyAnim State;
+    EnemyAnim Target;
+    
     
 
     private void Start()
     {
-        _rigid = GetComponent<Rigidbody>();
-        _monster = gameObject.GetComponent<Transform>();
-        _plyaer = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        _agent = gameObject.GetComponent<NavMeshAgent>();
+        _sysRigid = GetComponent<Rigidbody>();
+        _player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        _sysAgent = gameObject.GetComponent<NavMeshAgent>();
+        State = GetComponent<EnemyAnim>();
+        Target = GetComponent<EnemyAnim>();
     }
 
+    private void BossMOve()
+    {
+        float distance = Vector3.Distance(transform.position, _player.transform.position);
+        _sysState = State.EnemyState;
+        
+       
+        
+    }
     private void Update()
     {
-        _agent.destination = _plyaer.position;
+        _sysAgent.destination = _player.position;
+        BossMOve();
+        //_sysState = State.EnemyState;
+        //Debug.Log(_sysState);
     }
     void freeze_velocity()
     {
-        _rigid.velocity = Vector3.zero;
-        _rigid.angularVelocity = Vector3.zero;
+        _sysRigid.velocity = Vector3.zero;
+        _sysRigid.angularVelocity = Vector3.zero;
         
     }
 
@@ -37,15 +53,8 @@ public class EnemySystem : MonoBehaviour
     {
         freeze_velocity();
     }
-
-    /*IEnumerator play_wakeUp()
-    {
-        yield return new WaitForSeconds(3);//초는 in 시간에 맞춰 변경하시면 됩니다.
-        //play IN anim
-        Debug.Log("WakeUP");
-        enemy_state = State.Run;
-    }
-
+    
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         //무기 태그와 충돌 하였을 때 발동
