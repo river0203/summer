@@ -6,6 +6,8 @@ using static PlayerStates;
 
 public class PlayerController : MonoBehaviour
 {
+    // private Gamepad gamepad;
+
     PlayerInputActions _input;
     CharacterController _controller;
     PlayerInput _playerInput;
@@ -111,6 +113,8 @@ public class PlayerController : MonoBehaviour
     #endregion
     private void Start()
     {
+        // gamepad = Gamepad.current;
+
         CameraTarget = GameObject.Find("PlayerCameraRoot");
         _mainCamera = GameObject.Find("PlayerCamera");
 
@@ -127,6 +131,19 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        /*if (gamepad != null && gamepad.device != null)
+        {
+            // 왼쪽 모터의 진동 설정 (0.0 ~ 1.0 사이 값)
+            float leftVibration = 0.5f;
+
+            // 오른쪽 모터의 진동 설정 (0.0 ~ 1.0 사이 값)
+            float rightVibration = 0.8f;
+
+            // 진동 적용
+            gamepad.SetMotorSpeeds(leftVibration, rightVibration);
+        }*/
+
+
         // 중력
         Gravity();
         // 바닥 탐지
