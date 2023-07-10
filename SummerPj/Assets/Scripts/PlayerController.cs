@@ -246,7 +246,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_input.strongAttack)
         {
-            if (PlayerState == State.Idle || PlayerState == State.Walk || PlayerState == State.Sprint) PlayerState = State.StrongAttack;
+            PlayerState = State.StrongAttack;
             StartCoroutine(ChangeState());
 
             _input.strongAttack = false;
@@ -355,12 +355,11 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator ChangeState()
     {
-        yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length * 0.8f);
-
-        if(PlayerState == State.Heal || PlayerState == State.Heal_Walk)
+        if(PlayerState == State.StrongAttack)
         {
-            _hp += HealAmount;
+            yield return new WaitForSeconds(2.267f);
         }
+        else yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length);
 
         PlayerState = State.Idle;
         yield break;
