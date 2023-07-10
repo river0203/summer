@@ -97,12 +97,12 @@
                 },
                 {
                     "name": "Ultimate",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "e661ccdf-5617-49ad-88dc-926c8bde16ba",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Double",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "interactions": "Hold(duration=3)",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -421,6 +421,17 @@
                     "interactions": "Hold(duration=3)",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "Ultimate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "31f97be4-1b1c-48af-bcf2-07006977b18f",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Ultimate",
                     "isComposite": false,
                     "isPartOfComposite": false

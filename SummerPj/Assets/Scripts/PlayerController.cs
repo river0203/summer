@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
                 return;
 
             _playerState = value;
-
+            Debug.Log(value);
             string currentState = Enum.GetName(typeof(State), _playerState);
             _anim.CrossFade(currentState, 0.1f);
         }
@@ -32,34 +32,18 @@ public class PlayerController : MonoBehaviour
 
     #region  Status
     [Header("Status")]
-    #endregion
+    [Tooltip("플레이어 최대 체력")]
+    [SerializeField]float maxHP = 100;
 
-    #region  Camera
-    [Header("Camera")]
-    [Tooltip("카메라 하단 최대 범위")]
-    [SerializeField] float BottomClamp = -30.0f;
+    [Tooltip("플레이어 최대 스태미나")]
+    [SerializeField]float maxStamina = 100;
 
-    [Tooltip("카메라 상단 최대 범위")]
-    [SerializeField] float TopClamp = 70.0f;
-
-    float _cinemachineTargetYaw;
-    float _cinemachineTargetPitch;
+    float _hp;
+    float _stamina;
     #endregion
 
     #region  Move
     [Header("Move")]
-    /*    [Tooltip("현재 이동 속도")]
-        [SerializeField]float Speed;
-
-        [Tooltip("기본 이동 속도 m/s")]
-        [SerializeField]float MoveSpeed = 2f;
-
-        [Tooltip("달리기 속도 m/s")]
-        [SerializeField]float SprintSpeed = 5f;
-
-        [Tooltip("변경 이동속도 도달 시간")]
-        [SerializeField]float SpeedChangeRate = 10.0f;*/
-
     [Tooltip("방향 전환 시간")]
     [SerializeField] float RotationSmoothTime = 0.12f;
 
@@ -97,27 +81,7 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region  Dodge
-    [Header("Dodge")]
-    [Tooltip("구르기 지속시간")]
-    [SerializeField] float dodgeTime = 3f;
-
-    [Tooltip("구르기 쿨타임")]
-    [SerializeField] float DodgeCoolDown = 10f;
-
-    [Tooltip("구르기 속도 증가 시간")]
-    [SerializeField] float DodgeLerpTime = 3f;
-
-    [Tooltip("구르기 시작 속도")]
-    float DodgeStartSpeed = 8f;
-
-    [Tooltip("구르기 목표 속도")]
-    float DodgetargetSpeed = 8f;
-
-    float _dodgeCoolDownDelta;
-    float DodgeSpeedChangeRate;
-    float DodgecurrentTime;
-    float DodgeSpeed;
-    Vector3 dodgeTargetdirection;
+    //[Header("Dodge")]
     #endregion
 
     #region  Attack
@@ -125,21 +89,38 @@ public class PlayerController : MonoBehaviour
     [Tooltip("콤보 지속 시간")]
     [SerializeField] float comboTime = 3f;
 
-    [Tooltip("최대 콤보")]
-    [SerializeField] int Combo = 0;
-
+    int Combo = 0;
     float comboTimeDelta;
+    #endregion
+
+    #region  Heal
+    [Header("회복")]
+    [Tooltip("회복 아이템 수치")]
+    [SerializeField]float HealAmount = 30;
+    #endregion
+
+    #region  Camera
+    [Header("Camera")]
+    [Tooltip("카메라 하단 최대 범위")]
+    [SerializeField] float BottomClamp = -30.0f;
+
+    [Tooltip("카메라 상단 최대 범위")]
+    [SerializeField] float TopClamp = 70.0f;
+
+    float _cinemachineTargetYaw;
+    float _cinemachineTargetPitch;
     #endregion
     private void Start()
     {
         CameraTarget = GameObject.Find("PlayerCameraRoot");
         _mainCamera = GameObject.Find("PlayerCamera");
+
         _anim = GetComponent<Animator>();
         _input = GetComponent<PlayerInputActions>();
         _controller = GetComponent<CharacterController>();
         _playerInput = GetComponent<PlayerInput>();
 
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
 
         _cinemachineTargetYaw = CameraTarget.transform.rotation.eulerAngles.y;
         _jumpTimeoutDelta = JumpTimeout;
@@ -151,30 +132,28 @@ public class PlayerController : MonoBehaviour
         JumpAndGravity();
         // 바닥 탐지
         GroundedCheck();
-
+        //플레이어 회전
         moveRotation();
-
-        // Idle상태일 때 가능한 행동
-        if (PlayerState == State.Idle)
-        {
-            //이동 방향 결정
-            Move();
-        }
+        // 콤보 관리
+        Combo_Manage();
 
         if (PlayerState == State.Idle || PlayerState == State.Walk || PlayerState == State.Sprint)
         {
-            //약공격
+            // 이동
+            Move();
+            // 약공격
             WeakAttack();
-            //강공격
+            // 강공격
             StrongAttack();
+            // 구르기 방향 결정
+            Dodge();
+            // 회복
+            Heal();
 
-            //회복, 점프, 상호작용, 점프공격, 흘리기, 기모으기, 
+            // 점프, 상호작용, 점프공격, 흘리기, 기모으기, 
         }
-        //구르기 방향 결정
-        Dodge();
-
-        Combo_Manage();
     }
+
     private void LateUpdate()
     {
         CameraRotation();
@@ -185,7 +164,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-        if (_input.move != Vector2.zero)
+        if (_input.move != Vector2.zero && (_playerState != State.Dodge))
         {
             _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
@@ -199,6 +178,17 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void Heal()
+    {
+        if (_input.heal)
+        {
+            _playerState = State.Heal;
+            ChangeState();
+
+            _input.heal = false;
+        }
+        else _input.heal = false;
+    }
     void WeakAttack()
     {
         // 공격 및 콤보 관리
@@ -244,32 +234,30 @@ public class PlayerController : MonoBehaviour
     }
     void Dodge()
     {
+        if (_input.dodge)
+        {
+            Time.timeScale = 0.5f;
+            PlayerState = State.Dodge;
+            StartCoroutine(ChangeState());
+
+            _input.dodge = false;
+        }
+        else _input.dodge = false;
     }
     void Move()
     {
-        /*        float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
-                if (_input.move == Vector2.zero) targetSpeed = 0.0f;
-
-                float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
-
-                float speedOffset = 0.1f;
-
-                if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
-                {
-                    Speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed, Time.deltaTime * SpeedChangeRate);
-                    Speed = Mathf.Round(Speed * 1000f) / 1000f;
-                }
-                else Speed = targetSpeed;*/
-
-        // Idle상태 or 이동하고 있을 때 달리기를 누르면 달리기 상태
-        if ((PlayerState == State.Idle || PlayerState == State.Walk) && _input.move != Vector2.zero && _input.sprint) PlayerState = State.Sprint;
-        // Idle상태에서 이동하면 걷기 상태
-        else if (PlayerState == State.Idle && _input.move != Vector2.zero) PlayerState = State.Walk;
         // 걷거나 뛰는 상태에서 입력이 없을 시 Idle
-        else if (PlayerState == State.Walk || PlayerState == State.Sprint)
+        if (PlayerState == State.Walk || PlayerState == State.Sprint)
         {
             if (_input.move == Vector2.zero) PlayerState = State.Idle;
         }
+        // Idle상태 or 이동하고 있을 때 달리기를 누르면 달리기 상태
+        else if (PlayerState == State.Idle && _input.move != Vector2.zero && _input.sprint) PlayerState = State.Sprint;
+        else if (PlayerState == State.Idle && _input.move != Vector2.zero) PlayerState = State.Walk;
+
+        if (PlayerState == State.Walk) if(_input.sprint) PlayerState = State.Sprint;
+
+
     }
     void JumpAndGravity()
     {

@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputActions : MonoBehaviour
 {
+    InputAction action = new InputAction(); 
     #region  Action
     public Vector2 move;
     public Vector2 look;
@@ -13,9 +15,11 @@ public class PlayerInputActions : MonoBehaviour
     public bool strongAttack;
     public bool parry;
     public bool ultimate;
+    public bool heal;
     public bool lockOn;
     #endregion 
 
+    
     public void OnMove(InputValue value)
     {
         MoveInput(value.Get<Vector2>());
@@ -56,6 +60,11 @@ public class PlayerInputActions : MonoBehaviour
     {
         UltimateInput(value.isPressed);
     }
+    public void OnHeal(InputValue value)
+    {
+        HealInput(value.isPressed);
+    }
+
     public void MoveInput(Vector2 newMoveDirection)
     {
         move = newMoveDirection;
@@ -95,5 +104,9 @@ public class PlayerInputActions : MonoBehaviour
     public void UltimateInput(bool newUltimateState)
     {
         ultimate = newUltimateState;
+    }
+    public void HealInput(bool newHealState)
+    {
+        heal = newHealState;
     }
 }
