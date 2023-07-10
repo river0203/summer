@@ -705,63 +705,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7cdf331617458c4eab9d35509bb6f48, type: 3}
---- !u!1001 &1628729298
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1446379636734334, guid: 02118f3f769d0104dbc7533300879896, type: 3}
-      propertyPath: m_Name
-      value: Vampire
-      objectReference: {fileID: 0}
-    - target: {fileID: 4695178246411186, guid: 02118f3f769d0104dbc7533300879896, type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4695178246411186, guid: 02118f3f769d0104dbc7533300879896, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.867
-      objectReference: {fileID: 0}
-    - target: {fileID: 4695178246411186, guid: 02118f3f769d0104dbc7533300879896, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4695178246411186, guid: 02118f3f769d0104dbc7533300879896, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.969
-      objectReference: {fileID: 0}
-    - target: {fileID: 4695178246411186, guid: 02118f3f769d0104dbc7533300879896, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9039037
-      objectReference: {fileID: 0}
-    - target: {fileID: 4695178246411186, guid: 02118f3f769d0104dbc7533300879896, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4695178246411186, guid: 02118f3f769d0104dbc7533300879896, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.4277361
-      objectReference: {fileID: 0}
-    - target: {fileID: 4695178246411186, guid: 02118f3f769d0104dbc7533300879896, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4695178246411186, guid: 02118f3f769d0104dbc7533300879896, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4695178246411186, guid: 02118f3f769d0104dbc7533300879896, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 50.648003
-      objectReference: {fileID: 0}
-    - target: {fileID: 4695178246411186, guid: 02118f3f769d0104dbc7533300879896, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 02118f3f769d0104dbc7533300879896, type: 3}
 --- !u!1 &1916517226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,9 +1185,9 @@ MonoBehaviour:
   maxHP: 100
   maxStamina: 100
   RotationSmoothTime: 0.12
-  JumpTimeout: 0.5
+  JumpTimeout: 0
   FallTimeout: 0.15
-  JumpHeight: 1.2
+  JumpHeight: 2
   Gravity: -15
   GroundLayers:
     serializedVersion: 2

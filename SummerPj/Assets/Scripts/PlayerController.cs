@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
 
     GameObject CameraTarget;
     GameObject _mainCamera;
-    State _playerState = State.Idle;
 
+    State _playerState = State.Idle;
     State PlayerState
     {
         get { return _playerState; }
@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
                 return;
 
             _playerState = value;
-            Debug.Log(value);
             string currentState = Enum.GetName(typeof(State), _playerState);
             _anim.CrossFade(currentState, 0.1f);
         }
@@ -33,10 +32,10 @@ public class PlayerController : MonoBehaviour
     #region  Status
     [Header("Status")]
     [Tooltip("플레이어 최대 체력")]
-    [SerializeField]float maxHP = 100;
+    [SerializeField] float maxHP = 100;
 
     [Tooltip("플레이어 최대 스태미나")]
-    [SerializeField]float maxStamina = 100;
+    [SerializeField] float maxStamina = 100;
 
     float _hp;
     float _stamina;
@@ -47,7 +46,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("방향 전환 시간")]
     [SerializeField] float RotationSmoothTime = 0.12f;
 
-
+    Quaternion _playerRotation;
     float _targetRotation;
     float _rotationVelocity;
     float _verticalVelocity;
@@ -96,7 +95,7 @@ public class PlayerController : MonoBehaviour
     #region  Heal
     [Header("회복")]
     [Tooltip("회복 아이템 수치")]
-    [SerializeField]float HealAmount = 30;
+    [SerializeField] float HealAmount = 30;
     #endregion
 
     #region  Camera
@@ -128,6 +127,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        PlayerRotation();
         // 점프 및 중력
         JumpAndGravity();
         // 바닥 탐지
@@ -147,18 +147,50 @@ public class PlayerController : MonoBehaviour
             StrongAttack();
             // 구르기 방향 결정
             Dodge();
-            // 회복
-            Heal();
+            // 점프
+            Jump();
 
-            // 점프, 상호작용, 점프공격, 흘리기, 기모으기, 
+            // 상호작용, 흘리기, 기모으기, 
+        }
+
+        // 점프공격
+        if (PlayerState == State.Jump)
+        {
+            JumpAttack();
         }
     }
-
     private void LateUpdate()
     {
         CameraRotation();
     }
 
+    void PlayerRotation()
+    {
+        if(PlayerState != State.WeakAttack_1 && PlayerState != State.WeakAttack_2 && PlayerState != State.WeakAttack_3 &&
+           PlayerState != State.WeakAttack_4 && PlayerState != State.WeakAttack_5 && PlayerState != State.WeakAttack_6 &&
+           PlayerState != State.StrongAttack && PlayerState != State.Jump && PlayerState != State.JumpAttack)
+        {
+            _playerRotation = transform.rotation;
+        }
+        else transform.rotation = _playerRotation;
+    }
+    void JumpAttack()
+    {
+        if (_input.weakAttack || _input.strongAttack)
+        {
+            PlayerState = State.JumpAttack;
+            ChangeState();
+        }
+    }
+    void Jump()
+    {
+        if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+        {
+            _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+            _playerState = State.Jump;
+            StartCoroutine(ChangeState());
+        }
+    }
     void moveRotation()
     {
 
@@ -177,18 +209,6 @@ public class PlayerController : MonoBehaviour
         //_controller.Move(new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
     }
-
-    void Heal()
-    {
-        if (_input.heal)
-        {
-            _playerState = State.Heal;
-            ChangeState();
-
-            _input.heal = false;
-        }
-        else _input.heal = false;
-    }
     void WeakAttack()
     {
         // 공격 및 콤보 관리
@@ -202,11 +222,12 @@ public class PlayerController : MonoBehaviour
                 case 2: PlayerState = State.WeakAttack_3; break;
                 case 3: PlayerState = State.WeakAttack_4; break;
                 case 4: PlayerState = State.WeakAttack_5; break;
+                case 5: PlayerState = State.WeakAttack_6; break;
                 default: break;
             }
-            Combo++;
             StartCoroutine(ChangeState());
             StartCoroutine(ResetComboTime());
+            Combo++;
 
             _input.weakAttack = false;
         }
@@ -236,7 +257,6 @@ public class PlayerController : MonoBehaviour
     {
         if (_input.dodge)
         {
-            Time.timeScale = 0.5f;
             PlayerState = State.Dodge;
             StartCoroutine(ChangeState());
 
@@ -251,13 +271,13 @@ public class PlayerController : MonoBehaviour
         {
             if (_input.move == Vector2.zero) PlayerState = State.Idle;
         }
-        // Idle상태 or 이동하고 있을 때 달리기를 누르면 달리기 상태
+        // Idle상태에서 Sprint를 누르고 이동하면 Sprint
         else if (PlayerState == State.Idle && _input.move != Vector2.zero && _input.sprint) PlayerState = State.Sprint;
+        // Idle상태에서 이동하면 Walk
         else if (PlayerState == State.Idle && _input.move != Vector2.zero) PlayerState = State.Walk;
 
+        // 걷는 상태에서 Sprint를 누르면 달리기
         if (PlayerState == State.Walk) if(_input.sprint) PlayerState = State.Sprint;
-
-
     }
     void JumpAndGravity()
     {
@@ -270,11 +290,7 @@ public class PlayerController : MonoBehaviour
                 _verticalVelocity = -2f;
             }
 
-            if (_input.jump && _jumpTimeoutDelta <= 0.0f)
-            {
-                _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-                //_playerState = State.Jump;
-            }
+
 
             if (_jumpTimeoutDelta >= 0.0f)
             {
@@ -297,7 +313,10 @@ public class PlayerController : MonoBehaviour
         {
             _verticalVelocity += Gravity * Time.deltaTime;
         }
+
+        _controller.Move(new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
     }
+
     void CameraRotation()
     {
         // 입력에 따라 카메라 이동
@@ -320,7 +339,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // 최대 콤보 초과시 or 콤보 지속 시간 초과시 0로 초기화
-        if (comboTimeDelta <= 0 || Combo > 5) Combo = 0;
+        if (comboTimeDelta <= 0 || Combo > 6) Combo = 0;
     }
     void GroundedCheck()
     {
@@ -336,7 +355,13 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator ChangeState()
     {
-        yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length * 0.8f);
+
+        if(PlayerState == State.Heal || PlayerState == State.Heal_Walk)
+        {
+            _hp += HealAmount;
+        }
+
         PlayerState = State.Idle;
         yield break;
     }
@@ -346,5 +371,19 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length);
         comboTimeDelta = comboTime;
         yield break;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "EnemyAttack")
+        {
+            if (PlayerState != State.Jump && PlayerState != State.Dodge && PlayerState != State.Fall)
+            {
+                StopAllCoroutines();
+                PlayerState = State.Damaged;
+                // 플레이어 체력 -
+                StartCoroutine(ChangeState());
+            }
+        }
     }
 }    

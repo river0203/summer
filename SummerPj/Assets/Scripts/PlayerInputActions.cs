@@ -1,10 +1,12 @@
 using System;
+using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputActions : MonoBehaviour
 {
-    InputAction action = new InputAction(); 
+    InputAction _inputAction;
+
     #region  Action
     public Vector2 move;
     public Vector2 look;
@@ -19,7 +21,11 @@ public class PlayerInputActions : MonoBehaviour
     public bool lockOn;
     #endregion 
 
-    
+    private void Start()
+    {
+        _inputAction = GetComponent<InputAction>();
+
+    }
     public void OnMove(InputValue value)
     {
         MoveInput(value.Get<Vector2>());
