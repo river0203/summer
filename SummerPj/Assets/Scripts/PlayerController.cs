@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float JumpHeight = 1.2f;
 
     [Tooltip("캐릭터 자체 중력")]
-    [SerializeField] float Gravity = -15f;
+    [SerializeField] float _Gravity = -15f;
 
     [Tooltip("바닥으로 사용할 레이어")]
     [SerializeField] LayerMask GroundLayers;
@@ -127,12 +127,11 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        PlayerRotation();
-        // 점프 및 중력
-        JumpAndGravity();
+        // 중력
+        Gravity();
         // 바닥 탐지
         GroundedCheck();
-        //플레이어 회전
+        // 플레이어 회전
         moveRotation();
         // 콤보 관리
         Combo_Manage();
@@ -150,7 +149,7 @@ public class PlayerController : MonoBehaviour
             // 점프
             Jump();
 
-            // 상호작용, 흘리기, 기모으기, 
+            // 상호작용, 흘리기, 기모으기
         }
 
         // 점프공격
@@ -164,16 +163,6 @@ public class PlayerController : MonoBehaviour
         CameraRotation();
     }
 
-    void PlayerRotation()
-    {
-        if(PlayerState != State.WeakAttack_1 && PlayerState != State.WeakAttack_2 && PlayerState != State.WeakAttack_3 &&
-           PlayerState != State.WeakAttack_4 && PlayerState != State.WeakAttack_5 && PlayerState != State.WeakAttack_6 &&
-           PlayerState != State.StrongAttack && PlayerState != State.Jump && PlayerState != State.JumpAttack)
-        {
-            _playerRotation = transform.rotation;
-        }
-        else transform.rotation = _playerRotation;
-    }
     void JumpAttack()
     {
         if (_input.weakAttack || _input.strongAttack)
@@ -186,17 +175,17 @@ public class PlayerController : MonoBehaviour
     {
         if (_input.jump && _jumpTimeoutDelta <= 0.0f)
         {
-            _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-            _playerState = State.Jump;
+            _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * _Gravity);
+            PlayerState = State.Jump;
             StartCoroutine(ChangeState());
         }
     }
     void moveRotation()
     {
-
+        // 플레이어 회전
         Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-        if (_input.move != Vector2.zero && (_playerState != State.Dodge))
+        if (_input.move != Vector2.zero && (PlayerState != State.Dodge))
         {
             _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
@@ -206,8 +195,14 @@ public class PlayerController : MonoBehaviour
         }
         Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
-        //_controller.Move(new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-
+        // 플레이어 회전 제한
+        if (PlayerState != State.WeakAttack_1 && PlayerState != State.WeakAttack_2 && PlayerState != State.WeakAttack_3 &&
+        PlayerState != State.WeakAttack_4 && PlayerState != State.WeakAttack_5 && PlayerState != State.WeakAttack_6 &&
+        PlayerState != State.StrongAttack && PlayerState != State.Jump && PlayerState != State.JumpAttack)
+        {
+            _playerRotation = transform.rotation;
+        }
+        else transform.rotation = _playerRotation;
     }
     void WeakAttack()
     {
@@ -279,7 +274,7 @@ public class PlayerController : MonoBehaviour
         // 걷는 상태에서 Sprint를 누르면 달리기
         if (PlayerState == State.Walk) if(_input.sprint) PlayerState = State.Sprint;
     }
-    void JumpAndGravity()
+    void Gravity()
     {
         if (Grounded)
         {
@@ -289,8 +284,6 @@ public class PlayerController : MonoBehaviour
             {
                 _verticalVelocity = -2f;
             }
-
-
 
             if (_jumpTimeoutDelta >= 0.0f)
             {
@@ -311,7 +304,7 @@ public class PlayerController : MonoBehaviour
 
         if (_verticalVelocity < _terminalVelocity)
         {
-            _verticalVelocity += Gravity * Time.deltaTime;
+            _verticalVelocity += _Gravity * Time.deltaTime;
         }
 
         _controller.Move(new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
@@ -358,6 +351,11 @@ public class PlayerController : MonoBehaviour
         if(PlayerState == State.StrongAttack)
         {
             yield return new WaitForSeconds(2.267f);
+        }
+        else if (PlayerState == State.Jump)
+        {
+            yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length);
+            PlayerState = State.Jump;
         }
         else yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length);
 
