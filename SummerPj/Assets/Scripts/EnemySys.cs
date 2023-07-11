@@ -7,7 +7,6 @@ using static LivingEntity;
 
 public class EnemySys : MonoBehaviour
 {
-    LivingEntity.State _sysState;
     Transform _player;
     NavMeshAgent _sysAgent;
     Rigidbody _sysRigid;
@@ -23,8 +22,8 @@ public class EnemySys : MonoBehaviour
     {
         _player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         _sysAgent = gameObject.GetComponent<NavMeshAgent>();
+        _sysRigid  = gameObject.GetComponent<Rigidbody>();
         _startingHP = _hp;
-        _sysState = gameObject.GetComponent<LivingEntity.State>(); 
     }
 
     private void BossMove()
@@ -55,11 +54,11 @@ public class EnemySys : MonoBehaviour
         if (collision.collider.gameObject.CompareTag("Weapon"))
         {
             _hp -= _damage;
-            _sysState = LivingEntity.State.Stage2;
+            //_sysState = LivingEntity.State.Stage2;
 
             if(_hp <= 0)
             {
-                _sysState = LivingEntity.State.Dead;
+                //_sysState = LivingEntity.State.Dead;
                 Destroy(this.gameObject);
             }
         }
