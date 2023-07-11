@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
             Ultimate();
             // 상호작용, 흘리기, 기모으기
         }
-    
+
         // 점프 중 행동
         if (PlayerState == State.Jump || PlayerState == State.Fall)
         {
@@ -217,7 +217,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_input.ultimate)
         {
-             PlayerState = State.Ultimate;
+            PlayerState = State.Ultimate;
         }
         else { Ult = 0; }
     }
@@ -271,7 +271,7 @@ public class PlayerController : MonoBehaviour
         // 특정 상황 플레이어 회전 제한
         if (PlayerState != State.WeakAttack_1 && PlayerState != State.WeakAttack_2 && PlayerState != State.WeakAttack_3 &&
         PlayerState != State.WeakAttack_4 && PlayerState != State.WeakAttack_5 && PlayerState != State.WeakAttack_6 &&
-        PlayerState != State.StrongAttack && PlayerState != State.Jump && PlayerState != State.JumpAttack && PlayerState != State.Dodge) 
+        PlayerState != State.StrongAttack && PlayerState != State.Jump && PlayerState != State.JumpAttack && PlayerState != State.Dodge)
         {
             _playerRotation = transform.rotation;
         }
@@ -438,9 +438,9 @@ public class PlayerController : MonoBehaviour
         comboTimeDelta = comboTime;
         yield break;
     }
-    IEnumerator AttackState() 
-    { 
-        if(PlayerState == State.StrongAttack)
+    IEnumerator AttackState()
+    {
+        if (PlayerState == State.StrongAttack)
         {
             yield return new WaitForSeconds(2.267f);
         }
@@ -457,14 +457,13 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "EnemyAttack")
         {
-            if (PlayerState != State.Jump && PlayerState != State.Dodge && PlayerState != State.Fall)
+            PlayerState = State.Damaged;
+            _hp -= 10;
+            if (PlayerState != State.Jump && PlayerState != State.Dodge && PlayerState != State.Fall && PlayerState != State.Land)
             {
                 StopAllCoroutines();
-                PlayerState = State.Damaged;
-                _hp -= 10;
-                Debug.Log(_hp);
-                StartCoroutine(ChangeState());
             }
+            StartCoroutine(ChangeState());
         }
     }
 }
