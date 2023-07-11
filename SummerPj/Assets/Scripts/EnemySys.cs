@@ -10,7 +10,6 @@ public class EnemySys : MonoBehaviour
     NavMeshAgent _sysAgent;
 
     State _state = State.Idle;
-    //EnemyAnim _myEnemy;
 
     [SerializeField]
     float _startingHP;
@@ -29,7 +28,6 @@ public class EnemySys : MonoBehaviour
         _player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         _sysAgent = gameObject.GetComponent<NavMeshAgent>();
         _sysRigid  = gameObject.GetComponent<Rigidbody>();
-        //_myEnemy = new EnemyAnim();
         _hp = _startingHP;
     }
 
@@ -41,26 +39,6 @@ public class EnemySys : MonoBehaviour
         {
             Debug.Log(_state);
             _sysAgent.ResetPath();
-            /*if (_state == State.Skill1)
-            {
-                _sysAgent.ResetPath();
-            }
-            else if(_state == State.Skill2)
-            {
-                _sysAgent.ResetPath();
-            }
-            else if(_state == State.Skill3)
-            {
-                _sysAgent.ResetPath();
-            }
-            else if(_state == State.Skill4)
-            {
-                _sysAgent.ResetPath();
-            }
-            else if(_state == State.Skill5)
-            {
-                _sysAgent.ResetPath();
-            }*/
             
         }
         else if (distance <= _checkingRange)
