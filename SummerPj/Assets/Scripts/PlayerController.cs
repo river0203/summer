@@ -195,11 +195,17 @@ public class PlayerController : MonoBehaviour
         }
 
         // 착지
-        if (PlayerState == State.Fall && Grounded)
+        if (Grounded)
         {
-            StopCoroutine(JumpState());
-            PlayerState = State.Land;
-            StartCoroutine(ChangeState());
+            if (PlayerState == State.Fall || PlayerState == State.Jump)
+            {
+                if (_verticalVelocity < 0)
+                {
+                    StopCoroutine(JumpState());
+                    PlayerState = State.Land;
+                    StartCoroutine(ChangeState());
+                }
+            }
         }
     }
     private void LateUpdate()
@@ -403,6 +409,7 @@ public class PlayerController : MonoBehaviour
         Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
         Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
     }
+
     static float ClampAngle(float lfAngle, float lfMin, float lfMax)
     {
         if (lfAngle < -360f) lfAngle += 360f;
