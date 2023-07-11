@@ -8,6 +8,8 @@ public class EnemySys : MonoBehaviour
     Transform _player;
     Rigidbody _sysRigid;
     NavMeshAgent _sysAgent;
+    Vector3 _pos;
+    Vector3 _backPos;
 
     State _state = State.Idle;
 
@@ -46,6 +48,9 @@ public class EnemySys : MonoBehaviour
         }
         else if(_state == State.Skill4)
         {
+            _pos = this.gameObject.transform.position;
+            _backPos = ;
+
             _sysAgent.transform.LookAt(_player.position);
         }
         

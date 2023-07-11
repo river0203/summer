@@ -257,15 +257,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145910369, guid: da5c851cbe66b664198da849b11a74ca, type: 3}
       propertyPath: m_StoppingDistance
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 145910370, guid: da5c851cbe66b664198da849b11a74ca, type: 3}
       propertyPath: m_Drag
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 145910370, guid: da5c851cbe66b664198da849b11a74ca, type: 3}
+      propertyPath: m_Mass
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 145910370, guid: da5c851cbe66b664198da849b11a74ca, type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 674100984, guid: da5c851cbe66b664198da849b11a74ca, type: 3}
       propertyPath: _target
@@ -577,7 +581,6 @@ MonoBehaviour:
   _damage: 10
   _checkingRange: 30
   _attackRange: 20
-  _crush: 0
 --- !u!136 &1716789814
 CapsuleCollider:
   m_ObjectHideFlags: 0
