@@ -67,15 +67,16 @@ public class EnemySys : MonoBehaviour
     {
         freeze_velocity();
     }
-
-    private void OnCollisionEnter(Collision collision)
+    
+    private void OnCollisionExit(Collision collision)
     {
         if(collision.collider.gameObject.CompareTag("Player"))
         {
             _hp -= _damage;
             Debug.Log(_hp);
-            if (_hp < 0 )
+            if (_hp <= 0 )
             {
+                _state = State.Dead;
                 Destroy(this.gameObject);
             }
         }
