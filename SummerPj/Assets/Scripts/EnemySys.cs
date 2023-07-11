@@ -35,27 +35,20 @@ public class EnemySys : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, _player.transform.position);
         _state = EnemyAnim.EnemyState;
-        if (distance < _attackRange)
-        {
-            Debug.Log(_state);
-            _sysAgent.ResetPath();
-            
-        }
-        else if (distance <= _checkingRange)
-        {
-            _state = State.Run;
-            if(_state == State.Run)
-            {
-                _sysAgent.transform.LookAt(_player.position);
-                _sysAgent.destination = _player.position;
-            }
 
-        }
-        else if (distance > _checkingRange)
+        if (_state == State.Run)
         {
-            _state = State.Idle;
+            _sysAgent.transform.LookAt(_player.position);
+            _sysAgent.destination = _player.position;
         }
-       
+        else if (_state == State.Skill1)
+        {
+            _sysAgent.transform.LookAt(_player.position);
+        }
+        else if(_state == State.Skill4)
+        {
+            _sysAgent.transform.LookAt(_player.position);
+        }
         
     }
     // Update is called once per frame
@@ -74,5 +67,18 @@ public class EnemySys : MonoBehaviour
     private void FixedUpdate()
     {
         freeze_velocity();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Hitcheck");
+            _hp -= _damage;
+            if(_hp < 0 )
+            {
+                Destroy(this.gameObject);
+            }
+        }
     }
 }
