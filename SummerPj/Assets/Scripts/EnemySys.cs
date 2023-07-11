@@ -21,7 +21,6 @@ public class EnemySys : MonoBehaviour
     private float _attackRange; // 몬스터 공격 범위 
 
     float _hp;
-    public bool _crush = false;
     
     void Start()
     {
@@ -73,9 +72,9 @@ public class EnemySys : MonoBehaviour
     {
         if(collision.collider.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Hitcheck");
             _hp -= _damage;
-            if(_hp < 0 )
+            Debug.Log(_hp);
+            if (_hp < 0 )
             {
                 Destroy(this.gameObject);
             }
