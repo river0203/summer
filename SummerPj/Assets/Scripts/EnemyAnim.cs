@@ -110,7 +110,6 @@ public class EnemyAnim : MonoBehaviour
         if (_isAttack)
             return;
 
-        //CheckCrash();
         if (distance < _attackRange ) 
         {
             UpdateAttack();

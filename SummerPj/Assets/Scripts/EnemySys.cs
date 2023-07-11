@@ -75,12 +75,4 @@ public class EnemySys : MonoBehaviour
     {
         freeze_velocity();
     }
-
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            _crush = true;
-        }
-    }*/
 }
