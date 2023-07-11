@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEngine;
 using UnityEngine.AI;
 using static LivingEntity;
@@ -15,9 +16,12 @@ using static LivingEntity;
 
 public class EnemyAnim : MonoBehaviour
 {
-    private State _enemyState = State.Idle;
+    public bool _attacking = false;
+
+    private static State _enemyState = State.Idle;
     private List<string> _skillList = new List<string>() { "skill_1", "skill_2", "skill_3", "skill_4", "skill_5" };
-   
+    private EnemySys _enemySys;
+
     [SerializeField]
     private float _checkingRange; //몬스터 인식 범위
     [SerializeField]
@@ -25,11 +29,11 @@ public class EnemyAnim : MonoBehaviour
     [SerializeField]
     Transform _target;
     
+    static Animator _anim;
+    
     bool _isAttack = false;
 
-    Animator _anim;
-
-    public State EnemyState 
+    public static State EnemyState 
     { 
         get 
         {
@@ -41,7 +45,7 @@ public class EnemyAnim : MonoBehaviour
                 return;
             
             _enemyState = value;
-            Debug.Log(_enemyState);
+            //Debug.Log(_enemyState);
 
             string currentState = Enum.GetName(typeof(State), _enemyState);
             _anim.CrossFade(currentState, 0.1f);
@@ -51,6 +55,7 @@ public class EnemyAnim : MonoBehaviour
     void Start()
     {
         _anim = GetComponent<Animator>();
+        _enemySys = new EnemySys();
     }
 
     private void UpdateIdle()
@@ -105,6 +110,7 @@ public class EnemyAnim : MonoBehaviour
         if (_isAttack)
             return;
 
+        //CheckCrash();
         if (distance < _attackRange ) 
         {
             UpdateAttack();
@@ -118,11 +124,5 @@ public class EnemyAnim : MonoBehaviour
             UpdateIdle();
         }
 
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("onHit");
-        EnemyState = State.Dead;
     }
 }
