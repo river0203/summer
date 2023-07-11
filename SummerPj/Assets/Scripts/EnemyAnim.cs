@@ -26,13 +26,8 @@ public class EnemyAnim : MonoBehaviour
     Transform _target;
     
     bool _isAttack = false;
-    float _objDistance = 0f;
 
-    NavMeshAgent _agent;
-    Rigidbody _rigid;
     Animator _anim;
-    GameObject _playerObj = null;    
-
 
     public State EnemyState 
     { 
@@ -55,10 +50,7 @@ public class EnemyAnim : MonoBehaviour
 
     void Start()
     {
-        _agent = GetComponent<NavMeshAgent>();
-        _rigid = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
-        _playerObj = GameObject.Find("Player");
     }
 
     private void UpdateIdle()
@@ -68,8 +60,6 @@ public class EnemyAnim : MonoBehaviour
     private void UpdateRun()
     {
         EnemyState = State.Run;
-        _objDistance = Vector3.Distance(transform.position, _playerObj.transform.position);
-        _agent.transform.LookAt(_target.position);
     }
     private void UpdateAttack()
     {
@@ -81,7 +71,6 @@ public class EnemyAnim : MonoBehaviour
             if (_skillList[rand] == "skill_1")
             {
                 EnemyState = State.Skill1;
-                
             }
             else if (_skillList[rand] == "skill_2")
             {
@@ -129,5 +118,11 @@ public class EnemyAnim : MonoBehaviour
             UpdateIdle();
         }
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("onHit");
+        EnemyState = State.Dead;
     }
 }

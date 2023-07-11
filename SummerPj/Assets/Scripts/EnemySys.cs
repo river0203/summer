@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using UnityEngine;
 using UnityEngine.AI;
 using static LivingEntity;
@@ -5,10 +6,11 @@ using static LivingEntity;
 public class EnemySys : MonoBehaviour
 {
     Transform _player;
-    NavMeshAgent _sysAgent;
     Rigidbody _sysRigid;
+    NavMeshAgent _sysAgent;
 
     State _state = State.Idle;
+    EnemyAnim _myEnemy;
 
     [SerializeField]
     float _startingHP;
@@ -26,21 +28,43 @@ public class EnemySys : MonoBehaviour
         _player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         _sysAgent = gameObject.GetComponent<NavMeshAgent>();
         _sysRigid  = gameObject.GetComponent<Rigidbody>();
-        _startingHP = _hp;
+        _myEnemy = new EnemyAnim();
+        _hp = _startingHP;
     }
 
     private void BossMove()
     {
         float distance = Vector3.Distance(transform.position, _player.transform.position);
         if (distance < _attackRange)
-        {
-            _state = State.Attack;
-            Debug.Log("attack");
+        {  
+            if(_myEnemy.EnemyState == State.Skill1)
+            {
+                _sysAgent.isStopped = true;
+            }
+            else if(_myEnemy.EnemyState == State.Skill2)
+            {
+                _sysAgent.isStopped = true;
+            }
+            else if (_myEnemy.EnemyState == State.Skill3)
+            {
+                _sysAgent.isStopped = true;
+            }
+            else if (_myEnemy.EnemyState == State.Skill4)
+            {
+                _sysAgent.isStopped = true;
+            }
+            else if (_myEnemy.EnemyState == State.Skill5)
+            {
+                _sysAgent.isStopped = true;
+            }
         }
         else if (distance <= _checkingRange)
         {
             _state = State.Run;
+            _sysAgent.isStopped = false;
+            _sysAgent.transform.LookAt(_player.position);
             _sysAgent.destination = _player.position;
+
         }
         else if (distance > _checkingRange)
         {
@@ -53,7 +77,7 @@ public class EnemySys : MonoBehaviour
     void Update()
     {
         BossMove();
-    }
+    } 
 
     void freeze_velocity()
     {
@@ -69,19 +93,9 @@ public class EnemySys : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.CompareTag("Weapon"))
+        if (collision.collider.CompareTag("Player"))
         {
-            _hp -= _damage;
-            Debug.Log(_hp);
-            //_sysState = LivingEntity.State.Stage2;
-
-            if(_hp <= 0)
-            {
-                //_sysState = LivingEntity.State.Dead;
-                Destroy(this.gameObject);
-                _state = State.Dead;
-            }
+            _myEnemy.EnemyState = State.Stage2;
         }
-
     }
 }

@@ -235,8 +235,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 145910369, guid: da5c851cbe66b664198da849b11a74ca, type: 3}
+      propertyPath: m_Speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 145910369, guid: da5c851cbe66b664198da849b11a74ca, type: 3}
+      propertyPath: m_Height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 145910369, guid: da5c851cbe66b664198da849b11a74ca, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 145910369, guid: da5c851cbe66b664198da849b11a74ca, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 145910369, guid: da5c851cbe66b664198da849b11a74ca, type: 3}
       propertyPath: m_StoppingDistance
-      value: 5
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 145910370, guid: da5c851cbe66b664198da849b11a74ca, type: 3}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 145910370, guid: da5c851cbe66b664198da849b11a74ca, type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 674100984, guid: da5c851cbe66b664198da849b11a74ca, type: 3}
       propertyPath: _target
@@ -528,10 +552,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 2.1
+  m_Radius: 3.4
   m_Height: 14.63
   m_Direction: 1
-  m_Center: {x: 0, y: 6.76, z: -1.1}
+  m_Center: {x: -0.04, y: 7.08, z: -2.8}
 --- !u!1 &1933832747
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,7 +586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933832747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.47, y: 4.37, z: 0}
+  m_LocalPosition: {x: 45.04, y: 7.41, z: 4.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -675,7 +699,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.63093114
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.13093114}
