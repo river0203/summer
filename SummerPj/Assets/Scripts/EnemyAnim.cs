@@ -1,12 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 using static LivingEntity;
 //Enemy2
 //요원(_agent=enemy)에게 목적지를 알려줘서 목적지로 이동하게 한다.
@@ -74,7 +69,6 @@ public class EnemyAnim : MonoBehaviour
     {
         EnemyState = State.Run;
         _objDistance = Vector3.Distance(transform.position, _playerObj.transform.position);
-
         _agent.transform.LookAt(_target.position);
     }
     private void UpdateAttack()
@@ -114,6 +108,7 @@ public class EnemyAnim : MonoBehaviour
     {
         _isAttack = false;
     }
+
 
     void Update()
     {
