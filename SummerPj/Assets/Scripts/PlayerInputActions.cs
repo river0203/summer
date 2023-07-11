@@ -63,8 +63,7 @@ public class PlayerInputActions : MonoBehaviour
     {
         UltimateInput(value.isPressed);
     }
-
-        public void OnHeal(InputValue value)
+    public void OnHeal(InputValue value)
     {
         HealInput(value.isPressed);
     }

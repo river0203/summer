@@ -123,28 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &27886542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4870241170337346913}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f20e48b8b02cd34a85f23af9bdd3b21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  noticeZone: 10
-  maxNoticeAngle: 60
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  LockOn_UI: {fileID: 2144410955}
-  maxDistance: 10
-  LockOn_CameraTarget: {fileID: 0}
-  _currentTarget: {fileID: 0}
-  _cinemachine: {fileID: 1007326122}
 --- !u!1 &167747422
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +212,7 @@ GameObject:
   - component: {fileID: 409683279}
   m_Layer: 6
   m_Name: Capsule
-  m_TagString: Enemy
+  m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -562,17 +540,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4572286536385664624, guid: b98473f6964b55d4ca0850abca0867e0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b98473f6964b55d4ca0850abca0867e0, type: 3}
---- !u!114 &1007326122 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4572286536288671981, guid: b98473f6964b55d4ca0850abca0867e0, type: 3}
-  m_PrefabInstance: {fileID: 888227827}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!20 &1080581472 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 3180047588497207755, guid: d7cdf331617458c4eab9d35509bb6f48, type: 3}
@@ -1053,7 +1020,6 @@ GameObject:
   - component: {fileID: 4870241170337346936}
   - component: {fileID: 4870241170337346937}
   - component: {fileID: 4870241170337346934}
-  - component: {fileID: 27886542}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1188,11 +1154,12 @@ MonoBehaviour:
   JumpTimeout: 0
   FallTimeout: 0.15
   JumpHeight: 2
-  Gravity: -15
+  _Gravity: -15
   GroundLayers:
     serializedVersion: 2
     m_Bits: 8
   comboTime: 3
   HealAmount: 30
+  Heal_Count: 5
   BottomClamp: -30
   TopClamp: 70
