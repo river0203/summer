@@ -98,6 +98,9 @@ public class PlayerController : MonoBehaviour
     [Header("회복")]
     [Tooltip("회복 아이템 수치")]
     [SerializeField] float HealAmount = 30;
+
+    [Tooltip("회복 아이템 개수")]
+    [SerializeField] float Heal_Count = 5;
     #endregion
 
     #region  Camera
@@ -111,6 +114,7 @@ public class PlayerController : MonoBehaviour
     float _cinemachineTargetYaw;
     float _cinemachineTargetPitch;
     #endregion
+
     private void Start()
     {
         // gamepad = Gamepad.current;
@@ -129,8 +133,10 @@ public class PlayerController : MonoBehaviour
         _jumpTimeoutDelta = JumpTimeout;
         _fallTimeoutDelta = FallTimeout;
     }
+
     private void Update()
     {
+        #region  Vibration
         /*if (gamepad != null && gamepad.device != null)
         {
             // 왼쪽 모터의 진동 설정 (0.0 ~ 1.0 사이 값)
@@ -142,7 +148,7 @@ public class PlayerController : MonoBehaviour
             // 진동 적용
             gamepad.SetMotorSpeeds(leftVibration, rightVibration);
         }*/
-
+        #endregion
 
         // 중력
         Gravity();
@@ -166,13 +172,21 @@ public class PlayerController : MonoBehaviour
             // 점프
             Jump();
 
+            Heal();
             // 상호작용, 흘리기, 기모으기
         }
 
-        // 점프공격
-        if (PlayerState == State.Jump)
+        // 점프 중 행동
+        if (PlayerState == State.Jump || PlayerState == State.Fall)
         {
             JumpAttack();
+        }
+
+        // 착지
+        if (PlayerState == State.Fall && Grounded)
+        {
+            PlayerState = State.Land;
+            StartCoroutine(ChangeState());
         }
     }
     private void LateUpdate()
@@ -180,12 +194,23 @@ public class PlayerController : MonoBehaviour
         CameraRotation();
     }
 
+    void Heal()
+    {
+        if(_input.heal)
+        {
+            PlayerState = State.Heal;
+            StartCoroutine(ChangeState());
+        }
+    }
     void JumpAttack()
     {
-        if (_input.weakAttack || _input.strongAttack)
+        if (PlayerState == State.Fall)
         {
-            PlayerState = State.JumpAttack;
-            ChangeState();
+            if(_input.weakAttack || _input.strongAttack)
+            {
+                PlayerState = State.JumpAttack;
+                StartCoroutine(ChangeState());
+            }
         }
     }
     void Jump()
@@ -194,8 +219,12 @@ public class PlayerController : MonoBehaviour
         {
             _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * _Gravity);
             PlayerState = State.Jump;
-            StartCoroutine(ChangeState());
+            StartCoroutine(JumpState());
+
+            _input.jump = false;
         }
+        else _input.jump = false;
+        
     }
     void moveRotation()
     {
@@ -212,7 +241,7 @@ public class PlayerController : MonoBehaviour
         }
         Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
-        // 플레이어 회전 제한
+        // 특정 상황 플레이어 회전 제한
         if (PlayerState != State.WeakAttack_1 && PlayerState != State.WeakAttack_2 && PlayerState != State.WeakAttack_3 &&
         PlayerState != State.WeakAttack_4 && PlayerState != State.WeakAttack_5 && PlayerState != State.WeakAttack_6 &&
         PlayerState != State.StrongAttack && PlayerState != State.Jump && PlayerState != State.JumpAttack)
@@ -369,12 +398,14 @@ public class PlayerController : MonoBehaviour
         {
             yield return new WaitForSeconds(2.267f);
         }
-        else if (PlayerState == State.Jump)
+        else if(PlayerState == State.Heal || PlayerState == State.Heal_Walk)
         {
             yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length);
-            PlayerState = State.Jump;
+            _hp += HealAmount;
+            Heal_Count--;
         }
         else yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length);
+        
 
         PlayerState = State.Idle;
         yield break;
@@ -387,11 +418,17 @@ public class PlayerController : MonoBehaviour
         yield break;
     }
 
+    IEnumerator JumpState() 
+    { 
+        yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length);
+        PlayerState = State.Fall;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "EnemyAttack")
         {
-            if (PlayerState != State.Jump && PlayerState != State.Dodge && PlayerState != State.Fall)
+            if (PlayerState != State.Jump && PlayerState != State.Dodge && PlayerState != State.Fall && Input.anyKey)
             {
                 StopAllCoroutines();
                 PlayerState = State.Damaged;

@@ -1,5 +1,3 @@
-using System;
-using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,7 +22,6 @@ public class PlayerInputActions : MonoBehaviour
     private void Start()
     {
         _inputAction = GetComponent<InputAction>();
-
     }
     public void OnMove(InputValue value)
     {
@@ -66,7 +63,8 @@ public class PlayerInputActions : MonoBehaviour
     {
         UltimateInput(value.isPressed);
     }
-    public void OnHeal(InputValue value)
+
+        public void OnHeal(InputValue value)
     {
         HealInput(value.isPressed);
     }
