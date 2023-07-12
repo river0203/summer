@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Playables;
 using static PlayerStates;
 
 public class PlayerController : MonoBehaviour
@@ -92,7 +91,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float comboTime = 3f;
 
     int Combo = 0;
-    float comboTimeDelta;
+    float comboTimeDelta = 0f;
     #endregion
 
     #region  Heal
@@ -125,7 +124,7 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     private void Start()
-    {
+    { 
         _hp = maxHP;
         _stamina = maxStamina;
         // gamepad = Gamepad.current;
@@ -159,7 +158,7 @@ public class PlayerController : MonoBehaviour
                     gamepad.SetMotorSpeeds(leftVibration, rightVibration);
                 }*/
         #endregion
-
+        Debug.Log(PlayerState);
         // 중력
         Gravity();
         // 바닥 탐지
@@ -195,16 +194,13 @@ public class PlayerController : MonoBehaviour
         }
 
         // 착지
-        if (Grounded)
+        if (PlayerState == State.Fall || PlayerState == State.Jump)
         {
-            if (PlayerState == State.Fall || PlayerState == State.Jump)
+            if (_verticalVelocity < 0 && Grounded)
             {
-                if (_verticalVelocity < 0)
-                {
-                    StopCoroutine(JumpState());
-                    PlayerState = State.Land;
-                    StartCoroutine(ChangeState());
-                }
+                StopCoroutine("JumpState");
+                PlayerState = State.Land;
+                StartCoroutine(ChangeState());
             }
         }
     }
@@ -246,7 +242,7 @@ public class PlayerController : MonoBehaviour
         {
             _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * _Gravity);
             PlayerState = State.Jump;
-            StartCoroutine(JumpState());
+            StartCoroutine("JumpState");
 
             _input.jump = false;
         }
@@ -297,15 +293,6 @@ public class PlayerController : MonoBehaviour
             _input.weakAttack = false;
         }
         else _input.weakAttack = false;
-
-        // 공격중이 아닐 때 콤보 지속 시간 감소
-        if ((PlayerState != State.WeakAttack_1) && (PlayerState != State.WeakAttack_2) && (PlayerState != State.WeakAttack_3) && (comboTimeDelta > 0))
-        {
-            comboTimeDelta -= Time.deltaTime;
-        }
-
-        // 최대 콤보 초과시 or 콤보 지속 시간 초과시 0로 초기화
-        if (comboTimeDelta <= 0 || Combo > 5) Combo = 0;
     }
     void StrongAttack()
     {
@@ -402,21 +389,20 @@ public class PlayerController : MonoBehaviour
         }
 
         // 최대 콤보 초과시 or 콤보 지속 시간 초과시 0로 초기화
-        if (comboTimeDelta <= 0 || Combo > 6) Combo = 0;
+        if (comboTimeDelta < 0 || Combo > 2) Combo = 0;
     }
     void GroundedCheck()
     {
         Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
         Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
     }
-
     static float ClampAngle(float lfAngle, float lfMin, float lfMax)
     {
         if (lfAngle < -360f) lfAngle += 360f;
         if (lfAngle > 360f) lfAngle -= 360f;
         return Mathf.Clamp(lfAngle, lfMin, lfMax);
     }
-
+    
     IEnumerator ChangeState()
     {
         if (PlayerState == State.Heal || PlayerState == State.Heal_Walk)
@@ -424,6 +410,11 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length);
             _hp += HealAmount;
             Heal_Count--;
+        }
+        else if(PlayerState == State.Land)
+        {
+            yield return new WaitForSeconds(0.833f);
+
         }
         else yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length);
 
@@ -453,17 +444,22 @@ public class PlayerController : MonoBehaviour
         PlayerState = State.Fall;
     }
 
+    //피격
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "EnemyAttack")
         {
-            PlayerState = State.Damaged;
-            _hp -= 10;
-            if (PlayerState != State.Jump && PlayerState != State.Dodge && PlayerState != State.Fall && PlayerState != State.Land)
+            if (_hp > 0)
             {
-                StopAllCoroutines();
+                PlayerState = State.Damaged;
+                _hp -= 10;
+                if (PlayerState != State.Jump && PlayerState != State.Dodge && PlayerState != State.Fall && PlayerState != State.Land)
+                {
+                    StopAllCoroutines();
+                }
+                StartCoroutine(ChangeState());
             }
-            StartCoroutine(ChangeState());
+            else PlayerState = State.Dead;
         }
     }
 }
