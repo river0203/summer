@@ -366,12 +366,6 @@ public class PlayerController : MonoBehaviour
         Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
         Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
     }
-    static float ClampAngle(float lfAngle, float lfMin, float lfMax)
-    {
-        if (lfAngle < -360f) lfAngle += 360f;
-        if (lfAngle > 360f) lfAngle -= 360f;
-        return Mathf.Clamp(lfAngle, lfMin, lfMax);
-    }
     
     IEnumerator ChangeState()
     {
@@ -419,16 +413,20 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "EnemyAttack")
         {
+            //플레이어 체력 감소
+            // _hp -= 
+
+            // 플레이어 피격 상태
             if (_hp > 0)
             {
                 PlayerState = State.Damaged;
-                _hp -= 10;
                 if (PlayerState != State.Jump && PlayerState != State.Dodge && PlayerState != State.Fall && PlayerState != State.Land)
                 {
                     StopAllCoroutines();
                 }
                 StartCoroutine(ChangeState());
             }
+            // 플레이어 사망
             else PlayerState = State.Dead;
         }
     }
