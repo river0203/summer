@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using UnityEngine;
 using UnityEngine.AI;
 using static LivingEntity;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemySys : MonoBehaviour
 {
@@ -67,7 +68,8 @@ public class EnemySys : MonoBehaviour
 
     private void HittingDelay()
     {
-        EnemyAnim.EnemyState = State.Run;  
+        _sysAgent.GetComponent<CapsuleCollider>().isTrigger = false;
+        /**EnemyAnim.EnemyState = State.Run;*/
     }
 
     private void Die()
@@ -81,19 +83,20 @@ public class EnemySys : MonoBehaviour
         {
             _hp -= _damage;
             Debug.Log(_hp);
-            EnemyAnim.EnemyState = State.Stage2;
             if(_hp > 0)
             {
+                _sysAgent.GetComponent<CapsuleCollider>().isTrigger = true;
+                EnemyAnim.EnemyState = State.Stage2;
                 Invoke("HittingDelay", 7f);
             }
 
             else if (_hp <= 0 )
             {
                 EnemyAnim.EnemyState = State.Dead;
-               
+                _sysAgent.GetComponent<CapsuleCollider>().isTrigger = true;
                 _sysAgent.isStopped = true;
                 _sysAgent.enabled = false;
-                Invoke("Die", 2f);
+                Invoke("Die", 5f);
                
             }
         }

@@ -43,7 +43,7 @@ public class EnemyAnim : MonoBehaviour
                 return;
 
             _enemyState = value;
-            //Debug.Log(_enemyState);
+            Debug.Log(_enemyState);
 
             string currentState = Enum.GetName(typeof(State), _enemyState);
             _anim.CrossFade(currentState, 0.1f);
