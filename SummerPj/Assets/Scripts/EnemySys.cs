@@ -8,8 +8,6 @@ public class EnemySys : MonoBehaviour
     Transform _player;
     Rigidbody _sysRigid;
     NavMeshAgent _sysAgent;
-    Vector3 _pos;
-    Vector3 _backPos;
     EnemyAnim _enemyAnim;
 
     public State _state;
@@ -18,10 +16,6 @@ public class EnemySys : MonoBehaviour
     float _startingHP;
     [SerializeField]
     float _damage;
-    [SerializeField]
-    private float _checkingRange; //몬스터 인식 범위
-    [SerializeField]
-    private float _attackRange; // 몬스터 공격 범위 
 
     float _hp;
     
@@ -35,9 +29,8 @@ public class EnemySys : MonoBehaviour
 
     private void BossMove()
     {
-        float distance = Vector3.Distance(transform.position, _player.transform.position);
         _state = EnemyAnim.EnemyState;
-    
+
         if (_state == State.Run)
         {
             _sysAgent.transform.LookAt(_player.position);
@@ -49,9 +42,6 @@ public class EnemySys : MonoBehaviour
         }
         else if(_state == State.Skill4)
         {
-            _pos = this.gameObject.transform.position;
-            //_backPos = ;
-
             _sysAgent.transform.LookAt(_player.position);
         }
         
@@ -60,6 +50,7 @@ public class EnemySys : MonoBehaviour
     void Update()
     {
         BossMove();
+        Debug.Log(EnemyAnim.EnemyState);
     } 
 
     void freeze_velocity()
@@ -73,19 +64,30 @@ public class EnemySys : MonoBehaviour
     {
         freeze_velocity();
     }
-    
+
+    private void HittingDelay()
+    {
+        EnemyAnim.EnemyState = State.Run;  
+    }
+
     private void Die()
     {
         Destroy(this.gameObject);
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.gameObject.CompareTag("Player"))
         {
             _hp -= _damage;
             Debug.Log(_hp);
-            if (_hp <= 0 )
+            EnemyAnim.EnemyState = State.Stage2;
+            if(_hp > 0)
+            {
+                Invoke("HittingDelay", 7f);
+            }
+
+            else if (_hp <= 0 )
             {
                 EnemyAnim.EnemyState = State.Dead;
                

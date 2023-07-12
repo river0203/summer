@@ -109,7 +109,6 @@ public class EnemyAnim : MonoBehaviour
         if (_isAttack)
             return;
 
-        Debug.Log(_enemySys._state);
         if (distance < _attackRange)
         {
             UpdateAttack();
