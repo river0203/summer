@@ -34,13 +34,13 @@ public class PlayerController : MonoBehaviour
     #region  Status
     [Header("Status")]
     [Tooltip("플레이어 최대 체력")]
-    [SerializeField] float maxHP = 100;
+    [SerializeField] public float maxHP = 200;
 
     [Tooltip("플레이어 최대 스태미나")]
-    [SerializeField] float maxStamina = 100;
+    [SerializeField] public float maxStamina = 200;
 
-    float _hp;
-    float _stamina;
+    public float _hp;
+    public float _stamina;
     #endregion
 
     #region  Move
@@ -111,18 +111,6 @@ public class PlayerController : MonoBehaviour
     float Ult;
     #endregion
 
-    #region  Camera
-    [Header("Camera")]
-    [Tooltip("카메라 하단 최대 범위")]
-    [SerializeField] float BottomClamp = -30.0f;
-
-    [Tooltip("카메라 상단 최대 범위")]
-    [SerializeField] float TopClamp = 70.0f;
-
-    float _cinemachineTargetYaw;
-    float _cinemachineTargetPitch;
-    #endregion
-
     private void Start()
     { 
         _hp = maxHP;
@@ -139,12 +127,12 @@ public class PlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
 
-        _cinemachineTargetYaw = CameraTarget.transform.rotation.eulerAngles.y;
         _jumpTimeoutDelta = JumpTimeout;
         _fallTimeoutDelta = FallTimeout;
     }
     private void Update()
     {
+
         #region  Vibration
         /*        if (gamepad != null && gamepad.device != null)
                 {
@@ -158,7 +146,6 @@ public class PlayerController : MonoBehaviour
                     gamepad.SetMotorSpeeds(leftVibration, rightVibration);
                 }*/
         #endregion
-        Debug.Log(PlayerState);
         // 중력
         Gravity();
         // 바닥 탐지
@@ -203,10 +190,6 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(ChangeState());
             }
         }
-    }
-    private void LateUpdate()
-    {
-        CameraRotation();
     }
 
     void Ultimate()
@@ -267,7 +250,7 @@ public class PlayerController : MonoBehaviour
         // 특정 상황 플레이어 회전 제한
         if (PlayerState != State.WeakAttack_1 && PlayerState != State.WeakAttack_2 && PlayerState != State.WeakAttack_3 &&
         PlayerState != State.WeakAttack_4 && PlayerState != State.WeakAttack_5 && PlayerState != State.WeakAttack_6 &&
-        PlayerState != State.StrongAttack && PlayerState != State.Jump && PlayerState != State.JumpAttack && PlayerState != State.Dodge)
+        PlayerState != State.StrongAttack && PlayerState != State.Jump && PlayerState != State.JumpAttack && PlayerState != State.Dodge && PlayerState != State.Land)
         {
             _playerRotation = transform.rotation;
         }
@@ -365,19 +348,6 @@ public class PlayerController : MonoBehaviour
         }
 
         _controller.Move(new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-    }
-
-    void CameraRotation()
-    {
-        // 입력에 따라 카메라 이동
-        _cinemachineTargetYaw += _input.look.x;
-        _cinemachineTargetPitch += _input.look.y;
-
-        // 카메라 앵글 제한
-        _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
-        _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
-
-        CameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch, _cinemachineTargetYaw, 0f);
     }
 
     void Combo_Manage()
