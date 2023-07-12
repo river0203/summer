@@ -10,8 +10,9 @@ public class EnemySys : MonoBehaviour
     NavMeshAgent _sysAgent;
     Vector3 _pos;
     Vector3 _backPos;
+    EnemyAnim _enemyAnim;
 
-    State _state = State.Idle;
+    public State _state;
 
     [SerializeField]
     float _startingHP;
@@ -36,7 +37,7 @@ public class EnemySys : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, _player.transform.position);
         _state = EnemyAnim.EnemyState;
-
+    
         if (_state == State.Run)
         {
             _sysAgent.transform.LookAt(_player.position);
@@ -49,7 +50,7 @@ public class EnemySys : MonoBehaviour
         else if(_state == State.Skill4)
         {
             _pos = this.gameObject.transform.position;
-            _backPos = ;
+            //_backPos = ;
 
             _sysAgent.transform.LookAt(_player.position);
         }
@@ -73,6 +74,11 @@ public class EnemySys : MonoBehaviour
         freeze_velocity();
     }
     
+    private void Die()
+    {
+        Destroy(this.gameObject);
+    }
+
     private void OnCollisionExit(Collision collision)
     {
         if(collision.collider.gameObject.CompareTag("Player"))
@@ -81,8 +87,12 @@ public class EnemySys : MonoBehaviour
             Debug.Log(_hp);
             if (_hp <= 0 )
             {
-                _state = State.Dead;
-                Destroy(this.gameObject);
+                EnemyAnim.EnemyState = State.Dead;
+               
+                _sysAgent.isStopped = true;
+                _sysAgent.enabled = false;
+                Invoke("Die", 2f);
+               
             }
         }
     }

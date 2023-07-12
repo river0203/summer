@@ -16,8 +16,6 @@ using static LivingEntity;
 
 public class EnemyAnim : MonoBehaviour
 {
-    public bool _attacking = false;
-
     private static State _enemyState = State.Idle;
     private List<string> _skillList = new List<string>() { "skill_1", "skill_2", "skill_3", "skill_4", "skill_5" };
     private EnemySys _enemySys;
@@ -28,28 +26,28 @@ public class EnemyAnim : MonoBehaviour
     private float _attackRange; // 몬스터 공격 범위 
     [SerializeField]
     Transform _target;
-    
+
     static Animator _anim;
-    
+
     bool _isAttack = false;
 
-    public static State EnemyState 
-    { 
-        get 
+    public static State EnemyState
+    {
+        get
         {
-            return _enemyState; 
-        } 
-        set 
+            return _enemyState;
+        }
+        set
         {
             if (_enemyState == value)
                 return;
-            
+
             _enemyState = value;
             //Debug.Log(_enemyState);
 
             string currentState = Enum.GetName(typeof(State), _enemyState);
             _anim.CrossFade(currentState, 0.1f);
-        } 
+        }
     }
 
     void Start()
@@ -64,6 +62,7 @@ public class EnemyAnim : MonoBehaviour
     }
     private void UpdateRun()
     {
+        _checkingRange = 50f;
         EnemyState = State.Run;
     }
     private void UpdateAttack()
@@ -80,17 +79,17 @@ public class EnemyAnim : MonoBehaviour
             else if (_skillList[rand] == "skill_2")
             {
                 EnemyState = State.Skill2;
-                
+
             }
             else if (_skillList[rand] == "skill_3")
             {
                 EnemyState = State.Skill3;
-                
+
             }
             else if (_skillList[rand] == "skill_4")
             {
                 EnemyState = State.Skill4;
-                
+
             }
             else if (_skillList[rand] == "skill_5")
             {
@@ -109,6 +108,8 @@ public class EnemyAnim : MonoBehaviour
         float distance = Vector3.Distance(transform.position, _target.transform.position);
         if (_isAttack)
             return;
+
+        Debug.Log(_enemySys._state);
         if (distance < _attackRange)
         {
             UpdateAttack();
@@ -121,5 +122,6 @@ public class EnemyAnim : MonoBehaviour
         {
             UpdateIdle();
         }
+
     }
 }
