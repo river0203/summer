@@ -221,6 +221,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1264142866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 187764, guid: f3ee45e0dafa81a45a21976bb9ac7896, type: 3}
+  m_PrefabInstance: {fileID: 1891878378}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1264142868
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264142866}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 244.11966, y: 32.11025, z: 16.139975}
+  m_Center: {x: -67.05939, y: -4.2027435, z: -0.5266181}
 --- !u!1 &1513311226
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 403920, guid: f3ee45e0dafa81a45a21976bb9ac7896, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 403920, guid: f3ee45e0dafa81a45a21976bb9ac7896, type: 3}
       propertyPath: m_LocalRotation.w
@@ -390,8 +408,6 @@ MonoBehaviour:
   _state: 0
   _startingHP: 100
   _damage: 10
-  _checkingRange: 20
-  _attackRange: 10
 --- !u!114 &1891878382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,20 +445,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!136 &1891878384
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1891878380}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1891878385
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -459,6 +461,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &1891878388
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891878380}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2092567205
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,7 +678,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105653343}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.84, z: 9.54}
+  m_LocalPosition: {x: -0.56, y: 3.84, z: 14.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

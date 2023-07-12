@@ -37,21 +37,21 @@ public class EnemySys : MonoBehaviour
             _sysAgent.transform.LookAt(_player.position);
             _sysAgent.destination = _player.position;
         }
-        else if (_state == State.Skill1)
+        else if(_state == State.Skill3)
         {
             _sysAgent.transform.LookAt(_player.position);
         }
-        else if(_state == State.Skill4)
+        else if (_state == State.Skill4)
         {
             _sysAgent.transform.LookAt(_player.position);
         }
-        
+
     }
     // Update is called once per frame
     void Update()
     {
         BossMove();
-        Debug.Log(EnemyAnim.EnemyState);
+        //Debug.Log(EnemyAnim.EnemyState);
     } 
 
     void freeze_velocity()
@@ -69,7 +69,8 @@ public class EnemySys : MonoBehaviour
     private void HittingDelay()
     {
         _sysAgent.GetComponent<CapsuleCollider>().isTrigger = false;
-        /**EnemyAnim.EnemyState = State.Run;*/
+        //
+        //EnemyAnim.EnemyState = State.Run;
     }
 
     private void Die()
@@ -100,5 +101,9 @@ public class EnemySys : MonoBehaviour
                
             }
         }
+        /*else if(collision.collider.gameObject.CompareTag("Weapon"))
+        {
+
+        }*/
     }
 }
