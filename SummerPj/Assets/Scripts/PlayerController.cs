@@ -209,7 +209,13 @@ public class PlayerController : MonoBehaviour
     {
         if (_input.weakAttack || _input.strongAttack)
         {
-            PlayerState = State.JumpAttack;
+            int JumpAttack = UnityEngine.Random.Range(0, 2);
+            switch (JumpAttack)
+            {
+                case 0: PlayerState = State.JumpAttack_1; break;
+                case 1: PlayerState = State.JumpAttack_1; break;
+                case 2: PlayerState = State.JumpAttack_1; break;
+            }
             StartCoroutine(ChangeState());
 
             _input.weakAttack = false;
@@ -230,7 +236,7 @@ public class PlayerController : MonoBehaviour
         else _input.jump = false;
 
     }
-    void moveRotation()
+    float moveRotation()
     {
         // 플레이어 회전
         Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
@@ -246,13 +252,17 @@ public class PlayerController : MonoBehaviour
         Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
         // 특정 상황 플레이어 회전 제한
-        if (PlayerState != State.WeakAttack_1 && PlayerState != State.WeakAttack_2 && PlayerState != State.WeakAttack_3 &&
-        PlayerState != State.WeakAttack_4 && PlayerState != State.WeakAttack_5 && PlayerState != State.WeakAttack_6 &&
-        PlayerState != State.StrongAttack && PlayerState != State.Jump && PlayerState != State.JumpAttack && PlayerState != State.Dodge && PlayerState != State.Land)
+        if (PlayerState != State.WeakAttack_1 && PlayerState != State.WeakAttack_2 && PlayerState != State.WeakAttack_3 && PlayerState != State.WeakAttack_4 && 
+            PlayerState != State.WeakAttack_5 && PlayerState != State.WeakAttack_6 && PlayerState != State.StrongAttack && PlayerState != State.Jump &&
+            PlayerState != State.JumpAttack_1 && PlayerState != State.JumpAttack_2 && PlayerState != State.JumpAttack_3 && PlayerState != State.Dodge && 
+            PlayerState != State.Land)
         {
             _playerRotation = transform.rotation;
         }
         else transform.rotation = _playerRotation;
+
+        //return targetDirection; 
+        return _targetRotation;
     }
     void WeakAttack()
     {
@@ -290,7 +300,8 @@ public class PlayerController : MonoBehaviour
     {
         if (_input.dodge)
         {
-            PlayerState = State.Dodge;
+            // 플레이어 입력 방향대로 구르기
+            PlayerState = State.Dodge; 
             StartCoroutine(ChangeState());
 
             _input.dodge = false;
@@ -367,19 +378,18 @@ public class PlayerController : MonoBehaviour
     
     IEnumerator ChangeState()
     {
-        if (PlayerState == State.Heal || PlayerState == State.Heal_Walk)
-        {
-            yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length);
-            _hp += HealAmount;
-            Heal_Count--;
-        }
-        else if(PlayerState == State.Land)
+        if(PlayerState == State.Land)
         {
             yield return new WaitForSeconds(0.833f);
-
         }
         else yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length);
 
+        //만약 현재 상태가 Heal이라면 회복
+        if (PlayerState == State.Heal || PlayerState == State.Heal_Walk)
+        {
+            _hp += HealAmount;
+            Heal_Count--;
+        }
 
         PlayerState = State.Idle;
         yield break;
