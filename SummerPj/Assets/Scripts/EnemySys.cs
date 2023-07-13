@@ -84,7 +84,11 @@ public class EnemySys : MonoBehaviour
         {
             _hp -= _damage;
             Debug.Log(_hp);
-            if(_hp > 0)
+            if(_hp > 40)
+            {
+                Debug.Log(_hp);
+            }
+            else if(_hp <= 40)
             {
                 _sysAgent.GetComponent<CapsuleCollider>().isTrigger = true;
                 EnemyAnim.EnemyState = State.Stage2;
@@ -101,9 +105,9 @@ public class EnemySys : MonoBehaviour
                
             }
         }
-        /*else if(collision.collider.gameObject.CompareTag("Weapon"))
+        else if(collision.collider.gameObject.CompareTag("Weapon"))
         {
-
-        }*/
+            Debug.Log("check");
+        }
     }
 }
