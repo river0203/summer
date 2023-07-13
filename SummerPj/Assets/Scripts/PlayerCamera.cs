@@ -16,8 +16,8 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField]
     Define.CameraType _cameraType = Define.CameraType.Normal;
 
-    float _cinemachineTargetYaw;
-    float _cinemachineTargetPitch;
+    float _seta;
+    float _pi;
 
     GameObject _player;
     PlayerInputActions _input;
@@ -38,13 +38,18 @@ public class PlayerCamera : MonoBehaviour
     void CameraRotation()
     {
         // 입력에 따라 카메라 이동
-        _cinemachineTargetYaw += _input.look.x * Time.deltaTime;
-        _cinemachineTargetPitch += _input.look.y * Time.deltaTime;
-        _cinemachineTargetPitch = Mathf.Clamp(_cinemachineTargetPitch, -1, 1);
+        _seta += _input.look.y * Time.deltaTime;
+        _pi += _input.look.x * Time.deltaTime;
 
-        float x = Mathf.Cos(_cinemachineTargetYaw) * _interval.z;
-        float y = Mathf.Sin(_cinemachineTargetPitch) * _interval.z;
-        float z = Mathf.Sin(_cinemachineTargetYaw) * _interval.z;
+        _pi = Mathf.Repeat(_pi, Mathf.Deg2Rad * 360);
+        _seta = Mathf.Clamp(_seta, Mathf.Deg2Rad * (BottomClamp + 90), Mathf.Deg2Rad * (TopClamp + 90));
+
+        Debug.Log(_seta);
+        Debug.Log(_pi);
+
+        float x = _interval.z * Mathf.Sin(_seta) * Mathf.Cos(_pi);
+        float y = _interval.z * Mathf.Cos(_seta);
+        float z = _interval.z * Mathf.Sin(_seta) * Mathf.Sin(_pi);
 
         // 위치
         transform.position = _player.transform.position + new Vector3(-x, _collider.height + y, z);
@@ -54,10 +59,20 @@ public class PlayerCamera : MonoBehaviour
         transform.LookAt(lookPos);
     }
 
-    static float ClampAngle(float lfAngle, float lfMin, float lfMax)
+    static float PitchClampAngle(float lfAngle, float lfMin, float lfMax)
     {
         if (lfAngle < -360f) lfAngle += 360f;
         if (lfAngle > 360f) lfAngle -= 360f;
         return Mathf.Clamp(lfAngle, lfMin, lfMax);
+    }
+    float YawClampAngle(float lfAngle, float lfMin, float lfMax)
+    {
+        if (lfAngle < lfMin)
+            lfAngle = lfMax;
+
+        if (lfAngle > lfMax)
+            lfAngle = lfMin;
+
+        return lfAngle;
     }
 }
