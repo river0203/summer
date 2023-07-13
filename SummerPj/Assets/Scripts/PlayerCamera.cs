@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
@@ -9,42 +10,69 @@ public class PlayerCamera : MonoBehaviour
     [Tooltip("카메라 상단 최대 범위")]
     [SerializeField] float TopClamp = 70.0f;
 
-    float _cinemachineTargetYaw;
-    float _cinemachineTargetPitch;
+    [SerializeField]
+    Vector3 _interval;
 
-    GameObject CameraTarget;
-    GameObject _mainCamera;
+    [SerializeField]
+    Define.CameraType _cameraType = Define.CameraType.Normal;
 
+    float _seta;
+    float _pi;
+
+    GameObject _player;
     PlayerInputActions _input;
+    CharacterController _collider;
 
     void Start()
     {
-        _input = GameObject.Find("Player").GetComponent<PlayerInputActions>();
-        CameraTarget = GameObject.Find("PlayerCameraRoot");
-        _mainCamera = GameObject.Find("PlayerCamera");
-        _cinemachineTargetYaw = CameraTarget.transform.rotation.eulerAngles.y;
+        _player = GameObject.Find("Player");
+        _input = _player.GetComponent<PlayerInputActions>();
+        _collider = _player.GetComponent<CharacterController>();
     }
 
     void LateUpdate()
     {
         CameraRotation();
     }
+
     void CameraRotation()
     {
         // 입력에 따라 카메라 이동
-        _cinemachineTargetYaw += _input.look.x;
-        _cinemachineTargetPitch += _input.look.y;
+        _seta += _input.look.y * Time.deltaTime;
+        _pi += _input.look.x * Time.deltaTime;
 
-        // 카메라 앵글 제한
-        _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
-        _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+        _pi = Mathf.Repeat(_pi, Mathf.Deg2Rad * 360);
+        _seta = Mathf.Clamp(_seta, Mathf.Deg2Rad * (BottomClamp + 90), Mathf.Deg2Rad * (TopClamp + 90));
 
-        CameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch, _cinemachineTargetYaw, 0f);
+        Debug.Log(_seta);
+        Debug.Log(_pi);
+
+        float x = _interval.z * Mathf.Sin(_seta) * Mathf.Cos(_pi);
+        float y = _interval.z * Mathf.Cos(_seta);
+        float z = _interval.z * Mathf.Sin(_seta) * Mathf.Sin(_pi);
+
+        // 위치
+        transform.position = _player.transform.position + new Vector3(-x, _collider.height + y, z);
+
+        // 각도
+        Vector3 lookPos = _player.transform.position + new Vector3(0, _collider.height);
+        transform.LookAt(lookPos);
     }
-    static float ClampAngle(float lfAngle, float lfMin, float lfMax)
+
+    static float PitchClampAngle(float lfAngle, float lfMin, float lfMax)
     {
         if (lfAngle < -360f) lfAngle += 360f;
         if (lfAngle > 360f) lfAngle -= 360f;
         return Mathf.Clamp(lfAngle, lfMin, lfMax);
+    }
+    float YawClampAngle(float lfAngle, float lfMin, float lfMax)
+    {
+        if (lfAngle < lfMin)
+            lfAngle = lfMax;
+
+        if (lfAngle > lfMax)
+            lfAngle = lfMin;
+
+        return lfAngle;
     }
 }

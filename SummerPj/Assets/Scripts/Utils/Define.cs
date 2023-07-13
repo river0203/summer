@@ -11,4 +11,10 @@ public class Define : MonoBehaviour
         LockOn_Layer = 7,
         Player = 8,
     }
+
+    public enum CameraType
+    {
+        Normal,
+        LockOn
+    }
 }
