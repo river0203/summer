@@ -1021,7 +1021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state: 0
-  _startingHP: 100
+  _startingHP: 10
   _damage: 10
 --- !u!114 &1891878382
 MonoBehaviour:

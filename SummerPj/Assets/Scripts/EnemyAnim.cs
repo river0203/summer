@@ -102,12 +102,12 @@ public class EnemyAnim : MonoBehaviour
         _isAttack = false;
     }
 
-
     void Update()
     {
         float distance = Vector3.Distance(transform.position, _target.transform.position);
         if (_isAttack)
             return;
+
 
         if (distance < _attackRange)
         {

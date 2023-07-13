@@ -12,14 +12,15 @@ public class EnemySys : MonoBehaviour
     EnemyAnim _enemyAnim;
 
     public State _state;
+    public static float _hp;
 
     [SerializeField]
     float _startingHP;
     [SerializeField]
     float _damage;
-
-    float _hp;
-    
+    [SerializeField]
+    float _radiousSpeed = 0.5f;
+        
     void Start()
     {
         _player = GameObject.FindWithTag("Player").GetComponent<Transform>();
@@ -39,19 +40,18 @@ public class EnemySys : MonoBehaviour
         }
         else if(_state == State.Skill3)
         {
-            _sysAgent.transform.LookAt(_player.position);
+            Quaternion.Lerp(_sysAgent.transform.rotation, Quaternion.LookRotation(_player.position), _radiousSpeed);
         }
         else if (_state == State.Skill4)
         {
-            _sysAgent.transform.LookAt(_player.position);
+            Quaternion.Lerp(_sysAgent.transform.rotation, Quaternion.LookRotation(_player.position), _radiousSpeed);
         }
 
     }
-    // Update is called once per frame
+
     void Update()
     {
         BossMove();
-        //Debug.Log(EnemyAnim.EnemyState);
     } 
 
     void freeze_velocity()
@@ -66,48 +66,51 @@ public class EnemySys : MonoBehaviour
         freeze_velocity();
     }
 
-    private void HittingDelay()
-    {
-        _sysAgent.GetComponent<CapsuleCollider>().isTrigger = false;
-        //
-        //EnemyAnim.EnemyState = State.Run;
-    }
-
     private void Die()
     {
         Destroy(this.gameObject);
+    }
+    private void HittingDelay()
+    {
+        _sysAgent.GetComponent<CapsuleCollider>().isTrigger = false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Check");
+        }
+        else if(collision.collider.gameObject.CompareTag("Weapon"))
+        {
             _hp -= _damage;
             Debug.Log(_hp);
-            if(_hp > 40)
+
+            if (_hp > 40)
             {
                 Debug.Log(_hp);
             }
-            else if(_hp <= 40)
+            else if (_hp == 40)
             {
                 _sysAgent.GetComponent<CapsuleCollider>().isTrigger = true;
                 EnemyAnim.EnemyState = State.Stage2;
                 Invoke("HittingDelay", 7f);
+
+            }
+            else if (_hp < 40)
+            {
+                Debug.Log(_hp);
             }
 
-            else if (_hp <= 0 )
+            if (_hp <= 0)
             {
                 EnemyAnim.EnemyState = State.Dead;
                 _sysAgent.GetComponent<CapsuleCollider>().isTrigger = true;
                 _sysAgent.isStopped = true;
                 _sysAgent.enabled = false;
-                Invoke("Die", 5f);
-               
+                Invoke("Die", 13f);
+
             }
-        }
-        else if(collision.collider.gameObject.CompareTag("Weapon"))
-        {
-            Debug.Log("check");
         }
     }
 }
