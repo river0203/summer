@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
     { 
         _hp = maxHP;
         _stamina = maxStamina;
-        // gamepad = Gamepad.current;
+        gamepad = Gamepad.current;
 
         _anim = GetComponent<Animator>();
         _input = GetComponent<PlayerInputActions>();
@@ -200,18 +200,22 @@ public class PlayerController : MonoBehaviour
         {
             PlayerState = State.Heal;
             StartCoroutine(ChangeState());
+
+            _input.heal = false;
         }
+        else _input.heal = false;
     }
     void JumpAttack()
     {
-        if (PlayerState == State.Fall)
+        if (_input.weakAttack || _input.strongAttack)
         {
-            if (_input.weakAttack || _input.strongAttack)
-            {
-                PlayerState = State.JumpAttack;
-                StartCoroutine(ChangeState());
-            }
+            PlayerState = State.JumpAttack;
+            StartCoroutine(ChangeState());
+
+            _input.weakAttack = false;
+            _input.strongAttack = false;
         }
+        else { _input.weakAttack = false; _input.strongAttack = false; }
     }
     void Jump()
     {
