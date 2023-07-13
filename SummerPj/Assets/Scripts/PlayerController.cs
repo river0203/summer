@@ -13,9 +13,6 @@ public class PlayerController : MonoBehaviour
     PlayerInput _playerInput;
     Animator _anim;
 
-    GameObject CameraTarget;
-    GameObject _mainCamera;
-
     State _playerState = State.Idle;
     State PlayerState
     {
@@ -116,9 +113,6 @@ public class PlayerController : MonoBehaviour
         _hp = maxHP;
         _stamina = maxStamina;
         // gamepad = Gamepad.current;
-
-        CameraTarget = GameObject.Find("PlayerCameraRoot");
-        _mainCamera = GameObject.Find("PlayerCamera");
 
         _anim = GetComponent<Animator>();
         _input = GetComponent<PlayerInputActions>();
@@ -239,7 +233,7 @@ public class PlayerController : MonoBehaviour
 
         if (_input.move != Vector2.zero && (PlayerState != State.Dodge))
         {
-            _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
+            _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                 RotationSmoothTime);
 
