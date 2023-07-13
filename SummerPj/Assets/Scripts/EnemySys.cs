@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Net.Http.Headers;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,7 +13,7 @@ public class EnemySys : MonoBehaviour
     EnemyAnim _enemyAnim;
 
     public State _state;
-    public static float _hp;
+    static float _hp;
 
     [SerializeField]
     float _startingHP;
@@ -23,9 +24,10 @@ public class EnemySys : MonoBehaviour
         
     void Start()
     {
-        _player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        _player = GameObject.Find("Player").GetComponent<Transform>();
         _sysAgent = gameObject.GetComponent<NavMeshAgent>();
-        _sysRigid  = gameObject.GetComponent<Rigidbody>();
+        _sysRigid  = gameObject.GetComponent<Rigidbody>();  
+        _enemyAnim = GameObject.Find("Model").GetComponent<EnemyAnim>();
         _hp = _startingHP;
     }
 
@@ -70,9 +72,12 @@ public class EnemySys : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
-    private void HittingDelay()
+
+    IEnumerator ReAttack()
     {
-        _sysAgent.GetComponent<CapsuleCollider>().isTrigger = false;
+        yield return new WaitForSeconds(8.7f);
+        EnemyAnim.EnemyState = State.Idle;
+        _enemyAnim._isAttack = false;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -91,11 +96,10 @@ public class EnemySys : MonoBehaviour
                 Debug.Log(_hp);
             }
             else if (_hp == 40)
-            {
+            { 
                 _sysAgent.GetComponent<CapsuleCollider>().isTrigger = true;
                 EnemyAnim.EnemyState = State.Stage2;
-                Invoke("HittingDelay", 7f);
-
+                StartCoroutine(ReAttack());
             }
             else if (_hp < 40)
             {

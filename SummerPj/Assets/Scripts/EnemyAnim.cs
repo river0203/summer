@@ -29,7 +29,7 @@ public class EnemyAnim : MonoBehaviour
 
     static Animator _anim;
 
-    bool _isAttack = false;
+    public bool _isAttack = false;
 
     public static State EnemyState
     {
@@ -79,7 +79,6 @@ public class EnemyAnim : MonoBehaviour
             else if (_skillList[rand] == "skill_2")
             {
                 EnemyState = State.Skill2;
-
             }
             else if (_skillList[rand] == "skill_3")
             {
@@ -104,6 +103,7 @@ public class EnemyAnim : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(_isAttack);
         float distance = Vector3.Distance(transform.position, _target.transform.position);
         if (_isAttack)
             return;
