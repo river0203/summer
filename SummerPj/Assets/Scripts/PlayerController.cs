@@ -74,6 +74,10 @@ public class PlayerController : MonoBehaviour
     [Tooltip("바닥으로 사용할 레이어")]
     [SerializeField] LayerMask GroundLayers;
 
+    [Tooltip("점프 중 이동 속도")]
+    [SerializeField]float Jump_MoveSpeed = 3f;
+
+
     [Tooltip("점프 스태미나")]
     [SerializeField] float Jump_Cost = 10;
 
@@ -84,6 +88,7 @@ public class PlayerController : MonoBehaviour
     float _fallTimeoutDelta;
     float _jumpTimeoutDelta;
     float _terminalVelocity = 53.0f;
+
 
     #endregion
 
@@ -211,7 +216,11 @@ public class PlayerController : MonoBehaviour
     }
     void JumpMove()
     {
-
+        if (_input.move != Vector2.zero)
+        {
+            Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+            _controller.Move(targetDirection.normalized * (Jump_MoveSpeed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+        }
     }
     void Stamina_Manage()
     {
@@ -294,7 +303,6 @@ public class PlayerController : MonoBehaviour
             if (PlayerState == State.Jump || PlayerState == State.Fall)
             {
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime * 100);
-                Debug.Log("asdf");
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }
             else if (PlayerState != State.Dodge && !_input.dodge)
