@@ -11,7 +11,7 @@ public class PlayerCameraController : MonoBehaviour
     [SerializeField] float TopClamp = 70.0f;
 
     [SerializeField]
-    Vector3 _interval;
+    float _interval;
 
     [SerializeField]
     Define.CameraType _cameraType = Define.CameraType.Normal;
@@ -55,11 +55,11 @@ public class PlayerCameraController : MonoBehaviour
         _pi += _input.look.x * Time.deltaTime;
 
         _pi = Mathf.Repeat(_pi, Mathf.Deg2Rad * 360);
-        _seta = Mathf.Clamp(_seta, Mathf.Deg2Rad * (BottomClamp + 90), Mathf.Deg2Rad * (TopClamp + 90));
+        _seta = Mathf.Clamp(_seta, Mathf.Deg2Rad * (-TopClamp + 90), Mathf.Deg2Rad * (-BottomClamp + 90));
 
-        float x = _interval.z * Mathf.Sin(_seta) * Mathf.Cos(_pi);
-        float y = _interval.z * Mathf.Cos(_seta);
-        float z = _interval.z * Mathf.Sin(_seta) * Mathf.Sin(_pi);
+        float x = _interval * Mathf.Sin(_seta) * Mathf.Cos(_pi);
+        float y = _interval * Mathf.Cos(_seta);
+        float z = _interval * Mathf.Sin(_seta) * Mathf.Sin(_pi);
 
         // 위치
         transform.position = _player.transform.position + new Vector3(-x, _collider.height + y, z);
@@ -70,10 +70,17 @@ public class PlayerCameraController : MonoBehaviour
     }
     void LockOnMode()
     {
-        transform.position = _player.transform.position + new Vector3(0, _collider.height, 0);
+        // 위치
+        Vector3 dir = _target.transform.position - _player.transform.position;
+        dir = -dir.normalized * _interval;
+
+        dir = Quaternion.AngleAxis(50, Vector3.right) * dir;
+        Vector3 pos = _player.transform.position + new Vector3(0, _collider.height, 0) + dir;
+
+        transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * 3);
         
         // 방향
-        Vector3 lookPos = _target.transform.position + new Vector3(0, _collider.height);
+        Vector3 lookPos = _target.transform.position;
         transform.LookAt(lookPos);
     }
     void LateUpdate()
