@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
         Combo_Manage();
         // 스태미나 관리
         Stamina_Manage();
-
+         
         if (PlayerState == State.Idle || PlayerState == State.Walk || PlayerState == State.Sprint)
         {
             // 이동
@@ -265,12 +265,15 @@ public class PlayerController : MonoBehaviour
         {
             if (_stamina >= Weak_Attack_Cost)
             {
+                StopCoroutine("JumpState");
+                _stamina -= Weak_Attack_Cost;
+
                 int JumpAttack = UnityEngine.Random.Range(0, 2);
                 switch (JumpAttack)
                 {
                     case 0: PlayerState = State.JumpAttack_1; break;
-                    case 1: PlayerState = State.JumpAttack_1; break;
-                    case 2: PlayerState = State.JumpAttack_1; break;
+                    case 1: PlayerState = State.JumpAttack_2; break;
+                    case 2: PlayerState = State.JumpAttack_3; break;
                 }
                 StartCoroutine(ChangeState());
 
@@ -495,9 +498,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "EnemyAttack")
         {
-            //플레이어 체력 감소
-            // _hp -= 
-
             // 플레이어 피격 상태
             if (_hp > 0)
             {
