@@ -1519,7 +1519,7 @@ MonoBehaviour:
   Jump_Cost: 10
   Dodge_Cost: 10
   comboTime: 3
-  n_attackTime: 1
+  n_attackTime: 0.6
   Weak_Attack_Cost: 10
   Strong_Attack_Cost: 10
   HealAmount: 30

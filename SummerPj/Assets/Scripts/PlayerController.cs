@@ -200,8 +200,11 @@ public class PlayerController : MonoBehaviour
         // 점프 중 행동
         if (PlayerState == State.Jump || PlayerState == State.Fall)
         {
-            JumpMove();
             JumpAttack();
+        }
+        if(PlayerState == State.Jump || PlayerState == State.Fall || PlayerState == State.JumpAttack_1 || PlayerState == State.JumpAttack_2 || PlayerState == State.JumpAttack_3)
+        {
+            JumpMove();
         }
 
         // 착지
