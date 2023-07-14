@@ -11,9 +11,26 @@ public class InputHandler : MonoBehaviour
     public float _mouseY;
 
     PlayerInputAction _inputActions;
+    CameraHendler _cameraHandler;
 
     Vector2 movementInput;
     Vector2 cameraInput;
+
+    private void Awake()
+    {
+        _cameraHandler = CameraHendler._instance;
+    }
+
+    private void FixedUpdate()
+    {
+        float delta = Time.deltaTime;
+
+        if (_cameraHandler != null )
+        {
+            _cameraHandler.FollowTarget(delta);
+            _cameraHandler.HandlerCameraRotation(delta, _mouseX, _mouseY);
+        }
+    }
 
     public void OnEnable()
     {
