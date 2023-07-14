@@ -18,12 +18,6 @@ public class Status_UI : MonoBehaviour
 
     void Update()
     {
-        if(Input.anyKeyDown)
-        {
-            playercontroller._hp -= 10;
-            playercontroller._stamina -= 10;
-        }
-
         _hpPercentage = playercontroller._hp / playercontroller.maxHP;
         _staminaPercentage = playercontroller._stamina / playercontroller.maxStamina;
     }
