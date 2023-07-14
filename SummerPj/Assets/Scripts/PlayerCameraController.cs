@@ -74,14 +74,14 @@ public class PlayerCameraController : MonoBehaviour
         Vector3 dir = _target.transform.position - _player.transform.position;
         dir = -dir.normalized * _interval;
 
-        dir = Quaternion.AngleAxis(50, Vector3.right) * dir;
         Vector3 pos = _player.transform.position + new Vector3(0, _collider.height, 0) + dir;
 
         transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * 3);
-        
+
         // πÊ«‚
-        Vector3 lookPos = _target.transform.position;
-        transform.LookAt(lookPos);
+        Vector3 lookPos = _target.transform.position - transform.position;
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookPos), Time.deltaTime * 3);
     }
     void LateUpdate()
     {
