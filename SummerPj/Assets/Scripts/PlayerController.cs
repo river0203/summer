@@ -193,6 +193,7 @@ public class PlayerController : MonoBehaviour
             Heal();
             // 궁극기
             Ultimate();
+            
             // 상호작용, 흘리기, 기모으기
         }
 
@@ -302,20 +303,23 @@ public class PlayerController : MonoBehaviour
         {
             if (PlayerState == State.Jump || PlayerState == State.Fall)
             {
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime * 100);
+                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime * 10);
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }
             else if (PlayerState != State.Dodge && !_input.dodge)
             {
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
-                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f); 
+                if (PlayerState == State.Idle || PlayerState == State.Walk || PlayerState == State.Sprint || PlayerState == State.Heal_Walk)
+                {
+                    float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
+                    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                }
             }
 
         }
 
         // 특정 상황 플레이어 회전 제한
         if (PlayerState != State.WeakAttack_1 && PlayerState != State.WeakAttack_2 && PlayerState != State.WeakAttack_3 && PlayerState != State.WeakAttack_4 && 
-            PlayerState != State.WeakAttack_5 && PlayerState != State.WeakAttack_6 && PlayerState != State.StrongAttack /*&& PlayerState != State.Jump*/ && PlayerState != State.JumpAttack_1 && 
+            PlayerState != State.WeakAttack_5 && PlayerState != State.WeakAttack_6 && PlayerState != State.StrongAttack && PlayerState != State.JumpAttack_1 && 
             PlayerState != State.JumpAttack_2 && PlayerState != State.JumpAttack_3 && PlayerState != State.Land)
         {
             _playerRotation = transform.rotation;
