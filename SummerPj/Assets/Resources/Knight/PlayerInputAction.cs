@@ -24,7 +24,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     ""name"": ""PlayerInputAction"",
     ""maps"": [
         {
-            ""name"": ""Player"",
+            ""name"": ""PlayerMovement"",
             ""id"": ""427e5246-6f41-4045-933c-51fe433aa91a"",
             ""actions"": [
                 {
@@ -52,24 +52,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Sprint"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""201c1e07-0f69-44ba-9d07-0f6baa39c925"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Dodge"",
-                    ""type"": ""Button"",
-                    ""id"": ""a548e2ca-0d81-4f89-b22b-34b19a2934dd"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -240,50 +222,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f8f32e35-eddb-4632-ad51-bda265689c52"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Sprint"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a25277e1-bfc7-4a1b-aa76-7a1678ebc39a"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Sprint"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dfe64279-cee5-4ba5-8837-368d038f0212"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Dodge"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b6b9eab8-3b75-4841-a990-dc2968e60363"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Dodge"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""1d4a54ad-5866-42bd-8973-49a9375f865b"",
                     ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": """",
@@ -415,6 +353,76 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""PlayerActions"",
+            ""id"": ""b602c0dc-2f52-4396-9aa1-96083c8604f7"",
+            ""actions"": [
+                {
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""678a452a-72ac-43bc-aec1-c6ff8c5aab16"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""a0d42203-99d7-44f2-8b91-8ae6b7424843"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""4b99d616-a622-4dbd-8800-52d958d2f620"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d6de8dc-e861-4686-a58b-118f86ee8341"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""913df597-522b-45b0-b39a-99786ea231e3"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34b6f80b-7182-4fc7-b46d-cd2b723175f3"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -480,19 +488,21 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Player
-        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
-        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
-        m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
-        m_Player_Parry = m_Player.FindAction("Parry", throwIfNotFound: true);
-        m_Player_LockOn = m_Player.FindAction("LockOn", throwIfNotFound: true);
-        m_Player_WeakAttack = m_Player.FindAction("WeakAttack", throwIfNotFound: true);
-        m_Player_StrongAttack = m_Player.FindAction("StrongAttack", throwIfNotFound: true);
-        m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
-        m_Player_Ultimate = m_Player.FindAction("Ultimate", throwIfNotFound: true);
+        // PlayerMovement
+        m_PlayerMovement = asset.FindActionMap("PlayerMovement", throwIfNotFound: true);
+        m_PlayerMovement_Move = m_PlayerMovement.FindAction("Move", throwIfNotFound: true);
+        m_PlayerMovement_Look = m_PlayerMovement.FindAction("Look", throwIfNotFound: true);
+        m_PlayerMovement_Jump = m_PlayerMovement.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerMovement_Parry = m_PlayerMovement.FindAction("Parry", throwIfNotFound: true);
+        m_PlayerMovement_LockOn = m_PlayerMovement.FindAction("LockOn", throwIfNotFound: true);
+        m_PlayerMovement_WeakAttack = m_PlayerMovement.FindAction("WeakAttack", throwIfNotFound: true);
+        m_PlayerMovement_StrongAttack = m_PlayerMovement.FindAction("StrongAttack", throwIfNotFound: true);
+        m_PlayerMovement_Heal = m_PlayerMovement.FindAction("Heal", throwIfNotFound: true);
+        m_PlayerMovement_Ultimate = m_PlayerMovement.FindAction("Ultimate", throwIfNotFound: true);
+        // PlayerActions
+        m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
+        m_PlayerActions_Dodge = m_PlayerActions.FindAction("Dodge", throwIfNotFound: true);
+        m_PlayerActions_Sprint = m_PlayerActions.FindAction("Sprint", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -551,44 +561,40 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Player
-    private readonly InputActionMap m_Player;
-    private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Look;
-    private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Sprint;
-    private readonly InputAction m_Player_Dodge;
-    private readonly InputAction m_Player_Parry;
-    private readonly InputAction m_Player_LockOn;
-    private readonly InputAction m_Player_WeakAttack;
-    private readonly InputAction m_Player_StrongAttack;
-    private readonly InputAction m_Player_Heal;
-    private readonly InputAction m_Player_Ultimate;
-    public struct PlayerActions
+    // PlayerMovement
+    private readonly InputActionMap m_PlayerMovement;
+    private List<IPlayerMovementActions> m_PlayerMovementActionsCallbackInterfaces = new List<IPlayerMovementActions>();
+    private readonly InputAction m_PlayerMovement_Move;
+    private readonly InputAction m_PlayerMovement_Look;
+    private readonly InputAction m_PlayerMovement_Jump;
+    private readonly InputAction m_PlayerMovement_Parry;
+    private readonly InputAction m_PlayerMovement_LockOn;
+    private readonly InputAction m_PlayerMovement_WeakAttack;
+    private readonly InputAction m_PlayerMovement_StrongAttack;
+    private readonly InputAction m_PlayerMovement_Heal;
+    private readonly InputAction m_PlayerMovement_Ultimate;
+    public struct PlayerMovementActions
     {
         private @PlayerInputAction m_Wrapper;
-        public PlayerActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @Look => m_Wrapper.m_Player_Look;
-        public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
-        public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
-        public InputAction @Parry => m_Wrapper.m_Player_Parry;
-        public InputAction @LockOn => m_Wrapper.m_Player_LockOn;
-        public InputAction @WeakAttack => m_Wrapper.m_Player_WeakAttack;
-        public InputAction @StrongAttack => m_Wrapper.m_Player_StrongAttack;
-        public InputAction @Heal => m_Wrapper.m_Player_Heal;
-        public InputAction @Ultimate => m_Wrapper.m_Player_Ultimate;
-        public InputActionMap Get() { return m_Wrapper.m_Player; }
+        public PlayerMovementActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_PlayerMovement_Move;
+        public InputAction @Look => m_Wrapper.m_PlayerMovement_Look;
+        public InputAction @Jump => m_Wrapper.m_PlayerMovement_Jump;
+        public InputAction @Parry => m_Wrapper.m_PlayerMovement_Parry;
+        public InputAction @LockOn => m_Wrapper.m_PlayerMovement_LockOn;
+        public InputAction @WeakAttack => m_Wrapper.m_PlayerMovement_WeakAttack;
+        public InputAction @StrongAttack => m_Wrapper.m_PlayerMovement_StrongAttack;
+        public InputAction @Heal => m_Wrapper.m_PlayerMovement_Heal;
+        public InputAction @Ultimate => m_Wrapper.m_PlayerMovement_Ultimate;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
-        public void AddCallbacks(IPlayerActions instance)
+        public static implicit operator InputActionMap(PlayerMovementActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerMovementActions instance)
         {
-            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Add(instance);
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
@@ -598,12 +604,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @Sprint.started += instance.OnSprint;
-            @Sprint.performed += instance.OnSprint;
-            @Sprint.canceled += instance.OnSprint;
-            @Dodge.started += instance.OnDodge;
-            @Dodge.performed += instance.OnDodge;
-            @Dodge.canceled += instance.OnDodge;
             @Parry.started += instance.OnParry;
             @Parry.performed += instance.OnParry;
             @Parry.canceled += instance.OnParry;
@@ -624,7 +624,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Ultimate.canceled += instance.OnUltimate;
         }
 
-        private void UnregisterCallbacks(IPlayerActions instance)
+        private void UnregisterCallbacks(IPlayerMovementActions instance)
         {
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
@@ -635,12 +635,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @Sprint.started -= instance.OnSprint;
-            @Sprint.performed -= instance.OnSprint;
-            @Sprint.canceled -= instance.OnSprint;
-            @Dodge.started -= instance.OnDodge;
-            @Dodge.performed -= instance.OnDodge;
-            @Dodge.canceled -= instance.OnDodge;
             @Parry.started -= instance.OnParry;
             @Parry.performed -= instance.OnParry;
             @Parry.canceled -= instance.OnParry;
@@ -661,21 +655,75 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Ultimate.canceled -= instance.OnUltimate;
         }
 
-        public void RemoveCallbacks(IPlayerActions instance)
+        public void RemoveCallbacks(IPlayerMovementActions instance)
         {
-            if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IPlayerActions instance)
+        public void SetCallbacks(IPlayerMovementActions instance)
         {
-            foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_PlayerMovementActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public PlayerActions @Player => new PlayerActions(this);
+    public PlayerMovementActions @PlayerMovement => new PlayerMovementActions(this);
+
+    // PlayerActions
+    private readonly InputActionMap m_PlayerActions;
+    private List<IPlayerActionsActions> m_PlayerActionsActionsCallbackInterfaces = new List<IPlayerActionsActions>();
+    private readonly InputAction m_PlayerActions_Dodge;
+    private readonly InputAction m_PlayerActions_Sprint;
+    public struct PlayerActionsActions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public PlayerActionsActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Dodge => m_Wrapper.m_PlayerActions_Dodge;
+        public InputAction @Sprint => m_Wrapper.m_PlayerActions_Sprint;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerActionsActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerActionsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerActionsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerActionsActionsCallbackInterfaces.Add(instance);
+            @Dodge.started += instance.OnDodge;
+            @Dodge.performed += instance.OnDodge;
+            @Dodge.canceled += instance.OnDodge;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
+        }
+
+        private void UnregisterCallbacks(IPlayerActionsActions instance)
+        {
+            @Dodge.started -= instance.OnDodge;
+            @Dodge.performed -= instance.OnDodge;
+            @Dodge.canceled -= instance.OnDodge;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
+        }
+
+        public void RemoveCallbacks(IPlayerActionsActions instance)
+        {
+            if (m_Wrapper.m_PlayerActionsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayerActionsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerActionsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerActionsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PlayerActionsActions @PlayerActions => new PlayerActionsActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -721,18 +769,21 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_XRSchemeIndex];
         }
     }
-    public interface IPlayerActions
+    public interface IPlayerMovementActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnSprint(InputAction.CallbackContext context);
-        void OnDodge(InputAction.CallbackContext context);
         void OnParry(InputAction.CallbackContext context);
         void OnLockOn(InputAction.CallbackContext context);
         void OnWeakAttack(InputAction.CallbackContext context);
         void OnStrongAttack(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
         void OnUltimate(InputAction.CallbackContext context);
+    }
+    public interface IPlayerActionsActions
+    {
+        void OnDodge(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
 }

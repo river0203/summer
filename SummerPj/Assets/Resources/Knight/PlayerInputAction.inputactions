@@ -2,7 +2,7 @@
     "name": "PlayerInputAction",
     "maps": [
         {
-            "name": "Player",
+            "name": "PlayerMovement",
             "id": "427e5246-6f41-4045-933c-51fe433aa91a",
             "actions": [
                 {
@@ -30,24 +30,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Sprint",
-                    "type": "PassThrough",
-                    "id": "201c1e07-0f69-44ba-9d07-0f6baa39c925",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Dodge",
-                    "type": "Button",
-                    "id": "a548e2ca-0d81-4f89-b22b-34b19a2934dd",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
@@ -218,50 +200,6 @@
                 },
                 {
                     "name": "",
-                    "id": "f8f32e35-eddb-4632-ad51-bda265689c52",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a25277e1-bfc7-4a1b-aa76-7a1678ebc39a",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dfe64279-cee5-4ba5-8837-368d038f0212",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Dodge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b6b9eab8-3b75-4841-a990-dc2968e60363",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Dodge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "1d4a54ad-5866-42bd-8973-49a9375f865b",
                     "path": "<Keyboard>/ctrl",
                     "interactions": "",
@@ -389,6 +327,76 @@
                     "processors": "",
                     "groups": "",
                     "action": "Ultimate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerActions",
+            "id": "b602c0dc-2f52-4396-9aa1-96083c8604f7",
+            "actions": [
+                {
+                    "name": "Dodge",
+                    "type": "Button",
+                    "id": "678a452a-72ac-43bc-aec1-c6ff8c5aab16",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "PassThrough",
+                    "id": "a0d42203-99d7-44f2-8b91-8ae6b7424843",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4b99d616-a622-4dbd-8800-52d958d2f620",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d6de8dc-e861-4686-a58b-118f86ee8341",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "913df597-522b-45b0-b39a-99786ea231e3",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34b6f80b-7182-4fc7-b46d-cd2b723175f3",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

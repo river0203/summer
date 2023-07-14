@@ -21,7 +21,11 @@ public class PlayerLocoMotion : MonoBehaviour
     [SerializeField]
     float _movementSpeed = 5;
     [SerializeField]
+    float _sprintSpeed = 7;
+    [SerializeField]
     float _rotationSpeed = 10;
+
+    public bool _isSprinting;
 
     private void Start()
     {
@@ -37,25 +41,10 @@ public class PlayerLocoMotion : MonoBehaviour
     {
         float delta = Time.deltaTime;
 
+        _isSprinting = _inputHandler.b_input;
         _inputHandler.TickInput(delta);
-
-        _moveDirection = _cameraObject.forward * _inputHandler._vertical;
-        _moveDirection += _cameraObject.right * _inputHandler._horizontal;
-        _moveDirection.y = 0;
-        _moveDirection.Normalize();
-
-
-        _moveDirection *= _movementSpeed;
-
-        Vector3 projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, normalVector);
-        _rigid.velocity = projectedVelocity;
-
-        _animHandler.UpdateAnimatorValues(_inputHandler._moveAmount, 0);
-
-        if (_animHandler.canRotate)
-        {
-            HandleRotation(delta);
-        }
+        HandleMovement(delta);
+        HandleRollingAndSprinting(delta);
     }
 
     #region Movement
@@ -84,6 +73,64 @@ public class PlayerLocoMotion : MonoBehaviour
         Quaternion targetRotation = Quaternion.Slerp(_myTrnasform.rotation, tr, rs * delta);
 
         _myTrnasform.rotation = targetRotation;
+    }
+
+    public void HandleMovement(float delta)
+    {
+        if (_inputHandler._dodgeFlag)
+            return;
+
+        _moveDirection = _cameraObject.forward * _inputHandler._vertical;
+        _moveDirection += _cameraObject.right * _inputHandler._horizontal;
+        _moveDirection.y = 0;
+        _moveDirection.Normalize();
+
+        float speed = _movementSpeed;
+        if (_inputHandler._sprintFlag)
+        {
+            speed = _sprintSpeed;
+            _isSprinting = true;
+            _moveDirection *= speed;
+        }
+        else
+        {
+            _moveDirection *= speed;
+        }
+        
+        Vector3 projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, normalVector);
+        _rigid.velocity = projectedVelocity;
+
+        _animHandler.UpdateAnimatorValues(_inputHandler._moveAmount, 0, _isSprinting);
+
+        if (_animHandler.canRotate)
+        {
+            HandleRotation(delta);
+        }
+    }
+
+    public void HandleRollingAndSprinting(float delta)
+    {
+        if (_animHandler._anim.GetBool("isInteracting"))
+            return;
+
+        if (_inputHandler._dodgeFlag)
+        {
+            _moveDirection = _cameraObject.forward * _inputHandler._vertical;
+            _moveDirection += _cameraObject.right * _inputHandler._horizontal;
+
+            if (_inputHandler._moveAmount > 0)
+            {
+                _animHandler.PlayTargetAnimation("Dodge", true);
+
+                _moveDirection.y = 0;
+                Quaternion rollRotation = Quaternion.LookRotation(_moveDirection);
+                _myTrnasform.rotation = rollRotation;
+            }
+            else
+            {
+                _animHandler.PlayTargetAnimation("Backstep", true);
+            }
+        }
     }
 
     #endregion

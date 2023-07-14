@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    InputHandler _inputHandler;
+    Animator _anim;
+
     void Start()
     {
-        
+        _inputHandler = GetComponent<InputHandler>();
+        _anim = GetComponentInChildren<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        _inputHandler._isInteracting = _anim.GetBool("isInteracting");
+        _inputHandler._dodgeFlag = false;
+        _inputHandler._sprintFlag = false;
     }
 }
