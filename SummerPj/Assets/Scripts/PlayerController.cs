@@ -35,7 +35,10 @@ public class PlayerController : MonoBehaviour
 
     [Tooltip("플레이어 최대 스태미나")]
     [SerializeField] public float maxStamina = 200;
-
+    
+    [Tooltip("스태미나 회복량")]
+    [SerializeField] float Recovery_Stamina = 10;
+    
     public float _hp;
     public float _stamina;
     #endregion
@@ -44,6 +47,9 @@ public class PlayerController : MonoBehaviour
     [Header("Move")]
     [Tooltip("방향 전환 시간")]
     [SerializeField] float RotationSmoothTime = 0.12f;
+
+    [Tooltip("달리기 스태미나 in m/s")]
+    [SerializeField] float Sprint_Cost = 1f;
 
     Quaternion _playerRotation;
     float _targetRotation;
@@ -68,6 +74,9 @@ public class PlayerController : MonoBehaviour
     [Tooltip("바닥으로 사용할 레이어")]
     [SerializeField] LayerMask GroundLayers;
 
+    [Tooltip("점프 스태미나")]
+    [SerializeField] float Jump_Cost = 10;
+
     bool Grounded = true;
     float GroundedOffset = -0.14f;
     float GroundedRadius = 0.28f;
@@ -79,13 +88,26 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region  Dodge
-    //[Header("Dodge")]
+    [Header("Dodge")]
+
+    [Tooltip("구르기 스태미나")]
+    [SerializeField] float Dodge_Cost = 10;
     #endregion
 
     #region  Attack
     [Header("공격")]
     [Tooltip("콤보 지속 시간")]
     [SerializeField] float comboTime = 3f;
+
+    [Tooltip("다음 공격 가능 시간")]
+    [Range(0f, 1f)]
+    [SerializeField] float n_attackTime;
+
+    [Tooltip("약공격 스태미나")]
+    [SerializeField] float Weak_Attack_Cost = 10;
+
+    [Tooltip("강공격 스태미나")]
+    [SerializeField] float Strong_Attack_Cost = 10;
 
     int Combo = 0;
     float comboTimeDelta = 0f;
@@ -126,6 +148,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(_stamina);
         #region  Vibration
         /*        if (gamepad != null && gamepad.device != null)
                 {
@@ -147,6 +170,8 @@ public class PlayerController : MonoBehaviour
         moveRotation();
         // 콤보 관리
         Combo_Manage();
+        // 스태미나 관리
+        Stamina_Manage();
 
         if (PlayerState == State.Idle || PlayerState == State.Walk || PlayerState == State.Sprint)
         {
@@ -184,11 +209,23 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    private void LateUpdate()
+    void Stamina_Manage()
     {
-        
-    }
+        // 스태미나가 최대량 보다 적을 때 스태미나 회복
+        if (_stamina < maxStamina)
+        {
+            // 특정 상황에만 스태미나 회복 가능
+            if (PlayerState == State.Idle || PlayerState == State.Walk || PlayerState == State.Fall || PlayerState == State.Land || PlayerState == State.Heal || PlayerState == State.Heal_Walk ||
+               PlayerState == State.Damaged)
+                _stamina += Time.deltaTime * Recovery_Stamina;
+        }
 
+        // 스태미나가 최대량보다 많을 경우 최대 스태미나로 고정
+        if(_stamina > maxStamina)
+        {
+            _stamina = maxStamina;
+        }
+    }
     void Ultimate()
     {
         if (_input.ultimate)
@@ -212,23 +249,26 @@ public class PlayerController : MonoBehaviour
     {
         if (_input.weakAttack || _input.strongAttack)
         {
-            int JumpAttack = UnityEngine.Random.Range(0, 2);
-            switch (JumpAttack)
+            if (_stamina >= Weak_Attack_Cost)
             {
-                case 0: PlayerState = State.JumpAttack_1; break;
-                case 1: PlayerState = State.JumpAttack_1; break;
-                case 2: PlayerState = State.JumpAttack_1; break;
-            }
-            StartCoroutine(ChangeState());
+                int JumpAttack = UnityEngine.Random.Range(0, 2);
+                switch (JumpAttack)
+                {
+                    case 0: PlayerState = State.JumpAttack_1; break;
+                    case 1: PlayerState = State.JumpAttack_1; break;
+                    case 2: PlayerState = State.JumpAttack_1; break;
+                }
+                StartCoroutine(ChangeState());
 
-            _input.weakAttack = false;
-            _input.strongAttack = false;
+                _input.weakAttack = false;
+                _input.strongAttack = false;
+            }
         }
         else { _input.weakAttack = false; _input.strongAttack = false; }
     }
     void Jump()
     {
-        if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+        if (_input.jump && _jumpTimeoutDelta <= 0.0f && _stamina >= Jump_Cost)
         {
             _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * _Gravity);
             PlayerState = State.Jump;
@@ -261,14 +301,15 @@ public class PlayerController : MonoBehaviour
         {
             _playerRotation = transform.rotation;
         }
-        else if (PlayerState != State.Dodge) _playerRotation = Quaternion.Euler(0f, _targetRotation, 0f);
+        else if (PlayerState == State.Dodge) _playerRotation = Quaternion.Euler(0f, _targetRotation, 0f);
         else transform.rotation = _playerRotation;
     }
     void WeakAttack()
     {
         // 공격 및 콤보 관리
-        if (_input.weakAttack)
+        if (_input.weakAttack && _stamina >= Weak_Attack_Cost)
         {
+            _stamina -= Weak_Attack_Cost;
             //콤보에 따라 플레이어 스테이트 변경
             switch (Combo)
             {
@@ -287,8 +328,9 @@ public class PlayerController : MonoBehaviour
     }
     void StrongAttack()
     {
-        if (_input.strongAttack)
+        if (_input.strongAttack && _stamina >= Strong_Attack_Cost)
         {
+            _stamina -= Strong_Attack_Cost;
             PlayerState = State.StrongAttack;
             StartCoroutine(AttackState());
 
@@ -298,8 +340,9 @@ public class PlayerController : MonoBehaviour
     }
     void Dodge()
     {
-        if (_input.dodge)
+        if (_input.dodge && _stamina >= Dodge_Cost)
         {
+            _stamina -= Dodge_Cost;
             PlayerState = State.Dodge;
             transform.rotation = Quaternion.Euler(0f, _targetRotation, 0f);
 
@@ -323,6 +366,13 @@ public class PlayerController : MonoBehaviour
 
         // 걷는 상태에서 Sprint를 누르면 달리기
         if (PlayerState == State.Walk) if (_input.sprint) PlayerState = State.Sprint;
+
+        //달리기 스태미나
+/*        if(PlayerState == State.Sprint)
+        {
+            if(_input.move != Vector2.zero && _stamina > Sprint_Cost) _stamina -= Time.deltaTime * Sprint_Cost;
+            if (_stamina < Sprint_Cost) PlayerState = State.Idle;
+        }*/
     }
     void Gravity()
     {
@@ -408,7 +458,7 @@ public class PlayerController : MonoBehaviour
         {
             yield return new WaitForSeconds(2.267f);
         }
-        else yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length * 0.6f);
+        else yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length * n_attackTime);
         PlayerState = State.Idle;
     }
     IEnumerator JumpState()

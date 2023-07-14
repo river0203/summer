@@ -213,7 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BottomClamp: -30
   TopClamp: 70
-  _interval: {x: 0, y: 0, z: -3}
+  _interval: 5
   _cameraType: 0
   noticeZone: 10
   maxNoticeAngle: 60
@@ -1061,11 +1061,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1796254479}
   m_CullTransparentMesh: 1
---- !u!4 &2026165075 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5192230530987084295, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
-  m_PrefabInstance: {fileID: 1522738754}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2144410950
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,7 +1365,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2026165075}
+  - {fileID: 5192230532434324549}
   - {fileID: 2144410955}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1425,3 +1420,8 @@ MonoBehaviour:
   comboTime: 3
   HealAmount: 30
   Heal_Count: 5
+--- !u!4 &5192230532434324549 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5192230530987084295, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
+  m_PrefabInstance: {fileID: 1522738754}
+  m_PrefabAsset: {fileID: 0}
