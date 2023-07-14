@@ -270,6 +270,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_input.jump && _jumpTimeoutDelta <= 0.0f && _stamina >= Jump_Cost)
         {
+            _stamina -= Jump_Cost;
             _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * _Gravity);
             PlayerState = State.Jump;
             StartCoroutine("JumpState");
