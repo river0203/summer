@@ -905,6 +905,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.328
       objectReference: {fileID: 0}
+    - target: {fileID: 4632518371236127523, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.159
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632518371236127523, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.17
+      objectReference: {fileID: 0}
     - target: {fileID: 4847371301324329149, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
       propertyPath: m_Name
       value: SK_Knight

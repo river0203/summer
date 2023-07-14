@@ -130,9 +130,9 @@ public class PlayerController : MonoBehaviour
     #region  Ultimate
     [Header("Ultimate")]
     [Tooltip("최대 충전량")]
-    float Ult_Gage;
+    float Ult_Gage = 100;
 
-    float Ult;
+    float Ult = 0;
     #endregion
 
     private void Start()
@@ -154,17 +154,17 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         #region  Vibration
-        /*        if (gamepad != null && gamepad.device != null)
-                {
+/*        if (gamepad != null && gamepad.device != null)
+        {
                     // 왼쪽 모터의 진동 설정 (0.0 ~ 1.0 사이 값)
-                    float leftVibration = 0.5f;s
+                    float leftVibration = _input.move.x;
 
                     // 오른쪽 모터의 진동 설정 (0.0 ~ 1.0 사이 값)
-                    float rightVibration = 0.8f;
+                    float rightVibration = _input.move.y;
 
                     // 진동 적용
                     gamepad.SetMotorSpeeds(leftVibration, rightVibration);
-                }*/
+        }*/
         #endregion
         // 중력
         Gravity();
@@ -202,7 +202,7 @@ public class PlayerController : MonoBehaviour
         {
             JumpAttack();
         }
-        if(PlayerState == State.Jump || PlayerState == State.Fall || PlayerState == State.JumpAttack_1 || PlayerState == State.JumpAttack_2 || PlayerState == State.JumpAttack_3)
+        if (PlayerState == State.Jump || PlayerState == State.Fall || PlayerState == State.JumpAttack_1 || PlayerState == State.JumpAttack_2 || PlayerState == State.JumpAttack_3)
         {
             JumpMove();
         }
