@@ -49,7 +49,7 @@ public class PlayerInputActions : MonoBehaviour
     }
     public void OnLockOn(InputValue value)
     {
-        LockOnInput(value.isPressed);
+        Camera.main.GetComponent<PlayerCameraController>().TogleLockOnMode();
     }
     public void OnWeakAttack(InputValue value)
     {
