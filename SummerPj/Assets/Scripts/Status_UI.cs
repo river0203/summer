@@ -7,8 +7,8 @@ public class Status_UI : MonoBehaviour
 
     float _hpPercentage;
     float _staminaPercentage;
-    public Slider Hp_Slider;
-    public Slider Stamina_Slider;
+    [SerializeField] Slider Hp_Slider;
+    [SerializeField] Slider Stamina_Slider;
 
     void Start()
     {
