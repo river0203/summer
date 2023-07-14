@@ -126,12 +126,11 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-
         #region  Vibration
         /*        if (gamepad != null && gamepad.device != null)
                 {
                     // 왼쪽 모터의 진동 설정 (0.0 ~ 1.0 사이 값)
-                    float leftVibration = 0.5f;
+                    float leftVibration = 0.5f;s
 
                     // 오른쪽 모터의 진동 설정 (0.0 ~ 1.0 사이 값)
                     float rightVibration = 0.8f;
@@ -185,6 +184,10 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    private void LateUpdate()
+    {
+        
+    }
 
     void Ultimate()
     {
@@ -236,33 +239,30 @@ public class PlayerController : MonoBehaviour
         else _input.jump = false;
 
     }
-    float moveRotation()
+    void moveRotation()
     {
         // 플레이어 회전
         Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-
-        if (_input.move != Vector2.zero && (PlayerState != State.Dodge))
+        _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
+        if (_input.move != Vector2.zero)
         {
-            _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
-            float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                RotationSmoothTime);
-
-            transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            if (PlayerState != State.Dodge && !_input.dodge)
+            {
+                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
+                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            }
         }
         Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
         // 특정 상황 플레이어 회전 제한
         if (PlayerState != State.WeakAttack_1 && PlayerState != State.WeakAttack_2 && PlayerState != State.WeakAttack_3 && PlayerState != State.WeakAttack_4 && 
-            PlayerState != State.WeakAttack_5 && PlayerState != State.WeakAttack_6 && PlayerState != State.StrongAttack && PlayerState != State.Jump &&
-            PlayerState != State.JumpAttack_1 && PlayerState != State.JumpAttack_2 && PlayerState != State.JumpAttack_3 && PlayerState != State.Dodge && 
-            PlayerState != State.Land)
+            PlayerState != State.WeakAttack_5 && PlayerState != State.WeakAttack_6 && PlayerState != State.StrongAttack && PlayerState != State.Jump && PlayerState != State.JumpAttack_1 && 
+            PlayerState != State.JumpAttack_2 && PlayerState != State.JumpAttack_3 && PlayerState != State.Land)
         {
             _playerRotation = transform.rotation;
         }
+        else if (PlayerState != State.Dodge) _playerRotation = Quaternion.Euler(0f, _targetRotation, 0f);
         else transform.rotation = _playerRotation;
-
-        //return targetDirection; 
-        return _targetRotation;
     }
     void WeakAttack()
     {
@@ -300,8 +300,9 @@ public class PlayerController : MonoBehaviour
     {
         if (_input.dodge)
         {
-            // 플레이어 입력 방향대로 구르기
-            PlayerState = State.Dodge; 
+            PlayerState = State.Dodge;
+            transform.rotation = Quaternion.Euler(0f, _targetRotation, 0f);
+
             StartCoroutine(ChangeState());
 
             _input.dodge = false;
