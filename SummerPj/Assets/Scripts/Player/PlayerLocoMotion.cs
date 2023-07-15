@@ -99,7 +99,8 @@ public class PlayerLocomotion : MonoBehaviour
         _moveDirection.Normalize();
 
         float speed = _movementSpeed;
-        if (_inputHandler._sprintFlag)
+
+        if (_inputHandler._sprintFlag && _inputHandler._moveAmount > 0.5f)
         {
             speed = _sprintSpeed;
             _playerManager._isSprinting = true;
@@ -107,7 +108,16 @@ public class PlayerLocomotion : MonoBehaviour
         }
         else
         {
-            _moveDirection *= speed;
+            if (_inputHandler._moveAmount < 0.5f)
+            {
+                _moveDirection *= _movementSpeed;
+                _playerManager._isSprinting = false;
+            }
+            else
+            {
+                _moveDirection *= speed;
+                _playerManager._isSprinting = true;
+            }
         }
         
         Vector3 projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, normalVector);

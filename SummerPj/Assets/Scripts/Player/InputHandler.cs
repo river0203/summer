@@ -13,13 +13,17 @@ public class InputHandler : MonoBehaviour
     public float _mouseY;
 
     public bool b_input;
+    public bool la_input;
+    public bool ha_input;
+
     public bool _dodgeFlag;
     public bool _sprintFlag;
     public float _dodgeInputTimer;
     #endregion
 
     PlayerInputAction _inputActions;
-    CameraHendler _cameraHandler;
+    PlayerAttack _playerAttack;
+    PlayerInventory _playerInventory;
 
     Vector2 movementInput;
     Vector2 cameraInput;
@@ -27,7 +31,8 @@ public class InputHandler : MonoBehaviour
     #region '인풋에 따라 변하는 변수'를 변환시켜주는 함수들
     private void Awake()
     {
-        _cameraHandler = CameraHendler._instance;
+        _playerAttack = GetComponent<PlayerAttack>();
+        _playerInventory = GetComponent<PlayerInventory>();
     }
 
     private void OnEnable()
@@ -49,7 +54,8 @@ public class InputHandler : MonoBehaviour
     public void TickInput(float delta)
     {
         MoveInput(delta); 
-        HandleRollInput(delta); 
+        HandleRollInput(delta);
+        HandleAttackInput(delta);
     }
 
     // 이동 및 마우스 포지션 갱신 (TickInput에서 실행)
@@ -82,6 +88,21 @@ public class InputHandler : MonoBehaviour
 
             _dodgeInputTimer = 0;
         }    
+    }
+
+    private void HandleAttackInput(float delta)
+    {
+        _inputActions.PlayerActions.LightAttack.performed += i => { la_input = true; };
+        _inputActions.PlayerActions.HeavyAttack.performed += i => { ha_input = true; };
+
+        if (la_input)
+        {
+            _playerAttack.HandleLightAttack(_playerInventory._rightWeapon);
+        }
+        if (ha_input)
+        {
+            _playerAttack.HandleHeavyAttack(_playerInventory._rightWeapon);
+        }
     }
     #endregion
 }

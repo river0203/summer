@@ -60,6 +60,8 @@ public class PlayerManager : MonoBehaviour
     {
         _inputHandler._dodgeFlag = false;
         _inputHandler._sprintFlag = false;
+        _inputHandler.la_input = false;
+        _inputHandler.ha_input = false;
 
         if (_isInAir)
         {

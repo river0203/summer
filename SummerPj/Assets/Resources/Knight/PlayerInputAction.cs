@@ -73,24 +73,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""WeakAttack"",
-                    ""type"": ""Button"",
-                    ""id"": ""6944114e-2ce2-4c55-8e4b-aabdb7b4bc7c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""StrongAttack"",
-                    ""type"": ""Button"",
-                    ""id"": ""111b194d-4387-4cbb-9a67-715e662129db"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Heal"",
                     ""type"": ""Button"",
                     ""id"": ""a72f197b-c985-459e-abc5-47d1b1374828"",
@@ -266,50 +248,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""56a7bc20-2073-422c-818b-e9dc6b7d8b5a"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""StrongAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b7ac3090-2a16-4a65-921c-7cfbbcfdbd67"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""StrongAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""143bb1cd-cc10-4eca-a2f0-a3664166fe91"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""WeakAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""05f6913d-c316-48b2-a6bb-e225f14c7960"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""WeakAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""6372e7e8-2bac-43b3-b76e-df7c84ac3951"",
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
@@ -375,6 +313,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LightAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""03f05399-bd63-417f-977e-0d7de6e4740f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HeavyAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""9fa33171-b147-4141-b63e-ffb34ffbddc3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -419,6 +375,50 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f4c7ee7e-ebd7-47b6-a490-3ba78e74b6b6"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80cc13e5-aeed-45fc-bad6-6a32c2b73b49"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""LightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3057e68e-8ac2-49e1-a8d7-902bbe1cdd30"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""HeavyAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c254798-53c9-44d4-b124-bb3814660439"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""HeavyAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -495,14 +495,14 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_PlayerMovement_Jump = m_PlayerMovement.FindAction("Jump", throwIfNotFound: true);
         m_PlayerMovement_Parry = m_PlayerMovement.FindAction("Parry", throwIfNotFound: true);
         m_PlayerMovement_LockOn = m_PlayerMovement.FindAction("LockOn", throwIfNotFound: true);
-        m_PlayerMovement_WeakAttack = m_PlayerMovement.FindAction("WeakAttack", throwIfNotFound: true);
-        m_PlayerMovement_StrongAttack = m_PlayerMovement.FindAction("StrongAttack", throwIfNotFound: true);
         m_PlayerMovement_Heal = m_PlayerMovement.FindAction("Heal", throwIfNotFound: true);
         m_PlayerMovement_Ultimate = m_PlayerMovement.FindAction("Ultimate", throwIfNotFound: true);
         // PlayerActions
         m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
         m_PlayerActions_Dodge = m_PlayerActions.FindAction("Dodge", throwIfNotFound: true);
         m_PlayerActions_Sprint = m_PlayerActions.FindAction("Sprint", throwIfNotFound: true);
+        m_PlayerActions_LightAttack = m_PlayerActions.FindAction("LightAttack", throwIfNotFound: true);
+        m_PlayerActions_HeavyAttack = m_PlayerActions.FindAction("HeavyAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -569,8 +569,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Jump;
     private readonly InputAction m_PlayerMovement_Parry;
     private readonly InputAction m_PlayerMovement_LockOn;
-    private readonly InputAction m_PlayerMovement_WeakAttack;
-    private readonly InputAction m_PlayerMovement_StrongAttack;
     private readonly InputAction m_PlayerMovement_Heal;
     private readonly InputAction m_PlayerMovement_Ultimate;
     public struct PlayerMovementActions
@@ -582,8 +580,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerMovement_Jump;
         public InputAction @Parry => m_Wrapper.m_PlayerMovement_Parry;
         public InputAction @LockOn => m_Wrapper.m_PlayerMovement_LockOn;
-        public InputAction @WeakAttack => m_Wrapper.m_PlayerMovement_WeakAttack;
-        public InputAction @StrongAttack => m_Wrapper.m_PlayerMovement_StrongAttack;
         public InputAction @Heal => m_Wrapper.m_PlayerMovement_Heal;
         public InputAction @Ultimate => m_Wrapper.m_PlayerMovement_Ultimate;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
@@ -610,12 +606,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @LockOn.started += instance.OnLockOn;
             @LockOn.performed += instance.OnLockOn;
             @LockOn.canceled += instance.OnLockOn;
-            @WeakAttack.started += instance.OnWeakAttack;
-            @WeakAttack.performed += instance.OnWeakAttack;
-            @WeakAttack.canceled += instance.OnWeakAttack;
-            @StrongAttack.started += instance.OnStrongAttack;
-            @StrongAttack.performed += instance.OnStrongAttack;
-            @StrongAttack.canceled += instance.OnStrongAttack;
             @Heal.started += instance.OnHeal;
             @Heal.performed += instance.OnHeal;
             @Heal.canceled += instance.OnHeal;
@@ -641,12 +631,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @LockOn.started -= instance.OnLockOn;
             @LockOn.performed -= instance.OnLockOn;
             @LockOn.canceled -= instance.OnLockOn;
-            @WeakAttack.started -= instance.OnWeakAttack;
-            @WeakAttack.performed -= instance.OnWeakAttack;
-            @WeakAttack.canceled -= instance.OnWeakAttack;
-            @StrongAttack.started -= instance.OnStrongAttack;
-            @StrongAttack.performed -= instance.OnStrongAttack;
-            @StrongAttack.canceled -= instance.OnStrongAttack;
             @Heal.started -= instance.OnHeal;
             @Heal.performed -= instance.OnHeal;
             @Heal.canceled -= instance.OnHeal;
@@ -676,12 +660,16 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private List<IPlayerActionsActions> m_PlayerActionsActionsCallbackInterfaces = new List<IPlayerActionsActions>();
     private readonly InputAction m_PlayerActions_Dodge;
     private readonly InputAction m_PlayerActions_Sprint;
+    private readonly InputAction m_PlayerActions_LightAttack;
+    private readonly InputAction m_PlayerActions_HeavyAttack;
     public struct PlayerActionsActions
     {
         private @PlayerInputAction m_Wrapper;
         public PlayerActionsActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Dodge => m_Wrapper.m_PlayerActions_Dodge;
         public InputAction @Sprint => m_Wrapper.m_PlayerActions_Sprint;
+        public InputAction @LightAttack => m_Wrapper.m_PlayerActions_LightAttack;
+        public InputAction @HeavyAttack => m_Wrapper.m_PlayerActions_HeavyAttack;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -697,6 +685,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
+            @LightAttack.started += instance.OnLightAttack;
+            @LightAttack.performed += instance.OnLightAttack;
+            @LightAttack.canceled += instance.OnLightAttack;
+            @HeavyAttack.started += instance.OnHeavyAttack;
+            @HeavyAttack.performed += instance.OnHeavyAttack;
+            @HeavyAttack.canceled += instance.OnHeavyAttack;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -707,6 +701,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
+            @LightAttack.started -= instance.OnLightAttack;
+            @LightAttack.performed -= instance.OnLightAttack;
+            @LightAttack.canceled -= instance.OnLightAttack;
+            @HeavyAttack.started -= instance.OnHeavyAttack;
+            @HeavyAttack.performed -= instance.OnHeavyAttack;
+            @HeavyAttack.canceled -= instance.OnHeavyAttack;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -776,8 +776,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnParry(InputAction.CallbackContext context);
         void OnLockOn(InputAction.CallbackContext context);
-        void OnWeakAttack(InputAction.CallbackContext context);
-        void OnStrongAttack(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
         void OnUltimate(InputAction.CallbackContext context);
     }
@@ -785,5 +783,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     {
         void OnDodge(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnLightAttack(InputAction.CallbackContext context);
+        void OnHeavyAttack(InputAction.CallbackContext context);
     }
 }
