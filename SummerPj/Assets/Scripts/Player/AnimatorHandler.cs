@@ -2,20 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Animator의 파라미터 변수를 변경시켜줌 
 public class AnimatorHandler : MonoBehaviour
 {
+    PlayerManager _playerManager;
     public Animator _anim;
-    public InputHandler _inputHandler;
-    public PlayerLocoMotion _playerLocomotion;
+    InputHandler _inputHandler;
+    PlayerLocomotion _playerLocomotion;
     int _vertical;
     int _horizontal;
     public bool canRotate;
 
     public void Init()
     {
+        _playerManager = GetComponentInParent<PlayerManager>();
         _anim = GetComponent<Animator>();
         _inputHandler = GetComponentInParent<InputHandler>();
-        _playerLocomotion = GetComponentInParent<PlayerLocoMotion>();
+        _playerLocomotion = GetComponentInParent<PlayerLocomotion>();
         _vertical = Animator.StringToHash("Vertical");
         _horizontal = Animator.StringToHash("Horizontal");
     }
@@ -74,7 +77,7 @@ public class AnimatorHandler : MonoBehaviour
 
     private void OnAnimatorMove()
     {
-        if (_inputHandler._isInteracting == false)
+        if (_playerManager._isInteracting == false)
             return;
 
         float delta = Time.deltaTime;
