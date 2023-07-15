@@ -69,7 +69,7 @@ public class InputHandler : MonoBehaviour
 
     public void HandleRollInput(float delta)
     {
-        b_input = _inputActions.PlayerActions.Dodge.phase == UnityEngine.InputSystem.InputActionPhase.Started;
+        b_input = _inputActions.PlayerActions.Dodge.IsPressed();
 
         if (b_input)
         {
