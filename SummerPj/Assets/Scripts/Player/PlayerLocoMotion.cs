@@ -1,3 +1,4 @@
+using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -13,7 +14,7 @@ public class PlayerLocomotion : MonoBehaviour
     public Vector3 _moveDirection;
 
     [HideInInspector]
-    public Transform _myTrnasform;
+    public Transform _myTransform;
     [HideInInspector]
     public AnimatorHandler _animHandler;
 
@@ -48,9 +49,10 @@ public class PlayerLocomotion : MonoBehaviour
         _inputHandler = GetComponent<InputHandler>();
         _animHandler = GetComponentInChildren<AnimatorHandler>();
         _cameraObject = Camera.main.transform;
-        _myTrnasform = transform;
+        _myTransform = transform;
         _animHandler.Init();
 
+        // 플레이어가 시작하자마자 낙하하는 애니메이션이 재생하는 것을 방지
         _playerManager._isGrounded = true;
         _ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
     }
@@ -73,15 +75,15 @@ public class PlayerLocomotion : MonoBehaviour
 
         if (targetDir == Vector3.zero)
         {
-            targetDir = _myTrnasform.forward;
+            targetDir = _myTransform.forward;
         }
 
         float rs = _rotationSpeed;
 
         Quaternion tr = Quaternion.LookRotation(targetDir);
-        Quaternion targetRotation = Quaternion.Slerp(_myTrnasform.rotation, tr, rs * delta);
+        Quaternion targetRotation = Quaternion.Slerp(_myTransform.rotation, tr, rs * delta);
 
-        _myTrnasform.rotation = targetRotation;
+        _myTransform.rotation = targetRotation;
     }
 
     // 포지션 변경
@@ -119,7 +121,7 @@ public class PlayerLocomotion : MonoBehaviour
                 _playerManager._isSprinting = true;
             }
         }
-        
+
         Vector3 projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, normalVector);
         _rigid.velocity = projectedVelocity;
 
@@ -148,7 +150,7 @@ public class PlayerLocomotion : MonoBehaviour
 
                 _moveDirection.y = 0;
                 Quaternion rollRotation = Quaternion.LookRotation(_moveDirection);
-                _myTrnasform.rotation = rollRotation;
+                _myTransform.rotation = rollRotation;
             }
             else
             {
@@ -157,43 +159,49 @@ public class PlayerLocomotion : MonoBehaviour
         }
     }
 
-    public void HandleFalling(float delta, Vector3 moveDirection)
+    // 낙하 판정 및 물리 이동
+    public void HandleFalling(float delta, Vector3 moveDirection) // moveDirection : 떨어질때 이동할 방향
     {
         _playerManager._isGrounded = false;
         RaycastHit hit;
-        Vector3 origin = _myTrnasform.position;
+        // 스캔할 원점 잡기
+        Vector3 origin = _myTransform.position;
         origin.y += _groundDetectionRayStartPoint;
 
-        if (Physics.Raycast(origin, _myTrnasform.forward, out hit, 0.4f))
+        // 떨어지는 도중 앞에 벽이 있어도 비비지 않게 막음
+        if (Physics.Raycast(origin, _myTransform.forward, out hit, 0.6f))
         {
             moveDirection = Vector3.zero;
         }
 
+        // 낙하 물리 이동
         if (_playerManager._isInAir)
         {
             _rigid.AddForce(-Vector3.up * _fallingSpeed);
-            _rigid.AddForce(moveDirection * _fallingSpeed / 10);
+            _rigid.AddForce(moveDirection * _fallingSpeed / 10); // 떨어지는 방향으로 힘을 약간 줌
         }
 
         Vector3 dir = moveDirection;
         dir.Normalize();
         origin = origin + dir * _groundDirectionRayDistance;
 
-        _targetPosition = _myTrnasform.position;
+        _targetPosition = _myTransform.position;
 
-        Debug.DrawLine(origin, -Vector3.up * _minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
+        Debug.DrawLine(origin, origin + (-Vector3.up * _minimumDistanceNeededToBeginFall), Color.green, 0.1f, false);
+        // 바닥에 닿아 있을 때 처리
         if (Physics.Raycast(origin, -Vector3.up, out hit, _minimumDistanceNeededToBeginFall, _ignoreForGroundCheck))
         {
-            normalVector = hit.normal;
-            Vector3 tp = hit.point;
+            normalVector = hit.normal; // 충돌한 지점의 방향
+            Vector3 tp = hit.point; // 충돌한 지점
             _playerManager._isGrounded = true;
             _targetPosition.y = tp.y;
 
+            // 착지시
             if (_playerManager._isInAir)
             {
                 if (_inAirTimer > 0.5f)
                 {
-                    Debug.Log("You were in the air  for" + _inAirTimer);
+                    Debug.Log("You were in the air  for " + _inAirTimer);
                     _animHandler.PlayTargetAnimation("Land", true);
                     _inAirTimer = 0;
                 }
@@ -206,6 +214,7 @@ public class PlayerLocomotion : MonoBehaviour
                 _playerManager._isInAir = false;
             }
         }
+        // 바닥에 닿아있지 않을 때 처리
         else
         {
             if (_playerManager._isGrounded)
@@ -213,29 +222,30 @@ public class PlayerLocomotion : MonoBehaviour
                 _playerManager._isGrounded = false;
             }
 
-            if (_playerManager._isInAir == false)
+            if (!_playerManager._isInAir)
             {
                 if (_playerManager._isInteracting == false)
                 {
-                    _animHandler.PlayTargetAnimation("Falling", true);
+                    _animHandler.PlayTargetAnimation("Falling", true); // 낙하 애니메이션
                 }
 
                 Vector3 vel = _rigid.velocity;
                 vel.Normalize();
-                _rigid.velocity = vel * (_movementSpeed / 2);
+                _rigid.velocity = vel * (_movementSpeed / 3);
                 _playerManager._isInAir = true;
             }
         }
 
+        // 땅에 제대로 닿게 함 (안 하면 레이저가 딱 감지한 부분에 떠있음)
         if (_playerManager._isGrounded)
         {
             if (_playerManager._isInteracting || _inputHandler._moveAmount > 0)
             {
-                _myTrnasform.position = Vector3.Lerp(_myTrnasform.position, _targetPosition, Time.deltaTime);
+                _myTransform.position = Vector3.Lerp(_myTransform.position, _targetPosition, Time.deltaTime);
             }
             else
             {
-                _myTrnasform.position = _targetPosition;
+                _myTransform.position = _targetPosition;
             }
         }
     }
