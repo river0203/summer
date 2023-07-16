@@ -16,10 +16,11 @@ public class PlayerManager : MonoBehaviour
     public bool _isSprinting;
     public bool _isInAir;
     public bool _isGrounded;
+    public bool _canDoCombo;
 
     private void Awake()
     {
-        _cameraHandler = CameraHendler._instance;
+        _cameraHandler = FindObjectOfType<CameraHendler>();
     }
 
     void Start()
@@ -35,6 +36,8 @@ public class PlayerManager : MonoBehaviour
 
         // 스크립트 꼬임 해결
         _isInteracting = _anim.GetBool("isInteracting");
+
+        _canDoCombo = _anim.GetBool("canDoCombo");
         
         // 플레이어 이동
         _isSprinting = _inputHandler.b_input;

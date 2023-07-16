@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 // 매 프레임 인풋을 받아 '인풋에 따라 변하는 변수들'을 갱신시키고, 그 변수들을 public으로 열어 다른 스크립트에서 그 변수들을 통해 플레이어를 움직이게 해줌
@@ -18,12 +19,14 @@ public class InputHandler : MonoBehaviour
 
     public bool _dodgeFlag;
     public bool _sprintFlag;
+    public bool _comboFlag;
     public float _dodgeInputTimer;
     #endregion
 
     PlayerInputAction _inputActions;
     PlayerAttack _playerAttack;
     PlayerInventory _playerInventory;
+    PlayerManager _playerManager;
 
     Vector2 movementInput;
     Vector2 cameraInput;
@@ -33,6 +36,7 @@ public class InputHandler : MonoBehaviour
     {
         _playerAttack = GetComponent<PlayerAttack>();
         _playerInventory = GetComponent<PlayerInventory>();
+        _playerManager = GetComponent<PlayerManager>();
     }
 
     private void OnEnable()
@@ -97,7 +101,21 @@ public class InputHandler : MonoBehaviour
 
         if (la_input)
         {
-            _playerAttack.HandleLightAttack(_playerInventory._rightWeapon);
+            if (_playerManager._canDoCombo)
+            {
+                _comboFlag = true;
+                _playerAttack.HandleWeaponCombo(_playerInventory._rightWeapon);
+                _comboFlag = false;
+            }
+            else
+            {
+                if (_playerManager._isInteracting)
+                    return;
+                if (_playerManager._canDoCombo)
+                    return;
+
+                _playerAttack.HandleLightAttack(_playerInventory._rightWeapon);
+            }
         }
         if (ha_input)
         {

@@ -75,6 +75,16 @@ public class AnimatorHandler : MonoBehaviour
     public void CanRotate() { canRotate = true; }
     public void StopRotate() { canRotate = false; }
 
+    public void EnableCombo()
+    {
+        _anim.SetBool("canDoCombo", true);
+    }
+
+    public void Disablecombo()
+    {
+        _anim.SetBool("canDoCombo", false);
+    }
+
     private void OnAnimatorMove()
     {
         if (_playerManager._isInteracting == false)

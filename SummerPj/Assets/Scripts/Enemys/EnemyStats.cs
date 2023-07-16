@@ -2,25 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class EnemyStats : MonoBehaviour
 {
     public int _healthLevel = 10;
     public int _maxHealth;
     public int _currentHealth;
-
-    public HealthBar _healthBar;
-
-    AnimatorHandler _animHandler;
+    
+    Animator _anim;
 
     private void Awake()
     {
-        _animHandler = GetComponentInChildren<AnimatorHandler>();
+        _anim = GetComponentInChildren<Animator>();
     }
 
     private void Start()
     {
         _currentHealth = SetMaxHealthFromHealthLevel();
-        _healthBar.SetMaxHealth(_maxHealth);
     }
 
     private int SetMaxHealthFromHealthLevel()
@@ -32,15 +29,12 @@ public class PlayerStats : MonoBehaviour
     public void TakeDamage(int damege)
     {
         _currentHealth -= damege;
-
-        _healthBar.SetCurrentHealth(_currentHealth);
-
-        _animHandler.PlayTargetAnimation("Damaged", true);
+        _anim.Play("Damaged");
 
         if (_currentHealth <= 0)
         {
             _currentHealth = 0;
-            _animHandler.PlayTargetAnimation("Dead", true);
+            _anim.Play("Dead");
         }
     }
 }

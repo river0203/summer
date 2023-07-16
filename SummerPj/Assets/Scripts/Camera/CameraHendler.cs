@@ -13,8 +13,6 @@ public class CameraHendler : MonoBehaviour
     private LayerMask _ignoreLayers;
     private Vector3 _cameraFollowVelocity = Vector3.zero;
 
-    public static CameraHendler _instance;
-
     public float _lookSpeed = 0.1f;
     public float _followSpeed = 0.1f;
     public float _pivotSpeed = 0.03f;
@@ -32,10 +30,10 @@ public class CameraHendler : MonoBehaviour
 
     private void Awake()
     {
-        _instance = this;
         _myTransform = transform;
         _defaultPosition = _cameraTransform.localPosition.z;
         _ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
+        _targerTransform = FindObjectOfType<PlayerManager>().transform;
     }
 
     public void FollowTarget(float delta)

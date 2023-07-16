@@ -237,16 +237,13 @@ public class PlayerLocomotion : MonoBehaviour
         }
 
         // 땅에 제대로 닿게 함 (안 하면 레이저가 딱 감지한 부분에 떠있음)
-        if (_playerManager._isGrounded)
+        if (_playerManager._isInteracting || _inputHandler._moveAmount > 0)
         {
-            if (_playerManager._isInteracting || _inputHandler._moveAmount > 0)
-            {
-                _myTransform.position = Vector3.Lerp(_myTransform.position, _targetPosition, Time.deltaTime);
-            }
-            else
-            {
-                _myTransform.position = _targetPosition;
-            }
+            _myTransform.position = Vector3.Lerp(_myTransform.position, _targetPosition, Time.deltaTime / 0.1f);
+        }
+        else
+        {
+            _myTransform.position = _targetPosition;
         }
     }
 
