@@ -32,6 +32,7 @@ public class WeaponSlotManager : MonoBehaviour
 
     public void LoadWeponOnSlot(WeaponItem weaponItem, bool isLeft)
     {
+
         if (isLeft)
         {
             _leftHandSlot.LoadWeaponModel(weaponItem);
