@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WeaponSlotManager : MonoBehaviour
 {
+    public WeaponItem _attackingWeapon;
+
     WeaponHolderSlot _leftHandSlot;
     WeaponHolderSlot _rightHandSlot;
 
@@ -12,9 +14,15 @@ public class WeaponSlotManager : MonoBehaviour
 
     Animator animator;
 
+    QuickSlotsUI _quickSlotsUI;
+
+    PlayerStats _playerStats;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        _quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
+        _playerStats = GetComponentInParent<PlayerStats>();
 
         WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>(true);
         foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
@@ -32,6 +40,7 @@ public class WeaponSlotManager : MonoBehaviour
 
     public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
     {
+        // 무기 로드
         if (isLeft)
         {
             _leftHandSlot.LoadWeaponModel(weaponItem);
@@ -60,6 +69,9 @@ public class WeaponSlotManager : MonoBehaviour
             else animator.CrossFade("Right Arm Empty", 0.2f);
             #endregion
         }
+
+        // 슬롯 UI 로드
+        _quickSlotsUI.UpdateWeaponQuickSlotsUI(isLeft, weaponItem);
     }
 
     #region 데미지 콜라이더
@@ -100,5 +112,16 @@ public class WeaponSlotManager : MonoBehaviour
         _rightHandDamageCollider.DisableDamagecollider();
     }
 
+    #endregion
+
+    #region 스테미나
+    public void DrainStaminaLightAttack()
+    {
+        _playerStats.TakeStaminaDamage(Mathf.RoundToInt(_attackingWeapon.baseStaminar * _attackingWeapon.lightAttackMultiplier));
+    }
+    public void DrainStaminaHeavyAttack()
+    {
+        _playerStats.TakeStaminaDamage(Mathf.RoundToInt(_attackingWeapon.baseStaminar * _attackingWeapon.heavyAttackMultiplier));
+    }
     #endregion
 }
