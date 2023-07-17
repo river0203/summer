@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -154,7 +154,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         #region  Vibration
-/*        if (gamepad != null && gamepad.device != null)
+*//*        if (gamepad != null && gamepad.device != null)
         {
                     // 왼쪽 모터의 진동 설정 (0.0 ~ 1.0 사이 값)
                     float leftVibration = _input.move.x;
@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
 
                     // 진동 적용
                     gamepad.SetMotorSpeeds(leftVibration, rightVibration);
-        }*/
+        }*//*
         #endregion
         // 중력
         Gravity();
@@ -397,11 +397,11 @@ public class PlayerController : MonoBehaviour
         if (PlayerState == State.Walk) if (_input.sprint) PlayerState = State.Sprint;
 
         //달리기 스태미나
-/*        if(PlayerState == State.Sprint)
+*//*        if(PlayerState == State.Sprint)
         {
             if(_input.move != Vector2.zero && _stamina > Sprint_Cost) _stamina -= Time.deltaTime * Sprint_Cost;
             if (_stamina < Sprint_Cost) PlayerState = State.Idle;
-        }*/
+        }*//*
     }
     void Gravity()
     {
@@ -515,4 +515,4 @@ public class PlayerController : MonoBehaviour
             else PlayerState = State.Dead;
         }
     }
-}
+}*/

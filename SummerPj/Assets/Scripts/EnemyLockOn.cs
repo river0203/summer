@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using Cinemachine;
 
 public class EnemyLockOn : MonoBehaviour
@@ -119,3 +119,4 @@ public class EnemyLockOn : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, noticeZone);
     }
 }
+*/

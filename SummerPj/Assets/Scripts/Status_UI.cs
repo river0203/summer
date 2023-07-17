@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEngine.UI;
 
 public class Status_UI : MonoBehaviour
@@ -27,3 +27,4 @@ public class Status_UI : MonoBehaviour
         Stamina_Slider.value = _staminaPercentage;
     }
 }
+*/

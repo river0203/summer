@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputActions : MonoBehaviour
@@ -114,3 +114,4 @@ public class PlayerInputActions : MonoBehaviour
         heal = newHealState;
     }
 }
+*/

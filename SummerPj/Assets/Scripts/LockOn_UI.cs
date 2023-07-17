@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,3 +22,4 @@ public class LockOn_UI : MonoBehaviour
         LockOn_Image.transform.rotation = Quaternion.LookRotation(_dir);
     }
 }
+*/
