@@ -62,7 +62,7 @@ public class PlayerLocomotion : MonoBehaviour
     Vector3 _targetPosition;
 
     // 로테이션 변경
-    public void HandleRotation(float delta)
+    private void HandleRotation(float delta)
     {
         Vector3 targetDir = Vector3.zero;
         float moveOverride = _inputHandler._moveAmount;
@@ -154,7 +154,7 @@ public class PlayerLocomotion : MonoBehaviour
             }
             else
             {
-                _animHandler.PlayTargetAnimation("BackStep", true);
+                _animHandler.PlayTargetAnimation("Backstep", true);
             }
         }
     }
