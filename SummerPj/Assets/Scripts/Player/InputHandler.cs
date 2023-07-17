@@ -16,6 +16,10 @@ public class InputHandler : MonoBehaviour
     public bool b_input;
     public bool la_input;
     public bool ha_input;
+    public bool d_Pad_Up;
+    public bool d_Pad_Down;
+    public bool d_Pad_Left;
+    public bool d_Pad_Right;
 
     public bool _dodgeFlag;
     public bool _sprintFlag;
@@ -60,6 +64,7 @@ public class InputHandler : MonoBehaviour
         MoveInput(delta); 
         HandleRollInput(delta);
         HandleAttackInput(delta);
+        HandleQuickSlotsInput();
     }
 
     // 이동 및 마우스 포지션 갱신 (TickInput에서 실행)
@@ -120,6 +125,21 @@ public class InputHandler : MonoBehaviour
         if (ha_input)
         {
             _playerAttack.HandleHeavyAttack(_playerInventory._rightWeapon);
+        }
+    }
+
+    private void HandleQuickSlotsInput()
+    {
+        _inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+        _inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+
+        if (d_Pad_Right)
+        {
+            _playerInventory.ChangeRightWeapon();
+        }
+        else if (d_Pad_Left)
+        {
+            //_playerInventory.ChangeLeftWeapon();
         }
     }
     #endregion

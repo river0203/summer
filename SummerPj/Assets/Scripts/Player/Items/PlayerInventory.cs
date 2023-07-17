@@ -9,6 +9,13 @@ public class PlayerInventory : MonoBehaviour
     public WeaponItem _rightWeapon;
     public WeaponItem _leftWeapon;
 
+    public WeaponItem unarmedWeapon;
+
+    public WeaponItem[] weaponsInRightHandSlots = new WeaponItem[1];
+    public WeaponItem[] weaponsInLeftHandSlots = new WeaponItem[1];
+
+    public int currentRightWeaponIndex = -1;
+    public int currentLeftWeaponIndex = -1;
     private void Awake()
     {
         _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
@@ -16,7 +23,39 @@ public class PlayerInventory : MonoBehaviour
 
     private void Start()
     {
-        _weaponSlotManager.LoadWeponOnSlot(_rightWeapon, false);
-        _weaponSlotManager.LoadWeponOnSlot(_leftWeapon, true);
+        currentRightWeaponIndex = -1;
+        _rightWeapon = unarmedWeapon;
+        //_leftWeapon = unarmedWeapon;
+    }
+
+    public void ChangeRightWeapon()
+    {
+        currentRightWeaponIndex = currentRightWeaponIndex + 1;
+
+        if (currentRightWeaponIndex == 0 && weaponsInRightHandSlots[0] != null)
+        {
+            _rightWeapon = weaponsInRightHandSlots[currentRightWeaponIndex];
+            _weaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
+        }
+        else if (currentRightWeaponIndex == 0 && weaponsInRightHandSlots[0] == null)
+        {
+            currentRightWeaponIndex = currentRightWeaponIndex + 1;
+        }
+        else if (currentRightWeaponIndex == 1 && weaponsInRightHandSlots[1] != null)
+        {
+            _rightWeapon = weaponsInRightHandSlots[currentRightWeaponIndex];
+            _weaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
+        }
+        else
+        {
+            currentRightWeaponIndex = currentRightWeaponIndex + 1;
+        }
+
+        if(currentRightWeaponIndex > weaponsInRightHandSlots.Length - 1) 
+        {
+            currentRightWeaponIndex = -1;
+            _rightWeapon = unarmedWeapon;
+            _weaponSlotManager.LoadWeaponOnSlot(unarmedWeapon, false);
+        }
     }
 }

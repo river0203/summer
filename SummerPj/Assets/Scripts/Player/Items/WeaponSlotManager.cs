@@ -30,13 +30,15 @@ public class WeaponSlotManager : MonoBehaviour
         }
     }
 
-    public void LoadWeponOnSlot(WeaponItem weaponItem, bool isLeft)
+    public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
     {
 
         if (isLeft)
         {
             _leftHandSlot.LoadWeaponModel(weaponItem);
             LoadLeftWeaponDamageCollider();
+
+            // 현재 무기에 따라 왼손 Idle 애니메이션 변경
             #region Handle Left Weapon Idle Animations
             if (weaponItem != null)
             {
@@ -49,6 +51,8 @@ public class WeaponSlotManager : MonoBehaviour
         {
             _rightHandSlot.LoadWeaponModel(weaponItem);
             LoadRightWeaponDamageCollider();
+
+            // 현재 무기에 따라 오른손 Idle 애니메이션 변경
             #region Handle Right Weapon Idle Animations
             if (weaponItem != null)
             {
