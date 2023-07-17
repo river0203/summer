@@ -19,12 +19,12 @@ public class PlayerAttack : MonoBehaviour
         if (_inputHandler._comboFlag)
         {
             _animHandler._anim.SetBool("canDoCombo", false);
-            if (_lastAttack == weapon.OH_Light_Attack_1 && weapon.OH_Light_Attack_2 != "")
+            if (_lastAttack == weapon.OH_Light_Attack_1)
             {
                 _animHandler.PlayTargetAnimation(weapon.OH_Light_Attack_2, true);
                 _lastAttack = weapon.OH_Light_Attack_2;
             }
-            else if (_lastAttack == weapon.OH_Light_Attack_2 && weapon.OH_Light_Attack_3 != "")
+            else if (_lastAttack == weapon.OH_Light_Attack_2)
             {
                 _animHandler.PlayTargetAnimation(weapon.OH_Light_Attack_3, true);
                 _lastAttack = weapon.OH_Light_Attack_3;
