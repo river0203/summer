@@ -154,7 +154,7 @@ public class PlayerLocomotion : MonoBehaviour
             }
             else
             {
-                _animHandler.PlayTargetAnimation("Backstep", true);
+                _animHandler.PlayTargetAnimation("BackStep", true);
             }
         }
     }
