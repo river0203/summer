@@ -174,10 +174,14 @@ public class InputHandler : MonoBehaviour
             if(_inventoryFlag)
             {
                 _uiManager.OpenSelectWindow();
+                _uiManager.UpdateUI();
+                _uiManager.hudWindow.SetActive(false);
             }
             else
             {
                 _uiManager.CloseSelectWindow();
+                _uiManager.CloseAllInventoryWindows();
+                _uiManager.hudWindow.SetActive(true);
             }
         }
     }
