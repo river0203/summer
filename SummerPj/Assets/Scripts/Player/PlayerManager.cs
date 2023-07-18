@@ -11,6 +11,9 @@ public class PlayerManager : CharacterManager
     CameraHendler _cameraHandler;
     PlayerLocomotion _playerLocomotion;
 
+    interactableUI _interactableUI;
+    public GameObject interactableUIGameObject;
+
     public bool _isInteracting;
 
     [Header("PlayerFlag")]
@@ -29,42 +32,41 @@ public class PlayerManager : CharacterManager
         _inputHandler = GetComponent<InputHandler>();
         _anim = GetComponentInChildren<Animator>();
         _playerLocomotion = GetComponent<PlayerLocomotion>();
+        _interactableUI = FindObjectOfType<interactableUI>();
     }
 
     void Update()
     {
         float delta = Time.deltaTime;
 
+
         // 스크립트 꼬임 해결
         _isInteracting = _anim.GetBool("isInteracting");
 
         _canDoCombo = _anim.GetBool("canDoCombo");
-        
+        _anim.SetBool("isInAir", _isInAir);
+        _inputHandler.TickInput(delta);
+        _playerLocomotion.HandleJumping();
+        _playerLocomotion.HandleRollingAndSprinting(delta);
+
         // 플레이어 이동
         _isSprinting = _inputHandler.b_input;
-        _inputHandler.TickInput(delta);
-        _playerLocomotion.HandleMovement(delta);
-        _playerLocomotion.HandleRollingAndSprinting(delta);
-        _playerLocomotion.HandleFalling(delta, _playerLocomotion._moveDirection);
+
         CheckForInteractableObject();
+        
     }
 
     private void FixedUpdate()
     {
         // 카메라 이동
         float delta = Time.deltaTime;
-
-        if (_cameraHandler != null)
-        {
-            _cameraHandler.FollowTarget(delta);
-            _cameraHandler.HandlerCameraRotation(delta, _inputHandler._mouseX, _inputHandler._mouseY);
-        }
+        _playerLocomotion.HandleMovement(delta);
+        _playerLocomotion.HandleFalling(delta, _playerLocomotion._moveDirection);
     }
 
     private void LateUpdate()
     {
         _inputHandler._dodgeFlag = false;
-        _inputHandler._sprintFlag = false;
         _inputHandler.la_input = false;
         _inputHandler.ha_input = false;
         _inputHandler.d_Pad_Up = false;
@@ -72,6 +74,15 @@ public class PlayerManager : CharacterManager
         _inputHandler.d_Pad_Right = false;
         _inputHandler.d_Pad_Left = false;
         _inputHandler.a_input = false;
+        _inputHandler.jump_Input = false;
+        _inputHandler.inventory_Input = false;
+
+        float delta = Time.deltaTime;
+        if (_cameraHandler != null)
+        {
+            _cameraHandler.FollowTarget(delta);
+            _cameraHandler.HandlerCameraRotation(delta, _inputHandler._mouseX, _inputHandler._mouseY);
+        }
 
         if (_isInAir)
         {
@@ -93,12 +104,21 @@ public class PlayerManager : CharacterManager
                 if (interactableObj != null)
                 {
                     string interactableText = interactableObj._interactableText;
+                    _interactableUI._interactableText.text = interactableText;
+                    interactableUIGameObject.SetActive(true);
 
                     if (_inputHandler.a_input)
                     {
                         hit.collider.GetComponent<Interactable>().Interact(this);   
                     }
                 }
+            }
+        }
+        else
+        {
+            if(interactableUIGameObject != null)
+            {
+                interactableUIGameObject.SetActive(false);
             }
         }
     }

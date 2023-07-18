@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 // InputHandler에서 '인풋에 따라 변하는 변수들'을 가져와 플레이어를 이동시킴
 public class PlayerLocomotion : MonoBehaviour
@@ -40,7 +41,6 @@ public class PlayerLocomotion : MonoBehaviour
     float _rotationSpeed = 10;
     [SerializeField]
     float _fallingSpeed = 80;
-    
 
     private void Start()
     {
@@ -247,5 +247,27 @@ public class PlayerLocomotion : MonoBehaviour
         }
     }
 
+    // 점프
+    public void HandleJumping()
+    {
+        if (_playerManager._isInteracting)
+            return;
+
+        if(_inputHandler.jump_Input)
+        {
+            if(_inputHandler._moveAmount > 0)
+            {
+                _moveDirection = _cameraObject.forward * _inputHandler._vertical;
+                _moveDirection += _cameraObject.right * _inputHandler._horizontal;
+                _animHandler.PlayTargetAnimation("Jump", true);
+                _moveDirection.y = 0;
+
+                // 위쪽으로 힘을 주는 코드 추가
+
+                Quaternion jumpRotation = Quaternion.LookRotation(_moveDirection);
+                _myTransform.rotation = jumpRotation;
+            }
+        }
+    }
     #endregion
 }

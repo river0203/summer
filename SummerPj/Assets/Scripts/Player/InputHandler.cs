@@ -17,6 +17,9 @@ public class InputHandler : MonoBehaviour
     public bool a_input;
     public bool la_input;
     public bool ha_input;
+    public bool jump_Input;
+    public bool inventory_Input;
+
     public bool d_Pad_Up;
     public bool d_Pad_Down;
     public bool d_Pad_Left;
@@ -25,6 +28,7 @@ public class InputHandler : MonoBehaviour
     public bool _dodgeFlag;
     public bool _sprintFlag;
     public bool _comboFlag;
+    public bool _inventoryFlag;
     public float _dodgeInputTimer;
     #endregion
 
@@ -32,6 +36,7 @@ public class InputHandler : MonoBehaviour
     PlayerAttack _playerAttack;
     PlayerInventory _playerInventory;
     PlayerManager _playerManager;
+    UIManager _uiManager;
 
     Vector2 movementInput;
     Vector2 cameraInput;
@@ -42,6 +47,7 @@ public class InputHandler : MonoBehaviour
         _playerAttack = GetComponent<PlayerAttack>();
         _playerInventory = GetComponent<PlayerInventory>();
         _playerManager = GetComponent<PlayerManager>();
+        _uiManager = FindObjectOfType<UIManager>();
     }
 
     private void OnEnable()
@@ -52,6 +58,13 @@ public class InputHandler : MonoBehaviour
             _inputActions = new PlayerInputAction();
             _inputActions.PlayerMovement.Move.performed += _inputActions => { movementInput = _inputActions.ReadValue<Vector2>(); };
             _inputActions.PlayerMovement.Look.performed += i => { cameraInput = i.ReadValue<Vector2>(); } ;
+            _inputActions.PlayerActions.LightAttack.performed += i => { la_input = true; };
+            _inputActions.PlayerActions.HeavyAttack.performed += i => { ha_input = true; };
+            _inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+            _inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+            _inputActions.PlayerActions.Interact.performed += i => { a_input = true; };
+            _inputActions.PlayerActions.Jump.performed += i => { jump_Input = true; };
+            _inputActions.PlayerActions.Inventory.performed += i => { inventory_Input = true; };
         }
 
         _inputActions.Enable();
@@ -66,7 +79,7 @@ public class InputHandler : MonoBehaviour
         HandleRollInput(delta);
         HandleAttackInput(delta);
         HandleQuickSlotsInput();
-        HandleInteractButtonInput();
+        HandleInventoryInput();
     }
 
     // 이동 및 마우스 포지션 갱신 (TickInput에서 실행)
@@ -83,11 +96,11 @@ public class InputHandler : MonoBehaviour
     private void HandleRollInput(float delta)
     {
         b_input = _inputActions.PlayerActions.Dodge.IsPressed();
+        _sprintFlag = b_input;
 
         if (b_input)
         {
             _dodgeInputTimer += delta;
-            _sprintFlag = true;
         }
         else
         {
@@ -103,9 +116,6 @@ public class InputHandler : MonoBehaviour
 
     private void HandleAttackInput(float delta)
     {
-        _inputActions.PlayerActions.LightAttack.performed += i => { la_input = true; };
-        _inputActions.PlayerActions.HeavyAttack.performed += i => { ha_input = true; };
-
         if (la_input)
         {
             if (_playerManager._canDoCombo)
@@ -132,9 +142,6 @@ public class InputHandler : MonoBehaviour
 
     private void HandleQuickSlotsInput()
     {
-        _inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
-        _inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
-
         if (d_Pad_Right)
         {
             _playerInventory.ChangeRightWeapon();
@@ -145,9 +152,25 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    private void HandleInteractButtonInput()
+    private void HandleInventoryInput()
     {
-        _inputActions.PlayerActions.Interact.performed += i => { a_input = true; };
+        if(inventory_Input)
+        {
+            _inventoryFlag = !_inventoryFlag;
+
+            if(_inventoryFlag)
+            {
+                _uiManager.OpenSelectWindow();
+                _uiManager.UpdateUI();
+                _uiManager.hudWindow.SetActive(false);
+            }
+            else
+            {
+                _uiManager.CloseSelectWindow();
+                _uiManager.CloseAllInventoryWindows();
+                _uiManager.hudWindow.SetActive(true);
+            }
+        }
     }
     #endregion
 }
