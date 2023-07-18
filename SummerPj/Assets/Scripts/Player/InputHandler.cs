@@ -96,11 +96,11 @@ public class InputHandler : MonoBehaviour
     private void HandleRollInput(float delta)
     {
         b_input = _inputActions.PlayerActions.Dodge.IsPressed();
+        _sprintFlag = b_input;
 
         if (b_input)
         {
             _dodgeInputTimer += delta;
-            _sprintFlag = true;
         }
         else
         {
