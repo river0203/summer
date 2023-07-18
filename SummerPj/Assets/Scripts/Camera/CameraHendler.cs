@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CameraHendler : MonoBehaviour
 {
+    InputHandler _inputHandler;
+
     public Transform _targetTransform;
     public Transform _cameraTransform;
     public Transform _cameraPivotTransform;
@@ -28,8 +30,10 @@ public class CameraHendler : MonoBehaviour
     public float _cameraCollisionOffset = 0.2f;
     public float _minimumCollisionOffset = 0.2f;
 
+    public Transform _currentLockOnTarget;
+
     List<CharacterManager> _avilableTargets = new List<CharacterManager>();
-    public Transform _NearestLockOnTarget;
+    public Transform _nearestLockOnTarget;
     public float _maximumLockOnDistance = 30f;
 
     private void Awake()
@@ -38,6 +42,8 @@ public class CameraHendler : MonoBehaviour
         _defaultPosition = _cameraTransform.localPosition.z;
         _ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
         _targetTransform = FindObjectOfType<PlayerManager>().transform;
+        
+        _inputHandler = _targetTransform.GetComponent<InputHandler>();
     }
 
     public void FollowTarget(float delta)
@@ -50,20 +56,43 @@ public class CameraHendler : MonoBehaviour
 
     public void HandlerCameraRotation(float delta, float mouseXInput, float mouseYInput)
     {
-        _lookAngle += (mouseXInput * _lookSpeed) / delta;
-        _pivotAngle -= (mouseYInput * _pivotSpeed) / delta;
-        _pivotAngle = Mathf.Clamp(_pivotAngle, _minimumPivot, _maximumPivot);
+        if (_inputHandler._lockOnFlag == false && _currentLockOnTarget == null)
+        {
+            _lookAngle += (mouseXInput * _lookSpeed) / delta;
+            _pivotAngle -= (mouseYInput * _pivotSpeed) / delta;
+            _pivotAngle = Mathf.Clamp(_pivotAngle, _minimumPivot, _maximumPivot);
 
-        Vector3 rotation = Vector3.zero;
-        rotation.y = _lookAngle;
-        Quaternion targetRotation = Quaternion.Euler(rotation);
-        _myTransform.rotation = targetRotation;
+            Vector3 rotation = Vector3.zero;
+            rotation.y = _lookAngle;
+            Quaternion targetRotation = Quaternion.Euler(rotation);
+            _myTransform.rotation = targetRotation;
 
-        rotation = Vector3.zero;
-        rotation.x = _pivotAngle;
+            rotation = Vector3.zero;
+            rotation.x = _pivotAngle;
 
-        targetRotation = Quaternion.Euler(rotation);
-        _cameraPivotTransform.localRotation = targetRotation;
+            targetRotation = Quaternion.Euler(rotation);
+            _cameraPivotTransform.localRotation = targetRotation;
+        }
+        else
+        {
+            float velocity = 0;
+
+            Vector3 diraction = _currentLockOnTarget.position - transform.position;
+
+            diraction.Normalize();
+            diraction.y = 0;
+            Quaternion targetRotation = Quaternion.LookRotation(diraction);
+            transform.rotation = targetRotation;
+
+            diraction = _currentLockOnTarget.position - _cameraPivotTransform.position;
+            diraction.Normalize();
+
+            targetRotation = Quaternion.LookRotation(diraction);
+            Vector3 eulerAngle = targetRotation.eulerAngles;
+            eulerAngle.y = 0;
+            _cameraPivotTransform.localEulerAngles = eulerAngle; 
+        }
+        
     }
 
     void HandleCameraCollisions(float delta)
@@ -102,7 +131,7 @@ public class CameraHendler : MonoBehaviour
 
             if (character != null)
             {
-                Vector3 lockTargetDirection = character.transform.forward - _targetTransform.position;
+                Vector3 lockTargetDirection = character.transform.position - _targetTransform.position;
                 float distanceFromTarget = Vector3.Distance(_targetTransform.position, character.transform.position);
                 float viewableAngle = Vector3.Angle(lockTargetDirection, _cameraTransform.forward);
 
@@ -112,7 +141,6 @@ public class CameraHendler : MonoBehaviour
                 {
                     _avilableTargets.Add(character); 
                 }
-
             }
         }
 
@@ -123,9 +151,15 @@ public class CameraHendler : MonoBehaviour
             if (distanceFromTarget < shortestDistance)
             {
                 shortestDistance = distanceFromTarget;
-
-
+                _nearestLockOnTarget = _avilableTargets[i]._lockOnTransform;
             }
         }
+    }
+
+    public void ClearLockOnTargets()
+    {
+        _avilableTargets.Clear();
+        _nearestLockOnTarget = null;
+        _currentLockOnTarget = null;
     }
 }

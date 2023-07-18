@@ -98,7 +98,6 @@ public class PlayerManager : CharacterManager
         {
             if (hit.collider.tag == "Interactable")
             {
-                Debug.Log("is Interact2");
                 Interactable interactableObj = hit.collider.GetComponent<Interactable>();
 
                 if (interactableObj != null)

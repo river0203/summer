@@ -33,15 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LockOn",
-                    "type": "Button",
-                    "id": "2f48ef23-f76d-420d-ad96-91a6ce50ffe3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Heal",
                     "type": "Button",
                     "id": "a72f197b-c985-459e-abc5-47d1b1374828",
@@ -173,28 +164,6 @@
                 },
                 {
                     "name": "",
-                    "id": "fb653e32-7296-4f08-87a9-f904c8a5e2d5",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "LockOn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b8d92402-cb84-497c-b01b-eea76ba2fca7",
-                    "path": "<Gamepad>/rightStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "LockOn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "6372e7e8-2bac-43b3-b76e-df7c84ac3951",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
@@ -301,6 +270,15 @@
                     "name": "Inventory",
                     "type": "Button",
                     "id": "1257cee8-7df6-4eaf-b720-c3eab0708b22",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LockOn",
+                    "type": "Button",
+                    "id": "3feba291-78e5-4d42-b5cd-00772031c8ef",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -459,6 +437,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ce13c5ed-0340-469e-9da3-2f7ad12e337f",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7aaf46a-8d42-4d19-a395-72eb02e64c10",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "LockOn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -19,6 +19,7 @@ public class InputHandler : MonoBehaviour
     public bool ha_input;
     public bool jump_Input;
     public bool inventory_Input;
+    public bool lockOnInput;
 
     public bool d_Pad_Up;
     public bool d_Pad_Down;
@@ -28,6 +29,7 @@ public class InputHandler : MonoBehaviour
     public bool _dodgeFlag;
     public bool _sprintFlag;
     public bool _comboFlag;
+    public bool _lockOnFlag;
     public bool _inventoryFlag;
     public float _dodgeInputTimer;
     #endregion
@@ -36,20 +38,22 @@ public class InputHandler : MonoBehaviour
     PlayerAttack _playerAttack;
     PlayerInventory _playerInventory;
     PlayerManager _playerManager;
+    CameraHendler _cameraHandler;
     UIManager _uiManager;
 
     Vector2 movementInput;
     Vector2 cameraInput;
 
-    #region '인풋에 따라 변하는 변수'를 변환시켜주는 함수들
     private void Awake()
     {
         _playerAttack = GetComponent<PlayerAttack>();
         _playerInventory = GetComponent<PlayerInventory>();
         _playerManager = GetComponent<PlayerManager>();
+        _cameraHandler = FindObjectOfType<CameraHendler>();
         _uiManager = FindObjectOfType<UIManager>();
     }
 
+    #region '인풋에 따라 변하는 변수'를 변환시켜주는 함수들
     private void OnEnable()
     {
         // Move와 Look 인풋이 있을때마다 변수를 바꿔주도록 이벤트에 함수 바인딩
@@ -65,6 +69,7 @@ public class InputHandler : MonoBehaviour
             _inputActions.PlayerActions.Interact.performed += i => { a_input = true; };
             _inputActions.PlayerActions.Jump.performed += i => { jump_Input = true; };
             _inputActions.PlayerActions.Inventory.performed += i => { inventory_Input = true; };
+            _inputActions.PlayerActions.LockOn.performed += i => { lockOnInput = true; };
         }
 
         _inputActions.Enable();
@@ -80,6 +85,7 @@ public class InputHandler : MonoBehaviour
         HandleAttackInput(delta);
         HandleQuickSlotsInput();
         HandleInventoryInput();
+        HandleLockOnInput();
     }
 
     // 이동 및 마우스 포지션 갱신 (TickInput에서 실행)
@@ -170,6 +176,28 @@ public class InputHandler : MonoBehaviour
                 _uiManager.CloseAllInventoryWindows();
                 _uiManager.hudWindow.SetActive(true);
             }
+        }
+    }
+
+    private void HandleLockOnInput()
+    {
+        if (lockOnInput && _lockOnFlag == false)
+        {
+            _cameraHandler.ClearLockOnTargets();
+            lockOnInput = false;
+            _cameraHandler.HandleLockOn();
+            
+            if (_cameraHandler._nearestLockOnTarget != null)
+            {
+                _cameraHandler._currentLockOnTarget = _cameraHandler._nearestLockOnTarget;
+                _lockOnFlag = true;
+            }
+        }
+        else if (lockOnInput && _lockOnFlag)
+        {
+            lockOnInput = false;
+            _lockOnFlag = false;
+            _cameraHandler.ClearLockOnTargets();
         }
     }
     #endregion

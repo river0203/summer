@@ -40,7 +40,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     float _rotationSpeed = 10;
     [SerializeField]
-    float _fallingSpeed = 80;
+    float _fallingSpeed = 250;
 
     private void Start()
     {

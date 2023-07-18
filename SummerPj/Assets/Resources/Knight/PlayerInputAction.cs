@@ -55,15 +55,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""LockOn"",
-                    ""type"": ""Button"",
-                    ""id"": ""2f48ef23-f76d-420d-ad96-91a6ce50ffe3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Heal"",
                     ""type"": ""Button"",
                     ""id"": ""a72f197b-c985-459e-abc5-47d1b1374828"",
@@ -195,28 +186,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""fb653e32-7296-4f08-87a9-f904c8a5e2d5"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""LockOn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b8d92402-cb84-497c-b01b-eea76ba2fca7"",
-                    ""path"": ""<Gamepad>/rightStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""LockOn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""6372e7e8-2bac-43b3-b76e-df7c84ac3951"",
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
@@ -323,6 +292,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""name"": ""Inventory"",
                     ""type"": ""Button"",
                     ""id"": ""1257cee8-7df6-4eaf-b720-c3eab0708b22"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LockOn"",
+                    ""type"": ""Button"",
+                    ""id"": ""3feba291-78e5-4d42-b5cd-00772031c8ef"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -481,6 +459,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ce13c5ed-0340-469e-9da3-2f7ad12e337f"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""LockOn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7aaf46a-8d42-4d19-a395-72eb02e64c10"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LockOn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -687,7 +687,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_PlayerMovement_Move = m_PlayerMovement.FindAction("Move", throwIfNotFound: true);
         m_PlayerMovement_Look = m_PlayerMovement.FindAction("Look", throwIfNotFound: true);
         m_PlayerMovement_Parry = m_PlayerMovement.FindAction("Parry", throwIfNotFound: true);
-        m_PlayerMovement_LockOn = m_PlayerMovement.FindAction("LockOn", throwIfNotFound: true);
         m_PlayerMovement_Heal = m_PlayerMovement.FindAction("Heal", throwIfNotFound: true);
         m_PlayerMovement_Ultimate = m_PlayerMovement.FindAction("Ultimate", throwIfNotFound: true);
         // PlayerActions
@@ -699,6 +698,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_PlayerActions_Interact = m_PlayerActions.FindAction("Interact", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActions_Inventory = m_PlayerActions.FindAction("Inventory", throwIfNotFound: true);
+        m_PlayerActions_LockOn = m_PlayerActions.FindAction("LockOn", throwIfNotFound: true);
         // PlayerQuickSlots
         m_PlayerQuickSlots = asset.FindActionMap("PlayerQuickSlots", throwIfNotFound: true);
         m_PlayerQuickSlots_DPadUp = m_PlayerQuickSlots.FindAction("D-Pad Up", throwIfNotFound: true);
@@ -769,7 +769,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Move;
     private readonly InputAction m_PlayerMovement_Look;
     private readonly InputAction m_PlayerMovement_Parry;
-    private readonly InputAction m_PlayerMovement_LockOn;
     private readonly InputAction m_PlayerMovement_Heal;
     private readonly InputAction m_PlayerMovement_Ultimate;
     public struct PlayerMovementActions
@@ -779,7 +778,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_PlayerMovement_Move;
         public InputAction @Look => m_Wrapper.m_PlayerMovement_Look;
         public InputAction @Parry => m_Wrapper.m_PlayerMovement_Parry;
-        public InputAction @LockOn => m_Wrapper.m_PlayerMovement_LockOn;
         public InputAction @Heal => m_Wrapper.m_PlayerMovement_Heal;
         public InputAction @Ultimate => m_Wrapper.m_PlayerMovement_Ultimate;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
@@ -800,9 +798,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Parry.started += instance.OnParry;
             @Parry.performed += instance.OnParry;
             @Parry.canceled += instance.OnParry;
-            @LockOn.started += instance.OnLockOn;
-            @LockOn.performed += instance.OnLockOn;
-            @LockOn.canceled += instance.OnLockOn;
             @Heal.started += instance.OnHeal;
             @Heal.performed += instance.OnHeal;
             @Heal.canceled += instance.OnHeal;
@@ -822,9 +817,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Parry.started -= instance.OnParry;
             @Parry.performed -= instance.OnParry;
             @Parry.canceled -= instance.OnParry;
-            @LockOn.started -= instance.OnLockOn;
-            @LockOn.performed -= instance.OnLockOn;
-            @LockOn.canceled -= instance.OnLockOn;
             @Heal.started -= instance.OnHeal;
             @Heal.performed -= instance.OnHeal;
             @Heal.canceled -= instance.OnHeal;
@@ -859,6 +851,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Interact;
     private readonly InputAction m_PlayerActions_Jump;
     private readonly InputAction m_PlayerActions_Inventory;
+    private readonly InputAction m_PlayerActions_LockOn;
     public struct PlayerActionsActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -870,6 +863,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_PlayerActions_Interact;
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
         public InputAction @Inventory => m_Wrapper.m_PlayerActions_Inventory;
+        public InputAction @LockOn => m_Wrapper.m_PlayerActions_LockOn;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -900,6 +894,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @LockOn.started += instance.OnLockOn;
+            @LockOn.performed += instance.OnLockOn;
+            @LockOn.canceled += instance.OnLockOn;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -925,6 +922,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @LockOn.started -= instance.OnLockOn;
+            @LockOn.performed -= instance.OnLockOn;
+            @LockOn.canceled -= instance.OnLockOn;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -1062,7 +1062,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnParry(InputAction.CallbackContext context);
-        void OnLockOn(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
         void OnUltimate(InputAction.CallbackContext context);
     }
@@ -1075,6 +1074,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnLockOn(InputAction.CallbackContext context);
     }
     public interface IPlayerQuickSlotsActions
     {
