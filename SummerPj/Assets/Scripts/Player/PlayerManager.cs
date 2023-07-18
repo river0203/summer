@@ -49,7 +49,10 @@ public class PlayerManager : MonoBehaviour
         // 플레이어 이동
         _isSprinting = _inputHandler.b_input;
         _inputHandler.TickInput(delta);
-
+        _playerLocomotion.HandleMovement(delta);
+        _playerLocomotion.HandleRollingAndSprinting(delta);
+        _playerLocomotion.HandleFalling(delta, _playerLocomotion._moveDirection);
+        _playerLocomotion.HandleJumping();
         CheckForInteractableObject();
         
     }
@@ -58,10 +61,12 @@ public class PlayerManager : MonoBehaviour
     {
         // 카메라 이동
         float delta = Time.deltaTime;
-        _playerLocomotion.HandleMovement(delta);
-        _playerLocomotion.HandleRollingAndSprinting(delta);
-        _playerLocomotion.HandleFalling(delta, _playerLocomotion._moveDirection);
-        _playerLocomotion.HandleJumping();
+
+        if (_cameraHandler != null)
+        {
+            _cameraHandler.FollowTarget(delta);
+            _cameraHandler.HandlerCameraRotation(delta, _inputHandler._mouseX, _inputHandler._mouseY);
+        }
     }
 
     private void LateUpdate()
@@ -77,14 +82,6 @@ public class PlayerManager : MonoBehaviour
         _inputHandler.a_input = false;
         _inputHandler.jump_Input = false;
         _inputHandler.inventory_Input = false;
-
-        float delta = Time.deltaTime;
-
-        if (_cameraHandler != null)
-        {
-            _cameraHandler.FollowTarget(delta);
-            _cameraHandler.HandlerCameraRotation(delta, _inputHandler._mouseX, _inputHandler._mouseY);
-        }
 
         if (_isInAir)
         {

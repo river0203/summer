@@ -29,4 +29,3 @@ public class HandEquipmentSlotUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 }
-

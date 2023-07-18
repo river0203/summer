@@ -4,16 +4,50 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-<<<<<<< HEAD
     public PlayerInventory playerInventory;
     EquipmentWindowUI _equipmentWindowUI;
 
     [Header("UI Windows")]
     public GameObject hudWindow;
-=======
->>>>>>> parent of 624510c (PT21 :: 인벤토리 닫기)
     public GameObject selectWindow;
+    public GameObject weaponInventoryWindow;
 
+    [Header("Weapon Inventory")]
+    public GameObject weaponInventorySlotPrefab;
+    public Transform weaponInventorySlotsParent;
+    WeaponInventorySlot[] weaponInventorySlots;
+
+    private void Awake()
+    {
+        _equipmentWindowUI = FindObjectOfType<EquipmentWindowUI>();
+    }
+    private void Start()
+    {
+        weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
+        _equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);
+    }
+
+    public void UpdateUI()
+    {
+        #region Weapon Inventory Slots
+        for(int i = 0; i < weaponInventorySlots.Length; i++) 
+        { 
+            if( i< playerInventory._weaponInventory.Count )
+            {
+                if(weaponInventorySlots.Length < playerInventory._weaponInventory.Count )
+                {
+                    Instantiate(weaponInventorySlotPrefab, weaponInventorySlotsParent);
+                    weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
+                }
+                weaponInventorySlots[i].AddItem(playerInventory._weaponInventory[i]);
+            }
+            else
+            {
+                weaponInventorySlots[i].ClearInventorySlot();
+            }
+        }
+        #endregion 
+    }
     public void OpenSelectWindow()
     {
         selectWindow.SetActive(true);
@@ -22,5 +56,10 @@ public class UIManager : MonoBehaviour
     public void CloseSelectWindow()
     {
         selectWindow.SetActive(false);
+    }
+
+    public void CloseAllInventoryWindows()
+    {
+        weaponInventoryWindow.SetActive(false);
     }
 }

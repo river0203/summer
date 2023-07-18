@@ -15,12 +15,11 @@ public class EquipmentWindowUI : MonoBehaviour
     {
         handEquipmentSlotUI = GetComponentsInChildren<HandEquipmentSlotUI>();
     }
-
-    public void LoadWeaponsOnEquipmentScreen(PlayerInventory playerInventory)
-    {
+    
+    public void LoadWeaponsOnEquipmentScreen(PlayerInventory playerInventory) 
+    { 
         for(int i = 0; i< handEquipmentSlotUI.Length; i++)
         {
-            Debug.Log("asdf");
             if (handEquipmentSlotUI[i].rightHandSlot01)
             {
                 handEquipmentSlotUI[i].AddItem(playerInventory._weaponsInRightHandSlots[0]);
@@ -29,13 +28,13 @@ public class EquipmentWindowUI : MonoBehaviour
             {
                 handEquipmentSlotUI[i].AddItem(playerInventory._weaponsInRightHandSlots[1]);
             }
-            if (handEquipmentSlotUI[i].leftHandSlot01)
+            else if (handEquipmentSlotUI[i].leftHandSlot01)
             {
                 handEquipmentSlotUI[i].AddItem(playerInventory._weaponsInLeftHandSlots[0]);
             }
-            if (handEquipmentSlotUI[i].leftHandSlot02)
+            else
             {
-                handEquipmentSlotUI[i].AddItem(playerInventory._weaponsInLeftHandSlots[1]);
+                handEquipmentSlotUI[i].AddItem(playerInventory._weaponsInLeftHandSlots[1] );
             }
         }
     }
@@ -44,17 +43,15 @@ public class EquipmentWindowUI : MonoBehaviour
     {
         rightHandSlot01Selected = true;
     }
-
     public void SelectRightHandSlot02()
     {
         rightHandSlot02Selected = true;
     }
-
     public void SelectLeftHandSlot01()
     {
         leftHandSlot01Selected = true;
-    }
 
+    }
     public void SelectLeftHandSlot02()
     {
         leftHandSlot02Selected = true;
