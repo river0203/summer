@@ -14,6 +14,7 @@ public class InputHandler : MonoBehaviour
     public float _mouseY;
 
     public bool b_input;
+    public bool a_input;
     public bool la_input;
     public bool ha_input;
     public bool d_Pad_Up;
@@ -58,13 +59,14 @@ public class InputHandler : MonoBehaviour
 
     private void OnDisable() { _inputActions.Disable(); }
 
-    // Locomotion스크립트에서 실행
+    // 업데이트류 함수에서 실행
     public void TickInput(float delta)
     {
         MoveInput(delta); 
         HandleRollInput(delta);
         HandleAttackInput(delta);
         HandleQuickSlotsInput();
+        HandleInteractButtonInput();
     }
 
     // 이동 및 마우스 포지션 갱신 (TickInput에서 실행)
@@ -78,7 +80,7 @@ public class InputHandler : MonoBehaviour
     }
 
     // 구르기, 달리기 상태 갱신 (TickInput에서 실행)
-    public void HandleRollInput(float delta)
+    private void HandleRollInput(float delta)
     {
         b_input = _inputActions.PlayerActions.Dodge.IsPressed();
 
@@ -141,6 +143,11 @@ public class InputHandler : MonoBehaviour
         {
             //_playerInventory.ChangeLeftWeapon();
         }
+    }
+
+    private void HandleInteractButtonInput()
+    {
+        _inputActions.PlayerActions.Interact.performed += i => { a_input = true; };
     }
     #endregion
 }

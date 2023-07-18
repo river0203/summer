@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -45,6 +46,7 @@ public class PlayerManager : MonoBehaviour
         _playerLocomotion.HandleMovement(delta);
         _playerLocomotion.HandleRollingAndSprinting(delta);
         _playerLocomotion.HandleFalling(delta, _playerLocomotion._moveDirection);
+        CheckForInteractableObject();
     }
 
     private void FixedUpdate()
@@ -69,10 +71,35 @@ public class PlayerManager : MonoBehaviour
         _inputHandler.d_Pad_Down = false;
         _inputHandler.d_Pad_Right = false;
         _inputHandler.d_Pad_Left = false;
+        _inputHandler.a_input = false;
 
         if (_isInAir)
         {
             _playerLocomotion._inAirTimer += Time.deltaTime;
+        }
+    }
+
+    public void CheckForInteractableObject()
+    {
+        RaycastHit hit;
+        Debug.DrawRay(transform.position, transform.forward, Color.yellow);
+        if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, _cameraHandler._ignoreLayers))
+        {
+            if (hit.collider.tag == "Interactable")
+            {
+                Debug.Log("is Interact2");
+                Interactable interactableObj = hit.collider.GetComponent<Interactable>();
+
+                if (interactableObj != null)
+                {
+                    string interactableText = interactableObj._interactableText;
+
+                    if (_inputHandler.a_input)
+                    {
+                        hit.collider.GetComponent<Interactable>().Interact(this);   
+                    }
+                }
+            }
         }
     }
 }

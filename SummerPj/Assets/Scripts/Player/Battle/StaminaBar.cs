@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,13 +8,11 @@ public class StaminaBar : MonoBehaviour
 {
     public Slider _slider;
 
-    private void Start()
+    public void Init(int maxStamina)
     {
-        _slider = GetComponent<Slider>();
-    }
+        if (_slider == null)
+            _slider = GetComponent<Slider>();
 
-    public void SetMaxStamina(int maxStamina)
-    {
         _slider.maxValue = maxStamina;
         _slider.value = maxStamina;
     }

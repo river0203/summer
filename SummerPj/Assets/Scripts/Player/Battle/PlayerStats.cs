@@ -26,10 +26,10 @@ public class PlayerStats : MonoBehaviour
     private void Start()
     {
         _currentHealth = SetMaxHealthFromHealthLevel();
-        _healthBar.SetMaxHealth(_maxHealth);
+        _healthBar.Init(_maxHealth);
 
         _currentStamina = SetMaxStaminaFromStaminaLevel();
-        _staminaBar.SetMaxStamina(_maxStamina);
+        _staminaBar.Init(_maxStamina);
     }
 
     private int SetMaxHealthFromHealthLevel()

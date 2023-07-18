@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d950b705f1cd8c34eaa10d13fe4f4281, type: 3}
   m_Name: Unarmed
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   itemName: 
   _modelPrefabe: {fileID: 3312744762700536850, guid: 640c2447e37086148b85d840c260f1d5, type: 3}
   _isUnarmed: 0
@@ -22,3 +22,6 @@ MonoBehaviour:
   OH_Light_Attack_2: 
   OH_Light_Attack_3: 
   OH_Heavy_Attack_1: 
+  baseStaminar: 0
+  lightAttackMultiplier: 0
+  heavyAttackMultiplier: 0

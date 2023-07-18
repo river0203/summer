@@ -9,8 +9,8 @@ public class CameraHendler : MonoBehaviour
     public Transform _cameraTransform;
     public Transform _cameraPivotTransform;
     private Transform _myTransform;
+    public LayerMask _ignoreLayers;
     private Vector3 _cameraTransformPosition;
-    private LayerMask _ignoreLayers;
     private Vector3 _cameraFollowVelocity = Vector3.zero;
 
     public float _lookSpeed = 0.1f;
