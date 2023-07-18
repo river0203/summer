@@ -58,6 +58,13 @@ public class InputHandler : MonoBehaviour
             _inputActions = new PlayerInputAction();
             _inputActions.PlayerMovement.Move.performed += _inputActions => { movementInput = _inputActions.ReadValue<Vector2>(); };
             _inputActions.PlayerMovement.Look.performed += i => { cameraInput = i.ReadValue<Vector2>(); } ;
+            _inputActions.PlayerActions.LightAttack.performed += i => { la_input = true; };
+            _inputActions.PlayerActions.HeavyAttack.performed += i => { ha_input = true; };
+            _inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+            _inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+            _inputActions.PlayerActions.Interact.performed += i => { a_input = true; };
+            _inputActions.PlayerActions.Jump.performed += i => { jump_Input = true; };
+            _inputActions.PlayerActions.Inventory.performed += i => { inventory_Input = true; };
         }
 
         _inputActions.Enable();
@@ -72,8 +79,6 @@ public class InputHandler : MonoBehaviour
         HandleRollInput(delta);
         HandleAttackInput(delta);
         HandleQuickSlotsInput();
-        HandleInteractButtonInput();
-        HandleJumpInput();
         HandleInventoryInput();
     }
 
@@ -111,9 +116,6 @@ public class InputHandler : MonoBehaviour
 
     private void HandleAttackInput(float delta)
     {
-        _inputActions.PlayerActions.LightAttack.performed += i => { la_input = true; };
-        _inputActions.PlayerActions.HeavyAttack.performed += i => { ha_input = true; };
-
         if (la_input)
         {
             if (_playerManager._canDoCombo)
@@ -140,9 +142,6 @@ public class InputHandler : MonoBehaviour
 
     private void HandleQuickSlotsInput()
     {
-        _inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
-        _inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
-
         if (d_Pad_Right)
         {
             _playerInventory.ChangeRightWeapon();
@@ -153,20 +152,8 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    private void HandleInteractButtonInput()
-    {
-        _inputActions.PlayerActions.Interact.performed += i => { a_input = true; };
-    }
-
-    private void HandleJumpInput()
-    {
-        _inputActions.PlayerActions.Jump.performed += i => { jump_Input = true; };
-    }
-
     private void HandleInventoryInput()
     {
-        _inputActions.PlayerActions.Inventory.performed += i => { inventory_Input = true; };
-
         if(inventory_Input)
         {
             _inventoryFlag = !_inventoryFlag;

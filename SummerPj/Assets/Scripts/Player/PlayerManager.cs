@@ -45,14 +45,13 @@ public class PlayerManager : MonoBehaviour
 
         _canDoCombo = _anim.GetBool("canDoCombo");
         _anim.SetBool("isInAir", _isInAir);
-        
+        _inputHandler.TickInput(delta);
+        _playerLocomotion.HandleJumping();
+        _playerLocomotion.HandleRollingAndSprinting(delta);
+
         // 플레이어 이동
         _isSprinting = _inputHandler.b_input;
-        _inputHandler.TickInput(delta);
-        _playerLocomotion.HandleMovement(delta);
-        _playerLocomotion.HandleRollingAndSprinting(delta);
-        _playerLocomotion.HandleFalling(delta, _playerLocomotion._moveDirection);
-        _playerLocomotion.HandleJumping();
+
         CheckForInteractableObject();
         
     }
@@ -61,18 +60,13 @@ public class PlayerManager : MonoBehaviour
     {
         // 카메라 이동
         float delta = Time.deltaTime;
-
-        if (_cameraHandler != null)
-        {
-            _cameraHandler.FollowTarget(delta);
-            _cameraHandler.HandlerCameraRotation(delta, _inputHandler._mouseX, _inputHandler._mouseY);
-        }
+        _playerLocomotion.HandleMovement(delta);
+        _playerLocomotion.HandleFalling(delta, _playerLocomotion._moveDirection);
     }
 
     private void LateUpdate()
     {
         _inputHandler._dodgeFlag = false;
-        _inputHandler._sprintFlag = false;
         _inputHandler.la_input = false;
         _inputHandler.ha_input = false;
         _inputHandler.d_Pad_Up = false;
@@ -82,6 +76,13 @@ public class PlayerManager : MonoBehaviour
         _inputHandler.a_input = false;
         _inputHandler.jump_Input = false;
         _inputHandler.inventory_Input = false;
+
+        float delta = Time.deltaTime;
+        if (_cameraHandler != null)
+        {
+            _cameraHandler.FollowTarget(delta);
+            _cameraHandler.HandlerCameraRotation(delta, _inputHandler._mouseX, _inputHandler._mouseY);
+        }
 
         if (_isInAir)
         {
