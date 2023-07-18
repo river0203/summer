@@ -10,22 +10,15 @@ public class UIManager : MonoBehaviour
     [Header("UI Windows")]
     public GameObject hudWindow;
     public GameObject selectWindow;
-    public GameObject weaponInventoryWindow;
 
     [Header("Weapon Inventory")]
     public GameObject weaponInventorySlotPrefab;
     public Transform weaponInventorySlotsParent;
     WeaponInventorySlot[] weaponInventorySlots;
 
-    private void Awake()
-    {
-        _equipmentWindowUI = FindObjectOfType<EquipmentWindowUI>();
-    }
-
     private void Start()
     {
         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
-        _equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);
     }
 
     public void UpdateUI()
@@ -57,10 +50,5 @@ public class UIManager : MonoBehaviour
     public void CloseSelectWindow()
     {
         selectWindow.SetActive(false);
-    }
-
-    public void CloseAllInventoryWindows()
-    {
-        weaponInventoryWindow.SetActive(false);
     }
 }
