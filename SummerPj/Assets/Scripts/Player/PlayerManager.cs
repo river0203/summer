@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : CharacterManager
 {
     InputHandler _inputHandler;
     Animator _anim;

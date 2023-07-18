@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CameraHendler : MonoBehaviour
 {
-    public Transform _targerTransform;
+    public Transform _targetTransform;
     public Transform _cameraTransform;
     public Transform _cameraPivotTransform;
     private Transform _myTransform;
@@ -28,17 +28,21 @@ public class CameraHendler : MonoBehaviour
     public float _cameraCollisionOffset = 0.2f;
     public float _minimumCollisionOffset = 0.2f;
 
+    List<CharacterManager> _avilableTargets = new List<CharacterManager>();
+    public Transform _NearestLockOnTarget;
+    public float _maximumLockOnDistance = 30f;
+
     private void Awake()
     {
         _myTransform = transform;
         _defaultPosition = _cameraTransform.localPosition.z;
         _ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
-        _targerTransform = FindObjectOfType<PlayerManager>().transform;
+        _targetTransform = FindObjectOfType<PlayerManager>().transform;
     }
 
     public void FollowTarget(float delta)
     {
-        Vector3 targetPosition = Vector3.SmoothDamp(_myTransform.position, _targerTransform.position, ref _cameraFollowVelocity, delta / _followSpeed);
+        Vector3 targetPosition = Vector3.SmoothDamp(_myTransform.position, _targetTransform.position, ref _cameraFollowVelocity, delta / _followSpeed);
         _myTransform.position = targetPosition;
 
         HandleCameraCollisions(delta);
@@ -84,5 +88,44 @@ public class CameraHendler : MonoBehaviour
 
         _cameraTransformPosition.z = Mathf.Lerp(_cameraTransform.localPosition.z, _targetPosition, delta / 0.2f);
         _cameraTransform.localPosition = _cameraTransformPosition;
+    }
+
+    public void HandleLockOn()
+    {
+        float shortestDistance = Mathf.Infinity;
+
+        Collider[] colliders = Physics.OverlapSphere(_targetTransform.position, 26);
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            CharacterManager character = colliders[i].GetComponent<CharacterManager>();
+
+            if (character != null)
+            {
+                Vector3 lockTargetDirection = character.transform.forward - _targetTransform.position;
+                float distanceFromTarget = Vector3.Distance(_targetTransform.position, character.transform.position);
+                float viewableAngle = Vector3.Angle(lockTargetDirection, _cameraTransform.forward);
+
+                if (character.transform.root != _targetTransform.root &&
+                    viewableAngle > -50 && viewableAngle < 50 &&
+                    distanceFromTarget <= _maximumLockOnDistance)
+                {
+                    _avilableTargets.Add(character); 
+                }
+
+            }
+        }
+
+        for (int i = 0; i < _avilableTargets.Count; ++i)
+        {
+            float distanceFromTarget = Vector3.Distance(_targetTransform.position, _avilableTargets[i].transform.position);
+
+            if (distanceFromTarget < shortestDistance)
+            {
+                shortestDistance = distanceFromTarget;
+
+
+            }
+        }
     }
 }
