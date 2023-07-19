@@ -17,12 +17,14 @@ public class WeaponSlotManager : MonoBehaviour
     QuickSlotsUI _quickSlotsUI;
 
     PlayerStats _playerStats;
+    InputHandler _inputHandler;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         _quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
         _playerStats = GetComponentInParent<PlayerStats>();
+        _inputHandler = GetComponentInParent<InputHandler>();
 
         WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>(true);
         foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
@@ -45,6 +47,7 @@ public class WeaponSlotManager : MonoBehaviour
         {
             _leftHandSlot.LoadWeaponModel(weaponItem);
             LoadLeftWeaponDamageCollider();
+            _quickSlotsUI.UpdateWeaponQuickSlotsUI(true,weaponItem);
 
             // 현재 무기에 따라 왼손 Idle 애니메이션 변경
             #region Handle Left Weapon Idle Animations
@@ -57,17 +60,24 @@ public class WeaponSlotManager : MonoBehaviour
         }
         else
         {
+            if(_inputHandler._twoHandFlag)
+            {
+                animator.CrossFade(weaponItem.th_idle, 0.2f);
+            }
+            else
+            {
+                // 현재 무기에 따라 오른손 Idle 애니메이션 변경
+                #region Handle Right Weapon Idle Animations
+                if (weaponItem != null)
+                {
+                    animator.CrossFade("Both Arms Empty", 0.2f);
+                }
+                else animator.CrossFade("Right Arm Empty", 0.2f);
+                #endregion
+            }
             _rightHandSlot.LoadWeaponModel(weaponItem);
             LoadRightWeaponDamageCollider();
-
-            // 현재 무기에 따라 오른손 Idle 애니메이션 변경
-            #region Handle Right Weapon Idle Animations
-            if (weaponItem != null)
-            {
-                animator.CrossFade(weaponItem.right_hand_idle, 0.2f);
-            }
-            else animator.CrossFade("Right Arm Empty", 0.2f);
-            #endregion
+            _quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
         }
 
         // 슬롯 UI 로드

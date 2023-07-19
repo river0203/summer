@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 // InputHandler에서 '인풋에 따라 변하는 변수들'을 가져와 플레이어를 이동시킴
 public class PlayerLocomotion : MonoBehaviour
 {
-    CameraHendler _cameraHandler;
+    CameraHandler _cameraHandler;
     PlayerManager _playerManager;
     Transform _cameraObject;
     InputHandler _inputHandler;
@@ -41,11 +41,11 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     float _rotationSpeed = 10;
     [SerializeField]
-    float _fallingSpeed = 250;
+    float _fallingSpeed = 1000;
 
     private void Awake()
     {
-        _cameraHandler = FindObjectOfType<CameraHendler>();
+        _cameraHandler = FindObjectOfType<CameraHandler>();
 
     }
 

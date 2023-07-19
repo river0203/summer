@@ -17,7 +17,7 @@ public class PlayerInventory : MonoBehaviour
     public int _currentRightWeaponIndex;
     //public int _currentLeftWeaponIndex;
 
-    public List<WeaponItem> _weaponInventory;
+    public List<WeaponItem> _weaponsInventory;
 
     private void Awake()
     {
@@ -29,8 +29,10 @@ public class PlayerInventory : MonoBehaviour
         _currentRightWeaponIndex = -1;
         // _currentLeftWeaponIndex = -1;
 
-        _rightWeapon = _unarmedWeapon;
-        // _leftWeapon = _unarmedWeapon;
+        _rightWeapon = _weaponsInRightHandSlots[0];
+        // _leftWeapon = _weaponsInLeftHandSlots;
+        _weaponSlotManager.LoadWeaponOnSlot(_rightWeapon, false);
+        _weaponSlotManager.LoadWeaponOnSlot(_leftWeapon, true);
     }
 
     public void ChangeRightWeapon()

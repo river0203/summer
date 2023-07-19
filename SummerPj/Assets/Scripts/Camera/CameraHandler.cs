@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraHendler : MonoBehaviour
+public class CameraHandler : MonoBehaviour
 {
     InputHandler _inputHandler;
 

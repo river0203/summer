@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // 매 프레임 인풋을 받아 '인풋에 따라 변하는 변수들'을 갱신시키고, 그 변수들을 public으로 열어 다른 스크립트에서 그 변수들을 통해 플레이어를 움직이게 해줌
@@ -15,6 +16,7 @@ public class InputHandler : MonoBehaviour
 
     public bool b_input;
     public bool a_input;
+    public bool y_Input;
     public bool la_input;
     public bool ha_input;
     public bool jump_Input;
@@ -30,6 +32,7 @@ public class InputHandler : MonoBehaviour
     public bool d_Pad_Left;
     public bool d_Pad_Right;
 
+    public bool _twoHandFlag;
     public bool _dodgeFlag;
     public bool _sprintFlag;
     public bool _comboFlag;
@@ -42,7 +45,8 @@ public class InputHandler : MonoBehaviour
     PlayerAttack _playerAttack;
     PlayerInventory _playerInventory;
     PlayerManager _playerManager;
-    CameraHendler _cameraHandler;
+    WeaponSlotManager _weaponSlotManager;
+    CameraHandler _cameraHandler;
     UIManager _uiManager;
 
     Vector2 _movementInput;
@@ -66,8 +70,9 @@ public class InputHandler : MonoBehaviour
         _playerAttack = GetComponent<PlayerAttack>();
         _playerInventory = GetComponent<PlayerInventory>();
         _playerManager = GetComponent<PlayerManager>();
-        _cameraHandler = FindObjectOfType<CameraHendler>();
+        _cameraHandler = FindObjectOfType<CameraHandler>();
         _uiManager = FindObjectOfType<UIManager>();
+        _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
     }
 
     #region '인풋에 따라 변하는 변수'를 변환시켜주는 함수들
@@ -87,8 +92,11 @@ public class InputHandler : MonoBehaviour
             _inputActions.PlayerActions.Jump.performed += i => { jump_Input = true; };
             _inputActions.PlayerActions.Inventory.performed += i => { inventory_Input = true; };
             _inputActions.PlayerMovement.LockOn.performed += i => { lockOnInput = true; };
+            _inputActions.PlayerActions.Y.performed += i => y_Input = true;
+            #region
             _inputActions.PlayerMovement.LockOnTargetLeft.performed += i => { right_Stick_Left_Input = true; };
             _inputActions.PlayerMovement.LockOnTargetLeftMouce.performed += i =>
+
             {
                 if (_mouseX < -10)
                 {
@@ -103,6 +111,7 @@ public class InputHandler : MonoBehaviour
                     right_Stick_Right_Input = true;
                 }
             };
+            #endregion
         }
 
         _inputActions.Enable();
@@ -119,6 +128,7 @@ public class InputHandler : MonoBehaviour
         HandleQuickSlotsInput();
         HandleInventoryInput();
         HandleLockOnInput();
+        HandleTwoHandInput();
     }
 
     // 이동 및 마우스 포지션 갱신 (TickInput에서 실행)
@@ -263,6 +273,24 @@ public class InputHandler : MonoBehaviour
         }
 
         _cameraHandler.SetCameraHeight();
+    }
+
+    private void HandleTwoHandInput()
+    {
+        if(y_Input)
+        {
+            _twoHandFlag = !_twoHandFlag;
+
+            if(_twoHandFlag)
+            {
+                _weaponSlotManager.LoadWeaponOnSlot(_playerInventory._rightWeapon, false);
+            }
+            else
+            {
+                _weaponSlotManager.LoadWeaponOnSlot(_playerInventory._rightWeapon, false);
+                _weaponSlotManager.LoadWeaponOnSlot(_playerInventory._leftWeapon, true);
+            }
+        }
     }
     #endregion
 }

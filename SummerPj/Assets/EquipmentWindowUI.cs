@@ -9,12 +9,7 @@ public class EquipmentWindowUI : MonoBehaviour
     public bool leftHandSlot01Selected;
     public bool leftHandSlot02Selected;
 
-    HandEquipmentSlotUI[] handEquipmentSlotUI;
-
-    private void Start()
-    {
-        handEquipmentSlotUI = GetComponentsInChildren<HandEquipmentSlotUI>();
-    }
+    public HandEquipmentSlotUI[] handEquipmentSlotUI;
     
     public void LoadWeaponsOnEquipmentScreen(PlayerInventory playerInventory) 
     { 

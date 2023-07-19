@@ -11,6 +11,7 @@ public class WeaponItem : Item
     [Header("Idle Animations")]
     public string right_hand_idle;
     public string left_hand_idle;
+    public string th_idle;
 
     [Header("One Handed Attack Animations")]
     public string OH_Light_Attack_1;

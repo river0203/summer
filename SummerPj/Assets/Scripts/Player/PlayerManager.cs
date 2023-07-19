@@ -8,7 +8,7 @@ public class PlayerManager : CharacterManager
 {
     InputHandler _inputHandler;
     Animator _anim;
-    CameraHendler _cameraHandler;
+    CameraHandler _cameraHandler;
     PlayerLocomotion _playerLocomotion;
 
     interactableUI _interactableUI;
@@ -24,7 +24,7 @@ public class PlayerManager : CharacterManager
 
     private void Awake()
     {
-        _cameraHandler = FindObjectOfType<CameraHendler>();
+        _cameraHandler = FindObjectOfType<CameraHandler>();
     }
 
     void Start()

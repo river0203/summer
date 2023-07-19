@@ -21,7 +21,7 @@ public class WeaponPickUp : Interactable
 
         _playerLocomotion._rigid.velocity = Vector3.zero;
         _animHandler.PlayTargetAnimation("PickUpItem", true);
-        _playerInventory._weaponInventory.Add(_weapon);
+        _playerInventory._weaponsInventory.Add(_weapon);
         Destroy(gameObject);
     }
 }
