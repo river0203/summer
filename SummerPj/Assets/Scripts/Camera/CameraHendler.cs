@@ -29,11 +29,15 @@ public class CameraHendler : MonoBehaviour
     public float _cameraShereRadius = 0.2f;
     public float _cameraCollisionOffset = 0.2f;
     public float _minimumCollisionOffset = 0.2f;
+    public float _lockedPivotPosition = 2.25f;
+    public float _unlockedPivotPosition = 1.65f;
 
     public Transform _currentLockOnTarget;
 
-    List<CharacterManager> _avilableTargets = new List<CharacterManager>();
+    List<CharacterManager> _availableTargets = new List<CharacterManager>();
     public Transform _nearestLockOnTarget;
+    public Transform _leftLockTaregt;
+    public Transform _rightLockTaregt;
     public float _maximumLockOnDistance = 30f;
 
     private void Awake()
@@ -122,6 +126,8 @@ public class CameraHendler : MonoBehaviour
     public void HandleLockOn()
     {
         float shortestDistance = Mathf.Infinity;
+        float shortesDistanceLeftTaret = Mathf.Infinity;
+        float shortesDistanceRightTarget = Mathf.Infinity;
 
         Collider[] colliders = Physics.OverlapSphere(_targetTransform.position, 26);
 
@@ -139,27 +145,62 @@ public class CameraHendler : MonoBehaviour
                     viewableAngle > -50 && viewableAngle < 50 &&
                     distanceFromTarget <= _maximumLockOnDistance)
                 {
-                    _avilableTargets.Add(character); 
+                    _availableTargets.Add(character); 
                 }
             }
         }
 
-        for (int i = 0; i < _avilableTargets.Count; ++i)
+        for (int i = 0; i < _availableTargets.Count; ++i)
         {
-            float distanceFromTarget = Vector3.Distance(_targetTransform.position, _avilableTargets[i].transform.position);
+            float distanceFromTarget = Vector3.Distance(_targetTransform.position, _availableTargets[i].transform.position);
 
             if (distanceFromTarget < shortestDistance)
             {
                 shortestDistance = distanceFromTarget;
-                _nearestLockOnTarget = _avilableTargets[i]._lockOnTransform;
+                _nearestLockOnTarget = _availableTargets[i]._lockOnTransform;
+            }
+
+            if (_inputHandler._lockOnFlag)
+            {
+                Vector3 relativeEnemyPosition = _currentLockOnTarget.InverseTransformPoint(_availableTargets[i].transform.position);
+                var distanceFromLeftTarget = _currentLockOnTarget.transform.position.x - _availableTargets[i].transform.position.x;
+                var distanceFromRightTarget = _currentLockOnTarget.transform.position.x + _availableTargets[i].transform.position.x;
+
+                if (relativeEnemyPosition.x > 0f && distanceFromLeftTarget < shortesDistanceLeftTaret)
+                {
+                    shortesDistanceLeftTaret = distanceFromLeftTarget;
+                    _leftLockTaregt = _availableTargets[i]._lockOnTransform;
+                }
+
+                if (relativeEnemyPosition.x < 0f && distanceFromRightTarget < shortesDistanceRightTarget)
+                {
+                    shortesDistanceRightTarget = distanceFromRightTarget;
+                    _rightLockTaregt = _availableTargets[i]._lockOnTransform;
+                }
             }
         }
     }
 
     public void ClearLockOnTargets()
     {
-        _avilableTargets.Clear();
+        _availableTargets.Clear();
         _nearestLockOnTarget = null;
         _currentLockOnTarget = null;
+    }
+
+    public void SetCameraHeight()
+    {
+        Vector3 velocity = Vector3.zero;
+        Vector3 newLockedPosition = new Vector3(0, _lockedPivotPosition);
+        Vector3 newUnlockedPosition = new Vector3(0, _unlockedPivotPosition);
+
+        if (_currentLockOnTarget != null)
+        {
+            _cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(_cameraPivotTransform.transform.localPosition, newLockedPosition, ref velocity, Time.deltaTime);
+        }
+        else
+        {
+            _cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(_cameraPivotTransform.transform.localPosition, newUnlockedPosition, ref velocity, Time.deltaTime);
+        }
     }
 }

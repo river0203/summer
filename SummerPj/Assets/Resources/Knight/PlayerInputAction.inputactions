@@ -49,6 +49,51 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LockOn",
+                    "type": "Button",
+                    "id": "fd5ee87d-6f6d-4823-90fb-bc50d0b70bc9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LockOnTargetLeft",
+                    "type": "Button",
+                    "id": "b0294e06-f9ee-4b9c-b074-87c87edb19be",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LockOnTargetLeftMouce",
+                    "type": "Value",
+                    "id": "6768426b-9e2f-4cbf-9fda-de9dc06281f9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "LockOnTargetRight",
+                    "type": "Button",
+                    "id": "9f0ef325-ce69-49e7-bd9c-527e9a8a3990",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LockOnTargetRightMouce",
+                    "type": "Value",
+                    "id": "c4c2926b-6969-4505-a69c-43d3613f465b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -120,7 +165,7 @@
                 },
                 {
                     "name": "",
-                    "id": "8c8e490b-c610-4785-884f-f04217b23ca4",
+                    "id": "04a370b0-1539-4a52-9c3d-3c652e2595d0",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
@@ -205,6 +250,72 @@
                     "action": "Ultimate",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1125004-1cd6-4312-8bd8-b840392a4373",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15d35ab5-39a2-4988-a0c2-57d73d5b3783",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65235bf9-1a41-4f9f-9aed-7e79ed5f72b7",
+                    "path": "<Gamepad>/rightStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LockOnTargetLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c2dcecb8-6805-4881-9984-631b5f96ca49",
+                    "path": "<Mouse>/delta/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LockOnTargetLeftMouce",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "395cd72b-c305-4e0e-bae6-fffee08e0c49",
+                    "path": "<Mouse>/delta/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LockOnTargetRightMouce",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2e59e8c0-6df7-41ba-b3db-3df56cb9d87b",
+                    "path": "<Gamepad>/rightStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LockOnTargetRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -270,15 +381,6 @@
                     "name": "Inventory",
                     "type": "Button",
                     "id": "1257cee8-7df6-4eaf-b720-c3eab0708b22",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "LockOn",
-                    "type": "Button",
-                    "id": "3feba291-78e5-4d42-b5cd-00772031c8ef",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -437,28 +539,6 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Inventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ce13c5ed-0340-469e-9da3-2f7ad12e337f",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "LockOn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d7aaf46a-8d42-4d19-a395-72eb02e64c10",
-                    "path": "<Gamepad>/rightStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "LockOn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

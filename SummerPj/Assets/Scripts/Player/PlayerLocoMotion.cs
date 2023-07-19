@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 // InputHandler에서 '인풋에 따라 변하는 변수들'을 가져와 플레이어를 이동시킴
 public class PlayerLocomotion : MonoBehaviour
 {
+    CameraHendler _cameraHandler;
     PlayerManager _playerManager;
     Transform _cameraObject;
     InputHandler _inputHandler;
@@ -42,6 +43,12 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     float _fallingSpeed = 250;
 
+    private void Awake()
+    {
+        _cameraHandler = FindObjectOfType<CameraHendler>();
+
+    }
+
     private void Start()
     {
         _playerManager = GetComponent<PlayerManager>();
@@ -64,26 +71,60 @@ public class PlayerLocomotion : MonoBehaviour
     // 로테이션 변경
     private void HandleRotation(float delta)
     {
-        Vector3 targetDir = Vector3.zero;
-        float moveOverride = _inputHandler._moveAmount;
-
-        targetDir = _cameraObject.forward * _inputHandler._vertical;
-        targetDir += _cameraObject.right * _inputHandler._horizontal;
-
-        targetDir.Normalize();
-        targetDir.y = 0;
-
-        if (targetDir == Vector3.zero)
+        if (_inputHandler._lockOnFlag )
         {
-            targetDir = _myTransform.forward;
+            if (_inputHandler._sprintFlag || _inputHandler._dodgeFlag)
+            {
+                Vector3 targetDirection = Vector3.zero;
+                targetDirection = _cameraHandler._cameraTransform.forward * _inputHandler._vertical;
+                targetDirection = _cameraHandler._cameraTransform.right * _inputHandler._horizontal;
+                targetDirection.Normalize();
+                targetDirection.y = 0;
+
+                if (targetDirection == Vector3.zero)
+                {
+                    targetDirection = transform.forward;
+                }
+
+                Quaternion tr = Quaternion.LookRotation(targetDirection);
+                Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, _rotationSpeed * Time.deltaTime);
+
+                transform.rotation = targetRotation;
+            }
+            else
+            {
+                Vector3 rotationDirection = _moveDirection;
+                rotationDirection = _cameraHandler._currentLockOnTarget.position - transform.position;
+                rotationDirection.y = 0;
+                rotationDirection.Normalize();
+                Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, _rotationSpeed * Time.deltaTime);
+                transform.rotation = targetRotation;
+            }
         }
+        else
+        {
+            Vector3 targetDir = Vector3.zero;
+            float moveOverride = _inputHandler._moveAmount;
 
-        float rs = _rotationSpeed;
+            targetDir = _cameraObject.forward * _inputHandler._vertical;
+            targetDir += _cameraObject.right * _inputHandler._horizontal;
 
-        Quaternion tr = Quaternion.LookRotation(targetDir);
-        Quaternion targetRotation = Quaternion.Slerp(_myTransform.rotation, tr, rs * delta);
+            targetDir.Normalize();
+            targetDir.y = 0;
 
-        _myTransform.rotation = targetRotation;
+            if (targetDir == Vector3.zero)
+            {
+                targetDir = _myTransform.forward;
+            }
+
+            float rs = _rotationSpeed;
+
+            Quaternion tr = Quaternion.LookRotation(targetDir);
+            Quaternion targetRotation = Quaternion.Slerp(_myTransform.rotation, tr, rs * delta);
+
+            _myTransform.rotation = targetRotation;
+        }
     }
 
     // 포지션 변경
@@ -125,8 +166,15 @@ public class PlayerLocomotion : MonoBehaviour
         Vector3 projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, normalVector);
         _rigid.velocity = projectedVelocity;
 
-        _animHandler.UpdateAnimatorValues(_inputHandler._moveAmount, 0, _playerManager._isSprinting); // 애니메이션에게도 정보를 넘김
-
+        if (_inputHandler.lockOnInput && _inputHandler._sprintFlag == false)
+        {
+            _animHandler.UpdateAnimatorValues(_inputHandler._horizontal, 0, _playerManager._isSprinting); // 애니메이션에게도 정보를 넘김
+        }
+        else
+        {
+            _animHandler.UpdateAnimatorValues(_inputHandler._vertical, 0, _playerManager._isSprinting); // 애니메이션에게도 정보를 넘김
+        }
+        
         if (_animHandler.canRotate)
         {
             HandleRotation(delta);

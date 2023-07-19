@@ -20,6 +20,10 @@ public class InputHandler : MonoBehaviour
     public bool jump_Input;
     public bool inventory_Input;
     public bool lockOnInput;
+    public bool right_Stick_Right_Input;
+    public bool right_Stick_Left_Input;
+    public bool _canLockOnMove = false;
+    float _lockOnInputMoveTimer;
 
     public bool d_Pad_Up;
     public bool d_Pad_Down;
@@ -41,8 +45,21 @@ public class InputHandler : MonoBehaviour
     CameraHendler _cameraHandler;
     UIManager _uiManager;
 
-    Vector2 movementInput;
-    Vector2 cameraInput;
+    Vector2 _movementInput;
+    Vector2 _cameraInput;
+
+    public void Update()
+    {
+        if (_canLockOnMove == false)
+        {
+            _lockOnInputMoveTimer += Time.deltaTime;
+            if (_lockOnInputMoveTimer > 0.5)
+            {
+                _canLockOnMove = true;
+            }
+                
+        }
+    }
 
     private void Awake()
     {
@@ -60,8 +77,8 @@ public class InputHandler : MonoBehaviour
         if (_inputActions == null)
         {
             _inputActions = new PlayerInputAction();
-            _inputActions.PlayerMovement.Move.performed += _inputActions => { movementInput = _inputActions.ReadValue<Vector2>(); };
-            _inputActions.PlayerMovement.Look.performed += i => { cameraInput = i.ReadValue<Vector2>(); } ;
+            _inputActions.PlayerMovement.Move.performed += _inputActions => { _movementInput = _inputActions.ReadValue<Vector2>(); };
+            _inputActions.PlayerMovement.Look.performed += i => { _cameraInput = i.ReadValue<Vector2>(); } ;
             _inputActions.PlayerActions.LightAttack.performed += i => { la_input = true; };
             _inputActions.PlayerActions.HeavyAttack.performed += i => { ha_input = true; };
             _inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
@@ -69,7 +86,23 @@ public class InputHandler : MonoBehaviour
             _inputActions.PlayerActions.Interact.performed += i => { a_input = true; };
             _inputActions.PlayerActions.Jump.performed += i => { jump_Input = true; };
             _inputActions.PlayerActions.Inventory.performed += i => { inventory_Input = true; };
-            _inputActions.PlayerActions.LockOn.performed += i => { lockOnInput = true; };
+            _inputActions.PlayerMovement.LockOn.performed += i => { lockOnInput = true; };
+            _inputActions.PlayerMovement.LockOnTargetLeft.performed += i => { right_Stick_Left_Input = true; };
+            _inputActions.PlayerMovement.LockOnTargetLeftMouce.performed += i =>
+            {
+                if (_mouseX < -10)
+                {
+                    right_Stick_Left_Input = true;
+                }
+            };
+            _inputActions.PlayerMovement.LockOnTargetRight.performed += i => { right_Stick_Right_Input = true; };
+            _inputActions.PlayerMovement.LockOnTargetRightMouce.performed += i => 
+            {
+                if (_mouseX > 10)
+                {
+                    right_Stick_Right_Input = true;
+                }
+            };
         }
 
         _inputActions.Enable();
@@ -80,7 +113,7 @@ public class InputHandler : MonoBehaviour
     // 업데이트류 함수에서 실행
     public void TickInput(float delta)
     {
-        MoveInput(delta); 
+        HandleMoveInput(delta); 
         HandleRollInput(delta);
         HandleAttackInput(delta);
         HandleQuickSlotsInput();
@@ -89,13 +122,13 @@ public class InputHandler : MonoBehaviour
     }
 
     // 이동 및 마우스 포지션 갱신 (TickInput에서 실행)
-    private void MoveInput(float delta)
+    private void HandleMoveInput(float delta)
     {
-        _horizontal = movementInput.x;
-        _vertical = movementInput.y;
+        _horizontal = _movementInput.x;
+        _vertical = _movementInput.y;
         _moveAmount = Mathf.Clamp01(Mathf.Abs(_horizontal) + Mathf.Abs(_vertical));
-        _mouseX = cameraInput.x;
-        _mouseY = cameraInput.y;
+        _mouseX = _cameraInput.x;
+        _mouseY = _cameraInput.y;
     }
 
     // 구르기, 달리기 상태 갱신 (TickInput에서 실행)
@@ -183,13 +216,14 @@ public class InputHandler : MonoBehaviour
     {
         if (lockOnInput && _lockOnFlag == false)
         {
-            _cameraHandler.ClearLockOnTargets();
             lockOnInput = false;
             _cameraHandler.HandleLockOn();
             
             if (_cameraHandler._nearestLockOnTarget != null)
             {
                 _cameraHandler._currentLockOnTarget = _cameraHandler._nearestLockOnTarget;
+                _canLockOnMove = false;
+                _lockOnInputMoveTimer = 0;
                 _lockOnFlag = true;
             }
         }
@@ -199,6 +233,36 @@ public class InputHandler : MonoBehaviour
             _lockOnFlag = false;
             _cameraHandler.ClearLockOnTargets();
         }
+
+        if (_lockOnFlag && right_Stick_Left_Input && _canLockOnMove)
+        {
+            right_Stick_Left_Input = false;
+            _cameraHandler.HandleLockOn();
+
+            _canLockOnMove = false;
+            _lockOnInputMoveTimer = 0;
+
+            if (_cameraHandler._leftLockTaregt != null)
+            {
+                _cameraHandler._currentLockOnTarget = _cameraHandler._leftLockTaregt;
+            }
+        }
+
+        if (_lockOnFlag && right_Stick_Right_Input && _canLockOnMove)
+        {
+            right_Stick_Right_Input = false;
+            _cameraHandler.HandleLockOn();
+            
+            _canLockOnMove = false;
+            _lockOnInputMoveTimer = 0;
+
+            if (_cameraHandler._rightLockTaregt != null)
+            {
+                _cameraHandler._currentLockOnTarget = _cameraHandler._rightLockTaregt;
+            }
+        }
+
+        _cameraHandler.SetCameraHeight();
     }
     #endregion
 }
