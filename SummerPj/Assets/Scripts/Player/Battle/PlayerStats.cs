@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
-    public int _healthLevel = 10;
-    public int _maxHealth;
-    public int _currentHealth;
-
-    public int _staminaLevel = 10;
-    public int _maxStamina;
-    public int _currentStamina;
 
     public HealthBar _healthBar;
     public StaminaBar _staminaBar;

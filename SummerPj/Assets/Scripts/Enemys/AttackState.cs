@@ -1,101 +1,90 @@
+using SG;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SG
+public class AttackState : State
 {
-    public class AttackState : State
+    public CombatStanceState combatStanceState;
+    public EnemyAttackAction[] enemyAttacks;
+    public EnemyAttackAction currentAttack;
+    public override State Tick(EnemyManager enemyManger, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
-        public CombatStanceState combatStanceState;
+        Vector3 targetDirection = enemyManger.currentTarget.transform.position - transform.position;
+        float veiwableAngle = Vector3.Angle(targetDirection, transform.forward);
 
-        public EnemyAttackAction[] enemyAttacks;
-        public EnemyAttackAction currentAttack;
-
-        public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
-        {
-            Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
-            float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-            float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
-            if (enemyManager.isPreformingAction)
-                return combatStanceState;
-
-            if(currentAttack != null)
-            {
-                //if we are too close to the enemy to perform currentattack get a new attack
-
-                if(distanceFromTarget < currentAttack.minimumDistanceNeededToAttack)
-                {
-                    return this;
-                }
-                //if we are close enough to attack, then let us proced
-                else if(distanceFromTarget < currentAttack.maximumDistanceNeededToAttack)
-                {
-                    //if our enemy is within oru attack viewable  angle. we attack
-                    if(viewableAngle <= currentAttack.maximumAttackAngle &&
-                        viewableAngle >= currentAttack.minimumAttackAngle)
-                    {
-                        if(enemyManager.currentRecoveryTime <= 0 && enemyManager.isPreformingAction == false)
-                        {
-                            enemyAnimatorManager.anim.SetFloat("Verticla", 0, 0.1f, Time.deltaTime);
-                            enemyAnimatorManager.anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
-                            enemyAnimatorManager.PlayerTargetAnimation(currentAttack.actionAnimation, true);
-                            enemyManager.isPreformingAction = true;
-                            enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
-                            currentAttack = null;
-                            return combatStanceState;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                GetNewAttack(enemyManager);
-            }
-
+        if (enemyManger.isPreformingAction)
             return combatStanceState;
-        }
-        private void GetNewAttack(EnemyManager enemyManager)
+        
+        if(currentAttack != null)
         {
-            Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
-            float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
-            float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, transform.position);
-
-            int maxScore = 0;
-
-            for (int i = 0; i < enemyAttacks.Length; i++)
+            if(enemyManger.distanceFromTarget < currentAttack.minimumDistanceNeededToAttack)
             {
-                EnemyAttackAction enemyAttackAction = enemyAttacks[i];
-
-                if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
-                    distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
+                return this;
+            }
+            else if(enemyManger.distanceFromTarget < currentAttack.maximumAttackAngle)
+            {
+                if(enemyManger.viewableAngle <= currentAttack.maximumAttackAngle && enemyManger.viewableAngle >= currentAttack.minimumAttackAngle)
                 {
-                    if (viewableAngle <= enemyAttackAction.maximumAttackAngle && viewableAngle >= enemyAttackAction.minimumAttackAngle)
+                    if (enemyManger.currentRecoveryTime <= 0 && enemyManger.isPreformingAction == false)
                     {
-                        maxScore += enemyAttackAction.attackScore;
+                        enemyAnimatorManger._anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+                        enemyAnimatorManger._anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
+                        enemyAnimatorManger.PlayTargetAnimation(currentAttack.actionAnimation, true);
+                        enemyManger.isPreformingAction = true;
+                        enemyManger.currentRecoveryTime = currentAttack.recoveryTime;
+                        currentAttack = null;
+                        return combatStanceState;
                     }
                 }
             }
-            int randomValue = Random.Range(0, maxScore);
-            int temporaryScore = 0;
+        }
+        else
+        {
+            GetNewAttack(enemyManger);
+        }
 
-            for (int i = 0; i < enemyAttacks.Length; i++)
+        return combatStanceState;
+    }
+    void GetNewAttack(EnemyManager enemyManger)
+    {
+        Vector3 targetDirection = enemyManger.currentTarget.transform.position - transform.position;
+        float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+        enemyManger.distanceFromTarget = Vector3.Distance(enemyManger.currentTarget.transform.position, transform.position);
+
+        int maxScore = 0;
+        for (int i = 0; i < enemyAttacks.Length; i++)
+        {
+            EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+            if (enemyManger.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack && enemyManger.distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
             {
-                EnemyAttackAction enemyAttackAction = enemyAttacks[i];
-
-                if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
-                    distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
+                if (viewableAngle <= enemyAttackAction.maximumAttackAngle && viewableAngle >= enemyAttackAction.minimumAttackAngle)
                 {
-                    if (viewableAngle <= enemyAttackAction.maximumAttackAngle && viewableAngle >= enemyAttackAction.minimumAttackAngle)
+                    maxScore += enemyAttackAction.attackScore;
+                }
+            }
+        }
+
+        int randomValue = Random.Range(0, maxScore);
+        int temporaryScore = 0;
+
+        for (int i = 0; i < enemyAttacks.Length; i++)
+        {
+            EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+
+            if (enemyManger.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack && enemyManger.distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
+            {
+                if (viewableAngle <= enemyAttackAction.maximumAttackAngle && viewableAngle >= enemyAttackAction.minimumAttackAngle)
+                {
+                    if (currentAttack != null)
                     {
-                        if (currentAttack != null)
-                            return;
+                        return;
+                    }
+                    temporaryScore += enemyAttackAction.attackScore;
 
-                        temporaryScore += enemyAttackAction.attackScore;
-
-                        if (temporaryScore > randomValue)
-                        {
-                            currentAttack = enemyAttackAction;
-                        }
+                    if (temporaryScore > randomValue)
+                    {
+                        currentAttack = enemyAttackAction;
                     }
                 }
             }

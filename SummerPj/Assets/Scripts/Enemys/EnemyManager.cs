@@ -1,6 +1,7 @@
 using SG;
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,24 +10,23 @@ public class EnemyManager : CharacterManager
     EnemyLocomotionManager enemyLocomotionManager;
     EnemyAnimatorManager enemyAnimatorManager;
     EnemyStats enemyStats;
-
     public Rigidbody enemyRigidBody;
-    public NavMeshAgent navMeshAgent;
-    public CharacterStats currentTarget;
+
+    public NavMeshAgent navmeshAgent;
 
     public State currentState;
+            public CharacterStats currentTarget;
     public bool isPreformingAction;
-    public bool isInteracting;
-    public float rotationSpeed = 15f;
+    public float distanceFromTarget;
     public float maximumAttackRange = 1.5f;
 
-
+    public float rotationSpeed = 15;
 
     [Header("AI Setting")]
     public float detectionRadius = 20;
     public float maximumDetectionAngle = 50;
     public float minimumDetectionAngle = -50;
-
+    public float viewableAngle;
     public float currentRecoveryTime = 0;
 
 
@@ -36,31 +36,28 @@ public class EnemyManager : CharacterManager
         enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
         enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
         enemyStats = GetComponent<EnemyStats>();
-        navMeshAgent = GetComponentInChildren<NavMeshAgent>();
-        navMeshAgent.enabled = false;
         enemyRigidBody = GetComponent<Rigidbody>();
+        navmeshAgent = GetComponentInChildren<NavMeshAgent>();
+        navmeshAgent.enabled = false;
     }
-
     private void Start()
     {
-        enemyRigidBody.isKinematic = false; //¹°¸® x
+        enemyRigidBody.isKinematic = false;
     }
     // Update is called once per frame
     void Update()
     {
         HandleRecoveryTimer();
-
-        isInteracting = enemyAnimatorManager.anim.GetBool("isInteracting");
     }
 
     private void FixedUpdate()
     {
-        HandleCurrentAction();
+        HandleStateMachine();
     }
 
-    private void HandleCurrentAction()
+    private void HandleStateMachine()
     {
-        if (currentState != null)
+       if(currentState != null)
         {
             State nextState = currentState.Tick(this, enemyStats, enemyAnimatorManager);
 
@@ -71,24 +68,23 @@ public class EnemyManager : CharacterManager
         }
     }
 
-    private void SwitchToNextState(State state)
-    {
-        currentState = state;
-    }
-
     private void HandleRecoveryTimer()
     {
         if(currentRecoveryTime > 0)
         {
             currentRecoveryTime -= Time.deltaTime;
         }
-
         if(isPreformingAction)
         {
-            if(currentRecoveryTime <= 0) 
+            if(currentRecoveryTime <= 0)
             {
                 isPreformingAction = false;
             }
         }
+    }
+
+    private void SwitchToNextState(State state)
+    {
+        currentState = state;
     }
 }
