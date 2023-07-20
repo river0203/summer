@@ -58,7 +58,7 @@ public class PursueTargetState : State
         else
         {
             Vector3 relativeDirection = transform.InverseTransformDirection(enemyManger.navmeshAgent.desiredVelocity);
-            Vector3 targetVelocity = enemyManger.enemyRigidBody.velocity;
+            Vector3 targetVelocity = enemyManger.navmeshAgent.velocity;
 
             enemyManger.navmeshAgent.enabled = true;
             enemyManger.navmeshAgent.SetDestination(enemyManger.currentTarget.transform.position);
