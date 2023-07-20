@@ -29,7 +29,7 @@ namespace SG
 
             for(int i = 0; i < colliders.Length; i++)
             {
-                ChracterStats characterStats = colliders[i].transform.GetComponent<ChracterStats>();
+                CharacterStats characterStats = colliders[i].transform.GetComponent<CharacterStats>();
 
                 if (characterStats != null)
                 {
