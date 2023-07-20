@@ -38,7 +38,6 @@ public class PlayerManager : CharacterManager
     {
         float delta = Time.deltaTime;
 
-
         // 스크립트 꼬임 해결
         _isInteracting = _anim.GetBool("isInteracting");
 
@@ -90,8 +89,9 @@ public class PlayerManager : CharacterManager
     }
 
     public void CheckForInteractableObject()
-    {
+    { 
         RaycastHit hit;
+        
         Debug.DrawRay(transform.position, transform.forward, Color.yellow);
         if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, _cameraHandler._ignoreLayers))
         {
@@ -107,7 +107,7 @@ public class PlayerManager : CharacterManager
 
                     if (_inputHandler.a_input)
                     {
-                        hit.collider.GetComponent<Interactable>().Interact(this);   
+                        hit.collider.GetComponent<Interactable>().Interact(this);
                     }
                 }
             }

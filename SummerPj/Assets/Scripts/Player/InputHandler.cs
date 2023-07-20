@@ -93,7 +93,6 @@ public class InputHandler : MonoBehaviour
             _inputActions.PlayerActions.Inventory.performed += i => { inventory_Input = true; };
             _inputActions.PlayerMovement.LockOn.performed += i => { lockOnInput = true; };
             _inputActions.PlayerActions.Y.performed += i => y_Input = true;
-            #region
             _inputActions.PlayerMovement.LockOnTargetLeft.performed += i => { right_Stick_Left_Input = true; };
             _inputActions.PlayerMovement.LockOnTargetLeftMouce.performed += i =>
 
@@ -111,7 +110,6 @@ public class InputHandler : MonoBehaviour
                     right_Stick_Right_Input = true;
                 }
             };
-            #endregion
         }
 
         _inputActions.Enable();
@@ -191,13 +189,16 @@ public class InputHandler : MonoBehaviour
 
     private void HandleQuickSlotsInput()
     {
+        _inputActions.PlayerQuickSlots.DPadRight.performed += i => { d_Pad_Right = true; };
+        _inputActions.PlayerQuickSlots.DPadLeft.performed += i => { d_Pad_Left = true; };
+
         if (d_Pad_Right)
         {
             _playerInventory.ChangeRightWeapon();
         }
         else if (d_Pad_Left)
         {
-            //_playerInventory.ChangeLeftWeapon();
+            _playerInventory.ChangeLeftWeapon();
         }
     }
 
@@ -292,5 +293,5 @@ public class InputHandler : MonoBehaviour
             }
         }
     }
-    #endregion
+#endregion
 }
