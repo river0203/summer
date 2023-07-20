@@ -2916,7 +2916,6 @@ GameObject:
   m_Component:
   - component: {fileID: 466926}
   - component: {fileID: 9516680}
-  - component: {fileID: 1891878382}
   m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
@@ -2993,22 +2992,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1891878382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 154396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11cc03dd3d8b94539956a187c1a1769e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _checkingRange: 20
-  _attackRange: 10
-  _target: {fileID: 0}
-  _isAttack: 0
 --- !u!1 &156506
 GameObject:
   m_ObjectHideFlags: 0
@@ -4686,10 +4669,8 @@ GameObject:
   - component: {fileID: 403920}
   - component: {fileID: 1891878385}
   - component: {fileID: 1891878388}
-  - component: {fileID: 1891878381}
-  - component: {fileID: 1891878383}
   m_Layer: 0
-  m_Name: Skeleton
+  m_Name: Skeleton_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4741,44 +4722,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1891878381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fe114a8d3e82dd4cba5e99688a4d142, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _state: 0
-  _startingHP: 50
-  _damage: 10
-  _radiousSpeed: 1
---- !u!195 &1891878383
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191838}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 80
-  m_StoppingDistance: 8
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!1 &192866
 GameObject:
   m_ObjectHideFlags: 0
