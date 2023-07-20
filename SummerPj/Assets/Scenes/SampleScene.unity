@@ -15535,6 +15535,18 @@ PrefabInstance:
       propertyPath: _healthBar
       value: 
       objectReference: {fileID: 414255267}
+    - target: {fileID: 6643869495757402022, guid: 88c4f8a659871da4da6881df56eed413, type: 3}
+      propertyPath: _weaponsInRightHandSlots.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6643869495757402022, guid: 88c4f8a659871da4da6881df56eed413, type: 3}
+      propertyPath: _weaponsInRightHandSlots.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
+    - target: {fileID: 6643869495757402022, guid: 88c4f8a659871da4da6881df56eed413, type: 3}
+      propertyPath: _weaponsInRightHandSlots.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
     - target: {fileID: 6643869495757402046, guid: 88c4f8a659871da4da6881df56eed413, type: 3}
       propertyPath: m_Name
       value: Player
