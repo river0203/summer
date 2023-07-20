@@ -543,10 +543,6 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 2105653348}
-    - target: {fileID: 439825643775609055, guid: 68bca53225d57c044931793d032c9b52, type: 3}
-      propertyPath: m_Constraints
-      value: 80
-      objectReference: {fileID: 0}
     - target: {fileID: 439825644048310384, guid: 68bca53225d57c044931793d032c9b52, type: 3}
       propertyPath: m_Name
       value: Skeleton
