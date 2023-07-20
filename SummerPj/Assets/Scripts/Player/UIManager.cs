@@ -35,9 +35,9 @@ public class UIManager : MonoBehaviour
         #region Weapon Inventory Slots
         for(int i = 0; i < weaponInventorySlots.Length; i++) 
         { 
-            if( i< playerInventory._weaponsInventory.Count )
+            if (i < playerInventory._weaponsInventory.Count)
             {
-                if(weaponInventorySlots.Length < playerInventory._weaponsInventory.Count )
+                if(weaponInventorySlots.Length < playerInventory._weaponsInventory.Count)
                 {
                     Instantiate(weaponInventorySlotPrefab, weaponInventorySlotsParent);
                     weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();

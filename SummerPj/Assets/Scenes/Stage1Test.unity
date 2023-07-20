@@ -2568,7 +2568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8943269509390310485, guid: e611a477e22a1fa4fbc613ff1aa2d2a9, type: 3}
       propertyPath: _fallingSpeed
-      value: 80
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8943269509390310495, guid: e611a477e22a1fa4fbc613ff1aa2d2a9, type: 3}
       propertyPath: m_RootOrder
@@ -2580,11 +2580,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8943269509390310495, guid: e611a477e22a1fa4fbc613ff1aa2d2a9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.74
       objectReference: {fileID: 0}
     - target: {fileID: 8943269509390310495, guid: e611a477e22a1fa4fbc613ff1aa2d2a9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.12
+      value: 3.65
       objectReference: {fileID: 0}
     - target: {fileID: 8943269509390310495, guid: e611a477e22a1fa4fbc613ff1aa2d2a9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2810,6 +2810,17 @@ Transform:
   m_Father: {fileID: 1643711736}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 13.687, y: -201.055, z: -28.023}
+--- !u!114 &735407022 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8943269509390310490, guid: e611a477e22a1fa4fbc613ff1aa2d2a9, type: 3}
+  m_PrefabInstance: {fileID: 683928804}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3504c82d872e8c8439df46b7d9e80b2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &745553076
 GameObject:
   m_ObjectHideFlags: 0
@@ -9912,7 +9923,7 @@ MonoBehaviour:
   _lockOnTransform: {fileID: 0}
   enemyRigidBody: {fileID: 8532709397160050771}
   navMeshAgent: {fileID: 8532709397160050770}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 735407022}
   currentState: {fileID: 0}
   isPreformingAction: 0
   isInteracting: 0
