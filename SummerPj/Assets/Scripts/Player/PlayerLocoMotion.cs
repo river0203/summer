@@ -159,7 +159,7 @@ public class PlayerLocomotion : MonoBehaviour
             else
             {
                 _moveDirection *= speed;
-                _playerManager._isSprinting = true;
+                _playerManager._isSprinting = false;
             }
         }
 
@@ -168,11 +168,11 @@ public class PlayerLocomotion : MonoBehaviour
 
         if (_inputHandler.lockOnInput && _inputHandler._sprintFlag == false)
         {
-            _animHandler.UpdateAnimatorValues(_inputHandler._horizontal, 0, _playerManager._isSprinting); // 애니메이션에게도 정보를 넘김
+            _animHandler.UpdateAnimatorValues(_inputHandler._vertical, _inputHandler._horizontal, _playerManager._isSprinting); // 애니메이션에게도 정보를 넘김
         }
         else
         {
-            _animHandler.UpdateAnimatorValues(_inputHandler._vertical, 0, _playerManager._isSprinting); // 애니메이션에게도 정보를 넘김
+            _animHandler.UpdateAnimatorValues(_inputHandler._moveAmount, 0, _playerManager._isSprinting); // 애니메이션에게도 정보를 넘김
         }
         
         if (_animHandler.canRotate)
