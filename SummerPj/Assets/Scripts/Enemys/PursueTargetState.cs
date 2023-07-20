@@ -7,28 +7,30 @@ using UnityEngine.AI;
 public class PursueTargetState : State
 {
     public CombatStanceState combatStanceState;
-    public override State Tick(EnemyManager enemyManger, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
+    public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
-        if (enemyManger.isPreformingAction)
+        Debug.Log(enemyManager.isPreformingAction);
+
+        if (enemyManager.isPreformingAction)
         {
             return this;
         }
 
-        Vector3 targetDirection = enemyManger.currentTarget.transform.position - transform.position;
-        enemyManger.distanceFromTarget = Vector3.Distance(enemyManger.currentTarget.transform.position, transform.position);
+        Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
+        enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, transform.position);
         float veiwableAngle = Vector3.Angle(targetDirection, transform.forward);
 
-        if (enemyManger.distanceFromTarget > enemyManger.maximumAttackRange)
+        if (enemyManager.distanceFromTarget > enemyManager.maximumAttackRange)
         {
             enemyAnimatorManger._anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
         }
 
-        HandleRotateTarget(enemyManger);
+        HandleRotateTarget(enemyManager);
 
-        enemyManger.navmeshAgent.transform.localPosition = Vector3.zero;
-        enemyManger.navmeshAgent.transform.localRotation = Quaternion.identity;
+        enemyManager.navmeshAgent.transform.localPosition = Vector3.zero;
+        enemyManager.navmeshAgent.transform.localRotation = Quaternion.identity;
 
-        if(enemyManger.distanceFromTarget <= enemyManger.maximumAttackRange)
+        if(enemyManager.distanceFromTarget <= enemyManager.maximumAttackRange)
         {
             return combatStanceState;
         }

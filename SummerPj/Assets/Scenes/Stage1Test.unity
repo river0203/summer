@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3292,7 +3292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8943269509390310495, guid: e611a477e22a1fa4fbc613ff1aa2d2a9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.65
+      value: -10.24
       objectReference: {fileID: 0}
     - target: {fileID: 8943269509390310495, guid: e611a477e22a1fa4fbc613ff1aa2d2a9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5085,6 +5085,11 @@ Transform:
   m_Father: {fileID: 1616527783}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1136396168 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8943269510207478896, guid: e611a477e22a1fa4fbc613ff1aa2d2a9, type: 3}
+  m_PrefabInstance: {fileID: 683928804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1225706692
 GameObject:
   m_ObjectHideFlags: 0
@@ -5921,6 +5926,18 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8532709397849152632, guid: 2e4d973f0c2f0bf4eb9ea6defcc08d7d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532709397849152632, guid: 2e4d973f0c2f0bf4eb9ea6defcc08d7d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532709397849152632, guid: 2e4d973f0c2f0bf4eb9ea6defcc08d7d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532709397849152632, guid: 2e4d973f0c2f0bf4eb9ea6defcc08d7d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -5959,6 +5976,10 @@ PrefabInstance:
     - target: {fileID: 8532709397849152632, guid: 2e4d973f0c2f0bf4eb9ea6defcc08d7d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532709397849152632, guid: 2e4d973f0c2f0bf4eb9ea6defcc08d7d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8532709397858124576, guid: 2e4d973f0c2f0bf4eb9ea6defcc08d7d, type: 3}
       propertyPath: m_Controller
@@ -6307,19 +6328,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9682cbd0d3a0e2748925b762d4bc014c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lockOnTransform: {fileID: 0}
+  _lockOnTransform: {fileID: 1136396168}
   enemyRigidBody: {fileID: 0}
   navmeshAgent: {fileID: 0}
-  currentState: {fileID: 0}
+  currentState: {fileID: 515664714}
   currentTarget: {fileID: 0}
   isPreformingAction: 0
   distanceFromTarget: 0
-  maximumAttackRange: 1.5
+  maximumAttackRange: 3
   rotationSpeed: 15
   detectionRadius: 20
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
-  viewableAngle: 100
+  viewableAngle: 0
   currentRecoveryTime: 1
 --- !u!4 &1539401616 stripped
 Transform:

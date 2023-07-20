@@ -10,6 +10,7 @@ public class AttackState : State
     public EnemyAttackAction currentAttack;
     public override State Tick(EnemyManager enemyManger, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
+        Debug.Log(currentAttack);
         Vector3 targetDirection = enemyManger.currentTarget.transform.position - transform.position;
         float veiwableAngle = Vector3.Angle(targetDirection, transform.forward);
 
@@ -46,6 +47,7 @@ public class AttackState : State
 
         return combatStanceState;
     }
+
     void GetNewAttack(EnemyManager enemyManger)
     {
         Vector3 targetDirection = enemyManger.currentTarget.transform.position - transform.position;
@@ -89,5 +91,7 @@ public class AttackState : State
                 }
             }
         }
+
+
     }
 }
