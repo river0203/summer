@@ -9,7 +9,7 @@ public class PlayerManager : CharacterManager
     InputHandler _inputHandler;
     Animator _anim;
     CameraHandler _cameraHandler;
-    PlayerLocomotion _playerLocomotion
+    PlayerLocomotion _playerLocomotion;
     interactableUI _interactableUI;
     public GameObject interactableUIGameObject;
 
