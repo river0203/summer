@@ -12,7 +12,7 @@ namespace SG
         private void Awake()
         {
             anim = GetComponent<Animator>();
-            enemyManager = GetComponent<EnemyManager>();
+            enemyManager = GetComponentInParent<EnemyManager>();
         }
 
         private void OnAnimatorMove()
