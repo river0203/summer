@@ -1170,6 +1170,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
   _weaponsInLeftHandSlots:
   - {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
+  - {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
   _currentRightWeaponIndex: -1
   _currentLeftWeaponIndex: -1
   _weaponsInventory: []
@@ -3603,10 +3604,10 @@ RectTransform:
   m_Father: {fileID: 334659856361948760}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 210, y: -215}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &334659855513960118
 MonoBehaviour:
@@ -3629,7 +3630,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -3652,7 +3653,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 334659856292360429}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: EquipmentWindowUI, Assembly-CSharp
         m_MethodName: SelectLeftHandSlot01
         m_Mode: 1
@@ -3860,14 +3861,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 334659855645196620}
-  - component: {fileID: 334659855645196621}
   m_Layer: 5
   m_Name: Equipment Screen Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &334659855645196620
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3889,27 +3889,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &334659855645196621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 334659855645196611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab4d811fa4146a14b9c578f7a54ee049, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rightHandSlot01Selected: 0
-  rightHandSlot02Selected: 0
-  leftHandSlot01Selected: 0
-  leftHandSlot02Selected: 0
-  handEquipmentSlotUI:
-  - {fileID: 334659855513960113}
-  - {fileID: 334659855765408045}
-  - {fileID: 334659857351572375}
-  - {fileID: 334659857299149640}
 --- !u!1 &334659855691496728
 GameObject:
   m_ObjectHideFlags: 0
@@ -4336,10 +4315,10 @@ RectTransform:
   m_Father: {fileID: 334659856361948760}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 340, y: -215}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &334659855765408034
 MonoBehaviour:
@@ -4362,7 +4341,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -4385,7 +4364,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 334659856292360429}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: EquipmentWindowUI, Assembly-CSharp
         m_MethodName: SelectLeftHandSlot02
         m_Mode: 1
@@ -4806,7 +4785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 0.4117647}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4844,7 +4823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 0.4117647}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4962,7 +4941,11 @@ MonoBehaviour:
   rightHandSlot02Selected: 0
   leftHandSlot01Selected: 0
   leftHandSlot02Selected: 0
-  handEquipmentSlotUI: []
+  handEquipmentSlotUI:
+  - {fileID: 334659855513960113}
+  - {fileID: 334659855765408045}
+  - {fileID: 334659857351572375}
+  - {fileID: 334659857299149640}
 --- !u!1 &334659856320319920
 GameObject:
   m_ObjectHideFlags: 0
@@ -5158,7 +5141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 0.4117647}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5450,7 +5433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 0.4117647}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6035,10 +6018,10 @@ RectTransform:
   m_Father: {fileID: 334659856361948760}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 340, y: -85}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &334659857299149645
 MonoBehaviour:
@@ -6061,7 +6044,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -6084,7 +6067,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 334659856292360429}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: EquipmentWindowUI, Assembly-CSharp
         m_MethodName: SelectRightHandSlot02
         m_Mode: 1
@@ -6267,7 +6250,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -6290,7 +6273,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 334659856292360429}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: EquipmentWindowUI, Assembly-CSharp
         m_MethodName: SelectRightHandSlot01
         m_Mode: 1
@@ -6429,10 +6412,10 @@ RectTransform:
   m_Father: {fileID: 334659856361948760}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 210, y: -85}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &385698986184595473
 GameObject:
