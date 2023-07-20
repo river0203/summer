@@ -15,10 +15,11 @@ public class EnemyManager : CharacterManager
     public NavMeshAgent navmeshAgent;
 
     public State currentState;
-            public CharacterStats currentTarget;
+    public CharacterStats currentTarget;
     public bool isPreformingAction;
     public float distanceFromTarget;
     public float maximumAttackRange = 1.5f;
+    public bool isInteracting;
 
     public float rotationSpeed = 15;
 
@@ -48,6 +49,8 @@ public class EnemyManager : CharacterManager
     void Update()
     {
         HandleRecoveryTimer();
+
+        isInteracting = enemyAnimatorManager._anim.GetBool("isInteracting");
     }
 
     private void FixedUpdate()
