@@ -510,22 +510,6 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: ball_l
-      humanName: LeftToes
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: ball_r
-      humanName: RightToes
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
     skeleton:
     - name: SK_Knight(Clone)
       parentName: 
@@ -629,7 +613,7 @@ ModelImporter:
       scale: {x: 93.610886, y: 93.610886, z: 93.610886}
     - name: Knight:Object005
       parentName: SK_Knight(Clone)
-      position: {x: -0.01, y: 0.08526418, z: 0.008}
+      position: {x: -0, y: 0.08526418, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 93.610886, y: 93.610886, z: 93.610886}
     - name: Knight:Object006
