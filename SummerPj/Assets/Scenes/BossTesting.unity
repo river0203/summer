@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 1169c5e6cd4ef2a4380da184d74a75ed, type: 2}
 --- !u!4 &289560004 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 466926, guid: f3ee45e0dafa81a45a21976bb9ac7896, type: 3}
@@ -221,6 +221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 775307354}
+  - component: {fileID: 775307355}
   m_Layer: 6
   m_Name: Idle State
   m_TagString: Untagged
@@ -243,6 +244,22 @@ Transform:
   m_Father: {fileID: 289560004}
   m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &775307355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775307353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5775dd7700478d74fada6fefed4e80cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pursueTargetState: {fileID: 0}
+  detectionLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &796123776
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,7 +552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de2e08843365a9f468b00d38c169ec24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatStanceState: {fileID: 0}
+  combatStanceState: {fileID: 1969849817}
 --- !u!1 &1781440714
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,12 +599,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSleeping: 0
   detectionRadius: 2
-  sleepAnimation: 
-  wakeAnimation: 
+  sleepAnimation: In
+  wakeAnimation: Idle
   detectionLayer:
     serializedVersion: 2
-    m_Bits: 0
-  pursueTargetState: {fileID: 0}
+    m_Bits: 1088
+  pursueTargetState: {fileID: 1016132083}
 --- !u!1 &1852479253
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,8 +747,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd9ef15aa3d5ee478a3ccbe65f39cda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackState: {fileID: 0}
-  pursueTargetState: {fileID: 0}
+  attackState: {fileID: 1988498125}
+  pursueTargetState: {fileID: 1016132083}
 --- !u!1 &1988498123
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,6 +793,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7622a777f7c1615458b3be44a908f999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatStanceState: {fileID: 0}
-  enemyAttacks: []
+  combatStanceState: {fileID: 1969849817}
+  enemyAttacks:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   currentAttack: {fileID: 0}
