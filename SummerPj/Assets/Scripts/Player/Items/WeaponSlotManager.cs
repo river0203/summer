@@ -1,0 +1,137 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WeaponSlotManager : MonoBehaviour
+{
+    public WeaponItem _attackingWeapon;
+
+    WeaponHolderSlot _leftHandSlot;
+    WeaponHolderSlot _rightHandSlot;
+
+    DamageCollider _leftHandDamageCollider;
+    DamageCollider _rightHandDamageCollider;
+
+    Animator animator;
+
+    QuickSlotsUI _quickSlotsUI;
+
+    PlayerStats _playerStats;
+    InputHandler _inputHandler;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        _quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
+        _playerStats = GetComponentInParent<PlayerStats>();
+        _inputHandler = GetComponentInParent<InputHandler>();
+
+        WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>(true);
+        foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
+        {
+            if (weaponSlot._isLeftHandSlot)
+            {
+                _leftHandSlot = weaponSlot;
+            }
+            else if (weaponSlot._isRightHandSlot)
+            {
+                _rightHandSlot = weaponSlot;
+            }
+        }
+    }
+
+    public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
+    {
+        // 무기 로드
+        if (isLeft)
+        {
+            _leftHandSlot.LoadWeaponModel(weaponItem);
+            LoadLeftWeaponDamageCollider();
+            _quickSlotsUI.UpdateWeaponQuickSlotsUI(true,weaponItem);
+
+            // 현재 무기에 따라 왼손 Idle 애니메이션 변경
+            #region Handle Left Weapon Idle Animations
+            if (weaponItem != null)
+            {
+                animator.CrossFade(weaponItem.left_hand_idle, 0.2f);
+            }
+            else animator.CrossFade("Left Arm Empty", 0.2f);
+            #endregion
+        }
+        else
+        {
+            if(_inputHandler._twoHandFlag)
+            {
+                animator.CrossFade(weaponItem.th_idle, 0.2f);
+            }
+            else
+            {
+                // 현재 무기에 따라 오른손 Idle 애니메이션 변경
+                #region Handle Right Weapon Idle Animations
+                if (weaponItem != null)
+                {
+                    animator.CrossFade("Both Arms Empty", 0.2f);
+                }
+                else animator.CrossFade("Right Arm Empty", 0.2f);
+                #endregion
+            }
+            _rightHandSlot.LoadWeaponModel(weaponItem);
+            LoadRightWeaponDamageCollider();
+            _quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
+        }
+
+        // 슬롯 UI 로드
+        _quickSlotsUI.UpdateWeaponQuickSlotsUI(isLeft, weaponItem);
+    }
+
+    #region 데미지 콜라이더
+
+    private void LoadLeftWeaponDamageCollider()
+    {
+        if (_leftHandSlot._currentWeaponModel == null)
+            return;
+
+        _leftHandDamageCollider = _leftHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>();
+    }
+
+    private void LoadRightWeaponDamageCollider()
+    {
+        if (_rightHandSlot._currentWeaponModel == null)
+            return;
+
+        _rightHandDamageCollider = _rightHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>();
+    }
+
+    public void OpenLeftDamageCollier()
+    {
+        _leftHandDamageCollider.EnableDamagecollider();
+    }
+
+    public void OpenRightDamageCollier()
+    {
+        _rightHandDamageCollider.EnableDamagecollider();
+    }
+
+    public void CloseLeftDamageCollier()
+    {
+        _leftHandDamageCollider.DisableDamagecollider();
+    }
+
+    public void CloseRightDamageCollier()
+    {
+        _rightHandDamageCollider.DisableDamagecollider();
+    }
+
+    #endregion
+
+    #region 스테미나
+    public void DrainStaminaLightAttack()
+    {
+        _playerStats.TakeStaminaDamage(Mathf.RoundToInt(_attackingWeapon.baseStaminar * _attackingWeapon.lightAttackMultiplier));
+    }
+    public void DrainStaminaHeavyAttack()
+    {
+        _playerStats.TakeStaminaDamage(Mathf.RoundToInt(_attackingWeapon.baseStaminar * _attackingWeapon.heavyAttackMultiplier));
+    }
+    #endregion
+}
