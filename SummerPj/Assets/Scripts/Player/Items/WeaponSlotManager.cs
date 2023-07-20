@@ -8,6 +8,7 @@ public class WeaponSlotManager : MonoBehaviour
 
     WeaponHolderSlot _leftHandSlot;
     WeaponHolderSlot _rightHandSlot;
+    WeaponHolderSlot _backSlot;
 
     DamageCollider _leftHandDamageCollider;
     DamageCollider _rightHandDamageCollider;
@@ -37,6 +38,10 @@ public class WeaponSlotManager : MonoBehaviour
             {
                 _rightHandSlot = weaponSlot;
             }
+            else if(weaponSlot._isBackSlot)
+            {
+                _backSlot = weaponSlot;
+            }
         }
     }
 
@@ -45,6 +50,7 @@ public class WeaponSlotManager : MonoBehaviour
         // 무기 로드
         if (isLeft)
         {
+            _leftHandSlot.currentWeapon = weaponItem;
             _leftHandSlot.LoadWeaponModel(weaponItem);
             LoadLeftWeaponDamageCollider();
             _quickSlotsUI.UpdateWeaponQuickSlotsUI(true,weaponItem);
@@ -62,19 +68,25 @@ public class WeaponSlotManager : MonoBehaviour
         {
             if(_inputHandler._twoHandFlag)
             {
+                _backSlot.LoadWeaponModel(_leftHandSlot.currentWeapon);
+                _leftHandSlot.UnloadWeaponAndDestroy();
                 animator.CrossFade(weaponItem.th_idle, 0.2f);
             }
             else
             {
-                // 현재 무기에 따라 오른손 Idle 애니메이션 변경
                 #region Handle Right Weapon Idle Animations
+
+                animator.CrossFade("Both Arms Empty", 0.2f);
+                // 현재 무기에 따라 오른손 Idle 애니메이션 변경
+                _backSlot.UnloadWeaponAndDestroy();
                 if (weaponItem != null)
                 {
-                    animator.CrossFade("Both Arms Empty", 0.2f);
+                    animator.CrossFade(weaponItem.right_hand_idle, 0.2f);
                 }
                 else animator.CrossFade("Right Arm Empty", 0.2f);
                 #endregion
             }
+            _rightHandSlot.currentWeapon = weaponItem;
             _rightHandSlot.LoadWeaponModel(weaponItem);
             LoadRightWeaponDamageCollider();
             _quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);

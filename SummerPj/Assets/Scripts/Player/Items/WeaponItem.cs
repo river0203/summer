@@ -19,6 +19,10 @@ public class WeaponItem : Item
     public string OH_Light_Attack_3;
     public string OH_Heavy_Attack_1;
 
+    [Header("Two Handed Attack Animations")]
+    public string TH_Light_Attack_01;
+    public string TH_Light_Attack_02;
+
     [Header("Stamina Costs")]
     public int baseStaminar;
     public float lightAttackMultiplier;
