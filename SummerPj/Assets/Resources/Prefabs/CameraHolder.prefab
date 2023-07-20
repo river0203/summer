@@ -161,10 +161,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 310bbf29dc28d41439515cbaef1460d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targerTransform: {fileID: 0}
+  _targetTransform: {fileID: 0}
   _cameraTransform: {fileID: 576586990792904944}
   _cameraPivotTransform: {fileID: 576586990596784752}
-  _lookSpeed: 0.1
+  _ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  _lookSpeed: 0.01
   _followSpeed: 0.1
   _pivotSpeed: 0.03
   _minimumPivot: -35
@@ -172,3 +175,10 @@ MonoBehaviour:
   _cameraShereRadius: 0.2
   _cameraCollisionOffset: 0.2
   _minimumCollisionOffset: 0.2
+  _lockedPivotPosition: 2.25
+  _unlockedPivotPosition: 1.65
+  _currentLockOnTarget: {fileID: 0}
+  _nearestLockOnTarget: {fileID: 0}
+  _leftLockTaregt: {fileID: 0}
+  _rightLockTaregt: {fileID: 0}
+  _maximumLockOnDistance: 30
