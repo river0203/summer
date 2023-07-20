@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    public int healthLevel = 10;
-    public int maxHealth;
-    public int currentHealth;
+    [HideInInspector] public int healthLevel = 10;
+    [HideInInspector] public int maxHealth;
+    [HideInInspector] public int currentHealth;
 
-    public int staminaLevel = 10;
-    public int maxStamina;
-    public int currentStamina;
+    [HideInInspector] public int staminaLevel = 10;
+    [HideInInspector] public float maxStamina;
+    [HideInInspector] public float currentStamina;
+
+    [HideInInspector] public bool isDead;
 }

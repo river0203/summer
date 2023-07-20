@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : CharacterManager
 {
+    PlayerStats _playerStats;
     InputHandler _inputHandler;
     Animator _anim;
     CameraHandler _cameraHandler;
@@ -20,6 +21,9 @@ public class PlayerManager : CharacterManager
     public bool _isInAir;
     public bool _isGrounded;
     public bool _canDoCombo;
+    public bool isUsingRightHand;
+    public bool isUsingLeftHand;
+    public bool isInvulerable;
 
     private void Awake()
     {
@@ -32,21 +36,25 @@ public class PlayerManager : CharacterManager
         _anim = GetComponentInChildren<Animator>();
         _playerLocomotion = GetComponent<PlayerLocomotion>();
         _interactableUI = FindObjectOfType<interactableUI>();
+        _playerStats = GetComponent<PlayerStats>();
     }
 
     void Update()
     {
         float delta = Time.deltaTime;
 
-
         // 스크립트 꼬임 해결
         _isInteracting = _anim.GetBool("isInteracting");
-
         _canDoCombo = _anim.GetBool("canDoCombo");
         _anim.SetBool("isInAir", _isInAir);
+        isUsingRightHand = _anim.GetBool("isUsingRightHand");
+        isUsingLeftHand = _anim.GetBool("isUsingLeftHand");
+        isInvulerable = _anim.GetBool("isInvulnerable");
+
         _inputHandler.TickInput(delta);
         _playerLocomotion.HandleJumping();
         _playerLocomotion.HandleRollingAndSprinting(delta);
+        _playerStats.RegenerateStamina();
 
         // 플레이어 이동
         _isSprinting = _inputHandler.b_input;

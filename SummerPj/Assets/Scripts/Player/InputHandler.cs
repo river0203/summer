@@ -48,6 +48,7 @@ public class InputHandler : MonoBehaviour
     WeaponSlotManager _weaponSlotManager;
     CameraHandler _cameraHandler;
     UIManager _uiManager;
+    AnimatorHandler _animatorHandler;
 
     Vector2 _movementInput;
     Vector2 _cameraInput;
@@ -73,6 +74,7 @@ public class InputHandler : MonoBehaviour
         _cameraHandler = FindObjectOfType<CameraHandler>();
         _uiManager = FindObjectOfType<UIManager>();
         _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+        _animatorHandler = GetComponentInChildren<AnimatorHandler>();
     }
 
     #region '인풋에 따라 변하는 변수'를 변환시켜주는 함수들
@@ -180,6 +182,7 @@ public class InputHandler : MonoBehaviour
                 if (_playerManager._canDoCombo)
                     return;
 
+                _animatorHandler._anim.SetBool("isUsingRightHand", true);
                 _playerAttack.HandleLightAttack(_playerInventory._rightWeapon);
             }
         }

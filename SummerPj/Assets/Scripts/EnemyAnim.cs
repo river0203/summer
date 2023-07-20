@@ -1,18 +1,18 @@
-using System;
+/*using System;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using UnityEngine;
 using UnityEngine.AI;
 using static LivingEntity;
 //Enemy2
-//요원(_agent=enemy)에게 목적지를 알려줘서 목적지로 이동하게 한다.
-//상태를 만들어서 제어하고 싶다.
-// Idle : Player를 찾는다, 찾았으면 Run상태로 전이하고 싶다.
-//Run : 타겟방향으로 이동(요원)
-//Attack : 일정 시간마다 공격
-//attack -> run이 안됨 수정
-//스킬 랜덤 -> 가중치 랜덤
-//state가 dead면 코루틴 중지
+//?�원(_agent=enemy)?�게 목적지�??�려줘서 목적지�??�동?�게 ?�다.
+//?�태�?만들?�서 ?�어?�고 ?�다.
+// Idle : Player�?찾는?? 찾았?�면 Run?�태�??�이?�고 ?�다.
+//Run : ?�겟방?�으�??�동(?�원)
+//Attack : ?�정 ?�간마다 공격
+//attack -> run???�됨 ?�정
+//?�킬 ?�덤 -> 가중치 ?�덤
+//state가 dead�?코루??중�?
 
 public class EnemyAnim : MonoBehaviour
 {
@@ -21,9 +21,9 @@ public class EnemyAnim : MonoBehaviour
     private EnemySys _enemySys;
 
     [SerializeField]
-    private float _checkingRange; //몬스터 인식 범위
+    private float _checkingRange; //몬스???�식 범위
     [SerializeField]
-    private float _attackRange; // 몬스터 공격 범위 
+    private float _attackRange; // 몬스??공격 범위 
     [SerializeField]
     Transform _target;
 
@@ -123,4 +123,4 @@ public class EnemyAnim : MonoBehaviour
         }
 
     }
-}
+}*/

@@ -41,7 +41,6 @@ namespace SG
                 return this;
             }
         }
-        
         private void HandleRotateTowardsTarget(EnemyManager enemyManager)
         {
             //Rotate manually

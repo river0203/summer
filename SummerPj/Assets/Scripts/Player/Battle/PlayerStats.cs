@@ -9,15 +9,19 @@ public class PlayerStats : CharacterStats
     public int _currentHealth;
 
     public int _staminaLevel = 10;
-    public int _maxStamina;
-    public int _currentStamina;
+    public float _maxStamina = 100;
+    public float _currentStamina;
+    public float staminaRegenerationAmount = 1;
+    public float staminaRegenTimer = 0;
 
     public HealthBar _healthBar;
     public StaminaBar _staminaBar;
     AnimatorHandler _animHandler;
+    PlayerManager _playerManager;
 
     private void Awake()
     {
+        _playerManager = GetComponent<PlayerManager>();
         _healthBar = FindObjectOfType<HealthBar>();
         _staminaBar = FindObjectOfType<StaminaBar>();
         _animHandler = GetComponentInChildren<AnimatorHandler>();
@@ -38,7 +42,7 @@ public class PlayerStats : CharacterStats
         return _maxHealth;
     }
 
-    private int SetMaxStaminaFromStaminaLevel()
+    private float SetMaxStaminaFromStaminaLevel()
     {
         _maxStamina = _staminaLevel * 10;
         return _maxStamina;
@@ -46,6 +50,10 @@ public class PlayerStats : CharacterStats
 
     public void TakeDamage(int damege)
     {
+        if (_playerManager.isInvulerable) return;
+
+        if (isDead) return;
+
         _currentHealth -= damege;
 
         _healthBar.SetCurrentHealth(_currentHealth);
@@ -56,6 +64,7 @@ public class PlayerStats : CharacterStats
         {
             _currentHealth = 0;
             _animHandler.PlayTargetAnimation("Dead", true);
+            isDead = true;
         }
     }
 
@@ -64,5 +73,24 @@ public class PlayerStats : CharacterStats
         _currentStamina -= damege;
 
         _staminaBar.SetCurrentStamina(_currentStamina);
+    }
+
+    public void RegenerateStamina()
+    {
+        if(_playerManager._isInteracting)
+        {
+            staminaRegenTimer = 0;
+        }
+        else 
+        {
+
+            staminaRegenTimer += Time.deltaTime;
+            if (_currentStamina < _maxStamina && staminaRegenTimer > 1f)
+            {
+                _currentStamina += staminaRegenerationAmount * Time.deltaTime;
+                _staminaBar.SetCurrentStamina(Mathf.RoundToInt(_currentStamina));
+            }
+
+        }
     }
 }

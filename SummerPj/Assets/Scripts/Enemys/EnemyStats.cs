@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Processors;
 
-public class EnemyStats : MonoBehaviour
+public class EnemyStats : CharacterStats
 {
     public int _healthLevel = 10;
     public int _maxHealth;
@@ -28,6 +29,8 @@ public class EnemyStats : MonoBehaviour
 
     public void TakeDamage(int damege)
     {
+        if (isDead) return;
+
         _currentHealth -= damege;
         _anim.Play("Damaged");
 
@@ -35,6 +38,7 @@ public class EnemyStats : MonoBehaviour
         {
             _currentHealth = 0;
             _anim.Play("Dead");
+            isDead = true;   
         }
     }
 }
