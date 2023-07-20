@@ -10,7 +10,6 @@ public class PlayerManager : CharacterManager
     Animator _anim;
     CameraHandler _cameraHandler;
     PlayerLocomotion _playerLocomotion;
-
     interactableUI _interactableUI;
     public GameObject interactableUIGameObject;
 
