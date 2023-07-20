@@ -80,7 +80,11 @@ public class WeaponSlotManager : MonoBehaviour
 
                 animator.CrossFade("Both Arms Empty", 0.2f);
                 // 현재 무기에 따라 오른손 Idle 애니메이션 변경
-                _backSlot.UnloadWeaponAndDestroy();
+                if (_backSlot != null)
+                {
+                    _backSlot.UnloadWeaponAndDestroy();
+                }
+
                 if (weaponItem != null)
                 {
                     animator.CrossFade(weaponItem.right_hand_idle, 0.2f);

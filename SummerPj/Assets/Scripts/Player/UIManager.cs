@@ -51,6 +51,7 @@ public class UIManager : MonoBehaviour
         }
         #endregion 
     }
+
     public void OpenSelectWindow()
     {
         selectWindow.SetActive(true);
