@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Interactable
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -15,9 +16,9 @@ TagManager:
   - UI
   - Enemy
   - 
-  - 
-  - 
-  - Controller
+  - Environment
+  - Character
+  - CharacterCollisionBlcoker
   - 
   - 
   - 

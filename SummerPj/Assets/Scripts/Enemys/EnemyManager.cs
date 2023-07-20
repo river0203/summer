@@ -17,7 +17,6 @@ public class EnemyManager : CharacterManager
     public State currentState;
     public bool isPreformingAction;
     public bool isInteracting;
-    public float distanceFromTarget;
     public float rotationSpeed = 15f;
     public float maximumAttackRange = 1.5f;
 
@@ -27,7 +26,6 @@ public class EnemyManager : CharacterManager
     public float detectionRadius = 20;
     public float maximumDetectionAngle = 50;
     public float minimumDetectionAngle = -50;
-    public float viewableAngle;
 
     public float currentRecoveryTime = 0;
 
