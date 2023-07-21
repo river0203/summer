@@ -2,26 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace SG
 {
     public class EnemyLocomotionManager : MonoBehaviour
     {
         EnemyManager enemyManager;
-        LayerMask detectionLayer;
+        EnemyAnimatorManager enemyAnimatorManager;
         private void Awake()
         {
             enemyManager = GetComponent<EnemyManager>();
+            enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
         }
 
-        public void HandleDetection()
-        {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
-
-            for(int i = 0; i < colliders.Length; i++)
-            {
-
-            }
-        }
     }
 
 

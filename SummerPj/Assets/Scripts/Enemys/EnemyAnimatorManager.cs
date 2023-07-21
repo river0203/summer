@@ -8,10 +8,9 @@ namespace SG
     public class EnemyAnimatorManager : AnimatorManager
     {
         EnemyManager enemyManager;
-
         private void Awake()
         {
-            anim = GetComponent<Animator>();
+            _anim = GetComponent<Animator>();
             enemyManager = GetComponentInParent<EnemyManager>();
         }
 
@@ -19,8 +18,9 @@ namespace SG
         {
             float delta = Time.deltaTime;
             enemyManager.enemyRigidBody.drag = 0;
-            Vector3 deltaPosition = anim.deltaPosition;
+            Vector3 deltaPosition = _anim.deltaPosition;
             deltaPosition.y = 0;
+
             Vector3 velocity = deltaPosition / delta;
             enemyManager.enemyRigidBody.velocity = velocity;
         }

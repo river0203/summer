@@ -1,53 +1,45 @@
+using SG;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SG
+public class IdleState : State
 {
-    public class IdleState : State
+    public PursueTargetState pursueTargetState;
+    public LayerMask detectionLayer;
+
+    public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
-        public PursueTargetState pursueTargetState;
+        #region Handle Enemy Target Detection
+        Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
 
-        public LayerMask detectionLayer;
-
-        public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
+        for (int i = 0; i < colliders.Length; i++)
         {
-            #region Handle Enemy Target Detection
-            Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
+            CharacterStats characterState = colliders[i].transform.GetComponent<CharacterStats>();
 
-            for(int i = 0; i < colliders.Length; i++)
+            if (characterState != null)
             {
-                CharacterStats characterStats = colliders[i].transform.GetComponent<CharacterStats>();
+                Vector3 targetDirection = characterState.transform.position - transform.position;
+                float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
-                if(characterStats != null)
+                if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
                 {
-                    //check for team ID
-
-                    Vector3 targetDirection = characterStats.transform.position - transform.position;
-                    float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
-
-                    if(viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
-                    {
-                        enemyManager.currentTarget = characterStats;
-                    }
+                    enemyManager.currentTarget = characterState;
                 }
-            }
-            #endregion
-            //look for a potenrial target
-            //switch to the pursue target state if target is found
-            //if not return this state
 
-            #region Handle Switching to Next State
-            if (enemyManager.currentTarget != null)
-            {
-                return pursueTargetState;
             }
-            else
-            {
-                return this;
-            }
-            #endregion
         }
+        #endregion
+
+        #region Handle Switching to Next State
+        if (enemyManager.currentTarget != null)
+        {
+            return pursueTargetState;
+        }
+        else
+        {
+            return this;
+        }
+        #endregion
     }
 }
-
