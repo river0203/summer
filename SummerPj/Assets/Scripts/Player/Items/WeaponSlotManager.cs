@@ -124,9 +124,32 @@ public class WeaponSlotManager : MonoBehaviour
     {
         _leftHandDamageCollider.EnableDamagecollider();
     }
+
+    public void CloseLeftDamageCollier()
+    {
+        _leftHandDamageCollider.DisableDamagecollider();
+    }
+
+    public void OpenRightDamageCollier()
+    {
+        _rightHandDamageCollider.EnableDamagecollider();
+    }
+    public void CloseRightDamageCollier()
+    {
+        _rightHandDamageCollider.DisableDamagecollider();
+    }
     #endregion
 
     #region 스테미나
 
+    public void DrainStaminaLightAttack()
+    {
+        _playerStats.TakeStaminaDamage(Mathf.RoundToInt(_attackingWeapon.baseStaminar * _attackingWeapon.lightAttackMultiplier));
+    }
+
+    public void DrainStaminaHeavyAttack()
+    {
+        _playerStats.TakeStaminaDamage(Mathf.RoundToInt(_attackingWeapon.baseStaminar * _attackingWeapon.heavyAttackMultiplier));
+    }
     #endregion
 }

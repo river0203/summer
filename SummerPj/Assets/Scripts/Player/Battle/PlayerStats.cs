@@ -13,6 +13,7 @@ public class PlayerStats : CharacterStats
     public float _currentStamina;
     public float staminaRegenerationAmount = 1;
     public float staminaRegenTimer = 0;
+    public float staminaRegenTime = 0.5f;
 
     public HealthBar _healthBar;
     public StaminaBar _staminaBar;
@@ -83,9 +84,8 @@ public class PlayerStats : CharacterStats
         }
         else 
         {
-
             staminaRegenTimer += Time.deltaTime;
-            if (_currentStamina < _maxStamina && staminaRegenTimer > 1f)
+            if (_currentStamina < _maxStamina && staminaRegenTimer > staminaRegenTime)
             {
                 _currentStamina += staminaRegenerationAmount * Time.deltaTime;
                 _staminaBar.SetCurrentStamina(Mathf.RoundToInt(_currentStamina));

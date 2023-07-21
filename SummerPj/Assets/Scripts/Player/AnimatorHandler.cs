@@ -86,11 +86,11 @@ public class AnimatorHandler : MonoBehaviour
     
     public void EnableIsInvulerable()
     {
-        _anim.SetBool("isInvulerable", true);
+        _anim.SetBool("isInvulnerable", true);
     }
     public void DisableIsvulerable()
     {
-        _anim.SetBool("isInvulerable", false);
+        _anim.SetBool("isInvulnerable", false);
     }
 
     private void OnAnimatorMove()

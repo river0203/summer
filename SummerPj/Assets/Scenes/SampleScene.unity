@@ -1136,6 +1136,9 @@ MonoBehaviour:
   _isInAir: 0
   _isGrounded: 0
   _canDoCombo: 0
+  isUsingRightHand: 0
+  isUsingLeftHand: 0
+  isInvulerable: 0
 --- !u!136 &666362420
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1205,12 +1208,16 @@ MonoBehaviour:
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
+  isDead: 0
   _healthLevel: 10
   _maxHealth: 0
   _currentHealth: 0
   _staminaLevel: 10
   _maxStamina: 0
   _currentStamina: 0
+  staminaRegenerationAmount: 100
+  staminaRegenTimer: 0
+  staminaRegenTime: 0.5
   _healthBar: {fileID: 414255267}
   _staminaBar: {fileID: 0}
 --- !u!114 &666362424
@@ -1238,6 +1245,8 @@ MonoBehaviour:
   _sprintSpeed: 7
   _rotationSpeed: 10
   _fallingSpeed: 1000
+  characterCollider: {fileID: 0}
+  characterCollisionBlockerCollider: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -20082,6 +20091,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e96f4872cfea0cb41badf4a7bd7a74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthLevel: 10
+  maxHealth: 0
+  currentHealth: 0
+  staminaLevel: 10
+  maxStamina: 0
+  currentStamina: 0
+  isDead: 0
   _healthLevel: 10
   _maxHealth: 0
   _currentHealth: 0
