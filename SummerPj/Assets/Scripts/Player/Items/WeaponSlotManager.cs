@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WeaponSlotManager : MonoBehaviour
 {
+    PlayerManager _playerManager;
     public WeaponItem _attackingWeapon;
 
     WeaponHolderSlot _leftHandSlot;
@@ -22,25 +23,26 @@ public class WeaponSlotManager : MonoBehaviour
 
     private void Awake()
     {
+        _playerManager = GetComponentInParent<PlayerManager>(); 
         animator = GetComponent<Animator>();
         _quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
         _playerStats = GetComponentInParent<PlayerStats>();
         _inputHandler = GetComponentInParent<InputHandler>();
 
-        WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>(true);
-        foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
+        WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
+        foreach(WeaponHolderSlot weaponslot in weaponHolderSlots)
         {
-            if (weaponSlot._isLeftHandSlot)
+            if(weaponslot._isLeftHandSlot)
             {
-                _leftHandSlot = weaponSlot;
+                _leftHandSlot = weaponslot;
             }
-            else if (weaponSlot._isRightHandSlot)
+            else if(weaponslot._isRightHandSlot)
             {
-                _rightHandSlot = weaponSlot;
+                _rightHandSlot = weaponslot;
             }
-            else if(weaponSlot._isBackSlot)
+            else if(weaponslot._isBackSlot)
             {
-                _backSlot = weaponSlot;
+                _backSlot = weaponslot;
             }
         }
     }
@@ -122,32 +124,9 @@ public class WeaponSlotManager : MonoBehaviour
     {
         _leftHandDamageCollider.EnableDamagecollider();
     }
-
-    public void OpenRightDamageCollier()
-    {
-        _rightHandDamageCollider.EnableDamagecollider();
-    }
-
-    public void CloseLeftDamageCollier()
-    {
-        _leftHandDamageCollider.DisableDamagecollider();
-    }
-
-    public void CloseRightDamageCollier()
-    {
-        _rightHandDamageCollider.DisableDamagecollider();
-    }
-
     #endregion
 
     #region 스테미나
-    public void DrainStaminaLightAttack()
-    {
-        _playerStats.TakeStaminaDamage(Mathf.RoundToInt(_attackingWeapon.baseStaminar * _attackingWeapon.lightAttackMultiplier));
-    }
-    public void DrainStaminaHeavyAttack()
-    {
-        _playerStats.TakeStaminaDamage(Mathf.RoundToInt(_attackingWeapon.baseStaminar * _attackingWeapon.heavyAttackMultiplier));
-    }
+
     #endregion
 }

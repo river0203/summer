@@ -72,10 +72,18 @@ public class AnimatorHandler : AnimatorManager
     {
         _anim.SetBool("canDoCombo", true);
     }
-
     public void Disablecombo()
     {
         _anim.SetBool("canDoCombo", false);
+    }
+    
+    public void EnableIsInvulerable()
+    {
+        _anim.SetBool("isInvulerable", true);
+    }
+    public void DisableIsvulerable()
+    {
+        _anim.SetBool("isInvulerable", false);
     }
 
     private void OnAnimatorMove()

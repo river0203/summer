@@ -8,7 +8,7 @@ public class StaminaBar : MonoBehaviour
 {
     public Slider _slider;
 
-    public void Init(int maxStamina)
+    public void Init(float maxStamina)
     {
         if (_slider == null)
             _slider = GetComponent<Slider>();
@@ -17,7 +17,7 @@ public class StaminaBar : MonoBehaviour
         _slider.value = maxStamina;
     }
 
-    public void SetCurrentStamina(int currentStamina)
+    public void SetCurrentStamina(float currentStamina)
     {
         _slider.value = currentStamina;
     }

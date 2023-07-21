@@ -29,7 +29,7 @@ public class DamageCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Hittable")
+        if (other.tag == "Player")
         {
              PlayerStats playerStats = GetComponent<PlayerStats>();
 
