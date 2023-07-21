@@ -1215,7 +1215,7 @@ MonoBehaviour:
   _staminaLevel: 10
   _maxStamina: 0
   _currentStamina: 0
-  staminaRegenerationAmount: 100
+  staminaRegenerationAmount: 1
   staminaRegenTimer: 0
   staminaRegenTime: 0.5
   _healthBar: {fileID: 414255267}
@@ -1241,12 +1241,12 @@ MonoBehaviour:
   _minimumDistanceNeededToBeginFall: 1
   _groundDirectionRayDistance: 0.2
   _inAirTimer: 0
-  _movementSpeed: 5
-  _sprintSpeed: 7
+  _movementSpeed: 1.5
+  _sprintSpeed: 3
   _rotationSpeed: 10
   _fallingSpeed: 1000
-  characterCollider: {fileID: 0}
-  characterCollisionBlockerCollider: {fileID: 0}
+  characterCollider: {fileID: 666362420}
+  characterCollisionBlockerCollider: {fileID: 666362420}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
