@@ -73,8 +73,6 @@ public class EnemyManager : CharacterManager
 
     private void HandleRecoveryTimer()
     {
-        Debug.Log(currentRecoveryTime);
-
         if(currentRecoveryTime > 0)
         {
             currentRecoveryTime -= Time.deltaTime;
