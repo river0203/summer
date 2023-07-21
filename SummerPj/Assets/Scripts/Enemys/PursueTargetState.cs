@@ -9,8 +9,6 @@ public class PursueTargetState : State
     public CombatStanceState combatStanceState;
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
-        Debug.Log(enemyManager.isPreformingAction);
-
         if (enemyManager.isPreformingAction)
         {
             return this;

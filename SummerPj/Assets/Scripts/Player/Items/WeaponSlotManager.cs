@@ -124,9 +124,25 @@ public class WeaponSlotManager : MonoBehaviour
     {
         _leftHandDamageCollider.EnableDamagecollider();
     }
+
+    public void CloseLeftDamageCollier()
+    {
+        _leftHandDamageCollider.DisableDamagecollider();
+    }
+
+    public void OpenRightDamageCollier()
+    {
+        _rightHandDamageCollider.EnableDamagecollider();
+    }
+    public void CloseRightDamageCollier()
+    {
+        _rightHandDamageCollider.DisableDamagecollider();
+    }
     #endregion
 
     #region 스테미나
+
+
 
     #endregion
 }

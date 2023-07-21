@@ -54,7 +54,7 @@ public class PlayerManager : CharacterManager
         _inputHandler.TickInput(delta);
         _playerLocomotion.HandleJumping();
         _playerLocomotion.HandleRollingAndSprinting(delta);
-        _playerStats.RegenerateStamina();
+        //_playerStats.RegenerateStamina();
 
         // 플레이어 이동
         _isSprinting = _inputHandler.b_input;
