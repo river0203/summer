@@ -93,4 +93,16 @@ public class PlayerStats : CharacterStats
 
         }
     }
+
+    public void HealPlayer(int healAmount)
+    {
+        currentHealth = currentHealth + healAmount;
+
+        if(currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        _healthBar.SetCurrentHealth(currentHealth);
+    }
 }

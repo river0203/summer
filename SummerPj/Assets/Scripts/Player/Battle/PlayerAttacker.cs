@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttacker : MonoBehaviour
 {
     AnimatorHandler _animHandler;
+    PlayerStats _playerStats;
     PlayerManager _playerManager;
     InputHandler _inputHandler;
     PlayerInventory _playerInventory;
@@ -13,6 +14,7 @@ public class PlayerAttacker : MonoBehaviour
 
     private void Awake()
     {
+        _playerStats = GetComponentInParent<PlayerStats>();
         _playerInventory = GetComponentInParent<PlayerInventory>();
         _playerManager = GetComponentInParent<PlayerManager>();
         _animHandler = GetComponent<AnimatorHandler>();
@@ -115,11 +117,16 @@ public class PlayerAttacker : MonoBehaviour
     {
         if(weapon.isFaithCaster)
         {
-            if(_playerInventory.currentSpell != null && _playerInventory.currentSpell.isFaithSpell)
+            if(_playerInventory._currentSpell != null && _playerInventory._currentSpell.isFaithSpell)
             {
-
+                _playerInventory._currentSpell.AttemptToCastSpell(_animHandler, _playerStats);
             }
         }
+    }
+
+    private void SuccessfullyCastSpell()
+    {
+        _playerInventory._currentSpell.SucessfullyCastSpell(_animHandler, _playerStats);
     }
     #endregion
 }
