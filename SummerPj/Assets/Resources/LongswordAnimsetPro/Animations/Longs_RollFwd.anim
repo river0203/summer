@@ -97622,15 +97622,15 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 1
   m_Events:
-  - time: 0.11666667
-    functionName: EnableIsInvulerable()
+  - time: 0.1
+    functionName: EnableIsInvulerable
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.6
-    functionName: DisableIsInvulerable()
+  - time: 0.43333334
+    functionName: DisableIsvulerable
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
