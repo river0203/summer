@@ -1170,7 +1170,7 @@ MonoBehaviour:
   _unarmedWeapon: {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
   _weaponsInRightHandSlots:
   - {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
-  - {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
+  - {fileID: 11400000, guid: b583315338c63984680536c9c224c831, type: 2}
   _weaponsInLeftHandSlots:
   - {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
   - {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
@@ -1241,12 +1241,12 @@ MonoBehaviour:
   _minimumDistanceNeededToBeginFall: 1
   _groundDirectionRayDistance: 0.2
   _inAirTimer: 0
-  _movementSpeed: 1.5
-  _sprintSpeed: 3
+  _movementSpeed: 5
+  _sprintSpeed: 7
   _rotationSpeed: 10
   _fallingSpeed: 1000
-  characterCollider: {fileID: 666362420}
-  characterCollisionBlockerCollider: {fileID: 666362420}
+  characterCollider: {fileID: 0}
+  characterCollisionBlockerCollider: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -5887,8 +5887,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

@@ -27,4 +27,10 @@ public class WeaponItem : Item
     public int baseStaminar;
     public float lightAttackMultiplier;
     public float heavyAttackMultiplier;
+
+    [Header("Weapon Type")]
+    public bool isSpellCaster;
+    public bool isFaithCaster;
+    public bool isPyroCaster;
+    public bool isMeleeWeapon;
 }

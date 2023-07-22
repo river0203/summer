@@ -42,7 +42,7 @@ public class InputHandler : MonoBehaviour
     #endregion
 
     PlayerInputAction _inputActions;
-    PlayerAttack _playerAttack;
+    PlayerAttacker _playerAttack;
     PlayerInventory _playerInventory;
     PlayerManager _playerManager;
     WeaponSlotManager _weaponSlotManager;
@@ -68,7 +68,7 @@ public class InputHandler : MonoBehaviour
 
     private void Awake()
     {
-        _playerAttack = GetComponent<PlayerAttack>();
+        _playerAttack = GetComponentInChildren<PlayerAttacker>();
         _playerInventory = GetComponent<PlayerInventory>();
         _playerManager = GetComponent<PlayerManager>();
         _cameraHandler = FindObjectOfType<CameraHandler>();
@@ -167,22 +167,7 @@ public class InputHandler : MonoBehaviour
     {
         if (la_input)
         {
-            if (_playerManager._canDoCombo)
-            {
-                _comboFlag = true;
-                _playerAttack.HandleWeaponCombo(_playerInventory._rightWeapon);
-                _comboFlag = false;
-            }
-            else
-            {
-                if (_playerManager._isInteracting)
-                    return;
-                if (_playerManager._canDoCombo)
-                    return;
-
-                _animatorHandler._anim.SetBool("isUsingRightHand", true);
-                _playerAttack.HandleLightAttack(_playerInventory._rightWeapon);
-            }
+            _playerAttack.HandleRBAction();
         }
         if (ha_input)
         {
