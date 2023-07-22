@@ -8,9 +8,14 @@ public class PlayerStats : CharacterStats
     public int _maxHealth;
     public int _currentHealth;
 
+    public int _focusLevel = 10;
+    public float _maxFocusPoints = 100;
+    public float _currentFocusPoints;
+
     public int _staminaLevel = 10;
     public float _maxStamina = 100;
     public float _currentStamina;
+
     public float staminaRegenerationAmount = 1;
     public float staminaRegenTimer = 0;
     public float staminaRegenTime = 0.5f;
@@ -19,9 +24,10 @@ public class PlayerStats : CharacterStats
     public StaminaBar _staminaBar;
     AnimatorHandler _animHandler;
     PlayerManager _playerManager;
-
+    public FocusPointBar _focusPointBar;
     private void Awake()
     {
+        _focusPointBar = FindObjectOfType<FocusPointBar>();
         _playerManager = GetComponent<PlayerManager>();
         _healthBar = FindObjectOfType<HealthBar>();
         _staminaBar = FindObjectOfType<StaminaBar>();
@@ -35,6 +41,9 @@ public class PlayerStats : CharacterStats
 
         _currentStamina = SetMaxStaminaFromStaminaLevel();
         _staminaBar.Init(_maxStamina);
+
+        _currentFocusPoints = SetMaxFocusPointsFromFocusLevel();
+        _focusPointBar.Init(_maxFocusPoints);
     }
 
     private int SetMaxHealthFromHealthLevel()
@@ -47,6 +56,12 @@ public class PlayerStats : CharacterStats
     {
         _maxStamina = _staminaLevel * 10;
         return _maxStamina;
+    }
+
+    private float SetMaxFocusPointsFromFocusLevel()
+    {
+        _maxFocusPoints = _focusLevel * 10;
+        return _maxFocusPoints;
     }
 
     public void TakeDamage(int damege)
@@ -104,5 +119,16 @@ public class PlayerStats : CharacterStats
         }
 
         _healthBar.SetCurrentHealth(currentHealth);
+    }
+
+    public void DeductFocusPoints(float focusPoints) 
+    { 
+        _currentFocusPoints = _currentFocusPoints - focusPoints;
+
+        if(_currentFocusPoints < 0)
+        {
+            _currentFocusPoints = 0;
+        }
+        _focusPointBar.SetCurrentFocusPoints(_currentFocusPoints);
     }
 }

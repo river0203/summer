@@ -12,5 +12,9 @@ public class CharacterStats : MonoBehaviour
     [HideInInspector] public float maxStamina;
     [HideInInspector] public float currentStamina;
 
+    [HideInInspector] public int focusLevel = 10;
+    [HideInInspector] public float maxFocusPoints;
+    [HideInInspector] public float currentFocusPoints;
+
     [HideInInspector] public bool isDead;
 }

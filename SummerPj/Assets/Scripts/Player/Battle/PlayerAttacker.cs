@@ -115,11 +115,21 @@ public class PlayerAttacker : MonoBehaviour
 
     private void PerformRBMagicAction(WeaponItem weapon)
     {
+        if (_playerManager._isInteracting)
+            return;
+
         if(weapon.isFaithCaster)
         {
             if(_playerInventory._currentSpell != null && _playerInventory._currentSpell.isFaithSpell)
             {
-                _playerInventory._currentSpell.AttemptToCastSpell(_animHandler, _playerStats);
+                if(_playerStats._currentFocusPoints >= _playerInventory._currentSpell.focusPointCost)
+                {
+                    _playerInventory._currentSpell.AttemptToCastSpell(_animHandler, _playerStats);
+                }
+                else
+                {
+                    _animHandler.PlayTargetAnimation("Shrug", true);
+                }
             }
         }
     }

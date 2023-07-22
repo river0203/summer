@@ -7,11 +7,12 @@ public class HealthBar : MonoBehaviour
 {
     public Slider _slider;
 
+    public void Start()
+    {
+        _slider = GetComponent<Slider>();
+    }
     public void Init(int maxHealth)
     {
-        if (_slider == null)
-            _slider = GetComponent<Slider>();
-
         _slider.maxValue = maxHealth;
         _slider.value = maxHealth;
     }
