@@ -1296,6 +1296,7 @@ MonoBehaviour:
   _lockOnFlag: 0
   _inventoryFlag: 0
   _dodgeInputTimer: 0
+  criticalAttackRayCastStartPoint: {fileID: 0}
 --- !u!54 &666362417
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1343,6 +1344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lockOnTransform: {fileID: 1946346013}
+  _backStabCollider: {fileID: 0}
   interactableUIGameObject: {fileID: 140222481}
   _isInteracting: 0
   _isSprinting: 0
@@ -1378,7 +1380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d0f538cfbc6fc44882f53873f6193d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentSpell: {fileID: 11400000, guid: e54aaed16fc9fdf48997a8a01ccfd8bc, type: 2}
+  _currentSpell: {fileID: 0}
   _rightWeapon: {fileID: 11400000, guid: 7c40c447e90fd1d46ae14f419dd8c48d, type: 2}
   _leftWeapon: {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
   _unarmedWeapon: {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
@@ -1404,31 +1406,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3504c82d872e8c8439df46b7d9e80b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthLevel: 10
-  maxHealth: 0
-  currentHealth: 0
-  staminaLevel: 10
-  maxStamina: 0
-  currentStamina: 0
-  focusLevel: 10
-  maxFocusPoints: 0
-  currentFocusPoints: 0
-  isDead: 0
+  _healthLevel: 10
+  _maxHealth: 0
+  _currentHealth: 0
+  _staminaLevel: 10
+  _maxStamina: 0
+  _currentStamina: 0
+  _focusLevel: 10
+  _maxFocusPoints: 0
+  _currentFocusPoints: 0
+  _isDead: 0
   _healthLevel: 10
   _maxHealth: 0
   _currentHealth: 0
   _focusLevel: 10
-  _maxFocusPoints: 0
+  _maxFocusPoints: 100
   _currentFocusPoints: 0
   _staminaLevel: 10
   _maxStamina: 0
   _currentStamina: 0
-  staminaRegenerationAmount: 1
+  staminaRegenerationAmount: 200
   staminaRegenTimer: 0
   staminaRegenTime: 0.5
   _healthBar: {fileID: 414255267}
   _staminaBar: {fileID: 0}
-  _focusPointBar: {fileID: 239796717}
+  _focusPointBar: {fileID: 0}
 --- !u!114 &666362424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1450,8 +1452,8 @@ MonoBehaviour:
   _minimumDistanceNeededToBeginFall: 1
   _groundDirectionRayDistance: 0.2
   _inAirTimer: 0
-  _movementSpeed: 5
-  _sprintSpeed: 7
+  _movementSpeed: 1.5
+  _sprintSpeed: 3
   _rotationSpeed: 10
   _fallingSpeed: 1000
   characterCollider: {fileID: 0}
@@ -4067,7 +4069,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 334659856292360429}
         m_TargetAssemblyTypeName: EquipmentWindowUI, Assembly-CSharp
         m_MethodName: SelectLeftHandSlot01
         m_Mode: 1
@@ -4778,7 +4780,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 334659856292360429}
         m_TargetAssemblyTypeName: EquipmentWindowUI, Assembly-CSharp
         m_MethodName: SelectLeftHandSlot02
         m_Mode: 1
@@ -6481,7 +6483,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 334659856292360429}
         m_TargetAssemblyTypeName: EquipmentWindowUI, Assembly-CSharp
         m_MethodName: SelectRightHandSlot02
         m_Mode: 1
@@ -6687,7 +6689,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 334659856292360429}
         m_TargetAssemblyTypeName: EquipmentWindowUI, Assembly-CSharp
         m_MethodName: SelectRightHandSlot01
         m_Mode: 1
@@ -20499,19 +20501,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e96f4872cfea0cb41badf4a7bd7a74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthLevel: 10
-  maxHealth: 0
-  currentHealth: 0
-  staminaLevel: 10
-  maxStamina: 0
-  currentStamina: 0
-  focusLevel: 10
-  maxFocusPoints: 0
-  currentFocusPoints: 0
-  isDead: 0
   _healthLevel: 10
   _maxHealth: 0
   _currentHealth: 0
+  _staminaLevel: 10
+  _maxStamina: 0
+  _currentStamina: 0
+  _focusLevel: 10
+  _maxFocusPoints: 0
+  _currentFocusPoints: 0
+  _isDead: 0
 --- !u!4 &6451010654895516823
 Transform:
   m_ObjectHideFlags: 0

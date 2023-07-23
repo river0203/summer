@@ -65,7 +65,7 @@ public class PlayerLocomotion : MonoBehaviour
         // 플레이어가 시작하자마자 낙하하는 애니메이션이 재생하는 것을 방지
         _playerManager._isGrounded = true;
         _ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
-        Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
+        //Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
     }
 
     #region 이동

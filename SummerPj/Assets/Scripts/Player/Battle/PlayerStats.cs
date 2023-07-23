@@ -4,21 +4,9 @@ using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
-    public int _healthLevel = 10;
-    public int _maxHealth;
-    public int _currentHealth;
-
-    public int _focusLevel = 10;
-    public float _maxFocusPoints = 100;
-    public float _currentFocusPoints;
-
-    public int _staminaLevel = 10;
-    public float _maxStamina = 100;
-    public float _currentStamina;
-
-    public float staminaRegenerationAmount = 100;
-    public float staminaRegenTimer = 0;
-    public float staminaRegenTime = 0.5f;
+    public float _staminaRegenerationAmount = 100;
+    public float _staminaRegenTimer = 0;
+    public float _staminaRegenTime = 0.5f;
 
     public HealthBar _healthBar;
     public StaminaBar _staminaBar;
@@ -95,14 +83,14 @@ public class PlayerStats : CharacterStats
     {
         if(_playerManager._isInteracting)
         {
-            staminaRegenTimer = 0;
+            _staminaRegenTimer = 0;
         }
         else 
         {
-            staminaRegenTimer += Time.deltaTime;
-            if (_currentStamina < _maxStamina && staminaRegenTimer > staminaRegenTime)
+            _staminaRegenTimer += Time.deltaTime;
+            if (_currentStamina < _maxStamina && _staminaRegenTimer > _staminaRegenTime)
             {
-                _currentStamina += staminaRegenerationAmount * Time.deltaTime;
+                _currentStamina += _staminaRegenerationAmount * Time.deltaTime;
                 _staminaBar.SetCurrentStamina(Mathf.RoundToInt(_currentStamina));
             }
 
