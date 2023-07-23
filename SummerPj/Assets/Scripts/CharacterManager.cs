@@ -5,4 +5,5 @@ using UnityEngine;
 public class CharacterManager : MonoBehaviour
 {
     public Transform _lockOnTransform;
+    public BoxCollider _backStabCollider;
 }

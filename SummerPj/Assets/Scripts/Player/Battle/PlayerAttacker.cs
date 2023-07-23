@@ -12,6 +12,8 @@ public class PlayerAttacker : MonoBehaviour
     WeaponSlotManager _weaponSlotManager;
     public string _lastAttack;
 
+    LayerMask backStabLayer = 1 << 11;
+
     private void Awake()
     {
         _playerStats = GetComponentInParent<PlayerStats>();
@@ -113,6 +115,15 @@ public class PlayerAttacker : MonoBehaviour
         }
     }
 
+    private void AttemptBackStabOrRiposte()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(_inputHandler.criticalAttackRayCastStartPoint.position, transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
+        {
+            CharacterManager _characterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+        }
+    }
     private void PerformRBMagicAction(WeaponItem weapon)
     {
         if (_playerManager._isInteracting)

@@ -19,6 +19,7 @@ public class InputHandler : MonoBehaviour
     public bool y_Input;
     public bool la_input;
     public bool ha_input;
+    public bool critical_Attack_Input;
     public bool jump_Input;
     public bool inventory_Input;
     public bool lockOnInput;
@@ -39,10 +40,12 @@ public class InputHandler : MonoBehaviour
     public bool _lockOnFlag;
     public bool _inventoryFlag;
     public float _dodgeInputTimer;
+
+    public Transform criticalAttackRayCastStartPoint;
     #endregion
 
     PlayerInputAction _inputActions;
-    PlayerAttacker _playerAttack;
+    PlayerAttacker _playerAttacker;
     PlayerInventory _playerInventory;
     PlayerManager _playerManager;
     WeaponSlotManager _weaponSlotManager;
@@ -68,7 +71,7 @@ public class InputHandler : MonoBehaviour
 
     private void Awake()
     {
-        _playerAttack = GetComponentInChildren<PlayerAttacker>();
+        _playerAttacker = GetComponentInChildren<PlayerAttacker>();
         _playerInventory = GetComponent<PlayerInventory>();
         _playerManager = GetComponent<PlayerManager>();
         _cameraHandler = FindObjectOfType<CameraHandler>();
@@ -97,6 +100,7 @@ public class InputHandler : MonoBehaviour
             _inputActions.PlayerActions.Y.performed += i => y_Input = true;
             _inputActions.PlayerMovement.LockOnTargetLeft.performed += i => { right_Stick_Left_Input = true; };
             _inputActions.PlayerMovement.LockOnTargetLeftMouce.performed += i =>
+            _inputActions.PlayerActions.CriticalAttack.performed += i => critical_Attack_Input = true;
 
             {
                 if (_mouseX < -10)
@@ -167,11 +171,11 @@ public class InputHandler : MonoBehaviour
     {
         if (la_input)
         {
-            _playerAttack.HandleRBAction();
+            _playerAttacker.HandleRBAction();
         }
         if (ha_input)
         {
-            _playerAttack.HandleHeavyAttack(_playerInventory._rightWeapon);
+            _playerAttacker.HandleHeavyAttack(_playerInventory._rightWeapon);
         }
     }
 
@@ -279,6 +283,15 @@ public class InputHandler : MonoBehaviour
                 _weaponSlotManager.LoadWeaponOnSlot(_playerInventory._rightWeapon, false);
                 _weaponSlotManager.LoadWeaponOnSlot(_playerInventory._leftWeapon, true);
             }
+        }
+    }
+
+    private void HandleCriticalAttackInput()
+    {
+        if(critical_Attack_Input)
+        {
+            critical_Attack_Input = false;
+            _playerAttacker.
         }
     }
 #endregion
