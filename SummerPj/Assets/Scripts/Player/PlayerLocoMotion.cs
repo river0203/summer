@@ -35,9 +35,9 @@ public class PlayerLocomotion : MonoBehaviour
 
     [Header("Movement Stats")]
     [SerializeField]
-    float _movementSpeed = 5;
+    float _movementSpeed = 1.5f;
     [SerializeField]
-    float _sprintSpeed = 7;
+    float _sprintSpeed = 3;
     [SerializeField]
     float _rotationSpeed = 10;
     [SerializeField]
