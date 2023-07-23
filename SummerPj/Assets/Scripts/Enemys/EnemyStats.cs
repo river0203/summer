@@ -1,14 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.Processors;
 
 public class EnemyStats : CharacterStats
-{
-    public int _healthLevel = 10;
-    public int _maxHealth;
-    public int _currentHealth;
-    
+{   
     Animator _anim;
 
     private void Awake()
@@ -29,8 +24,6 @@ public class EnemyStats : CharacterStats
 
     public void TakeDamage(int damege)
     {
-        if (isDead) return;
-
         _currentHealth -= damege;
         _anim.Play("Damaged");
 
@@ -38,7 +31,6 @@ public class EnemyStats : CharacterStats
         {
             _currentHealth = 0;
             _anim.Play("Dead");
-            isDead = true;   
         }
     }
 }

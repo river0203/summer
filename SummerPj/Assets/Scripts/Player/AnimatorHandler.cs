@@ -1,12 +1,12 @@
+using SG;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 // Animator의 파라미터 변수를 변경시켜줌 
-public class AnimatorHandler : MonoBehaviour
+public class AnimatorHandler : AnimatorManager
 {
     PlayerManager _playerManager;
-    public Animator _anim;
     InputHandler _inputHandler;
     PlayerLocomotion _playerLocomotion;
     int _vertical;
@@ -63,13 +63,6 @@ public class AnimatorHandler : MonoBehaviour
 
         _anim.SetFloat(_vertical, v, 0.1f, Time.deltaTime);
         _anim.SetFloat(_horizontal, h, 0.1f, Time.deltaTime);
-    }
-
-    public void PlayTargetAnimation(string targetAnim, bool isInteracting)
-    {
-        _anim.applyRootMotion = isInteracting;
-        _anim.SetBool("isInteracting", isInteracting);
-        _anim.CrossFade(targetAnim, 0.2f);
     }
 
     public void CanRotate() { canRotate = true; }

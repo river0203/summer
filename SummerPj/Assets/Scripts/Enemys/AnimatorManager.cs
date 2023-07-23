@@ -6,14 +6,13 @@ namespace SG
 { 
     public class AnimatorManager : MonoBehaviour
     {
-        //AnimatorHandler => AnimatorManager 
+        public Animator _anim;
 
-        public Animator anim;
-        public void PlayerTargetAnimation(string targetAnim, bool isInteracting)
+        public void PlayTargetAnimation(string targetAnim, bool isInteracting)
         {
-            anim.applyRootMotion = isInteracting;
-            anim.SetBool("isInteracting", isInteracting);
-            anim.CrossFade(targetAnim, 0.2f);
+            _anim.applyRootMotion = isInteracting;
+            _anim.SetBool("isInteracting", isInteracting);
+            _anim.CrossFade(targetAnim, 0.2f);
         }
     }
 }

@@ -14,9 +14,9 @@ TagManager:
   - Water
   - UI
   - Enemy
+  - 
+  - 
   - Character
-  - CharacterCollisionBlocker
-  - Player
   - Controller
   - BackStab
   - 
