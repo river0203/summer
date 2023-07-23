@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    [HideInInspector] public int healthLevel = 10;
-    [HideInInspector] public int maxHealth;
-    [HideInInspector] public int currentHealth;
+    [HideInInspector] public int _healthLevel = 10;
+    [HideInInspector] public int _maxHealth;
+    [HideInInspector] public int _currentHealth;
 
-    [HideInInspector] public int staminaLevel = 10;
-    [HideInInspector] public float maxStamina;
-    [HideInInspector] public float currentStamina;
+    [HideInInspector] public int _staminaLevel = 10;
+    [HideInInspector] public float _maxStamina;
+    [HideInInspector] public float _currentStamina;
 
-    [HideInInspector] public int focusLevel = 10;
-    [HideInInspector] public float maxFocusPoints;
-    [HideInInspector] public float currentFocusPoints;
+    [HideInInspector] public int _focusLevel = 10;
+    [HideInInspector] public float _maxFocusPoints;
+    [HideInInspector] public float _currentFocusPoints;
 
-    [HideInInspector] public bool isDead;
+    [HideInInspector] public bool _isDead;
 }

@@ -68,7 +68,7 @@ public class PlayerStats : CharacterStats
     {
         if (_playerManager.isInvulerable) return;
 
-        if (isDead) return;
+        if (_isDead) return;
 
         _currentHealth -= damege;
 
@@ -80,7 +80,7 @@ public class PlayerStats : CharacterStats
         {
             _currentHealth = 0;
             _animHandler.PlayTargetAnimation("Dead", true);
-            isDead = true;
+            _isDead = true;
         }
     }
 
@@ -111,14 +111,14 @@ public class PlayerStats : CharacterStats
 
     public void HealPlayer(int healAmount)
     {
-        currentHealth = currentHealth + healAmount;
+        _currentHealth = _currentHealth + healAmount;
 
-        if(currentHealth > maxHealth)
+        if(_currentHealth > _maxHealth)
         {
-            currentHealth = maxHealth;
+            _currentHealth = _maxHealth;
         }
 
-        _healthBar.SetCurrentHealth(currentHealth);
+        _healthBar.SetCurrentHealth(_currentHealth);
     }
 
     public void DeductFocusPoints(float focusPoints) 

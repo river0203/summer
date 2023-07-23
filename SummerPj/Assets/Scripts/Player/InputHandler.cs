@@ -286,13 +286,5 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    private void HandleCriticalAttackInput()
-    {
-        if(critical_Attack_Input)
-        {
-            critical_Attack_Input = false;
-            _playerAttacker.
-        }
-    }
 #endregion
 }
