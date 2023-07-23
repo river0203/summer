@@ -133,6 +133,7 @@ public class InputHandler : MonoBehaviour
         HandleInventoryInput();
         HandleLockOnInput();
         HandleTwoHandInput();
+        HandleCriticalAttackInput();
     }
 
     // 이동 및 마우스 포지션 갱신 (TickInput에서 실행)
@@ -286,5 +287,10 @@ public class InputHandler : MonoBehaviour
         }
     }
 
+    private void HandleCriticalAttackInput()
+    {
+        critical_Attack_Input = false;
+        _playerAttacker.AttemptBackStabOrRiposte(); 
+    }
 #endregion
 }
