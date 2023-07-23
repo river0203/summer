@@ -16,7 +16,7 @@ public class PlayerStats : CharacterStats
     public float _maxStamina = 100;
     public float _currentStamina;
 
-    public float staminaRegenerationAmount = 1;
+    public float staminaRegenerationAmount = 100;
     public float staminaRegenTimer = 0;
     public float staminaRegenTime = 0.5f;
 

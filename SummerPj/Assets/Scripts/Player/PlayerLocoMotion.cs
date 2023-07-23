@@ -230,7 +230,7 @@ public class PlayerLocomotion : MonoBehaviour
         if (_playerManager._isInAir)
         {
             _rigid.AddForce(-Vector3.up * _fallingSpeed);
-            _rigid.AddForce(moveDirection * _fallingSpeed / 10); // 떨어지는 방향으로 힘을 약간 줌
+            _rigid.AddForce(moveDirection * _fallingSpeed / (_inAirTimer + 20)); // 떨어지는 방향으로 힘을 약간 줌
         }
 
         Vector3 dir = moveDirection;
