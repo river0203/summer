@@ -35,9 +35,9 @@ public class PlayerLocomotion : MonoBehaviour
 
     [Header("Movement Stats")]
     [SerializeField]
-    float _movementSpeed = 5;
+    float _movementSpeed = 1.5f;
     [SerializeField]
-    float _sprintSpeed = 7;
+    float _sprintSpeed = 3;
     [SerializeField]
     float _rotationSpeed = 10;
     [SerializeField]
@@ -65,7 +65,7 @@ public class PlayerLocomotion : MonoBehaviour
         // 플레이어가 시작하자마자 낙하하는 애니메이션이 재생하는 것을 방지
         _playerManager._isGrounded = true;
         _ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
-        Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
+        //Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
     }
 
     #region 이동
@@ -230,7 +230,7 @@ public class PlayerLocomotion : MonoBehaviour
         if (_playerManager._isInAir)
         {
             _rigid.AddForce(-Vector3.up * _fallingSpeed);
-            _rigid.AddForce(moveDirection * _fallingSpeed / 10); // 떨어지는 방향으로 힘을 약간 줌
+            _rigid.AddForce(moveDirection * _fallingSpeed / (_inAirTimer + 20)); // 떨어지는 방향으로 힘을 약간 줌
         }
 
         Vector3 dir = moveDirection;
