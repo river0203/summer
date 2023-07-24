@@ -4,51 +4,21 @@ using UnityEngine;
 
 public class EquipmentWindowUI : MonoBehaviour
 {
-    public bool rightHandSlot01Selected;
-    public bool rightHandSlot02Selected;
-    public bool leftHandSlot01Selected;
-    public bool leftHandSlot02Selected;
+    public List<HandEquipmentSlotUI> _rightHandEquipmentSlotUI = new List<HandEquipmentSlotUI>();
+    public List<HandEquipmentSlotUI> _leftHandEquipmentSlotUI = new List<HandEquipmentSlotUI>();
 
-    public HandEquipmentSlotUI[] handEquipmentSlotUI;
-    
     public void LoadWeaponsOnEquipmentScreen(PlayerInventory playerInventory) 
     { 
-        for(int i = 0; i < handEquipmentSlotUI.Length; i++)
+        for (int i = 0; i < _rightHandEquipmentSlotUI.Count; i++)
         {
-            if (handEquipmentSlotUI[i].rightHandSlot01)
-            {
-                handEquipmentSlotUI[i].AddItem(playerInventory._weaponsInRightHandSlots[0]);
-            }
-            else if (handEquipmentSlotUI[i].rightHandSlot02)
-            {
-                handEquipmentSlotUI[i].AddItem(playerInventory._weaponsInRightHandSlots[1]);
-            }
-            else if (handEquipmentSlotUI[i].leftHandSlot01)
-            {
-                handEquipmentSlotUI[i].AddItem(playerInventory._weaponsInLeftHandSlots[0]);
-            }
-            else
-            {
-                handEquipmentSlotUI[i].AddItem(playerInventory._weaponsInLeftHandSlots[1] );
-            }
+            if (playerInventory._weaponsInRightHandSlots.Count > i)
+                _rightHandEquipmentSlotUI[i].AddItem(playerInventory._weaponsInRightHandSlots[i]);
         }
-    }
 
-    public void SelectRightHandSlot01()
-    {
-        rightHandSlot01Selected = true;
-    }
-    public void SelectRightHandSlot02()
-    {
-        rightHandSlot02Selected = true;
-    }
-    public void SelectLeftHandSlot01()
-    {
-        leftHandSlot01Selected = true;
-
-    }
-    public void SelectLeftHandSlot02()
-    {
-        leftHandSlot02Selected = true;
+        for (int i = 0; i < _leftHandEquipmentSlotUI.Count; ++i)
+        {
+            if (playerInventory._weaponsInLeftHandSlots.Count > i)
+                _leftHandEquipmentSlotUI[i].AddItem(playerInventory._weaponsInLeftHandSlots[i]);
+        }
     }
 }

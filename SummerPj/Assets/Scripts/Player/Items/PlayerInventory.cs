@@ -28,17 +28,10 @@ public class PlayerInventory : MonoBehaviour
 
     private void Start()
     {
-        while (_weaponsInRightHandSlots.Count < _maxInventorySlotCount)
-        {
-            _weaponsInRightHandSlots.Add(new WeaponItem());
-        }
-        while (_weaponsInLeftHandSlots.Count < _maxInventorySlotCount)
-        {
-            _weaponsInLeftHandSlots.Add(new WeaponItem());
-        }
-
         _rightWeapon = _weaponsInRightHandSlots[0];
         _leftWeapon = _weaponsInLeftHandSlots[0];
+        _currentRightWeaponIndex = 0;
+        _currentLeftWeaponIndex = 0;
         _weaponSlotManager.LoadWeaponOnSlot(_rightWeapon, false);
         _weaponSlotManager.LoadWeaponOnSlot(_leftWeapon, true);
     }
