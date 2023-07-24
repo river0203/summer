@@ -19,6 +19,7 @@ public class InputHandler : MonoBehaviour
     public bool y_Input;
     public bool la_input;
     public bool ha_input;
+    public bool lt_Input;
     public bool critical_Attack_Input;
     public bool jump_Input;
     public bool inventory_Input;
@@ -93,6 +94,7 @@ public class InputHandler : MonoBehaviour
             _inputActions.PlayerMovement.Look.performed += i => { _cameraInput = i.ReadValue<Vector2>(); } ;
             _inputActions.PlayerActions.LightAttack.performed += i => { la_input = true; };
             _inputActions.PlayerActions.HeavyAttack.performed += i => { ha_input = true; };
+            _inputActions.PlayerActions.Parry.performed += i => { lt_Input = true; };
             _inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
             _inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
             _inputActions.PlayerActions.Interact.performed += i => { a_input = true; };
@@ -192,6 +194,11 @@ public class InputHandler : MonoBehaviour
         if (ha_input)
         {
             _playerAttacker.HandleHeavyAttack(_playerInventory._rightWeapon);
+        }
+
+        if(lt_Input)
+        {
+            _playerAttacker.HandleLTAction();
         }
     }
 
