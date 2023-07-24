@@ -1,3 +1,4 @@
+using SG;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,15 @@ public class PlayerAttacker : MonoBehaviour
         _inputHandler = GetComponentInParent<InputHandler>();
         _weaponSlotManager = GetComponent<WeaponSlotManager>();
     }
+    private void Update()
+    {
+        Debug.DrawRay(_inputHandler.criticalAttackRayCastStartPoint.position, transform.forward * 10, Color.green, 100f);
+    }
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(_inputHandler.criticalAttackRayCastStartPoint.position, transform.TransformDirection(Vector3.forward) * 100, Color.red);
+    }
+
 
     public void HandleWeaponCombo(WeaponItem weapon)
     {
@@ -115,13 +125,28 @@ public class PlayerAttacker : MonoBehaviour
         }
     }
 
-    private void AttemptBackStabOrRiposte()
+    public void AttemptBackStabOrRiposte()
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(_inputHandler.criticalAttackRayCastStartPoint.position, transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
+        if (Physics.Raycast(_inputHandler.criticalAttackRayCastStartPoint.position, 
+            transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
         {
-            CharacterManager _characterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+            CharacterManager _enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+
+            if(_enemyCharacterManager != null )
+            {
+                _playerManager.transform.position = _enemyCharacterManager._backStabCollider.backStabberStandPoint.position;
+                Vector3 rotationDirection = _playerManager.transform.root.eulerAngles;
+                rotationDirection = hit.transform.position - _playerManager.transform.position;
+                rotationDirection.y = 0;
+                rotationDirection.Normalize();
+                Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                Quaternion targetRotation = Quaternion.Slerp(_playerManager.transform.rotation, tr, 500 * Time.deltaTime);
+                _playerManager.transform.rotation = targetRotation;
+                _animHandler.PlayTargetAnimation("Back Stab", true);
+                _enemyCharacterManager.GetComponentInChildren<EnemyAnimatorManager>().PlayTargetAnimation("Back Stabbed", true);
+            }
         }
     }
     private void PerformRBMagicAction(WeaponItem weapon)
