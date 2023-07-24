@@ -26,13 +26,8 @@ public class PlayerAttacker : MonoBehaviour
     }
     private void Update()
     {
-        Debug.DrawRay(_inputHandler.criticalAttackRayCastStartPoint.position, transform.forward * 10, Color.green, 100f);
+        Debug.DrawRay(_inputHandler.criticalAttackRayCastStartPoint.position, transform.forward, Color.green, 0.1f);
     }
-    private void OnDrawGizmos()
-    {
-        Debug.DrawRay(_inputHandler.criticalAttackRayCastStartPoint.position, transform.TransformDirection(Vector3.forward) * 100, Color.red);
-    }
-
 
     public void HandleWeaponCombo(WeaponItem weapon)
     {
