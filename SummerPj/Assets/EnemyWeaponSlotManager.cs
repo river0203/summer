@@ -70,8 +70,10 @@ public class EnemyWeaponSlotManager : MonoBehaviour
         if(isleft)
         {
             leftHandDamageCollider = leftHandSlot._currentWeaponModel.GetComponent<DamageCollider>();
+            leftHandDamageCollider._characterManager = GetComponentInParent<CharacterManager>();
         }
         else rightHandDamageCollider = rightHandSlot._currentWeaponModel.GetComponent<DamageCollider>();
+        rightHandDamageCollider._characterManager = GetComponentInParent<CharacterManager>();
     }
 
     public void OpenDamageCollider()

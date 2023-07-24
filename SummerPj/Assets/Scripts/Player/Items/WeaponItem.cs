@@ -27,6 +27,9 @@ public class WeaponItem : Item
     public string TH_Light_Attack_01;
     public string TH_Light_Attack_02;
 
+    [Header("Weapon Art")]
+    public string weapon_art;
+
     [Header("Stamina Costs")]
     public int baseStaminar;
     public float lightAttackMultiplier;
@@ -37,4 +40,5 @@ public class WeaponItem : Item
     public bool isFaithCaster;
     public bool isPyroCaster;
     public bool isMeleeWeapon;
+    public bool isShieldWeapon;
 }

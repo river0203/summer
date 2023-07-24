@@ -19,6 +19,7 @@ public class InputHandler : MonoBehaviour
     public bool y_Input;
     public bool la_input;
     public bool ha_input;
+    public bool lt_Input;
     public bool critical_Attack_Input;
     public bool jump_Input;
     public bool inventory_Input;
@@ -49,6 +50,7 @@ public class InputHandler : MonoBehaviour
     PlayerInventory _playerInventory;
     PlayerManager _playerManager;
     WeaponSlotManager _weaponSlotManager;
+    PlayerStats _playerStats;
     CameraHandler _cameraHandler;
     UIManager _uiManager;
     PlayerAnimatorManager _animatorHandler;
@@ -78,6 +80,7 @@ public class InputHandler : MonoBehaviour
         _uiManager = FindObjectOfType<UIManager>();
         _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
         _animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
+        _playerStats = GetComponent<PlayerStats>();
     }
 
     #region '인풋에 따라 변하는 변수'를 변환시켜주는 함수들
@@ -91,9 +94,12 @@ public class InputHandler : MonoBehaviour
             _inputActions.PlayerMovement.Look.performed += i => { _cameraInput = i.ReadValue<Vector2>(); } ;
             _inputActions.PlayerActions.LightAttack.performed += i => { la_input = true; };
             _inputActions.PlayerActions.HeavyAttack.performed += i => { ha_input = true; };
+            _inputActions.PlayerActions.Parry.performed += i => { lt_Input = true; };
             _inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
             _inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
             _inputActions.PlayerActions.Interact.performed += i => { a_input = true; };
+            _inputActions.PlayerActions.Dodge.performed += i => { b_input = true; };
+            _inputActions.PlayerActions.Dodge.canceled += i => { b_input = false; };
             _inputActions.PlayerActions.Jump.performed += i => { jump_Input = true; };
             _inputActions.PlayerActions.Inventory.performed += i => { inventory_Input = true; };
             _inputActions.PlayerMovement.LockOn.performed += i => { lockOnInput = true; };
@@ -150,17 +156,28 @@ public class InputHandler : MonoBehaviour
     private void HandleRollInput(float delta)
     {
         b_input = _inputActions.PlayerActions.Dodge.IsPressed();
-        _sprintFlag = b_input;
 
         if (b_input)
         {
             _dodgeInputTimer += delta;
+
+            if(_playerStats._currentStamina <= 0)
+            {
+                b_input = false;
+                _sprintFlag = false;
+            }
+
+            if(_moveAmount> 0.5f && _playerStats._currentStamina > 0)
+            {
+                _sprintFlag = true;
+            }
         }
         else
         {
+            _sprintFlag = false;
+
             if (_dodgeInputTimer > 0 && _dodgeInputTimer < 0.5f)
             {
-                _sprintFlag = false;
                 _dodgeFlag = true;
             }
 
@@ -177,6 +194,11 @@ public class InputHandler : MonoBehaviour
         if (ha_input)
         {
             _playerAttacker.HandleHeavyAttack(_playerInventory._rightWeapon);
+        }
+
+        if(lt_Input)
+        {
+            _playerAttacker.HandleLTAction();
         }
     }
 

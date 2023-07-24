@@ -13,6 +13,7 @@ public class PlayerLocomotion : MonoBehaviour
     PlayerManager _playerManager;
     Transform _cameraObject;
     InputHandler _inputHandler;
+    PlayerStats _playerstats;
     public Vector3 _moveDirection;
 
     [HideInInspector]
@@ -43,21 +44,27 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     float _fallingSpeed = 1000;
 
+    [Header("Stamina Costs")]
+    [SerializeField]
+    int rollStaminaCost = 15;
+    int backstepStaminaCost = 12;
+    int sprintStaminaCost = 1;
+
     public CapsuleCollider characterCollider;
     public CapsuleCollider characterCollisionBlockerCollider;
 
     private void Awake()
     {
         _cameraHandler = FindObjectOfType<CameraHandler>();
-
-    }
-
-    private void Start()
-    {
         _playerManager = GetComponent<PlayerManager>();
         _rigid = GetComponent<Rigidbody>();
         _inputHandler = GetComponent<InputHandler>();
         _animHandler = GetComponentInChildren<PlayerAnimatorManager>();
+        _playerstats = GetComponent<PlayerStats>();
+    }
+
+    private void Start()
+    {
         _cameraObject = Camera.main.transform;
         _myTransform = transform;
         _animHandler.Init();
@@ -155,6 +162,7 @@ public class PlayerLocomotion : MonoBehaviour
             speed = _sprintSpeed;
             _playerManager._isSprinting = true;
             _moveDirection *= speed;
+            _playerstats.TakeStaminaDamage(sprintStaminaCost);
         }
         else
         {
@@ -186,8 +194,9 @@ public class PlayerLocomotion : MonoBehaviour
     // 구르기 또는 달리기 트리거
     public void HandleRollingAndSprinting(float delta)
     {
-        if (_animHandler._anim.GetBool("isInteracting"))
-            return;
+        if (_animHandler._anim.GetBool("isInteracting")) return;
+
+        if (_playerstats._currentStamina <= 0) return; 
 
         if (_inputHandler._dodgeFlag)
         {
@@ -201,10 +210,12 @@ public class PlayerLocomotion : MonoBehaviour
                 _moveDirection.y = 0;
                 Quaternion rollRotation = Quaternion.LookRotation(_moveDirection);
                 _myTransform.rotation = rollRotation;
+                _playerstats.TakeStaminaDamage(rollStaminaCost);
             }
             else
             {
                 _animHandler.PlayTargetAnimation("BackStep", true);
+                _playerstats.TakeStaminaDamage(backstepStaminaCost);
             }
         }
     }
@@ -300,10 +311,12 @@ public class PlayerLocomotion : MonoBehaviour
     // 점프
     public void HandleJumping()
     {
-        if (_playerManager._isInteracting)
-            return;
+        if (_playerManager._isInteracting)return;
 
-        if(_inputHandler.jump_Input)
+        if (_playerstats._currentStamina <= 0) return;
+
+
+        if (_inputHandler.jump_Input)
         {
             if(_inputHandler._moveAmount > 0)
             {

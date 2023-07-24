@@ -29,7 +29,7 @@ public class PlayerManager : CharacterManager
     private void Awake()
     {
         _cameraHandler = FindObjectOfType<CameraHandler>();
-        _backStabCollider = GetComponentInChildren<BackStabCollider>();
+        _backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
         _inputHandler = GetComponent<InputHandler>();
         _playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         _anim = GetComponentInChildren<Animator>();
@@ -78,6 +78,7 @@ public class PlayerManager : CharacterManager
         _inputHandler._dodgeFlag = false;
         _inputHandler.la_input = false;
         _inputHandler.ha_input = false;
+        _inputHandler.lt_Input = false;
         _inputHandler.d_Pad_Up = false;
         _inputHandler.d_Pad_Down = false;
         _inputHandler.d_Pad_Right = false;

@@ -11,10 +11,12 @@ public class PlayerStats : CharacterStats
     public HealthBar _healthBar;
     public StaminaBar _staminaBar;
     PlayerAnimatorManager _animHandler;
+    InputHandler _inputHandler;
     PlayerManager _playerManager;
     public FocusPointBar _focusPointBar;
     private void Awake()
     {
+        _inputHandler = GetComponent<InputHandler>();
         _focusPointBar = FindObjectOfType<FocusPointBar>();
         _playerManager = GetComponent<PlayerManager>();
         _healthBar = FindObjectOfType<HealthBar>();
@@ -101,6 +103,8 @@ public class PlayerStats : CharacterStats
             _staminaRegenTimer += Time.deltaTime;
             if (_currentStamina < _maxStamina && _staminaRegenTimer > _staminaRegenTime)
             {
+                if (_inputHandler._sprintFlag) return;
+
                 _currentStamina += _staminaRegenerationAmount * Time.deltaTime;
                 _staminaBar.SetCurrentStamina(Mathf.RoundToInt(_currentStamina));
             }
