@@ -1384,6 +1384,7 @@ MonoBehaviour:
   _rightWeapon: {fileID: 11400000, guid: 7c40c447e90fd1d46ae14f419dd8c48d, type: 2}
   _leftWeapon: {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
   _unarmedWeapon: {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
+  _maxInventorySlotCount: 3
   _weaponsInRightHandSlots:
   - {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
   - {fileID: 11400000, guid: b583315338c63984680536c9c224c831, type: 2}
@@ -1416,18 +1417,9 @@ MonoBehaviour:
   _maxFocusPoints: 0
   _currentFocusPoints: 0
   _isDead: 0
-  _healthLevel: 10
-  _maxHealth: 0
-  _currentHealth: 0
-  _focusLevel: 10
-  _maxFocusPoints: 100
-  _currentFocusPoints: 0
-  _staminaLevel: 10
-  _maxStamina: 0
-  _currentStamina: 0
-  staminaRegenerationAmount: 200
-  staminaRegenTimer: 0
-  staminaRegenTime: 0.5
+  _staminaRegenerationAmount: 100
+  _staminaRegenTimer: 0
+  _staminaRegenTime: 0.5
   _healthBar: {fileID: 414255267}
   _staminaBar: {fileID: 0}
   _focusPointBar: {fileID: 0}
