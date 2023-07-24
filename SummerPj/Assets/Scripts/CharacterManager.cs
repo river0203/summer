@@ -7,4 +7,7 @@ public class CharacterManager : MonoBehaviour
     public Transform _lockOnTransform;
     public BoxCollider _backStabBoxCollider;
     public BackStabCollider _backStabCollider;
+    public int pendingCriticalDamage;
+
+
 }

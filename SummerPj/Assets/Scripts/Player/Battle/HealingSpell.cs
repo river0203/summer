@@ -7,7 +7,7 @@ public class HealingSpell : SpellItem
 {
     public int healAmount;
 
-    public override void AttemptToCastSpell(AnimatorHandler _animatorHandler, PlayerStats _playerStats)
+    public override void AttemptToCastSpell(PlayerAnimatorManager _animatorHandler, PlayerStats _playerStats)
     {
         base.AttemptToCastSpell(_animatorHandler, _playerStats);
         GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, _animatorHandler.transform);
@@ -15,7 +15,7 @@ public class HealingSpell : SpellItem
         Debug.Log("Attempting to cast spell...");
     }
 
-    public override void SucessfullyCastSpell(AnimatorHandler _animatorHandler, PlayerStats _playerStats)
+    public override void SucessfullyCastSpell(PlayerAnimatorManager _animatorHandler, PlayerStats _playerStats)
     {
         base.SucessfullyCastSpell(_animatorHandler, _playerStats);
         GameObject instantiatedSpellFX = Instantiate(spellCastFX, _animatorHandler.transform);

@@ -10,7 +10,7 @@ public class PlayerStats : CharacterStats
 
     public HealthBar _healthBar;
     public StaminaBar _staminaBar;
-    AnimatorHandler _animHandler;
+    PlayerAnimatorManager _animHandler;
     PlayerManager _playerManager;
     public FocusPointBar _focusPointBar;
     private void Awake()
@@ -19,7 +19,7 @@ public class PlayerStats : CharacterStats
         _playerManager = GetComponent<PlayerManager>();
         _healthBar = FindObjectOfType<HealthBar>();
         _staminaBar = FindObjectOfType<StaminaBar>();
-        _animHandler = GetComponentInChildren<AnimatorHandler>();
+        _animHandler = GetComponentInChildren<PlayerAnimatorManager>();
     }
 
     private void Start()
@@ -68,6 +68,17 @@ public class PlayerStats : CharacterStats
         {
             _currentHealth = 0;
             _animHandler.PlayTargetAnimation("Dead", true);
+            _isDead = true;
+        }
+    }
+
+    public void TakeDamageNoAnimation(int damage)
+    {
+        _currentHealth -= damage;
+
+        if (_currentHealth <= 0)
+        {
+            _currentHealth = 0;
             _isDead = true;
         }
     }
