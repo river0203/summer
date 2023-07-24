@@ -66,6 +66,7 @@ public class WeaponInventorySlot : MonoBehaviour
         {
             return;
         }
+
         _playerInventory._rightWeapon = _playerInventory._weaponsInRightHandSlots[_playerInventory._currentRightWeaponIndex];
         _playerInventory._leftWeapon = _playerInventory._weaponsInLeftHandSlots[_playerInventory._currentLeftWeaponIndex];
         _weaponSlotManager.LoadWeaponOnSlot(_playerInventory._rightWeapon, false);

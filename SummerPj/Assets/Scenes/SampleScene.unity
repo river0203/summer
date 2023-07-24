@@ -1538,6 +1538,7 @@ MonoBehaviour:
   _rightWeapon: {fileID: 11400000, guid: b583315338c63984680536c9c224c831, type: 2}
   _leftWeapon: {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
   _unarmedWeapon: {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
+  _maxInventorySlotCount: 4
   _weaponsInRightHandSlots:
   - {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
   - {fileID: 11400000, guid: b583315338c63984680536c9c224c831, type: 2}
@@ -2052,7 +2053,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -535, y: -310}
+  m_AnchoredPosition: {x: -885, y: -310}
   m_SizeDelta: {x: 150, y: 225}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1109307155
@@ -2482,7 +2483,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -885, y: -310}
+  m_AnchoredPosition: {x: -535, y: -310}
   m_SizeDelta: {x: 150, y: 225}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1318714032
@@ -2769,7 +2770,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550319349}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.334, z: 0.228}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0.228}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
