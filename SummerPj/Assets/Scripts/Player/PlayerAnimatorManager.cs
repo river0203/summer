@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Animator의 파라미터 변수를 변경시켜줌 
-public class AnimatorHandler : AnimatorManager
+public class PlayerAnimatorManager : AnimatorManager
 {
     PlayerManager _playerManager;
+    PlayerStats _playerStats;
     InputHandler _inputHandler;
     PlayerLocomotion _playerLocomotion;
     int _vertical;
     int _horizontal;
-    public bool canRotate;
 
     public void Init()
     {
+        _playerStats = GetComponentInParent<PlayerStats>();
         _playerManager = GetComponentInParent<PlayerManager>();
         _anim = GetComponent<Animator>();
         _inputHandler = GetComponentInParent<InputHandler>();
@@ -65,8 +66,14 @@ public class AnimatorHandler : AnimatorManager
         _anim.SetFloat(_horizontal, h, 0.1f, Time.deltaTime);
     }
 
-    public void CanRotate() { canRotate = true; }
-    public void StopRotate() { canRotate = false; }
+    public void CanRotate() 
+    {
+        _anim.SetBool("canRotate", true);
+    }
+    public void StopRotate() 
+    {
+        _anim.SetBool("canRotate", false);
+    }
 
     public void EnableCombo()
     {
@@ -76,7 +83,12 @@ public class AnimatorHandler : AnimatorManager
     {
         _anim.SetBool("canDoCombo", false);
     }
-    
+
+    public override void TakeCriticalDamageAnimationEvent()
+    {
+        _playerStats.TakeDamageNoAnimation(_playerManager.pendingCriticalDamage);
+        _playerManager.pendingCriticalDamage = 0;
+    }
     public void EnableIsInvulerable()
     {
         _anim.SetBool("isInvulnerable", true);

@@ -11,6 +11,7 @@ public class PlayerManager : CharacterManager
     Animator _anim;
     CameraHandler _cameraHandler;
     PlayerLocomotion _playerLocomotion;
+    PlayerAnimatorManager _playerAnimatorManager;
     interactableUI _interactableUI;
     public GameObject interactableUIGameObject;
 
@@ -28,11 +29,9 @@ public class PlayerManager : CharacterManager
     private void Awake()
     {
         _cameraHandler = FindObjectOfType<CameraHandler>();
-    }
-
-    void Start()
-    {
+        _backStabCollider = GetComponentInChildren<BackStabCollider>();
         _inputHandler = GetComponent<InputHandler>();
+        _playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         _anim = GetComponentInChildren<Animator>();
         _playerLocomotion = GetComponent<PlayerLocomotion>();
         _interactableUI = FindObjectOfType<interactableUI>();
@@ -46,12 +45,14 @@ public class PlayerManager : CharacterManager
         // 스크립트 꼬임 해결
         _isInteracting = _anim.GetBool("isInteracting");
         _canDoCombo = _anim.GetBool("canDoCombo");
-        _anim.SetBool("isInAir", _isInAir);
         isUsingRightHand = _anim.GetBool("isUsingRightHand");
         isUsingLeftHand = _anim.GetBool("isUsingLeftHand");
         isInvulerable = _anim.GetBool("isInvulnerable");
+        _anim.SetBool("isInAir", _isInAir);
+        _anim.SetBool("isDead", _playerStats._isDead);
 
         _inputHandler.TickInput(delta);
+        _playerAnimatorManager.canRotate = _anim.GetBool("canRotate");
         _playerLocomotion.HandleJumping();
         _playerLocomotion.HandleRollingAndSprinting(delta);
         _playerStats.RegenerateStamina();
@@ -69,6 +70,7 @@ public class PlayerManager : CharacterManager
         float delta = Time.deltaTime;
         _playerLocomotion.HandleMovement(delta);
         _playerLocomotion.HandleFalling(delta, _playerLocomotion._moveDirection);
+        _playerLocomotion.HandleRotation(delta);
     }
 
     private void LateUpdate()

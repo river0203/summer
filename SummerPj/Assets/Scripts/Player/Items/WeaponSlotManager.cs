@@ -5,14 +5,15 @@ using UnityEngine;
 public class WeaponSlotManager : MonoBehaviour
 {
     PlayerManager _playerManager;
+    PlayerInventory _playerInventory;
     public WeaponItem _attackingWeapon;
 
     WeaponHolderSlot _leftHandSlot;
     WeaponHolderSlot _rightHandSlot;
     WeaponHolderSlot _backSlot;
 
-    DamageCollider _leftHandDamageCollider;
-    DamageCollider _rightHandDamageCollider;
+    public DamageCollider _leftHandDamageCollider;
+    public DamageCollider _rightHandDamageCollider;
 
     Animator animator;
 
@@ -23,7 +24,8 @@ public class WeaponSlotManager : MonoBehaviour
 
     private void Awake()
     {
-        _playerManager = GetComponentInParent<PlayerManager>(); 
+        _playerManager = GetComponentInParent<PlayerManager>();
+        _playerInventory = GetComponentInParent<PlayerInventory>();
         animator = GetComponent<Animator>();
         _quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
         _playerStats = GetComponentInParent<PlayerStats>();
@@ -103,13 +105,14 @@ public class WeaponSlotManager : MonoBehaviour
     }
 
     #region 데미지 콜라이더
-
     private void LoadLeftWeaponDamageCollider()
     {
         if (_leftHandSlot._currentWeaponModel == null)
             return;
 
         _leftHandDamageCollider = _leftHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>();
+        _leftHandDamageCollider._currentWeaponDamage = _playerInventory._leftWeapon.baseDamage;
+
     }
 
     private void LoadRightWeaponDamageCollider()
@@ -118,6 +121,7 @@ public class WeaponSlotManager : MonoBehaviour
             return;
 
         _rightHandDamageCollider = _rightHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>();
+        _rightHandDamageCollider._currentWeaponDamage = _playerInventory._rightWeapon.baseDamage;
     }
 
     public void OpenLeftDamageCollier()

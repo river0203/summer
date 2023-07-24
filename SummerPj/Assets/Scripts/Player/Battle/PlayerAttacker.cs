@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using SG;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 public class PlayerAttacker : MonoBehaviour
 {
-    AnimatorHandler _animHandler;
+    PlayerAnimatorManager _animHandler;
     PlayerStats _playerStats;
     PlayerManager _playerManager;
     InputHandler _inputHandler;
@@ -20,15 +21,10 @@ public class PlayerAttacker : MonoBehaviour
         _playerStats = GetComponentInParent<PlayerStats>();
         _playerInventory = GetComponentInParent<PlayerInventory>();
         _playerManager = GetComponentInParent<PlayerManager>();
-        _animHandler = GetComponent<AnimatorHandler>();
+        _animHandler = GetComponent<PlayerAnimatorManager>();
         _inputHandler = GetComponentInParent<InputHandler>();
         _weaponSlotManager = GetComponent<WeaponSlotManager>();
     }
-    private void Update()
-    {
-        Debug.DrawRay(_inputHandler.criticalAttackRayCastStartPoint.position, transform.forward, Color.green, 0.1f);
-    }
-
     public void HandleWeaponCombo(WeaponItem weapon)
     {
         if (_inputHandler._comboFlag)
@@ -128,6 +124,7 @@ public class PlayerAttacker : MonoBehaviour
             transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
         {
             CharacterManager _enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+            DamageCollider rightWeapon = _weaponSlotManager._rightHandDamageCollider;
 
             if(_enemyCharacterManager != null )
             {
@@ -139,6 +136,10 @@ public class PlayerAttacker : MonoBehaviour
                 Quaternion tr = Quaternion.LookRotation(rotationDirection);
                 Quaternion targetRotation = Quaternion.Slerp(_playerManager.transform.rotation, tr, 500 * Time.deltaTime);
                 _playerManager.transform.rotation = targetRotation;
+
+                int criticalDamage = _playerInventory._rightWeapon.criticalDamageMultiplier * rightWeapon._currentWeaponDamage;
+                _enemyCharacterManager.pendingCriticalDamage = criticalDamage;
+
                 _animHandler.PlayTargetAnimation("Back Stab", true);
                 _enemyCharacterManager.GetComponentInChildren<EnemyAnimatorManager>().PlayTargetAnimation("Back Stabbed", true);
             }

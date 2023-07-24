@@ -22,6 +22,17 @@ public class EnemyStats : CharacterStats
         return _maxHealth;
     }
 
+    public void TakeDamageNoAnimation(int damage)
+    {
+        _currentHealth -= damage;
+
+        if (_currentHealth <= 0)
+        {
+            _currentHealth = 0;
+            _isDead = true;
+        }
+    }
+
     public void TakeDamage(int damege)
     {
         _currentHealth -= damege;
@@ -31,6 +42,7 @@ public class EnemyStats : CharacterStats
         {
             _currentHealth = 0;
             _anim.Play("Dead");
+            _isDead = true;
         }
     }
 }
