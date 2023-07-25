@@ -54,7 +54,7 @@ public class PlayerStats : CharacterStats
         return _maxFocusPoints;
     }
 
-    public void TakeDamage(int damege)
+    public void TakeDamage(int damege, string damageAnimation = "Damage_01")
     {
         if (_playerManager.isInvulerable) return;
 
@@ -64,7 +64,7 @@ public class PlayerStats : CharacterStats
 
         _healthBar.SetCurrentHealth(_currentHealth);
 
-        _animHandler.PlayTargetAnimation("Damaged", true);
+        _animHandler.PlayTargetAnimation(damageAnimation, true);
 
         if (_currentHealth <= 0)
         {

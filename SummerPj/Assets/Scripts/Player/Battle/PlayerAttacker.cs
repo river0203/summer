@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlayerAttacker : MonoBehaviour
 {
     PlayerAnimatorManager _animHandler;
+    PlayerEquipmentManager _playerEquipmentHandler;
     PlayerStats _playerStats;
     PlayerManager _playerManager;
     InputHandler _inputHandler;
@@ -20,6 +21,7 @@ public class PlayerAttacker : MonoBehaviour
 
     private void Awake()
     {
+        _playerEquipmentHandler = GetComponent<PlayerEquipmentManager>();
         _playerStats = GetComponentInParent<PlayerStats>();
         _playerInventory = GetComponentInParent<PlayerInventory>();
         _playerManager = GetComponentInParent<PlayerManager>();
@@ -208,6 +210,7 @@ public class PlayerAttacker : MonoBehaviour
         if(_playerManager.isBlocking) { return; }
 
         _animHandler.PlayTargetAnimation("Block Start", false, true);
+        _playerEquipmentHandler.OpenBlockingCollider();
         _playerManager.isBlocking = true;
     }
     private void PerformRBMagicAction(WeaponItem weapon)

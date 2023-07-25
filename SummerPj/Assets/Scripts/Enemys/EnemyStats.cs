@@ -1,3 +1,4 @@
+using SG;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,10 +34,11 @@ public class EnemyStats : CharacterStats
         }
     }
 
-    public void TakeDamage(int damege)
+    public void TakeDamage(int damege, string damageAnimation = "Damage_01")
     {
+        if (_isDead) return;
+
         _currentHealth -= damege;
-        _anim.Play("Damaged");
 
         if (_currentHealth <= 0)
         {

@@ -32,8 +32,8 @@ public class DamageCollider : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-             PlayerStats playerStats = GetComponent<PlayerStats>();
-             CharacterManager _enemycharacterManager = collision.GetComponent<CharacterManager>();
+            PlayerStats playerStats = GetComponent<PlayerStats>();
+            CharacterManager _enemycharacterManager = collision.GetComponent<CharacterManager>();
 
             if(_enemycharacterManager != null)
             {
@@ -42,7 +42,10 @@ public class DamageCollider : MonoBehaviour
                     _characterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
                     return;
                 }
+
             }
+
+
             if (playerStats != null)
             {
                 playerStats.TakeDamage(_currentWeaponDamage);
@@ -52,11 +55,21 @@ public class DamageCollider : MonoBehaviour
         if (collision.tag == "Enemy")
         {
             EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
+            BlockingCollider shield = collision.transform.GetComponentInChildren<BlockingCollider>();
             CharacterManager _enemycharacterManager = collision.GetComponent<CharacterManager>();
 
             if (enemyStats != null)
             {
                 enemyStats.TakeDamage(_currentWeaponDamage);
+            }
+            else if (shield != null && _enemycharacterManager.isBlocking)
+            {
+                float physicalDamageAfterBlock = _currentWeaponDamage - (_currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
+                if (enemyStats != null)
+                {
+                    enemyStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard");
+                    return;
+                }
             }
         }
     }

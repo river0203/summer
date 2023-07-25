@@ -53,6 +53,7 @@ public class InputHandler : MonoBehaviour
     WeaponSlotManager _weaponSlotManager;
     PlayerStats _playerStats;
     CameraHandler _cameraHandler;
+    BlockingCollider _blockingCollider;
     UIManager _uiManager;
     PlayerAnimatorManager _animatorHandler;
 
@@ -61,6 +62,7 @@ public class InputHandler : MonoBehaviour
 
     private void Awake()
     {
+        _blockingCollider = GetComponentInChildren<BlockingCollider>();
         _playerAttacker = GetComponentInChildren<PlayerAttacker>();
         _playerInventory = GetComponent<PlayerInventory>();
         _playerManager = GetComponent<PlayerManager>();
@@ -206,6 +208,11 @@ public class InputHandler : MonoBehaviour
         else
         {
             _playerManager.isBlocking = false;
+
+            if(_blockingCollider.blockingCollider.enabled)
+            {
+                _blockingCollider.DisableBlockingCollider();
+            }
         }
 
         if(lt_Input)
