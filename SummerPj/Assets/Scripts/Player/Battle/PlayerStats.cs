@@ -56,9 +56,11 @@ public class PlayerStats : CharacterStats
 
     public void TakeDamage(int damege)
     {
-        if (_playerManager.isInvulerable) return;
+        if (_playerManager.isInvulerable) 
+            return;
 
-        if (_isDead) return;
+        if (_isDead) 
+            return;
 
         _currentHealth -= damege;
 

@@ -124,23 +124,23 @@ public class WeaponSlotManager : MonoBehaviour
         _rightHandDamageCollider._currentWeaponDamage = _playerInventory._rightWeapon.baseDamage;
     }
 
-    public void OpenLeftDamageCollier()
+    public void OpenDamageCollier()
     {
-        _leftHandDamageCollider.EnableDamagecollider();
+        if (_playerManager.isUsingRightHand)
+        {
+            _rightHandDamageCollider.EnableDamagecollider();
+        }
+        else if( _playerManager.isUsingLeftHand)
+        {
+            _leftHandDamageCollider.EnableDamagecollider();
+        }
     }
 
-    public void CloseLeftDamageCollier()
-    {
-        _leftHandDamageCollider.DisableDamagecollider();
-    }
-
-    public void OpenRightDamageCollier()
-    {
-        _rightHandDamageCollider.EnableDamagecollider();
-    }
-    public void CloseRightDamageCollier()
+    public void CloseDamageCollier()
     {
         _rightHandDamageCollider.DisableDamagecollider();
+        _leftHandDamageCollider.DisableDamagecollider();
+
     }
     #endregion
 

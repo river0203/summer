@@ -60,7 +60,7 @@ public class EnemyStats : CharacterStats
     private void HandleDeath()
     {
         _currentHealth = 0;
-        _enemyAnimatorManager.PlayTargetAnimation("Stage2", true);
+        _enemyAnimatorManager.PlayTargetAnimation("Dead", true);
         _isDead = true; 
     }
 }

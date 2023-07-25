@@ -32,9 +32,9 @@ public class EnemyWeaponSlotManager : MonoBehaviour
     }
 
     private void Start()
-    {
-        _anim = GetComponent<Animator>();
+    {   
         LoadWeaponsOnBothHands();
+
     }
 
     public void LoadWeaponOnSlot(WeaponItem weapon, bool isleft)
@@ -67,14 +67,17 @@ public class EnemyWeaponSlotManager : MonoBehaviour
 
     public void LoadWeaponsDamageCollider(bool isleft)
     {
-        if(isleft)
+        if (isleft)
         {
             leftHandDamageCollider = leftHandSlot._currentWeaponModel.GetComponent<DamageCollider>();
             leftHandDamageCollider._characterManager = GetComponentInParent<CharacterManager>();
         }
-        else rightHandDamageCollider = rightHandSlot._currentWeaponModel.GetComponent<DamageCollider>();
-        rightHandDamageCollider._characterManager = GetComponentInParent<CharacterManager>();
-    }
+        else
+        {
+            rightHandDamageCollider = rightHandSlot._currentWeaponModel.GetComponent<DamageCollider>();
+            rightHandDamageCollider._characterManager = GetComponentInParent<CharacterManager>();
+        }
+    }   
 
     public void OpenDamageCollider()
     {
@@ -89,6 +92,7 @@ public class EnemyWeaponSlotManager : MonoBehaviour
     {
 
     }
+
     public void DrainStaminaHeavyAttack()
     {
 

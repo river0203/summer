@@ -13,6 +13,8 @@ public class AttackState : State
         Vector3 targetDirection = enemyManger.currentTarget.transform.position - transform.position;
         float veiwableAngle = Vector3.Angle(targetDirection, transform.forward);
 
+        HandleRotateTarget(enemyManger);
+
         if (enemyManger.isPreformingAction)
             return combatStanceState;
         
@@ -91,6 +93,36 @@ public class AttackState : State
             }
         }
 
+
+    }
+    
+    private void HandleRotateTarget(EnemyManager enemyManger)
+    {
+        if (enemyManger.isPreformingAction)
+        {
+            Vector3 direction = enemyManger.currentTarget.transform.position - transform.position;
+            direction.y = 0;
+            direction.Normalize();
+
+            if (direction == Vector3.zero)
+            {
+                direction = transform.forward;
+            }
+
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            enemyManger.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, enemyManger.rotationSpeed / Time.deltaTime);
+
+        }
+        else
+        {
+            Vector3 relativeDirection = transform.InverseTransformDirection(enemyManger.navmeshAgent.desiredVelocity);
+            Vector3 targetVelocity = enemyManger.navmeshAgent.velocity;
+
+            enemyManger.navmeshAgent.enabled = true;
+            enemyManger.navmeshAgent.SetDestination(enemyManger.currentTarget.transform.position);
+            enemyManger.enemyRigidBody.velocity = targetVelocity;
+            enemyManger.transform.rotation = Quaternion.Slerp(transform.rotation, enemyManger.navmeshAgent.transform.rotation, enemyManger.rotationSpeed / Time.deltaTime);
+        }
 
     }
 }
