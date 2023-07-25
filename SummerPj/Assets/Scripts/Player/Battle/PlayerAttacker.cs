@@ -101,6 +101,11 @@ public class PlayerAttacker : MonoBehaviour
         }
     }
 
+    public void HandleLBAtcion()
+    {
+        PerformLBBlockingAction();
+    }
+
     public void HandleLTAction()
     {
         if(_playerInventory._rightWeapon.isMeleeWeapon)
@@ -194,6 +199,16 @@ public class PlayerAttacker : MonoBehaviour
                 _enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Riposte", true);
             }
         }
+    }
+
+    void PerformLBBlockingAction()
+    {
+        if(_playerManager._isInteracting) { return; }
+
+        if(_playerManager.isBlocking) { return; }
+
+        _animHandler.PlayTargetAnimation("Block Start", false);
+        _playerManager.isBlocking = true;
     }
     private void PerformRBMagicAction(WeaponItem weapon)
     {

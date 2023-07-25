@@ -20,6 +20,7 @@ public class InputHandler : MonoBehaviour
     public bool la_input;
     public bool ha_input;
     public bool lt_Input;
+    public bool lb_Input;
     public bool critical_Attack_Input;
     public bool jump_Input;
     public bool inventory_Input;
@@ -94,6 +95,8 @@ public class InputHandler : MonoBehaviour
             _inputActions.PlayerMovement.Look.performed += i => { _cameraInput = i.ReadValue<Vector2>(); } ;
             _inputActions.PlayerActions.LightAttack.performed += i => { la_input = true; };
             _inputActions.PlayerActions.HeavyAttack.performed += i => { ha_input = true; };
+            _inputActions.PlayerActions.Block.performed += i => { lb_Input = true; };
+            _inputActions.PlayerActions.Block.canceled += i => { lb_Input = false; };
             _inputActions.PlayerActions.Parry.performed += i => { lt_Input = true; };
             _inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
             _inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
@@ -134,7 +137,7 @@ public class InputHandler : MonoBehaviour
     {
         HandleMoveInput(delta); 
         HandleRollInput(delta);
-        HandleAttackInput(delta);
+        HandleCombatInput(delta);
         HandleQuickSlotsInput();
         HandleInventoryInput();
         HandleLockOnInput();
@@ -185,7 +188,7 @@ public class InputHandler : MonoBehaviour
         }    
     }
 
-    private void HandleAttackInput(float delta)
+    private void HandleCombatInput(float delta)
     {
         if (la_input)
         {
@@ -195,6 +198,16 @@ public class InputHandler : MonoBehaviour
         {
             _playerAttacker.HandleHeavyAttack(_playerInventory._rightWeapon);
         }
+
+        if(lb_Input)
+        {
+            _playerAttacker.HandleLBAtcion();
+        }
+        else
+        {
+            _playerManager.isBlocking = false;
+        }
+
         if(lt_Input)
         {
             if(_twoHandFlag)
