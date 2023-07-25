@@ -7,7 +7,6 @@ using UnityEngine;
         public Animator _anim;
         public bool canRotate;
 
-
         public void PlayTargetAnimation(string targetAnim, bool isInteracting)
         {
             _anim.applyRootMotion = isInteracting;
