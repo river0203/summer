@@ -908,6 +908,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2588640685419567610, guid: 6e6564475c01e1a4ebfe14a9a24689eb, type: 3}
   m_PrefabInstance: {fileID: 1564155363}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1419254753 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1303696079384668977, guid: d97c6c2b17546db4bb8b6521d7a581c8, type: 3}
+  m_PrefabInstance: {fileID: 1303696079135134294}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1a59165d29639b4487459af3aba1b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1433010589
 GameObject:
   m_ObjectHideFlags: 0
@@ -2656,6 +2667,10 @@ PrefabInstance:
       propertyPath: _healthBar
       value: 
       objectReference: {fileID: 414255267}
+    - target: {fileID: 950589028229339691, guid: 88c4f8a659871da4da6881df56eed413, type: 3}
+      propertyPath: _staminaBar
+      value: 
+      objectReference: {fileID: 1419254753}
     - target: {fileID: 950589028229339691, guid: 88c4f8a659871da4da6881df56eed413, type: 3}
       propertyPath: _focusPointBar
       value: 

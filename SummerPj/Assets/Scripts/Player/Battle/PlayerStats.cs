@@ -28,7 +28,7 @@ public class PlayerStats : CharacterStats
     {
         _currentHealth = SetMaxHealthFromHealthLevel();
         _healthBar.Init(_maxHealth);
-
+            
         _currentStamina = SetMaxStaminaFromStaminaLevel();
         _staminaBar.Init(_maxStamina);
 

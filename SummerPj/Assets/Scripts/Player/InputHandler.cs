@@ -59,19 +59,6 @@ public class InputHandler : MonoBehaviour
     Vector2 _movementInput;
     Vector2 _cameraInput;
 
-    public void Update()
-    {
-        if (_canLockOnMove == false)
-        {
-            _lockOnInputMoveTimer += Time.deltaTime;
-            if (_lockOnInputMoveTimer > 0.5)
-            {
-                _canLockOnMove = true;
-            }
-                
-        }
-    }
-
     private void Awake()
     {
         _playerAttacker = GetComponentInChildren<PlayerAttacker>();
@@ -82,6 +69,19 @@ public class InputHandler : MonoBehaviour
         _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
         _animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
         _playerStats = GetComponent<PlayerStats>();
+    }
+
+    public void Update()
+    {
+        if (_canLockOnMove == false)
+        {
+            _lockOnInputMoveTimer += Time.deltaTime;
+            if (_lockOnInputMoveTimer > 0.5)
+            {
+                _canLockOnMove = true;
+            }
+
+        }
     }
 
     #region '인풋에 따라 변하는 변수'를 변환시켜주는 함수들
@@ -101,7 +101,7 @@ public class InputHandler : MonoBehaviour
             _inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
             _inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
             _inputActions.PlayerActions.Interact.performed += i => { a_input = true; };
-            _inputActions.PlayerActions.Dodge.performed += i => { b_input = true; };
+            _inputActions.PlayerActions.Dodge.performed += i => { b_input = true; }; 
             _inputActions.PlayerActions.Dodge.canceled += i => { b_input = false; };
             _inputActions.PlayerActions.Jump.performed += i => { jump_Input = true; };
             _inputActions.PlayerActions.Inventory.performed += i => { inventory_Input = true; };

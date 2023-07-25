@@ -207,7 +207,7 @@ public class PlayerAttacker : MonoBehaviour
 
         if(_playerManager.isBlocking) { return; }
 
-        _animHandler.PlayTargetAnimation("Block Start", false);
+        _animHandler.PlayTargetAnimation("Block Start", false, true);
         _playerManager.isBlocking = true;
     }
     private void PerformRBMagicAction(WeaponItem weapon)

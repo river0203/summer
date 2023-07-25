@@ -7,10 +7,10 @@ using UnityEngine;
         public Animator _anim;
         public bool canRotate;
 
-        public void PlayTargetAnimation(string targetAnim, bool isInteracting)
+        public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool canRotate = false)
         {
             _anim.applyRootMotion = isInteracting;
-            _anim.SetBool("canRotate", false);
+            _anim.SetBool("canRotate", canRotate);
             _anim.SetBool("isInteracting", isInteracting);
             _anim.CrossFade(targetAnim, 0.2f);
         }

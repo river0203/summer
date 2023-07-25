@@ -5,7 +5,7 @@ public class FocusPointBar : MonoBehaviour
 {
     public Slider _slider;
 
-    private void Start()
+    private void Awake()
     {
         _slider = GetComponent<Slider>();
     }
