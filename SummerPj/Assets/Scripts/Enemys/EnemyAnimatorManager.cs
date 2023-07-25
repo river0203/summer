@@ -17,7 +17,7 @@ namespace SG
 
         public override void TakeCriticalDamageAnimationEvent()
         {
-            _enemyStats.TakeDamageNoAnimation(_enemyManager.pendingCriticalDamage);
+            //_enemyStats.TakeDamageNoAnimation(_enemyManager.pendingCriticalDamage);
             _enemyManager.pendingCriticalDamage = 0;
         }
         private void OnAnimatorMove()
