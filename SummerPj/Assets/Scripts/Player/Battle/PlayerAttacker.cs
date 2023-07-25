@@ -103,10 +103,14 @@ public class PlayerAttacker : MonoBehaviour
 
     public void HandleLTAction()
     {
-        if(_playerInventory._leftWeapon.isShieldWeapon)
+        if(_playerInventory._rightWeapon.isMeleeWeapon)
         {
             PerformLTWeaponArt(_inputHandler._twoHandFlag);
         }
+        /*        if(_playerInventory._leftWeapon.isShieldWeapon)
+                {
+                    PerformLTWeaponArt(_inputHandler._twoHandFlag);
+                }*/
         else if(_playerInventory._leftWeapon.isMeleeWeapon)
         {
 
@@ -218,11 +222,10 @@ public class PlayerAttacker : MonoBehaviour
 
         if (isTwoHanding)
         {
-
         }
         else 
         {
-            _animHandler.PlayTargetAnimation(_playerInventory._leftWeapon.weapon_art, true);
+            _animHandler.PlayTargetAnimation(_playerInventory._rightWeapon.weapon_art, true);
         }
 
     }

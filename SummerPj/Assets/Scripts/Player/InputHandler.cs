@@ -126,7 +126,7 @@ public class InputHandler : MonoBehaviour
 
         _inputActions.Enable();
     }
-
+     
     private void OnDisable() { _inputActions.Disable(); }
 
     // 업데이트류 함수에서 실행
@@ -195,10 +195,16 @@ public class InputHandler : MonoBehaviour
         {
             _playerAttacker.HandleHeavyAttack(_playerInventory._rightWeapon);
         }
-
         if(lt_Input)
         {
-            _playerAttacker.HandleLTAction();
+            if(_twoHandFlag)
+            {
+
+            }
+            else
+            {
+                _playerAttacker.HandleLTAction();
+            }
         }
     }
 

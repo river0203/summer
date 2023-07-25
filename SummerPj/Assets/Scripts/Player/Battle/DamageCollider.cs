@@ -16,8 +16,6 @@ public class DamageCollider : MonoBehaviour
         _damageCollider.gameObject.SetActive(true);
         _damageCollider.isTrigger = true;
         _damageCollider.enabled = false;
-
-        _characterManager = GetComponentInParent<CharacterManager>();
     }
 
     public void EnableDamagecollider()
@@ -50,7 +48,7 @@ public class DamageCollider : MonoBehaviour
                 playerStats.TakeDamage(_currentWeaponDamage);
             }
         }
-
+        
         if (collision.tag == "Enemy")
         {
             EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
