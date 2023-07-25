@@ -13,8 +13,8 @@ public class PlayerInventory : MonoBehaviour
     public WeaponItem _unarmedWeapon;
 
     public int _maxInventorySlotCount = 4;
-    public WeaponItem[] _weaponsInRightHandSlots = new WeaponItem[1];
-    public WeaponItem[] _weaponsInLeftHandSlots = new WeaponItem[1];
+    public List<WeaponItem> _weaponsInRightHandSlots = new List<WeaponItem>();
+    public List<WeaponItem> _weaponsInLeftHandSlots = new List<WeaponItem>();
 
     public int _currentRightWeaponIndex = -1;
     public int _currentLeftWeaponIndex = -1;
@@ -30,13 +30,15 @@ public class PlayerInventory : MonoBehaviour
     {
         _rightWeapon = _weaponsInRightHandSlots[0];
         _leftWeapon = _weaponsInLeftHandSlots[0];
+        _currentRightWeaponIndex = 0;
+        _currentLeftWeaponIndex = 0;
         _weaponSlotManager.LoadWeaponOnSlot(_rightWeapon, false);
         _weaponSlotManager.LoadWeaponOnSlot(_leftWeapon, true);
     }
 
     public void ChangeRightWeapon()
     {
-        if (_currentRightWeaponIndex < _maxInventorySlotCount - 1 && _currentRightWeaponIndex < _weaponsInRightHandSlots.Length - 1)
+        if (_currentRightWeaponIndex < _maxInventorySlotCount - 1 && _currentRightWeaponIndex < _weaponsInRightHandSlots.Count - 1)
         {
             _currentRightWeaponIndex++;
 
@@ -56,7 +58,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void ChangeLeftWeapon()
     {
-        if (_currentLeftWeaponIndex < _maxInventorySlotCount - 1 && _currentLeftWeaponIndex < _weaponsInLeftHandSlots.Length - 1)
+        if (_currentLeftWeaponIndex < _maxInventorySlotCount - 1 && _currentLeftWeaponIndex < _weaponsInLeftHandSlots.Count - 1)
         {
             _currentLeftWeaponIndex++;
 
