@@ -89,6 +89,22 @@ public class PlayerAnimatorManager : AnimatorManager
         _playerStats.TakeDamageNoAnimation(_playerManager.pendingCriticalDamage);
         _playerManager.pendingCriticalDamage = 0;
     }
+    public void EnableParrying()
+    {
+        _playerManager.isParrying = true;
+    }
+    public void DisableParrying()
+    {
+        _playerManager.isParrying = false;
+    }
+    public void EnableCanBeRiposted()
+    {
+        _playerManager.canBeRiposted = true;
+    }
+    public void DisableCanBeRiposted()
+    {
+        _playerManager.canBeRiposted = false;
+    }
     public void EnableIsInvulerable()
     {
         _anim.SetBool("isInvulnerable", true);

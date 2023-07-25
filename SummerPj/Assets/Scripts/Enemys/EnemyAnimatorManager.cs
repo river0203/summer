@@ -20,6 +20,22 @@ namespace SG
             //_enemyStats.TakeDamageNoAnimation(_enemyManager.pendingCriticalDamage);
             _enemyManager.pendingCriticalDamage = 0;
         }
+        public void EnableParrying()
+        {
+            _enemyManager.isParrying = true;
+        }
+        public void DisableParrying()
+        {
+            _enemyManager.isParrying = false;
+        }
+        public void EnableCanBeRiposted()
+        {
+            _enemyManager.canBeRiposted = true;
+        }
+        public void DisableCanBeRiposted()
+        {
+            _enemyManager.canBeRiposted = false;
+        }
         private void OnAnimatorMove()
         {
             float delta = Time.deltaTime;

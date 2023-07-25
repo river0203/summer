@@ -42,24 +42,28 @@ public class WeaponInventorySlot : MonoBehaviour
         {
             _playerInventory._weaponsInventory.Add(_playerInventory._weaponsInRightHandSlots[0]);
             _playerInventory._weaponsInRightHandSlots[0] = item;
+            _playerInventory._currentRightWeaponIndex = 0;
             _playerInventory._weaponsInventory.Remove(item);
         }
         else if(_uiManager.rightHandSlot02Selected)
         {
             _playerInventory._weaponsInventory.Add(_playerInventory._weaponsInRightHandSlots[1]);
             _playerInventory._weaponsInRightHandSlots[1] = item;
+            _playerInventory._currentRightWeaponIndex = 1;
             _playerInventory._weaponsInventory.Remove(item);
         }
         else if (_uiManager.leftHandSlot01Selected)
         {
             _playerInventory._weaponsInventory.Add(_playerInventory._weaponsInLeftHandSlots[0]);
             _playerInventory._weaponsInLeftHandSlots[0] = item;
+            _playerInventory._currentLeftWeaponIndex = 0;
             _playerInventory._weaponsInventory.Remove(item);
         }
         else if (_uiManager.leftHandSlot02Selected)
         {
             _playerInventory._weaponsInventory.Add(_playerInventory._weaponsInLeftHandSlots[1]);
             _playerInventory._weaponsInLeftHandSlots[1] = item;
+            _playerInventory._currentLeftWeaponIndex = 1;
             _playerInventory._weaponsInventory.Remove(item);
         }
         else
@@ -67,11 +71,17 @@ public class WeaponInventorySlot : MonoBehaviour
             return;
         }
 
-        _playerInventory._rightWeapon = _playerInventory._weaponsInRightHandSlots[_playerInventory._currentRightWeaponIndex];
-        _playerInventory._leftWeapon = _playerInventory._weaponsInLeftHandSlots[_playerInventory._currentLeftWeaponIndex];
-        _weaponSlotManager.LoadWeaponOnSlot(_playerInventory._rightWeapon, false);
-        _weaponSlotManager.LoadWeaponOnSlot(_playerInventory._leftWeapon, true);
-
+        if (_playerInventory._currentRightWeaponIndex != -1)
+        {
+            _playerInventory._rightWeapon = _playerInventory._weaponsInRightHandSlots[_playerInventory._currentRightWeaponIndex];
+            _weaponSlotManager.LoadWeaponOnSlot(_playerInventory._rightWeapon, false);
+        }
+        if (_playerInventory._currentLeftWeaponIndex != -1)
+        {
+            _playerInventory._leftWeapon = _playerInventory._weaponsInLeftHandSlots[_playerInventory._currentLeftWeaponIndex];
+            _weaponSlotManager.LoadWeaponOnSlot(_playerInventory._leftWeapon, true);
+        }
+        
         _uiManager._equipmentWindowUI.LoadWeaponsOnEquipmentScreen(_playerInventory);
         _uiManager.ResetAllSelectedSlots();
     }
