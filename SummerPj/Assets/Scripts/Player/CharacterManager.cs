@@ -18,5 +18,8 @@ public class CharacterManager : MonoBehaviour
     public bool isParrying;
     public bool isBlocking;
 
+    [Header("Spells")]
+    public bool isFiringSpell;
+
     public int pendingCriticalDamage;
 }

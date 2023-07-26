@@ -20,7 +20,7 @@ public class SpellItem : Item
     [TextArea]
     public string spellDescription;
 
-    public virtual void AttemptToCastSpell(PlayerAnimatorManager _animatorHandler, PlayerStats _playerStats)
+    public virtual void AttemptToCastSpell(PlayerAnimatorManager _animatorHandler, PlayerStats _playerStats, WeaponSlotManager _weaponSlotManager)
     {
         Debug.Log("You attempt to cast a spell!");
 

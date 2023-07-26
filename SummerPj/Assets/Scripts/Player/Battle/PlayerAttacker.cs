@@ -224,7 +224,21 @@ public class PlayerAttacker : MonoBehaviour
             {
                 if(_playerStats._currentFocusPoints >= _playerInventory._currentSpell.focusPointCost)
                 {
-                    _playerInventory._currentSpell.AttemptToCastSpell(_animHandler, _playerStats);
+                    _playerInventory._currentSpell.AttemptToCastSpell(_animHandler, _playerStats, _weaponSlotManager);
+                }
+                else
+                {
+                    _animHandler.PlayTargetAnimation("Shrug", true);
+                }
+            }
+        }
+        else if(weapon.isPyroCaster)
+        {
+            if (_playerInventory._currentSpell != null && _playerInventory._currentSpell.isPyroSpell)
+            {
+                if (_playerStats._currentFocusPoints >= _playerInventory._currentSpell.focusPointCost)
+                {
+                    _playerInventory._currentSpell.AttemptToCastSpell(_animHandler, _playerStats, _weaponSlotManager);
                 }
                 else
                 {
@@ -251,6 +265,7 @@ public class PlayerAttacker : MonoBehaviour
     private void SuccessfullyCastSpell()
     {
         _playerInventory._currentSpell.SucessfullyCastSpell(_animHandler, _playerStats);
+        _animHandler._anim.SetBool("isFiringSpell", true).
     }
     #endregion
 }

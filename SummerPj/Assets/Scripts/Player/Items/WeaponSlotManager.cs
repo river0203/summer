@@ -8,8 +8,8 @@ public class WeaponSlotManager : MonoBehaviour
     PlayerInventory _playerInventory;
     public WeaponItem _attackingWeapon;
 
-    WeaponHolderSlot _leftHandSlot;
-    WeaponHolderSlot _rightHandSlot;
+    public WeaponHolderSlot _leftHandSlot;
+    public WeaponHolderSlot _rightHandSlot;
     WeaponHolderSlot _backSlot;
 
     public DamageCollider _leftHandDamageCollider;

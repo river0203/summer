@@ -21,6 +21,7 @@ MonoBehaviour:
   right_hand_idle: Spear_Right_Arm_Idle_01
   left_hand_idle: Spear_Left_Arm_Idle_01
   th_idle: Locomotion
+  physicalDamageAbsorption: 99
   OH_Light_Attack_1: Halberd_LightAttack_1
   OH_Light_Attack_2: Halberd_LightAttack_2
   OH_Light_Attack_3: Halberd_LightAttack_3
