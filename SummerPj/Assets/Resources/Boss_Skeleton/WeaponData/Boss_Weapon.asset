@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
   itemName: 
-  _modelPrefabe: {fileID: 8580684214309347039, guid: b252149376e40964988fe31b5b173b38, type: 3}
+  _modelPrefabe: {fileID: 7056819939209645759, guid: b252149376e40964988fe31b5b173b38, type: 3}
   _isUnarmed: 0
   baseDamage: 25
   criticalDamageMultiplier: 4

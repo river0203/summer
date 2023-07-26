@@ -32,7 +32,7 @@ public class DamageCollider : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-             PlayerStats playerStats = GetComponent<PlayerStats>();
+             PlayerStats playerStats = collision.GetComponent<PlayerStats>();
              CharacterManager _enemycharacterManager = collision.GetComponent<CharacterManager>();
 
             if(_enemycharacterManager != null)

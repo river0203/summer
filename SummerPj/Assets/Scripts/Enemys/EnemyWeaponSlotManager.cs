@@ -11,24 +11,13 @@ public class EnemyWeaponSlotManager : MonoBehaviour
     WeaponHolderSlot leftHandSlot;
 
     DamageCollider leftHandDamageCollider;
-    DamageCollider rightHandDamageCollider;
+    public DamageCollider rightHandDamageCollider;
 
     Animator _anim;
 
     private void Awake()
     {
-        WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
-        foreach (WeaponHolderSlot weaponslot in weaponHolderSlots)
-        {
-            if (weaponslot._isLeftHandSlot)
-            {
-                leftHandSlot = weaponslot;
-            }
-            else if (weaponslot._isRightHandSlot)
-            {
-                rightHandSlot = weaponslot;
-            }
-        }
+        rightHandDamageCollider = GetComponentInChildren<DamageCollider>(true);
     }
 
     private void Start()

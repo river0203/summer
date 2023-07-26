@@ -20,7 +20,7 @@ public class PursueTargetState : State
         // 내가 적까지의 화살표
         Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
         // 적과 나의 거리 저장
-        float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, transform.position);
+        float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
         // 적의 위치와 내가 바라보는 방향 사이의 각도
         float veiwableAngle = Vector3.Angle(targetDirection, transform.forward);
         #endregion
