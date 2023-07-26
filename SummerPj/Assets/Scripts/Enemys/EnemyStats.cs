@@ -1,4 +1,3 @@
-using SG;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,7 +33,7 @@ public class EnemyStats : CharacterStats
         }
     }
 
-    public void TakeDamage(int damege, string damageAnimation = "Damage_01")
+    public override void TakeDamage(int damege, string damageAnimation = "Damage_01")
     {
         if (_isDead) return;
 

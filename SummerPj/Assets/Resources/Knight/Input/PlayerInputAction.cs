@@ -443,6 +443,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""X"",
+                    ""type"": ""Button"",
+                    ""id"": ""d2696dc0-ce75-4641-9928-c43b5f19d66d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -663,6 +672,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Block"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ff574ec-357a-4563-a03f-72435237b8a7"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""X"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -889,6 +909,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_PlayerActions_CriticalAttack = m_PlayerActions.FindAction("CriticalAttack", throwIfNotFound: true);
         m_PlayerActions_Parry = m_PlayerActions.FindAction("Parry", throwIfNotFound: true);
         m_PlayerActions_Block = m_PlayerActions.FindAction("Block", throwIfNotFound: true);
+        m_PlayerActions_X = m_PlayerActions.FindAction("X", throwIfNotFound: true);
         // PlayerQuickSlots
         m_PlayerQuickSlots = asset.FindActionMap("PlayerQuickSlots", throwIfNotFound: true);
         m_PlayerQuickSlots_DPadUp = m_PlayerQuickSlots.FindAction("D-Pad Up", throwIfNotFound: true);
@@ -1085,6 +1106,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_CriticalAttack;
     private readonly InputAction m_PlayerActions_Parry;
     private readonly InputAction m_PlayerActions_Block;
+    private readonly InputAction m_PlayerActions_X;
     public struct PlayerActionsActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -1100,6 +1122,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @CriticalAttack => m_Wrapper.m_PlayerActions_CriticalAttack;
         public InputAction @Parry => m_Wrapper.m_PlayerActions_Parry;
         public InputAction @Block => m_Wrapper.m_PlayerActions_Block;
+        public InputAction @X => m_Wrapper.m_PlayerActions_X;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1142,6 +1165,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Block.started += instance.OnBlock;
             @Block.performed += instance.OnBlock;
             @Block.canceled += instance.OnBlock;
+            @X.started += instance.OnX;
+            @X.performed += instance.OnX;
+            @X.canceled += instance.OnX;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -1179,6 +1205,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Block.started -= instance.OnBlock;
             @Block.performed -= instance.OnBlock;
             @Block.canceled -= instance.OnBlock;
+            @X.started -= instance.OnX;
+            @X.performed -= instance.OnX;
+            @X.canceled -= instance.OnX;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -1337,6 +1366,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnCriticalAttack(InputAction.CallbackContext context);
         void OnParry(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
+        void OnX(InputAction.CallbackContext context);
     }
     public interface IPlayerQuickSlotsActions
     {

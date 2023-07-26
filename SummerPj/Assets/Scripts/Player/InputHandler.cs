@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -16,6 +16,7 @@ public class InputHandler : MonoBehaviour
 
     public bool b_input;
     public bool a_input;
+    public bool x_Input;
     public bool y_Input;
     public bool la_input;
     public bool ha_input;
@@ -84,6 +85,8 @@ public class InputHandler : MonoBehaviour
             }
 
         }
+
+        Debug.Log(_animatorHandler._anim.GetCurrentAnimatorStateInfo(0).length);
     }
 
     #region '인풋에 따라 변하는 변수'를 변환시켜주는 함수들
@@ -105,6 +108,7 @@ public class InputHandler : MonoBehaviour
             _inputActions.PlayerActions.Interact.performed += i => { a_input = true; };
             _inputActions.PlayerActions.Dodge.performed += i => { b_input = true; }; 
             _inputActions.PlayerActions.Dodge.canceled += i => { b_input = false; };
+            _inputActions.PlayerActions.X.performed += i => { x_Input = true; };
             _inputActions.PlayerActions.Jump.performed += i => { jump_Input = true; };
             _inputActions.PlayerActions.Inventory.performed += i => { inventory_Input = true; };
             _inputActions.PlayerMovement.LockOn.performed += i => { lockOnInput = true; };
@@ -145,6 +149,7 @@ public class InputHandler : MonoBehaviour
         HandleLockOnInput();
         HandleTwoHandInput();
         HandleCriticalAttackInput();
+        HandleUseConsumableInput();
     }
 
     // 이동 및 마우스 포지션 갱신 (TickInput에서 실행)
@@ -339,6 +344,14 @@ public class InputHandler : MonoBehaviour
     {
         critical_Attack_Input = false;
         _playerAttacker.AttemptBackStabOrRiposte(); 
+    }
+
+    void HandleUseConsumableInput()
+    {
+        if(x_Input)
+        {
+            x_Input = false;
+        }
     }
 #endregion
 }

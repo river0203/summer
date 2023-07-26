@@ -17,4 +17,9 @@ public class CharacterStats : MonoBehaviour
     [HideInInspector] public float _currentFocusPoints;
 
     [HideInInspector] public bool _isDead;
+
+    public virtual void TakeDamage(int damege, string damageAnimation = "Damage_01")
+    {
+
+    }
 }

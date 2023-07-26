@@ -14,6 +14,7 @@ public class PlayerAttacker : MonoBehaviour
     InputHandler _inputHandler;
     PlayerInventory _playerInventory;
     WeaponSlotManager _weaponSlotManager;
+    CameraHandler _cameraHandler;
     public string _lastAttack;
 
     LayerMask riposteLayer = 1 << 12;
@@ -21,6 +22,7 @@ public class PlayerAttacker : MonoBehaviour
 
     private void Awake()
     {
+        _cameraHandler = FindObjectOfType<CameraHandler>();
         _playerEquipmentHandler = GetComponent<PlayerEquipmentManager>();
         _playerStats = GetComponentInParent<PlayerStats>();
         _playerInventory = GetComponentInParent<PlayerInventory>();
@@ -264,8 +266,8 @@ public class PlayerAttacker : MonoBehaviour
 
     private void SuccessfullyCastSpell()
     {
-        _playerInventory._currentSpell.SucessfullyCastSpell(_animHandler, _playerStats);
-        _animHandler._anim.SetBool("isFiringSpell", true).
+        _playerInventory._currentSpell.SucessfullyCastSpell(_animHandler, _playerStats, _cameraHandler, _weaponSlotManager);
+        _animHandler._anim.SetBool("isFiringSpell", true);
     }
     #endregion
 }

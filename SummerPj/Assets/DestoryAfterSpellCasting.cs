@@ -13,6 +13,9 @@ public class DestoryAfterSpellCasting : MonoBehaviour
 
     private void Update()
     {
-        if(_characterCastingSpell.)
+        if(_characterCastingSpell.isFiringSpell)
+        {
+            Destroy(gameObject);
+        }
     }
 }
