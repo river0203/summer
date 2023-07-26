@@ -54,6 +54,7 @@ public class InputHandler : MonoBehaviour
     WeaponSlotManager _weaponSlotManager;
     PlayerStats _playerStats;
     CameraHandler _cameraHandler;
+    PlayerEffectsManager _playerEffectsManager;
     BlockingCollider _blockingCollider;
     UIManager _uiManager;
     PlayerAnimatorManager _animatorHandler;
@@ -63,6 +64,7 @@ public class InputHandler : MonoBehaviour
 
     private void Awake()
     {
+        _playerEffectsManager = GetComponentInChildren<PlayerEffectsManager>();
         _blockingCollider = GetComponentInChildren<BlockingCollider>();
         _playerAttacker = GetComponentInChildren<PlayerAttacker>();
         _playerInventory = GetComponent<PlayerInventory>();
@@ -85,8 +87,6 @@ public class InputHandler : MonoBehaviour
             }
 
         }
-
-        Debug.Log(_animatorHandler._anim.GetCurrentAnimatorStateInfo(0).length);
     }
 
     #region '인풋에 따라 변하는 변수'를 변환시켜주는 함수들
@@ -351,6 +351,7 @@ public class InputHandler : MonoBehaviour
         if(x_Input)
         {
             x_Input = false;
+            _playerInventory.currentConsumable.AttemptToConsumeItem(_animatorHandler, _weaponSlotManager, _playerEffectsManager);
         }
     }
 #endregion

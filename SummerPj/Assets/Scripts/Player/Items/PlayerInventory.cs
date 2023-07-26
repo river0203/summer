@@ -6,6 +6,7 @@ public class PlayerInventory : MonoBehaviour
 {
     WeaponSlotManager _weaponSlotManager;
 
+    public ConsumableItem currentConsumable;
     public SpellItem _currentSpell;
     public WeaponItem _rightWeapon;
     public WeaponItem _leftWeapon;

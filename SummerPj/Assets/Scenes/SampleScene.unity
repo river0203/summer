@@ -128,6 +128,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1303696078997090887, guid: d97c6c2b17546db4bb8b6521d7a581c8, type: 3}
   m_PrefabInstance: {fileID: 1303696079135134294}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &169246296 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 950589027222842493, guid: 88c4f8a659871da4da6881df56eed413, type: 3}
+  m_PrefabInstance: {fileID: 950589028804704284}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &239796717 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1303696079029556155, guid: d97c6c2b17546db4bb8b6521d7a581c8, type: 3}
@@ -754,7 +759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _radius: 0.6
   _interactableText: Sword2
-  _weapon: {fileID: 11400000, guid: 061ca4416b48be047ad65c2a70fcb4c5, type: 2}
+  _weapon: {fileID: 0}
 --- !u!136 &780873658
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -820,6 +825,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blockingCollider: {fileID: 714254127}
+--- !u!114 &851577734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851577726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db9e916b368875498b49f8e11585628, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentParticleFX: {fileID: 1876515289}
+  amountToBeHealed: 10
+  instantiatedFXModel: {fileID: 169246296}
 --- !u!1 &887068204
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,6 +1300,11 @@ Transform:
   m_Father: {fileID: 1034599714870867122}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1876515289 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 950589028904028207, guid: 88c4f8a659871da4da6881df56eed413, type: 3}
+  m_PrefabInstance: {fileID: 950589028804704284}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2013768877
 GameObject:
   m_ObjectHideFlags: 0
@@ -2803,6 +2828,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 950589028229339689, guid: 88c4f8a659871da4da6881df56eed413, type: 3}
+      propertyPath: currentConsumable
+      value: 
+      objectReference: {fileID: 11400000, guid: 92183ebf3ac258b48ab9e2e839769c2d, type: 2}
     - target: {fileID: 950589028229339691, guid: 88c4f8a659871da4da6881df56eed413, type: 3}
       propertyPath: _healthBar
       value: 
@@ -2866,6 +2895,20 @@ PrefabInstance:
     - target: {fileID: 950589028229339697, guid: 88c4f8a659871da4da6881df56eed413, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432009800028900680, guid: 88c4f8a659871da4da6881df56eed413, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432009800028900680, guid: 88c4f8a659871da4da6881df56eed413, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'neck_01'\n\tTransform 'index_03_r'\n\tTransform
+        'ring_03_r'\n\tTransform 'middle_02_r'\n\tTransform 'pelvis'\n\tTransform
+        'thumb_03_r'\n\tTransform 'thumb_02_r'\n\tTransform 'index_02_r'\n\tTransform
+        'lowerarm_l'\n\tTransform 'neck_01'\n\tand more ...\n\tFrom animation clip
+        'heal2'"
       objectReference: {fileID: 0}
     - target: {fileID: 5653276659631279496, guid: 88c4f8a659871da4da6881df56eed413, type: 3}
       propertyPath: m_Name
@@ -14041,6 +14084,7 @@ MonoBehaviour:
   canBeParried: 0
   isParrying: 0
   isBlocking: 0
+  isFiringSpell: 0
   pendingCriticalDamage: 0
   enemyRigidBody: {fileID: 3525883449289298498}
   navmeshAgent: {fileID: 0}

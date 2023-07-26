@@ -49,6 +49,11 @@ public class WeaponSlotManager : MonoBehaviour
         }
     }
 
+    public void LoadBothWeaponsOnSlot()
+    {
+        LoadWeaponOnSlot(_playerInventory._rightWeapon, false);
+        LoadWeaponOnSlot(_playerInventory._leftWeapon, true);
+    }
     public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
     {
         // 무기 로드
