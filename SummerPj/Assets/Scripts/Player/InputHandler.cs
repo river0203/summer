@@ -77,9 +77,9 @@ public class InputHandler : MonoBehaviour
         _playerAttacker = GetComponentInChildren<PlayerAttacker>();
         _playerInventory = GetComponent<PlayerInventory>();
         _playerManager = GetComponent<PlayerManager>();
-        _cameraHandler = FindObjectOfType<CameraHandler>();
-        _uiManager = FindObjectOfType<UIManager>();
         _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+        _uiManager = FindObjectOfType<UIManager>();
+        _cameraHandler = FindObjectOfType<CameraHandler>();
         _animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
         _playerStats = GetComponent<PlayerStats>();
     }
