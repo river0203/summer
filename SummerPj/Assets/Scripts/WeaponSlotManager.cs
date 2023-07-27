@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class PlayerWeaponSlotManager : MonoBehaviour
+public class WeaponSlotManager : MonoBehaviour
 {
     PlayerManager _playerManager;
     PlayerInventoryManager _playerInventoryManager;
