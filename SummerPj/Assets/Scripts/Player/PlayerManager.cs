@@ -25,7 +25,6 @@ public class PlayerManager : CharacterManager
     public bool isUsingRightHand;
     public bool isUsingLeftHand;
     public bool isInvulerable;
-    public bool isBlocking;
 
     private void Awake()
     {
@@ -49,7 +48,8 @@ public class PlayerManager : CharacterManager
         isUsingRightHand = _anim.GetBool("isUsingRightHand");
         isUsingLeftHand = _anim.GetBool("isUsingLeftHand");
         isInvulerable = _anim.GetBool("isInvulnerable");
-        //_anim.SetBool("isBlocking", isBlocking);
+        isFiringSpell = _anim.GetBool("isFiringSpell");
+        _anim.SetBool("isBlocking", isBlocking);
         _anim.SetBool("isInAir", _isInAir);
         _anim.SetBool("isDead", _playerStats._isDead);
 

@@ -8,8 +8,8 @@ public class WeaponSlotManager : MonoBehaviour
     PlayerInventory _playerInventory;
     public WeaponItem _attackingWeapon;
 
-    WeaponHolderSlot _leftHandSlot;
-    WeaponHolderSlot _rightHandSlot;
+    public WeaponHolderSlot _leftHandSlot;
+    public WeaponHolderSlot _rightHandSlot;
     WeaponHolderSlot _backSlot;
 
     public DamageCollider _leftHandDamageCollider;
@@ -49,6 +49,11 @@ public class WeaponSlotManager : MonoBehaviour
         }
     }
 
+    public void LoadBothWeaponsOnSlot()
+    {
+        LoadWeaponOnSlot(_playerInventory._rightWeapon, false);
+        LoadWeaponOnSlot(_playerInventory._leftWeapon, true);
+    }
     public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
     {
         // 무기 로드

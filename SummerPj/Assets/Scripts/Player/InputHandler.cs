@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -16,6 +16,7 @@ public class InputHandler : MonoBehaviour
 
     public bool b_input;
     public bool a_input;
+    public bool x_Input;
     public bool y_Input;
     public bool la_input;
     public bool ha_input;
@@ -53,11 +54,27 @@ public class InputHandler : MonoBehaviour
     WeaponSlotManager _weaponSlotManager;
     PlayerStats _playerStats;
     CameraHandler _cameraHandler;
+    PlayerEffectsManager _playerEffectsManager;
+    BlockingCollider _blockingCollider;
     UIManager _uiManager;
     PlayerAnimatorManager _animatorHandler;
 
     Vector2 _movementInput;
     Vector2 _cameraInput;
+
+    private void Awake()
+    {
+        _playerEffectsManager = GetComponentInChildren<PlayerEffectsManager>();
+        _blockingCollider = GetComponentInChildren<BlockingCollider>();
+        _playerAttacker = GetComponentInChildren<PlayerAttacker>();
+        _playerInventory = GetComponent<PlayerInventory>();
+        _playerManager = GetComponent<PlayerManager>();
+        _cameraHandler = FindObjectOfType<CameraHandler>();
+        _uiManager = FindObjectOfType<UIManager>();
+        _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+        _animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
+        _playerStats = GetComponent<PlayerStats>();
+    }
 
     public void Update()
     {
@@ -68,20 +85,8 @@ public class InputHandler : MonoBehaviour
             {
                 _canLockOnMove = true;
             }
-                
-        }
-    }
 
-    private void Awake()
-    {
-        _playerAttacker = GetComponentInChildren<PlayerAttacker>();
-        _playerInventory = GetComponent<PlayerInventory>();
-        _playerManager = GetComponent<PlayerManager>();
-        _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
-        _uiManager = FindObjectOfType<UIManager>();
-        _cameraHandler = FindObjectOfType<CameraHandler>();
-        _animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
-        _playerStats = GetComponent<PlayerStats>();
+        }
     }
 
     #region '인풋에 따라 변하는 변수'를 변환시켜주는 함수들
@@ -101,8 +106,9 @@ public class InputHandler : MonoBehaviour
             _inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
             _inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
             _inputActions.PlayerActions.Interact.performed += i => { a_input = true; };
-            _inputActions.PlayerActions.Dodge.performed += i => { b_input = true; };
+            _inputActions.PlayerActions.Dodge.performed += i => { b_input = true; }; 
             _inputActions.PlayerActions.Dodge.canceled += i => { b_input = false; };
+            _inputActions.PlayerActions.X.performed += i => { x_Input = true; };
             _inputActions.PlayerActions.Jump.performed += i => { jump_Input = true; };
             _inputActions.PlayerActions.Inventory.performed += i => { inventory_Input = true; };
             _inputActions.PlayerMovement.LockOn.performed += i => { lockOnInput = true; };
@@ -143,6 +149,7 @@ public class InputHandler : MonoBehaviour
         HandleLockOnInput();
         HandleTwoHandInput();
         HandleCriticalAttackInput();
+        HandleUseConsumableInput();
     }
 
     // 이동 및 마우스 포지션 갱신 (TickInput에서 실행)
@@ -206,6 +213,11 @@ public class InputHandler : MonoBehaviour
         else
         {
             _playerManager.isBlocking = false;
+
+            if(_blockingCollider.blockingCollider.enabled)
+            {
+                _blockingCollider.DisableBlockingCollider();
+            }
         }
 
         if(lt_Input)
@@ -332,6 +344,15 @@ public class InputHandler : MonoBehaviour
     {
         critical_Attack_Input = false;
         _playerAttacker.AttemptBackStabOrRiposte(); 
+    }
+
+    void HandleUseConsumableInput()
+    {
+        if(x_Input)
+        {
+            x_Input = false;
+            _playerInventory.currentConsumable.AttemptToConsumeItem(_animatorHandler, _weaponSlotManager, _playerEffectsManager);
+        }
     }
 #endregion
 }

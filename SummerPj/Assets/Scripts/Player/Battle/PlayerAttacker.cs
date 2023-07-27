@@ -7,11 +7,13 @@ using UnityEngine;
 public class PlayerAttacker : MonoBehaviour
 {
     PlayerAnimatorManager _animHandler;
+    PlayerEquipmentManager _playerEquipmentHandler;
     PlayerStats _playerStats;
     PlayerManager _playerManager;
     InputHandler _inputHandler;
     PlayerInventory _playerInventory;
     WeaponSlotManager _weaponSlotManager;
+    CameraHandler _cameraHandler;
     public string _lastAttack;
 
     LayerMask riposteLayer = 1 << 12;
@@ -19,6 +21,8 @@ public class PlayerAttacker : MonoBehaviour
 
     private void Awake()
     {
+        _cameraHandler = FindObjectOfType<CameraHandler>();
+        _playerEquipmentHandler = GetComponent<PlayerEquipmentManager>();
         _playerStats = GetComponentInParent<PlayerStats>();
         _playerInventory = GetComponentInParent<PlayerInventory>();
         _playerManager = GetComponentInParent<PlayerManager>();
@@ -206,7 +210,8 @@ public class PlayerAttacker : MonoBehaviour
 
         if(_playerManager.isBlocking) { return; }
 
-        _animHandler.PlayTargetAnimation("Block Start", false);
+        _animHandler.PlayTargetAnimation("Block Start", false, true);
+        _playerEquipmentHandler.OpenBlockingCollider();
         _playerManager.isBlocking = true;
     }
     private void PerformRBMagicAction(WeaponItem weapon)
@@ -220,7 +225,21 @@ public class PlayerAttacker : MonoBehaviour
             {
                 if(_playerStats._currentFocusPoints >= _playerInventory._currentSpell.focusPointCost)
                 {
-                    _playerInventory._currentSpell.AttemptToCastSpell(_animHandler, _playerStats);
+                    _playerInventory._currentSpell.AttemptToCastSpell(_animHandler, _playerStats, _weaponSlotManager);
+                }
+                else
+                {
+                    _animHandler.PlayTargetAnimation("Shrug", true);
+                }
+            }
+        }
+        else if(weapon.isPyroCaster)
+        {
+            if (_playerInventory._currentSpell != null && _playerInventory._currentSpell.isPyroSpell)
+            {
+                if (_playerStats._currentFocusPoints >= _playerInventory._currentSpell.focusPointCost)
+                {
+                    _playerInventory._currentSpell.AttemptToCastSpell(_animHandler, _playerStats, _weaponSlotManager);
                 }
                 else
                 {
@@ -246,7 +265,8 @@ public class PlayerAttacker : MonoBehaviour
 
     private void SuccessfullyCastSpell()
     {
-        _playerInventory._currentSpell.SucessfullyCastSpell(_animHandler, _playerStats);
+        _playerInventory._currentSpell.SucessfullyCastSpell(_animHandler, _playerStats, _cameraHandler, _weaponSlotManager);
+        _animHandler._anim.SetBool("isFiringSpell", true);
     }
     #endregion
 }

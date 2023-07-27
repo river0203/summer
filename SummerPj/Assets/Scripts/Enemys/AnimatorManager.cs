@@ -7,11 +7,10 @@ using UnityEngine;
         public Animator _anim;
         public bool canRotate;
 
-        // 애니메이션을 실행시키는 함수
-        public void PlayTargetAnimation(string targetAnim, bool isInteracting) // isInteracting이란? 상호작용 중인가?
+        public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool canRotate = false)
         {
             _anim.applyRootMotion = isInteracting;
-            _anim.SetBool("canRotate", false);
+            _anim.SetBool("canRotate", canRotate);
             _anim.SetBool("isInteracting", isInteracting);
             _anim.CrossFade(targetAnim, 0.2f);
         }
