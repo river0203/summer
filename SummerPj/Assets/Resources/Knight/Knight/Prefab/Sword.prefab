@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1523148020903734277}
   m_Layer: 0
   m_Name: Rukoyatka
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7610903363441105478}
   m_Layer: 0
   m_Name: SM_Sword
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 086c3b467dbebed40b2ccb4512c36b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterManager: {fileID: 0}
   _currentWeaponDamage: 25
 --- !u!136 &7610903363441105478
 CapsuleCollider:
@@ -159,7 +160,7 @@ GameObject:
   - component: {fileID: 4419349957069446863}
   m_Layer: 0
   m_Name: Seredina
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -240,7 +241,7 @@ GameObject:
   - component: {fileID: 8802118721215927882}
   m_Layer: 0
   m_Name: WeaponPivot
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -272,7 +273,7 @@ GameObject:
   - component: {fileID: 3797668573260427361}
   m_Layer: 0
   m_Name: Sword
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -306,7 +307,7 @@ GameObject:
   - component: {fileID: 6243594486148923172}
   m_Layer: 0
   m_Name: Lezvie
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

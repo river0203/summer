@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyStats : CharacterStats
 {
 
-   // public UIEnemyHealthBar _enemyHealthBar;
+    public UIEnemyHealthBar _enemyHealthBar;
 
     EnemyAnimatorManager _enemyAnimatorManager;
 
@@ -18,7 +18,7 @@ public class EnemyStats : CharacterStats
     {
         _maxHealth = SetMaxHealthFromHealthLevel();
         _currentHealth = _maxHealth;
-        //_enemyHealthBar.SetMaxHealth(_maxHealth);
+        _enemyHealthBar.SetMaXHealth(_maxHealth);
     }
 
     private int SetMaxHealthFromHealthLevel()
@@ -31,9 +31,9 @@ public class EnemyStats : CharacterStats
     public void TakeDamageAnimation(int _damage)
     {
         _currentHealth -= _damage;
-        //_enemyHealthBar.SetHealth(_currentHealth);
+        _enemyHealthBar.SetHealth(_currentHealth);
 
-        if(_currentHealth <= 0)
+        if (_currentHealth <= 0)
         {
             _currentHealth = 0;
             _isDead = true;
@@ -46,7 +46,8 @@ public class EnemyStats : CharacterStats
             return;
 
         _currentHealth -= _damege;
-        //_enemyHealthBar.SetHealth(_currentHealth);
+        _enemyHealthBar.SetHealth(_currentHealth);
+
 
         _enemyAnimatorManager.PlayTargetAnimation(_damageAnimation, true);
 
