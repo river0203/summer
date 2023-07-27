@@ -84362,7 +84362,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.36666667
-    functionName: OpenRightDamageCollier
+    functionName: OpenDamageCollier
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -84376,7 +84376,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.6
-    functionName: CloseRightDamageCollier
+    functionName: CloseDamageCollier
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

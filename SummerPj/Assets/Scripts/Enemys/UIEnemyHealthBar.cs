@@ -13,7 +13,6 @@ public class UIEnemyHealthBar : MonoBehaviour
     private void Awake()
     {
         _slider = GetComponentInChildren<Slider>();
-
     }
 
     public void SetHealth(int health)
