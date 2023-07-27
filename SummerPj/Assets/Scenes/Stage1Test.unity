@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2734,6 +2734,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d97c6c2b17546db4bb8b6521d7a581c8, type: 3}
+--- !u!136 &1504252153 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 8871361283091808060, guid: 2e4d973f0c2f0bf4eb9ea6defcc08d7d, type: 3}
+  m_PrefabInstance: {fileID: 5077277905559950386}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1848216003 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 5077277905944746494, guid: 2e4d973f0c2f0bf4eb9ea6defcc08d7d, type: 3}
+  m_PrefabInstance: {fileID: 5077277905559950386}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5077277905559950386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2741,6 +2751,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 970294721810278768, guid: 2e4d973f0c2f0bf4eb9ea6defcc08d7d, type: 3}
+      propertyPath: _characterCollider
+      value: 
+      objectReference: {fileID: 1504252153}
+    - target: {fileID: 970294721810278768, guid: 2e4d973f0c2f0bf4eb9ea6defcc08d7d, type: 3}
+      propertyPath: _characterCollisionBlockerCollider
+      value: 
+      objectReference: {fileID: 1848216003}
     - target: {fileID: 970294721810278771, guid: 2e4d973f0c2f0bf4eb9ea6defcc08d7d, type: 3}
       propertyPath: _lockOnTransform
       value: 
