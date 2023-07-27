@@ -15,17 +15,6 @@ public class PlayerManager : CharacterManager
     interactableUI _interactableUI;
     public GameObject interactableUIGameObject;
 
-    public bool _isInteracting;
-
-    [Header("PlayerFlag")]
-    public bool _isSprinting;
-    public bool _isInAir;
-    public bool _isGrounded;
-    public bool _canDoCombo;
-    public bool isUsingRightHand;
-    public bool isUsingLeftHand;
-    public bool isInvulerable;
-
     private void Awake()
     {
         _cameraHandler = FindObjectOfType<CameraHandler>();

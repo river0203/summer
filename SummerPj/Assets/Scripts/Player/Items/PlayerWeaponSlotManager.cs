@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class PlayerWeaponSlotManager : MonoBehaviour
+public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 {
     PlayerManager _playerManager;
     PlayerInventoryManager _playerInventoryManager;
@@ -13,14 +13,7 @@ public class PlayerWeaponSlotManager : MonoBehaviour
     InputHandler _inputHandler;
 
     public WeaponItem _attackingWeapon;
-    public WeaponItem _unarmedWeapon;
 
-    public WeaponHolderSlot _leftHandSlot;
-    public WeaponHolderSlot _rightHandSlot;
-    WeaponHolderSlot _backSlot;
-
-    public DamageCollider _leftHandDamageCollider;
-    public DamageCollider _rightHandDamageCollider;
 
     private void Awake()
     {

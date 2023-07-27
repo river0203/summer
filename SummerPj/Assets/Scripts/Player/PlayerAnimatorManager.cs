@@ -6,17 +6,14 @@ using UnityEngine;
 // Animator의 파라미터 변수를 변경시켜줌 
 public class PlayerAnimatorManager : AnimatorManager
 {
-    PlayerManager _playerManager;
-    PlayerStatsManager _playerStatsManager;
     InputHandler _inputHandler;
     PlayerLocomotionManager _playerLocomotionManager;
     int _vertical;
     int _horizontal;
 
-    public void Init()
+    protected override void Awake()
     {
-        _playerStatsManager = GetComponentInParent<PlayerStatsManager>();
-        _playerManager = GetComponentInParent<PlayerManager>();
+        base.Awake();
         _anim = GetComponentInChildren<Animator>();
         _inputHandler = GetComponentInParent<InputHandler>();
         _playerLocomotionManager = GetComponentInParent<PlayerLocomotionManager>();
@@ -66,57 +63,10 @@ public class PlayerAnimatorManager : AnimatorManager
         _anim.SetFloat(_horizontal, h, 0.1f, Time.deltaTime);
     }
 
-    public void CanRotate() 
-    {
-        _anim.SetBool("canRotate", true);
-    }
-    public void StopRotate() 
-    {
-        _anim.SetBool("canRotate", false);
-    }
-
-    public void EnableCombo()
-    {
-        _anim.SetBool("canDoCombo", true);
-    }
-    public void Disablecombo()
-    {
-        _anim.SetBool("canDoCombo", false);
-    }
-
-    public override void TakeCriticalDamageAnimationEvent()
-    {
-        _playerStatsManager.TakeDamageNoAnimation(_playerManager.pendingCriticalDamage);
-        _playerManager.pendingCriticalDamage = 0;
-    }
-    public void EnableParrying()
-    {
-        _playerManager.isParrying = true;
-    }
-    public void DisableParrying()
-    {
-        _playerManager.isParrying = false;
-    }
-    public void EnableCanBeRiposted()
-    {
-        _playerManager.canBeRiposted = true;
-    }
-    public void DisableCanBeRiposted()
-    {
-        _playerManager.canBeRiposted = false;
-    }
-    public void EnableIsInvulerable()
-    {
-        _anim.SetBool("isInvulnerable", true);
-    }
-    public void DisableIsvulerable()
-    {
-        _anim.SetBool("isInvulnerable", false);
-    }
 
     private void OnAnimatorMove()
     {
-        if (_playerManager._isInteracting == false)
+        if (_characterManager._isInteracting == false)
             return;
 
         float delta = Time.deltaTime;
