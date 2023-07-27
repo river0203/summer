@@ -14,7 +14,7 @@ public class EnemyManager : CharacterManager
     public NavMeshAgent navmeshAgent;
 
     public State currentState;
-    public CharacterStats currentTarget;
+    public CharacterStatsManager currentTarget;
     public bool isPreformingAction;
     public float maximumAttackRange = 1.5f;
     public bool isInteracting;

@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class WeaponSlotManager : MonoBehaviour
+public class PlayerWeaponSlotManager : MonoBehaviour
 {
     PlayerManager _playerManager;
-    PlayerInventory _playerInventory;
+    PlayerInventoryManager _playerInventoryManager;
+    Animator animator;
+    QuickSlotsUI _quickSlotsUI;
+    PlayerStatsManager _playerStats;
+    InputHandler _inputHandler;
+
     public WeaponItem _attackingWeapon;
+    public WeaponItem _unarmedWeapon;
 
     public WeaponHolderSlot _leftHandSlot;
     public WeaponHolderSlot _rightHandSlot;
@@ -15,34 +22,31 @@ public class WeaponSlotManager : MonoBehaviour
     public DamageCollider _leftHandDamageCollider;
     public DamageCollider _rightHandDamageCollider;
 
-    Animator animator;
-
-    QuickSlotsUI _quickSlotsUI;
-
-    PlayerStats _playerStats;
-    InputHandler _inputHandler;
-
     private void Awake()
     {
-        _playerManager = GetComponentInParent<PlayerManager>();
-        _playerInventory = GetComponentInParent<PlayerInventory>();
-        animator = GetComponent<Animator>();
+        _playerManager = GetComponent<PlayerManager>();
+        _playerInventoryManager = GetComponent<PlayerInventoryManager>();
+        animator = GetComponentInChildren<Animator>();
         _quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
-        _playerStats = GetComponentInParent<PlayerStats>();
-        _inputHandler = GetComponentInParent<InputHandler>();
+        _playerStats = GetComponent<PlayerStatsManager>();
+        _inputHandler = GetComponent<InputHandler>();
+        LoadWeaponHolderSlots();
+    }
 
+    void LoadWeaponHolderSlots()
+    {
         WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
-        foreach(WeaponHolderSlot weaponslot in weaponHolderSlots)
+        foreach (WeaponHolderSlot weaponslot in weaponHolderSlots)
         {
-            if(weaponslot._isLeftHandSlot)
+            if (weaponslot._isLeftHandSlot)
             {
                 _leftHandSlot = weaponslot;
             }
-            else if(weaponslot._isRightHandSlot)
+            else if (weaponslot._isRightHandSlot)
             {
                 _rightHandSlot = weaponslot;
             }
-            else if(weaponslot._isBackSlot)
+            else if (weaponslot._isBackSlot)
             {
                 _backSlot = weaponslot;
             }
@@ -51,59 +55,65 @@ public class WeaponSlotManager : MonoBehaviour
 
     public void LoadBothWeaponsOnSlot()
     {
-        LoadWeaponOnSlot(_playerInventory._rightWeapon, false);
-        LoadWeaponOnSlot(_playerInventory._leftWeapon, true);
+        LoadWeaponOnSlot(_playerInventoryManager._rightWeapon, false);
+        LoadWeaponOnSlot(_playerInventoryManager._leftWeapon, true);
     }
     public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
     {
-        // 무기 로드
-        if (isLeft)
+        if(weaponItem != null)
         {
-            _leftHandSlot.currentWeapon = weaponItem;
-            _leftHandSlot.LoadWeaponModel(weaponItem);
-            LoadLeftWeaponDamageCollider();
-            _quickSlotsUI.UpdateWeaponQuickSlotsUI(true,weaponItem);
-
-            // 현재 무기에 따라 왼손 Idle 애니메이션 변경
-            #region Handle Left Weapon Idle Animations
-            if (weaponItem != null)
+            if (isLeft)
             {
+                _leftHandSlot.currentWeapon = weaponItem;
+                _leftHandSlot.LoadWeaponModel(weaponItem);
+                LoadLeftWeaponDamageCollider();
+                _quickSlotsUI.UpdateWeaponQuickSlotsUI(true, weaponItem);
                 animator.CrossFade(weaponItem.left_hand_idle, 0.2f);
-            }
-            else animator.CrossFade("Left Arm Empty", 0.2f);
-            #endregion
-        }
-        else
-        {
-            if(_inputHandler._twoHandFlag)
-            {
-                _backSlot.LoadWeaponModel(_leftHandSlot.currentWeapon);
-                _leftHandSlot.UnloadWeaponAndDestroy();
-                animator.CrossFade(weaponItem.th_idle, 0.2f);
             }
             else
             {
-                #region Handle Right Weapon Idle Animations
-
-                animator.CrossFade("Both Arms Empty", 0.2f);
-                // 현재 무기에 따라 오른손 Idle 애니메이션 변경
-                if (_backSlot != null)
+                if (_inputHandler._twoHandFlag)
                 {
+                    _backSlot.LoadWeaponModel(_leftHandSlot.currentWeapon);
+                    _leftHandSlot.UnloadWeaponAndDestroy();
+                    animator.CrossFade(weaponItem.th_idle, 0.2f);
+                }
+                else
+                {
+                    animator.CrossFade("Both Arms Empty", 0.2f);
+                    animator.CrossFade(weaponItem.right_hand_idle, 0.2f);
                     _backSlot.UnloadWeaponAndDestroy();
                 }
-
-                if (weaponItem != null)
-                {
-                    animator.CrossFade(weaponItem.right_hand_idle, 0.2f);
-                }
-                else animator.CrossFade("Right Arm Empty", 0.2f);
-                #endregion
+                _rightHandSlot.currentWeapon = weaponItem;
+                _rightHandSlot.LoadWeaponModel(weaponItem);
+                LoadRightWeaponDamageCollider();
+                _quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
             }
-            _rightHandSlot.currentWeapon = weaponItem;
-            _rightHandSlot.LoadWeaponModel(weaponItem);
-            LoadRightWeaponDamageCollider();
-            _quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
         }
+        else
+        {
+            weaponItem = _unarmedWeapon;
+            if(isLeft)
+            {
+                animator.CrossFade("Left Arm Empty", 0.2f);
+                _playerInventoryManager._leftWeapon = _unarmedWeapon;
+                _leftHandSlot.currentWeapon = _unarmedWeapon;
+                _leftHandSlot.LoadWeaponModel(_unarmedWeapon);
+                LoadLeftWeaponDamageCollider();
+                _quickSlotsUI.UpdateWeaponQuickSlotsUI(true, _unarmedWeapon);
+            }
+            else
+            {
+                animator.CrossFade("Right Arm Empty", 0.2f);
+                _playerInventoryManager._rightWeapon = _unarmedWeapon;
+                _rightHandSlot.currentWeapon = _unarmedWeapon;
+                _rightHandSlot.LoadWeaponModel(_unarmedWeapon);
+                LoadRightWeaponDamageCollider();
+                _quickSlotsUI.UpdateWeaponQuickSlotsUI(false, _unarmedWeapon);
+            }
+        }
+        // 무기 로드
+
 
         // 슬롯 UI 로드
         _quickSlotsUI.UpdateWeaponQuickSlotsUI(isLeft, weaponItem);
@@ -116,7 +126,7 @@ public class WeaponSlotManager : MonoBehaviour
             return;
 
         _leftHandDamageCollider = _leftHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>();
-        _leftHandDamageCollider._currentWeaponDamage = _playerInventory._leftWeapon.baseDamage;
+        _leftHandDamageCollider._currentWeaponDamage = _playerInventoryManager._leftWeapon.baseDamage;
 
     }
 
@@ -126,7 +136,7 @@ public class WeaponSlotManager : MonoBehaviour
             return;
 
         _rightHandDamageCollider = _rightHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>();
-        _rightHandDamageCollider._currentWeaponDamage = _playerInventory._rightWeapon.baseDamage;
+        _rightHandDamageCollider._currentWeaponDamage = _playerInventoryManager._rightWeapon.baseDamage;
     }
 
     public void OpenDamageCollier()

@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterManager: {fileID: 0}
+  enabledDamageColliderOnStartUp: 0
   _currentWeaponDamage: 25
 --- !u!136 &7610903363441105478
 CapsuleCollider:

@@ -10,7 +10,7 @@ public class SpellDamageCollider : DamageCollider
 
     bool hasCollided = false;
 
-    CharacterStats _spellTarget;
+    CharacterStatsManager _spellTarget;
     Rigidbody _rigid;
 
     Vector3 impactNormal;
@@ -35,7 +35,7 @@ public class SpellDamageCollider : DamageCollider
     {
         if(!hasCollided)
         {
-            _spellTarget = collision.transform.GetComponent<CharacterStats>();
+            _spellTarget = collision.transform.GetComponent<CharacterStatsManager>();
 
             if(_spellTarget != null)
             {

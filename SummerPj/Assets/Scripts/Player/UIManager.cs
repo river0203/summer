@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public PlayerInventory playerInventory;
+    public PlayerInventoryManager playerInventory;
     public EquipmentWindowUI _equipmentWindowUI;
 
     [Header("UI Windows")]

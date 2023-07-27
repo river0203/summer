@@ -6,19 +6,19 @@ using UnityEngine;
 public class PlayerAnimatorManager : AnimatorManager
 {
     PlayerManager _playerManager;
-    PlayerStats _playerStats;
+    PlayerStatsManager _playerStatsManager;
     InputHandler _inputHandler;
-    PlayerLocomotion _playerLocomotion;
+    PlayerLocomotionManager _playerLocomotionManager;
     int _vertical;
     int _horizontal;
 
     public void Init()
     {
-        _playerStats = GetComponentInParent<PlayerStats>();
+        _playerStatsManager = GetComponentInParent<PlayerStatsManager>();
         _playerManager = GetComponentInParent<PlayerManager>();
-        _anim = GetComponent<Animator>();
+        _anim = GetComponentInChildren<Animator>();
         _inputHandler = GetComponentInParent<InputHandler>();
-        _playerLocomotion = GetComponentInParent<PlayerLocomotion>();
+        _playerLocomotionManager = GetComponentInParent<PlayerLocomotionManager>();
         _vertical = Animator.StringToHash("Vertical");
         _horizontal = Animator.StringToHash("Horizontal");
     }
@@ -85,7 +85,7 @@ public class PlayerAnimatorManager : AnimatorManager
 
     public override void TakeCriticalDamageAnimationEvent()
     {
-        _playerStats.TakeDamageNoAnimation(_playerManager.pendingCriticalDamage);
+        _playerStatsManager.TakeDamageNoAnimation(_playerManager.pendingCriticalDamage);
         _playerManager.pendingCriticalDamage = 0;
     }
     public void EnableParrying()
@@ -119,10 +119,10 @@ public class PlayerAnimatorManager : AnimatorManager
             return;
 
         float delta = Time.deltaTime;
-        _playerLocomotion._rigid.drag = 0;
+        _playerLocomotionManager._rigid.drag = 0;
         Vector3 deltaPosition = _anim.deltaPosition;
         deltaPosition.y = 0;
         Vector3 velocity = deltaPosition / delta;
-        _playerLocomotion._rigid.velocity = velocity;
+        _playerLocomotionManager._rigid.velocity = velocity;
     }
 }
