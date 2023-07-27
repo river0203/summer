@@ -19,7 +19,7 @@ public class IdleState : State
         for (int i = 0; i < colliders.Length; i++)
         {
             // CharacterStats를 가져옴 (캐릭터인지 아닌지 판별)
-            CharacterStatsManager characterState = colliders[i].transform.GetComponent<CharacterStatsManager>();
+            CharacterStats characterState = colliders[i].transform.GetComponent<CharacterStats>();
 
             // -- 
             if (characterState != null)

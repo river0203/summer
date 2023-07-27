@@ -155,6 +155,7 @@ public class PlayerWeaponSlotManager : MonoBehaviour
     {
         _rightHandDamageCollider.DisableDamagecollider();
         _leftHandDamageCollider.DisableDamagecollider();
+
     }
     #endregion
 

@@ -2,24 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStats : CharacterStatsManager
+public class EnemyStats : CharacterStats
 {
 
-    public UIEnemyHealthBar _UIenemyHealthBar;
+    public UIEnemyHealthBar _enemyHealthBar;
 
     EnemyAnimatorManager _enemyAnimatorManager;
 
     private void Awake()
     {
         _enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
-        _UIenemyHealthBar = GetComponentInChildren<UIEnemyHealthBar>();
     }
 
     private void Start()
     {
         _maxHealth = SetMaxHealthFromHealthLevel();
         _currentHealth = _maxHealth;
-        _UIenemyHealthBar.SetMaXHealth(_maxHealth);
+        _enemyHealthBar.SetMaXHealth(_maxHealth);
     }
 
     private int SetMaxHealthFromHealthLevel()
@@ -32,7 +31,7 @@ public class EnemyStats : CharacterStatsManager
     public void TakeDamageAnimation(int _damage)
     {
         _currentHealth -= _damage;
-        _UIenemyHealthBar.SetHealth(_currentHealth);
+        _enemyHealthBar.SetHealth(_currentHealth);
 
         if (_currentHealth <= 0)
         {
@@ -41,13 +40,14 @@ public class EnemyStats : CharacterStatsManager
         }
     }
 
-    public override void TakeDamage(int _damege, string _damageAnimation = "Stage2")
+    public void TakeDamage(int _damege, string _damageAnimation = "Stage2")
     {
         if (_isDead)
             return;
 
         _currentHealth -= _damege;
-        _UIenemyHealthBar.SetHealth(_currentHealth);
+        _enemyHealthBar.SetHealth(_currentHealth);
+
 
         _enemyAnimatorManager.PlayTargetAnimation(_damageAnimation, true);
 

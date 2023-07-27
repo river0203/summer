@@ -13,7 +13,6 @@ public class DamageCollider : MonoBehaviour
 
     private void Awake()
     {
-        _characterManager = GameObject.Find("Player").GetComponent<CharacterManager>();
         _damageCollider = GetComponent<Collider>();
         _damageCollider.gameObject.SetActive(true);
         _damageCollider.isTrigger = true;
@@ -21,7 +20,7 @@ public class DamageCollider : MonoBehaviour
     }
 
     public void EnableDamagecollider()
-     {
+    {
         _damageCollider.enabled = true;
     }
 
@@ -46,6 +45,7 @@ public class DamageCollider : MonoBehaviour
                 }
 
             }
+
 
             if (playerStats != null)
             {
