@@ -11,7 +11,7 @@ public class EnemyAttackAction : EnemyAction
     public float maximumAttackAngle = 35; // 공격 가능한 각도
     public float minimumAttackAngle = -35; // ''
 
-    public float minimumDistanceNeededToAttack = 0; // 공격 가능 최소 거리
     public float maximumDistanceNeededToAttack = 3; // 공격 가능 최대 거리
+    public float minimumDistanceNeededToAttack = 0; // 공격 가능 최소 거리
 }
 
