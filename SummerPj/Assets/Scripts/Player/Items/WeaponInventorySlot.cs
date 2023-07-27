@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class WeaponInventorySlot : MonoBehaviour
 {
-    PlayerInventory _playerInventory;
-    WeaponSlotManager _weaponSlotManager;
+    PlayerInventoryManager _playerInventory;
+    PlayerWeaponSlotManager _weaponSlotManager;
     UIManager _uiManager;
 
     public Image icon;
@@ -15,8 +15,8 @@ public class WeaponInventorySlot : MonoBehaviour
 
     private void Awake()
     {
-        _playerInventory = FindObjectOfType<PlayerInventory>();
-        _weaponSlotManager = FindObjectOfType<WeaponSlotManager>();
+        _playerInventory = FindObjectOfType<PlayerInventoryManager>();
+        _weaponSlotManager = FindObjectOfType<PlayerWeaponSlotManager>();
         _uiManager = FindObjectOfType<UIManager>();
     }
 

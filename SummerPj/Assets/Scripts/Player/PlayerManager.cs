@@ -6,11 +6,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : CharacterManager
 {
-    PlayerStats _playerStats;
+    PlayerStatsManager _playerStatsManager;
     InputHandler _inputHandler;
     Animator _anim;
     CameraHandler _cameraHandler;
-    PlayerLocomotion _playerLocomotion;
+    PlayerLocomotionManager _playerLocomotion;
     PlayerAnimatorManager _playerAnimatorManager;
     interactableUI _interactableUI;
     public GameObject interactableUIGameObject;
@@ -31,11 +31,11 @@ public class PlayerManager : CharacterManager
         _cameraHandler = FindObjectOfType<CameraHandler>();
         _backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
         _inputHandler = GetComponent<InputHandler>();
-        _playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
-        _anim = GetComponentInChildren<Animator>();
-        _playerLocomotion = GetComponent<PlayerLocomotion>();
+        _playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
+        _anim = GetComponent<Animator>();
+        _playerLocomotion = GetComponent<PlayerLocomotionManager>();
         _interactableUI = FindObjectOfType<interactableUI>();
-        _playerStats = GetComponent<PlayerStats>();
+        _playerStatsManager = GetComponent<PlayerStatsManager>();
     }
 
     void Update()
@@ -51,13 +51,13 @@ public class PlayerManager : CharacterManager
         isFiringSpell = _anim.GetBool("isFiringSpell");
         _anim.SetBool("isBlocking", isBlocking);
         _anim.SetBool("isInAir", _isInAir);
-        _anim.SetBool("isDead", _playerStats._isDead);
+        _anim.SetBool("isDead", _playerStatsManager._isDead);
 
         _inputHandler.TickInput(delta);
         _playerAnimatorManager.canRotate = _anim.GetBool("canRotate");
         _playerLocomotion.HandleJumping();
         _playerLocomotion.HandleRollingAndSprinting(delta);
-        _playerStats.RegenerateStamina();
+        _playerStatsManager.RegenerateStamina();
 
         // 플레이어 이동
         _isSprinting = _inputHandler.b_input;

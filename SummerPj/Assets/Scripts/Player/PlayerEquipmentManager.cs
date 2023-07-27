@@ -5,24 +5,24 @@ using UnityEngine;
 public class PlayerEquipmentManager : MonoBehaviour
 {
     InputHandler _inputHandler;
-    PlayerInventory _playerInventory;
+    PlayerInventoryManager _playerInventoryManager;
     public BlockingCollider _blockingCollider;
 
     private void Awake()
     {
-        _inputHandler = GetComponentInParent<InputHandler>();
-        _playerInventory = GetComponentInParent<PlayerInventory>();
+        _inputHandler = GetComponent<InputHandler>();
+        _playerInventoryManager = GetComponent<PlayerInventoryManager>();
     }
     
     public void OpenBlockingCollider()
     {
         if (_inputHandler._twoHandFlag)
         {
-            _blockingCollider.SetColliderDamageAbsorption(_playerInventory._rightWeapon);
+            _blockingCollider.SetColliderDamageAbsorption(_playerInventoryManager._rightWeapon);
         }
         else
         {
-            _blockingCollider.SetColliderDamageAbsorption(_playerInventory._leftWeapon);
+            _blockingCollider.SetColliderDamageAbsorption(_playerInventoryManager._leftWeapon);
         }
 
         _blockingCollider.EnableBlockingCollider();

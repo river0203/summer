@@ -12,7 +12,7 @@ public class projectileSpell : SpellItem
     public bool isEffectedbyGravity;
     Rigidbody rigid;
 
-    public override void AttemptToCastSpell(PlayerAnimatorManager _animatorHandler, PlayerStats _playerStats, WeaponSlotManager _weaponSlotManager)
+    public override void AttemptToCastSpell(PlayerAnimatorManager _animatorHandler, PlayerStatsManager _playerStats, PlayerWeaponSlotManager _weaponSlotManager)
     {
         base.AttemptToCastSpell(_animatorHandler, _playerStats, _weaponSlotManager);
         GameObject instatiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, _weaponSlotManager._rightHandSlot.transform);
@@ -20,7 +20,7 @@ public class projectileSpell : SpellItem
         _animatorHandler.PlayTargetAnimation(spellAnimation, true);
     }
 
-    public override void SucessfullyCastSpell(PlayerAnimatorManager _animatorHandler, PlayerStats _playerStats, CameraHandler _cameraHandler, WeaponSlotManager _weaponSlotManager)
+    public override void SucessfullyCastSpell(PlayerAnimatorManager _animatorHandler, PlayerStatsManager _playerStats, CameraHandler _cameraHandler, PlayerWeaponSlotManager _weaponSlotManager)
     {
         base.SucessfullyCastSpell(_animatorHandler, _playerStats, _cameraHandler, _weaponSlotManager);
         GameObject instantiatedSpellFX = Instantiate(spellCastFX, _weaponSlotManager._rightHandSlot.transform.position, _cameraHandler._cameraPivotTransform.rotation);

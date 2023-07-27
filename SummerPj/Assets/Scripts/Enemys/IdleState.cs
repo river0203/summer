@@ -15,7 +15,7 @@ public class IdleState : State
 
         for (int i = 0; i < colliders.Length; i++)
         {
-            CharacterStats characterState = colliders[i].transform.GetComponent<CharacterStats>();
+            CharacterStatsManager characterState = colliders[i].transform.GetComponent<CharacterStatsManager>();
 
             if (characterState != null)
             {

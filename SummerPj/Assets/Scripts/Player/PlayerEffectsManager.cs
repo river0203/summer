@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class PlayerEffectsManager : MonoBehaviour
 {
-    PlayerStats _playerStats;
-    WeaponSlotManager _weaponSlotManager;
+    PlayerStatsManager _playerStatsManager;
+    PlayerWeaponSlotManager _playerWeaponSlotManager;
     public GameObject currentParticleFX;
     public int amountToBeHealed;
     public GameObject instantiatedFXModel;
 
     void Awake()
     {
-        _playerStats = GetComponentInParent<PlayerStats>();
-        _weaponSlotManager = GetComponent<WeaponSlotManager>();
+        _playerStatsManager = GetComponentInParent<PlayerStatsManager>();
+        _playerWeaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
     }
     public void HealPlayerFromEffect()
     {
-        _playerStats.HealPlayer(amountToBeHealed);
-        GameObject healParticles = Instantiate(currentParticleFX, _playerStats.transform);
+        _playerStatsManager.HealPlayer(amountToBeHealed);
+        GameObject healParticles = Instantiate(currentParticleFX, _playerStatsManager.transform);
         Destroy(instantiatedFXModel.gameObject);
-        _weaponSlotManager.LoadBothWeaponsOnSlot();
+        _playerWeaponSlotManager.LoadBothWeaponsOnSlot();
     }
 }

@@ -33,7 +33,7 @@ public class DamageCollider : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            PlayerStats playerStats = collision.GetComponent<PlayerStats>();
+            PlayerStatsManager playerStats = collision.GetComponent<PlayerStatsManager>();
             CharacterManager _enemycharacterManager = collision.GetComponent<CharacterManager>();
 
             if(_enemycharacterManager != null)
@@ -73,5 +73,12 @@ public class DamageCollider : MonoBehaviour
                 }
             }
         }
+
+/*        if(collision.tag == "Illusionary Wall")
+        {
+            IllusionaryWall _illusionaryWall = collision.GetComponent<IllusionaryWall>();
+
+            _illusionaryWall.wallHasBeenHit = true;
+        }*/
     }
 }

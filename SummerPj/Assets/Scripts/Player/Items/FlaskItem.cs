@@ -16,7 +16,7 @@ public class FlaskItem : ConsumableItem
     [Header("Recovery FX")]
     public GameObject recoveryFX;
 
-    public override void AttemptToConsumeItem(PlayerAnimatorManager _playerAnimatorManager, WeaponSlotManager _weaponSlotManager, PlayerEffectsManager _playerEffectsManager)
+    public override void AttemptToConsumeItem(PlayerAnimatorManager _playerAnimatorManager, PlayerWeaponSlotManager _weaponSlotManager, PlayerEffectsManager _playerEffectsManager)
     {
         base.AttemptToConsumeItem(_playerAnimatorManager, _weaponSlotManager, _playerEffectsManager);
         
