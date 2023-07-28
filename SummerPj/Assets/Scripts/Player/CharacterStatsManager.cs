@@ -22,4 +22,15 @@ public class CharacterStatsManager : MonoBehaviour
     {
 
     }
+
+    public virtual void TakeDamageNoAnimation(int damage)
+    {
+        _currentHealth -= damage;
+
+        if (_currentHealth <= 0)
+        {
+            _currentHealth = 0;
+            _isDead = true;
+        }
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class PlayerWeaponSlotManager : MonoBehaviour
+public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 {
     PlayerManager _playerManager;
     PlayerInventoryManager _playerInventoryManager;
@@ -11,19 +11,14 @@ public class PlayerWeaponSlotManager : MonoBehaviour
     QuickSlotsUI _quickSlotsUI;
     PlayerStatsManager _playerStats;
     InputHandler _inputHandler;
+    PlayerEffectsManager _playerEffectsManager;
 
     public WeaponItem _attackingWeapon;
-    public WeaponItem _unarmedWeapon;
 
-    public WeaponHolderSlot _leftHandSlot;
-    public WeaponHolderSlot _rightHandSlot;
-    WeaponHolderSlot _backSlot;
-
-    public DamageCollider _leftHandDamageCollider;
-    public DamageCollider _rightHandDamageCollider;
 
     private void Awake()
     {
+        _playerEffectsManager = GetComponent<PlayerEffectsManager>();
         _playerManager = GetComponent<PlayerManager>();
         _playerInventoryManager = GetComponent<PlayerInventoryManager>();
         animator = GetComponentInChildren<Animator>();
@@ -127,9 +122,8 @@ public class PlayerWeaponSlotManager : MonoBehaviour
 
         _leftHandDamageCollider = _leftHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>();
         _leftHandDamageCollider._currentWeaponDamage = _playerInventoryManager._leftWeapon.baseDamage;
-
+        _playerEffectsManager._leftWeaponFX = _leftHandSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();   
     }
-
     private void LoadRightWeaponDamageCollider()
     {
         if (_rightHandSlot._currentWeaponModel == null)
@@ -137,30 +131,27 @@ public class PlayerWeaponSlotManager : MonoBehaviour
 
         _rightHandDamageCollider = _rightHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>();
         _rightHandDamageCollider._currentWeaponDamage = _playerInventoryManager._rightWeapon.baseDamage;
+        _playerEffectsManager._rightWeaponFX = _rightHandSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
     }
-
-    public void OpenDamageCollier()
+    public void OpenLeftDamageCollier()
     {
-        if (_playerManager.isUsingRightHand)
-        {
-            _rightHandDamageCollider.EnableDamagecollider();
-        }
-        else if( _playerManager.isUsingLeftHand)
-        {
-            _leftHandDamageCollider.EnableDamagecollider();
-        }
+        _leftHandDamageCollider.EnableDamagecollider();
     }
-
-    public void CloseDamageCollier()
+    public void CloseLeftDamageCollier()
+    {
+        _leftHandDamageCollider.DisableDamagecollider();
+    }
+    public void OpenRightDamageCollier()
+    {
+        _rightHandDamageCollider.EnableDamagecollider();
+    }
+    public void CloseRightDamageCollier()
     {
         _rightHandDamageCollider.DisableDamagecollider();
-        _leftHandDamageCollider.DisableDamagecollider();
-
     }
     #endregion
 
     #region 스테미나
-
     public void DrainStaminaLightAttack()
     {
         _playerStats.TakeStaminaDamage(Mathf.RoundToInt(_attackingWeapon.baseStaminar * _attackingWeapon.lightAttackMultiplier));

@@ -76,15 +76,10 @@ public class PlayerStatsManager : CharacterStatsManager
         }
     }
 
-    public void TakeDamageNoAnimation(int damage)
+    public override void TakeDamageNoAnimation(int damage)
     {
-        _currentHealth -= damage;
-
-        if (_currentHealth <= 0)
-        {
-            _currentHealth = 0;
-            _isDead = true;
-        }
+        base.TakeDamageNoAnimation(damage);
+        _healthBar.SetCurrentHealth(_currentHealth);
     }
 
     public void TakeStaminaDamage(int damege)

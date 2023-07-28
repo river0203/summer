@@ -34,22 +34,23 @@ public class DamageCollider : MonoBehaviour
         if (collision.tag == "Player")
         {
             PlayerStatsManager playerStats = collision.GetComponent<PlayerStatsManager>();
-            CharacterManager _enemycharacterManager = collision.GetComponent<CharacterManager>();
-            BlockingCollider shield = collision.transform.GetComponentInChildren<BlockingCollider>();
+            CharacterEffectsManager _playerEffectsManager = collision.GetComponent<CharacterEffectsManager>();
+            CharacterManager _playercharacterManager = collision.GetComponent<CharacterManager>();
 
-            if(_enemycharacterManager != null)
+            if(_playercharacterManager != null)
             {
-                if(_enemycharacterManager.isParrying)
+                if(_playercharacterManager.isParrying)
                 {
                     _characterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
                     return;
                 }
-
             }
-
 
             if (playerStats != null)
             {
+                Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+                _playerEffectsManager.PlayBloodSplatterFX(contactPoint);
+
                 playerStats.TakeDamage(_currentWeaponDamage);
             }
         }
@@ -58,7 +59,11 @@ public class DamageCollider : MonoBehaviour
         {
             EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
             BlockingCollider shield = collision.transform.GetComponentInChildren<BlockingCollider>();
+            CharacterEffectsManager _enemyEffectsManager = collision.GetComponent<CharacterEffectsManager>();
             CharacterManager _enemycharacterManager = collision.GetComponent<CharacterManager>();
+
+            Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+            _enemyEffectsManager.PlayBloodSplatterFX(contactPoint);
 
             if (enemyStats != null)
             {

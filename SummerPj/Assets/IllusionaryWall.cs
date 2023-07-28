@@ -32,7 +32,7 @@ public class IllusionaryWall : MonoBehaviour
     public void FadeIllusionaryWall()
     {
         alpha = illusionaryWallMaterial.color.a;
-        alpha = alpha - Time.deltaTime / fadeTimer; 
+        alpha -= Time.deltaTime / fadeTimer; 
         Color fadewallColor = new Color(1,1,1,alpha);
         illusionaryWallMaterial.color = fadewallColor;
 
