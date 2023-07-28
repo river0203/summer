@@ -14,6 +14,7 @@ public class PlayerCombatManager : MonoBehaviour
     InputHandler _inputHandler;
     PlayerInventoryManager _playerInventoryManager;
     PlayerWeaponSlotManager _playerWeaponSlotManager;
+    PlayerEffectsManager _playerEffectsManager;
     CameraHandler _cameraHandler;
     public string _lastAttack;
 
@@ -23,6 +24,7 @@ public class PlayerCombatManager : MonoBehaviour
     private void Awake()
     {
         _cameraHandler = FindObjectOfType<CameraHandler>();
+        _playerEffectsManager = GetComponent<PlayerEffectsManager>();
         _playerEquipmentHandler = GetComponent<PlayerEquipmentManager>();
         _playerStatsManager = GetComponent<PlayerStatsManager>();
         _playerInventoryManager = GetComponent<PlayerInventoryManager>();
@@ -146,6 +148,8 @@ public class PlayerCombatManager : MonoBehaviour
             _playerAnimatorManager._anim.SetBool("isUsingRightHand", true);
             HandleLightAttack(_playerInventoryManager._rightWeapon);
         }
+
+        _playerEffectsManager.PlayWeaponFX(false); 
     }
     public void AttemptBackStabOrRiposte()
     {

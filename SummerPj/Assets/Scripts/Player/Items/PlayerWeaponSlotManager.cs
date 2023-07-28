@@ -11,12 +11,14 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
     QuickSlotsUI _quickSlotsUI;
     PlayerStatsManager _playerStats;
     InputHandler _inputHandler;
+    PlayerEffectsManager _playerEffectsManager;
 
     public WeaponItem _attackingWeapon;
 
 
     private void Awake()
     {
+        _playerEffectsManager = GetComponent<PlayerEffectsManager>();
         _playerManager = GetComponent<PlayerManager>();
         _playerInventoryManager = GetComponent<PlayerInventoryManager>();
         animator = GetComponentInChildren<Animator>();
@@ -120,9 +122,8 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 
         _leftHandDamageCollider = _leftHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>();
         _leftHandDamageCollider._currentWeaponDamage = _playerInventoryManager._leftWeapon.baseDamage;
-
+        _playerEffectsManager._leftWeaponFX = _leftHandSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();   
     }
-
     private void LoadRightWeaponDamageCollider()
     {
         if (_rightHandSlot._currentWeaponModel == null)
@@ -130,18 +131,16 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 
         _rightHandDamageCollider = _rightHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>();
         _rightHandDamageCollider._currentWeaponDamage = _playerInventoryManager._rightWeapon.baseDamage;
+        _playerEffectsManager._rightWeaponFX = _rightHandSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
     }
-
     public void OpenLeftDamageCollier()
     {
         _leftHandDamageCollider.EnableDamagecollider();
     }
-
     public void CloseLeftDamageCollier()
     {
         _leftHandDamageCollider.DisableDamagecollider();
     }
-
     public void OpenRightDamageCollier()
     {
         _rightHandDamageCollider.EnableDamagecollider();
@@ -153,7 +152,6 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
     #endregion
 
     #region 스테미나
-
     public void DrainStaminaLightAttack()
     {
         _playerStats.TakeStaminaDamage(Mathf.RoundToInt(_attackingWeapon.baseStaminar * _attackingWeapon.lightAttackMultiplier));
