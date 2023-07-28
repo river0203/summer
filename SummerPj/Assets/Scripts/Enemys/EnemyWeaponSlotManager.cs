@@ -9,6 +9,7 @@ public class EnemyWeaponSlotManager : MonoBehaviour
 
     WeaponHolderSlot rightHandSlot;
     WeaponHolderSlot leftHandSlot;
+    EnemyEffactManager _enemyEffactManager;
 
     DamageCollider leftHandDamageCollider;
     public DamageCollider rightHandDamageCollider;
@@ -17,6 +18,7 @@ public class EnemyWeaponSlotManager : MonoBehaviour
 
     private void Awake()
     {
+        _enemyEffactManager = GetComponent<EnemyEffactManager>();
         rightHandDamageCollider = GetComponentInChildren<DamageCollider>(true);
     }
 
@@ -59,11 +61,13 @@ public class EnemyWeaponSlotManager : MonoBehaviour
         {
             leftHandDamageCollider = leftHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>(true);
             leftHandDamageCollider._characterManager = GetComponentInParent<CharacterManager>();
+            _enemyEffactManager._leftWeaponFX = leftHandSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
         }
         else
         {
             rightHandDamageCollider = rightHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>(true);
             rightHandDamageCollider._characterManager = GetComponentInParent<CharacterManager>();
+            _enemyEffactManager._rightWeaponFX = rightHandSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
         }
     }   
 

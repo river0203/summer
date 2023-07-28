@@ -5,11 +5,13 @@ using UnityEngine;
 public class EnemyAnimatorManager : AnimatorManager
 {
     EnemyManager _enemyManager;
+    EnemyEffactManager _enemyEffactManager;
 
     private void Awake()
     {
         _anim = GetComponent<Animator>();
         _enemyManager = GetComponentInParent<EnemyManager>();
+        _enemyEffactManager = GetComponent<EnemyEffactManager>();
     }
 
     public override void TakeCriticalDamageAnimationEvent()
@@ -32,5 +34,10 @@ public class EnemyAnimatorManager : AnimatorManager
     public void DisableCanBeRiposted()
     {
         _enemyManager.canBeRiposted = false;
+    }
+
+    public void PlayWeaponTrailFX()
+    {
+        _enemyEffactManager.PlayWeaponFX(false);
     }
 }
