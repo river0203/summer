@@ -39,7 +39,7 @@ public class SpellDamageCollider : DamageCollider
 
             if(_spellTarget != null)
             {
-                _spellTarget.TakeDamage(_currentWeaponDamage);
+                _spellTarget.TakeDamage(_currentWeaponDamage, currentDamageAnimation);
             }
             hasCollided = true;
             _impactParticles = Instantiate(_impactParticles, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));

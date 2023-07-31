@@ -10,6 +10,7 @@ public class DamageCollider : MonoBehaviour
     public bool enabledDamageColliderOnStartUp = false;   
 
     public int _currentWeaponDamage = 25;
+    protected string currentDamageAnimation;
 
     private void Awake()
     {
@@ -36,6 +37,8 @@ public class DamageCollider : MonoBehaviour
             PlayerStatsManager playerStats = collision.GetComponent<PlayerStatsManager>();
             CharacterEffectsManager _playerEffectsManager = collision.GetComponent<CharacterEffectsManager>();
             CharacterManager _playercharacterManager = collision.GetComponent<CharacterManager>();
+            float directionHitFrom = (Vector3.SignedAngle(_playercharacterManager.transform.forward, _playercharacterManager.transform.forward, Vector3.up)); 
+            ChooseWhichDirectionDamageCameFrom(directionHitFrom);
 
             if(_playercharacterManager != null)
             {
@@ -46,12 +49,13 @@ public class DamageCollider : MonoBehaviour
                 }
             }
 
+
             if (playerStats != null)
             {
                 Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                 _playerEffectsManager.PlayBloodSplatterFX(contactPoint);
 
-                playerStats.TakeDamage(_currentWeaponDamage);
+                playerStats.TakeDamage(_currentWeaponDamage, currentDamageAnimation);
             }
         }
         
@@ -86,5 +90,29 @@ public class DamageCollider : MonoBehaviour
 
             _illusionaryWall.wallHasBeenHit = true;
         }*/
+    }
+
+    public void ChooseWhichDirectionDamageCameFrom(float direction)
+    {
+        if(direction >= 145 && direction <= 180)
+        {
+            currentDamageAnimation = "Damage_Foward_01";
+        }
+        else if (direction <= -145 && direction >= 180)
+        {
+            currentDamageAnimation = "Damage_Foward_01";
+        }
+        else if (direction >= -45 && direction <= 180)
+        {
+            currentDamageAnimation = "Damage_Back_01";
+        }
+        else if (direction >= -144 && direction <= 180)
+        {
+            currentDamageAnimation = "Damage_Right_01";
+        }
+        else if (direction >= 45 && direction <= 180)
+        {
+            currentDamageAnimation = "Damage_Left_01";
+        }
     }
 }

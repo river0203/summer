@@ -51,6 +51,11 @@ public class PlayerCombatManager : MonoBehaviour
                 _playerAnimatorManager.PlayTargetAnimation(weapon.OH_Light_Attack_3, true);
                 _lastAttack = weapon.OH_Light_Attack_3;
             }
+            else if (_lastAttack == weapon.OH_Light_Attack_3 && weapon.OH_Light_Attack_4 != "")
+            {
+                _playerAnimatorManager.PlayTargetAnimation(weapon.OH_Light_Attack_3, true);
+                _lastAttack = weapon.OH_Light_Attack_4;
+            }
             else if(_lastAttack == weapon.TH_Light_Attack_01)
             {
                 _playerAnimatorManager.PlayTargetAnimation(weapon.TH_Light_Attack_02, true);
