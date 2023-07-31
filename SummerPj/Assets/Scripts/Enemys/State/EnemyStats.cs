@@ -12,12 +12,12 @@ public class EnemyStats : CharacterStatsManager
     private void Awake()
     {
         _enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
+        _maxHealth = SetMaxHealthFromHealthLevel();
+        _currentHealth = _maxHealth;
     }
 
     private void Start()
     {
-        _maxHealth = SetMaxHealthFromHealthLevel();
-        _currentHealth = _maxHealth;
         _enemyHealthBar.SetMaXHealth(_maxHealth);
     }
 
