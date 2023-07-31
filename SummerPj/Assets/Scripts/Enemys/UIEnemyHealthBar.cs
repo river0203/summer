@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class UIEnemyHealthBar : MonoBehaviour
 {
-    Slider _slider;
+    public Slider _slider;
     float _timeUntillBarIsHidden = 0;
 
     private void Awake()
