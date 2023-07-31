@@ -40,7 +40,7 @@ public class EnemyStats : CharacterStatsManager
         }
     }
 
-    public void TakeDamage(int _damege, string _damageAnimation = "Stage2")
+    public override void TakeDamage(int _damege, string _damageAnimation = "Stage2")
     {
         if (_isDead)
             return;
@@ -48,12 +48,11 @@ public class EnemyStats : CharacterStatsManager
         _currentHealth -= _damege;
         _enemyHealthBar.SetHealth(_currentHealth);
 
-
         _enemyAnimatorManager.PlayTargetAnimation(_damageAnimation, true);
 
         if (_currentHealth <= 0)
         {
-            HandleDeath();
+            HandleDeath();  
         }
     }
 
