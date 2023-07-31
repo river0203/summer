@@ -237,14 +237,16 @@ public class InputHandler : MonoBehaviour
     {
         _inputActions.PlayerQuickSlots.DPadRight.performed += i => { d_Pad_Right = true; };
         _inputActions.PlayerQuickSlots.DPadLeft.performed += i => { d_Pad_Left = true; };
-
-        if (d_Pad_Right)
+        if (!_playerManager._isInteracting)
         {
-            _playerInventoryManager.ChangeRightWeapon();
-        }
-        else if (d_Pad_Left)
-        {
-            _playerInventoryManager.ChangeLeftWeapon();
+            if (d_Pad_Right)
+            {
+                _playerInventoryManager.ChangeRightWeapon();
+            }
+            else if (d_Pad_Left)
+            {
+                _playerInventoryManager.ChangeLeftWeapon();
+            }
         }
     }
 
