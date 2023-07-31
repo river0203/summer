@@ -10,6 +10,7 @@ public class EnemyManager : CharacterManager
     public EnemyAnimatorManager enemyAnimatorManager;
     EnemyStats enemyStats;
     public Rigidbody enemyRigidBody;
+    public CharacterStatsManager _characterState;
 
     public NavMeshAgent navmeshAgent;
 
