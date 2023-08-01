@@ -319,13 +319,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 774234792}
+  m_Father: {fileID: 553343253}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 1.182, y: 180.229, z: 0.404}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2, y: 78.27072}
-  m_SizeDelta: {x: -0.0001, y: 56.5414}
+  m_AnchoredPosition: {x: 2.000122, y: 83.52841}
+  m_SizeDelta: {x: -0.00022207032, y: 46.026203}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &428697239
 MonoBehaviour:
@@ -456,6 +456,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1883759001}
+  - {fileID: 428697238}
   m_Father: {fileID: 774234792}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -528,7 +529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4678471234201664945, guid: b472891c16645a8408f2b9384550923f, type: 3}
       propertyPath: _isBoss
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4678471234201664948, guid: b472891c16645a8408f2b9384550923f, type: 3}
       propertyPath: m_RootOrder
@@ -711,7 +712,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 553343253}
-  - {fileID: 428697238}
   m_Father: {fileID: 1508570951}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

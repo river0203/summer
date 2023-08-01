@@ -36,6 +36,7 @@ public class EnemyManager : CharacterManager
         navmeshAgent = GetComponentInChildren<NavMeshAgent>();
         _backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
         navmeshAgent.enabled = false;
+        _characterState = GetComponent<CharacterStatsManager>();
     }
 
     private void Start()
@@ -49,6 +50,7 @@ public class EnemyManager : CharacterManager
         isInteracting = enemyAnimatorManager._anim.GetBool("isInteracting");
         isPreformingAction = enemyAnimatorManager._anim.GetBool("isPreformingAction");
         enemyAnimatorManager._anim.SetBool("isDead", enemyStats._isDead);
+        _characterState.DestroyObj();
     }
 
     private void FixedUpdate()
@@ -76,4 +78,6 @@ public class EnemyManager : CharacterManager
     {
         currentState = state;
     }
+
+
 }

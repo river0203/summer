@@ -9,6 +9,7 @@ public class IdleState : State
 
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
+
         #region 적 감지
         // 범위 안에 모든걸 감지(배열로 저장)
         Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
@@ -50,5 +51,6 @@ public class IdleState : State
             return this;
         }
         #endregion
+
     }
 }

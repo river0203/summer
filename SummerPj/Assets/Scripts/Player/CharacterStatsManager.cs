@@ -33,4 +33,19 @@ public class CharacterStatsManager : MonoBehaviour
             _isDead = true;
         }
     }
+
+    public void DestroyObj()
+    {
+        if(_isDead == true)
+        {
+            StartCoroutine(DestroyChar());
+        }
+    }
+
+    private IEnumerator DestroyChar()
+    {
+        yield return new WaitForSeconds(15);
+        Destroy(gameObject);
+        
+    }
 }
