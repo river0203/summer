@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 {
+    CharacterManager _characterManager;
     PlayerManager _playerManager;
     PlayerInventoryManager _playerInventoryManager;
     Animator animator;
@@ -14,7 +15,6 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
     PlayerEffectsManager _playerEffectsManager;
 
     public WeaponItem _attackingWeapon;
-
 
     private void Awake()
     {
@@ -129,7 +129,8 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
         if (_rightHandSlot._currentWeaponModel == null)
             return;
 
-        _rightHandDamageCollider = _rightHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>();
+        //_rightHandDamageCollider._characterManager = _characterManager;
+        _rightHandDamageCollider = _rightHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>(); 
         _rightHandDamageCollider._currentWeaponDamage = _playerInventoryManager._rightWeapon.baseDamage;
         _playerEffectsManager._rightWeaponFX = _rightHandSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
     }
