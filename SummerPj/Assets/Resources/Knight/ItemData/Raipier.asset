@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Raipier
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  itemName: Raipier
+  itemName: Rapier
   _modelPrefabe: {fileID: 6290263777526386278, guid: 5015a91943a07d543a0819ad04cede80, type: 3}
   _isUnarmed: 0
   baseDamage: 25

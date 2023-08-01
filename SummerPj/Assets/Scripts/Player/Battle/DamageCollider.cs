@@ -49,7 +49,6 @@ public class DamageCollider : MonoBehaviour
                 }
             }
 
-
             if (playerStats != null)
             {
                 Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);

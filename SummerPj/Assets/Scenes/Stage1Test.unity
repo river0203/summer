@@ -1653,14 +1653,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentConsumable: {fileID: 11400000, guid: 92183ebf3ac258b48ab9e2e839769c2d, type: 2}
-  _currentSpell: {fileID: 0}
+  _currentSpell: {fileID: 11400000, guid: a7ab6c41498a58645b51a260bba0dd82, type: 2}
   _rightWeapon: {fileID: 0}
   _leftWeapon: {fileID: 0}
   _maxInventorySlotCount: 4
   _weaponsInRightHandSlots:
-  - {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
+  - {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
   - {fileID: 11400000, guid: b583315338c63984680536c9c224c831, type: 2}
   _weaponsInLeftHandSlots: []
+  _Spells:
+  - {fileID: 0}
+  - {fileID: 11400000, guid: e54aaed16fc9fdf48997a8a01ccfd8bc, type: 2}
+  - {fileID: 11400000, guid: a7ab6c41498a58645b51a260bba0dd82, type: 2}
   _currentRightWeaponIndex: -1
   _currentLeftWeaponIndex: -1
   _weaponsInventory: []

@@ -9,14 +9,15 @@ public class PlayerInventoryManager : MonoBehaviour
     public ConsumableItem currentConsumable;
     public SpellItem _currentSpell;
     public WeaponItem _rightWeapon;
-    public WeaponItem _leftWeapon;
+    [HideInInspector] public WeaponItem _leftWeapon;
 
     public int _maxInventorySlotCount = 4;
     public List<WeaponItem> _weaponsInRightHandSlots = new List<WeaponItem>();
     public List<WeaponItem> _weaponsInLeftHandSlots = new List<WeaponItem>();
+    public List<SpellItem> _Spells = new List<SpellItem>();
 
     public int _currentRightWeaponIndex = -1;
-    public int _currentLeftWeaponIndex = -1;
+    [HideInInspector] public int _currentLeftWeaponIndex = -1;
 
     public List<WeaponItem> _weaponsInventory;
 
@@ -53,6 +54,10 @@ public class PlayerInventoryManager : MonoBehaviour
             _rightWeapon = _playerWeaponSlotManager._unarmedWeapon;
             _playerWeaponSlotManager.LoadWeaponOnSlot(_playerWeaponSlotManager._unarmedWeapon, false);
         }
+
+        if (_rightWeapon.itemName == "Sword") { _currentSpell = _Spells[0]; }
+        else if (_rightWeapon.itemName == "Halberd") { _currentSpell = _Spells[1]; }
+        else if (_rightWeapon.itemName == "Rapier") { _currentSpell = _Spells[2]; }
     }
 
     public void ChangeLeftWeapon()
