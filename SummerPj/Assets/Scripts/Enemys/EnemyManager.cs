@@ -24,8 +24,8 @@ public class EnemyManager : CharacterManager
 
     [Header("AI Setting")]
     public float detectionRadius = 20;
-    public float maximumDetectionAngle = 50;
-    public float minimumDetectionAngle = -50;
+    public float maximumDetectionAngle = 10;
+    public float minimumDetectionAngle = -10;
 
     void Awake()
     {
