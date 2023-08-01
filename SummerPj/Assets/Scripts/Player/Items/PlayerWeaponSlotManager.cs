@@ -130,7 +130,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
             return;
 
         //_rightHandDamageCollider._characterManager = _characterManager;
-        _rightHandDamageCollider = _rightHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>();
+        _rightHandDamageCollider = _rightHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>(); 
         _rightHandDamageCollider._currentWeaponDamage = _playerInventoryManager._rightWeapon.baseDamage;
         _playerEffectsManager._rightWeaponFX = _rightHandSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
     }

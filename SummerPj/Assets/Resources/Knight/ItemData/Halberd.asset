@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   itemName: Halberd
-  _modelPrefabe: {fileID: 1202009022844540, guid: 5ec09ce5b40ce02458231b0c0afdc948, type: 3}
+  _modelPrefabe: {fileID: 3024973028223165133, guid: f6421486fe73bc845a0047da6bbdcb3e, type: 3}
   _isUnarmed: 0
   baseDamage: 25
   criticalDamageMultiplier: 4

@@ -21,6 +21,6 @@ MonoBehaviour:
   isInteracting: 0
   estusFlask: 1
   ashenFlask: 0
-  healthRecoverAmount: 10
+  healthRecoverAmount: 30
   focusPointsRecoverAmount: 0
-  recoveryFX: {fileID: 919132149155446097, guid: 565e5535f80f489cabb87cf57394cbb3, type: 3}
+  recoveryFX: {fileID: 919132149155446097, guid: 836cc097422a45c09492413cef52f6bd, type: 3}
