@@ -81,9 +81,13 @@ public class EnemyManager : CharacterManager
         currentState = state;
     }
 
+    
     private void LookTarget()
     {
-        Vector3 _targetDirection = currentTarget.transform.position - this.transform.position;
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(_targetDirection), rotationSpeed * Time.deltaTime);
+        if(!_characterState._isDead)
+        {
+            Vector3 _targetDirection = currentTarget.transform.position - this.transform.position;
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(_targetDirection), rotationSpeed * Time.deltaTime);
+        }
     }
 }

@@ -8,6 +8,7 @@ public class PursueTargetState : State
     public CombatStanceState combatStanceState;
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
+        
         // 무언가 하고 있으면 제자리에 멈추고 그냥 현재 상태 유지하는걸 추천
         if (enemyManager.isPreformingAction)
         {

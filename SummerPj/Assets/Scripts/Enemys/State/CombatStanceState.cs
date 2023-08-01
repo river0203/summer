@@ -11,7 +11,7 @@ public class CombatStanceState : State
     {
         // 플레이어와의 거리 저장
         float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-        
+
         // 적이 공격 하고 있었으면 이속을 0으로 밀어버림 (공격하고 달리는 애니메이션으로 넘어가는거 방지)
         if (enemyManager.isPreformingAction)
         {
