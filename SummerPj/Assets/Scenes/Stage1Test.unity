@@ -1658,7 +1658,7 @@ MonoBehaviour:
   _leftWeapon: {fileID: 0}
   _maxInventorySlotCount: 4
   _weaponsInRightHandSlots:
-  - {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
+  - {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
   - {fileID: 11400000, guid: b583315338c63984680536c9c224c831, type: 2}
   _weaponsInLeftHandSlots: []
   _currentRightWeaponIndex: -1
