@@ -34,6 +34,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -78,6 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -151,6 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -169,6 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -293,6 +301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -495,6 +505,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -561,6 +573,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -1045,6 +1059,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -1331,6 +1347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -1417,73 +1435,73 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Horizontal
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isInAir
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isInteracting
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: canDoCombo
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isUsingRightHand
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isUsingLeftHand
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isInvulnerable
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isDead
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: canRotate
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isBlocking
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isFiringSpell
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -2311,6 +2329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -2714,6 +2734,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -2732,6 +2754,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -2750,6 +2774,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -2768,6 +2794,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -3115,6 +3143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell

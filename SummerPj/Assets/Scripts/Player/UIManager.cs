@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public PlayerInventoryManager playerInventory;
+    public PlayerInventoryManager _playerInventory;
     public EquipmentWindowUI _equipmentWindowUI;
 
     [Header("UI Windows")]
-    public GameObject hudWindow;
-    public GameObject selectWindow;
-    public GameObject equipmentScreentWindow;
-    public GameObject weaponInventoryWindow;
+    public GameObject _hudWindow;
+    public GameObject _selectWindow;
+    public GameObject _equipmentScreentWindow;
+    public GameObject _weaponInventoryWindow;
 
     [Header("Equipment Window Slot Selected")]
     public bool rightHandSlot01Selected;
@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
-        _equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);
+        _equipmentWindowUI.LoadWeaponsOnEquipmentScreen(_playerInventory);
     }
 
     public void UpdateUI()
@@ -35,14 +35,14 @@ public class UIManager : MonoBehaviour
         #region Weapon Inventory Slots
         for(int i = 0; i < weaponInventorySlots.Length; i++) 
         { 
-            if (i < playerInventory._weaponsInventory.Count)
+            if (i < _playerInventory._weaponsInventory.Count)
             {
-                if(weaponInventorySlots.Length < playerInventory._weaponsInventory.Count)
+                if(weaponInventorySlots.Length < _playerInventory._weaponsInventory.Count)
                 {
                     Instantiate(weaponInventorySlotPrefab, weaponInventorySlotsParent);
                     weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
                 }
-                weaponInventorySlots[i].AddItem(playerInventory._weaponsInventory[i]);
+                weaponInventorySlots[i].AddItem(_playerInventory._weaponsInventory[i]);
             }
             else
             {
@@ -54,19 +54,20 @@ public class UIManager : MonoBehaviour
 
     public void OpenSelectWindow()
     {
-        selectWindow.SetActive(true);
+        _selectWindow.SetActive(true);
+        
     }
 
     public void CloseSelectWindow()
     {
-        selectWindow.SetActive(false);
+        _selectWindow.SetActive(false);
     }
 
     public void CloseAllInventoryWindows()
     {
         ResetAllSelectedSlots();
-        weaponInventoryWindow.SetActive(false);
-        equipmentScreentWindow.SetActive(false);
+        _weaponInventoryWindow.SetActive(false);
+        _equipmentScreentWindow.SetActive(false);
     }
 
     public void ResetAllSelectedSlots()

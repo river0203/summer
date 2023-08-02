@@ -260,13 +260,13 @@ public class InputHandler : MonoBehaviour
             {
                 _uiManager.OpenSelectWindow();
                 _uiManager.UpdateUI();
-                _uiManager.hudWindow.SetActive(false);
+                _uiManager._hudWindow.SetActive(false);
             }
             else
             {
                 _uiManager.CloseSelectWindow();
                 _uiManager.CloseAllInventoryWindows();
-                _uiManager.hudWindow.SetActive(true);
+                _uiManager._hudWindow.SetActive(true);
             }
         }
     }
