@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 428697240}
   - component: {fileID: 428697239}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Boss Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -314,17 +314,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428697237}
-  m_LocalRotation: {x: 0.003503113, y: 0.9999388, z: -0.010318376, w: -0.0019638005}
+  m_LocalRotation: {x: 0.010328723, y: 0.0049208696, z: 0.0034725897, w: 0.9999286}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 553343253}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 1.182, y: 180.229, z: 0.404}
+  m_LocalEulerAnglesHint: {x: 1.182, y: 0.568, z: 0.404}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.000122, y: 83.52841}
+  m_AnchoredPosition: {x: -2.000122, y: 83.52841}
   m_SizeDelta: {x: -0.00022207032, y: 46.026203}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &428697239
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -508,7 +508,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1579688909}
   m_HandleRect: {fileID: 0}
-  m_Direction: 1
+  m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
@@ -623,6 +623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 774234792}
+  - component: {fileID: 774234793}
   m_Layer: 5
   m_Name: Boss HP Bar
   m_TagString: Untagged
@@ -648,9 +649,22 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1786.256, y: -372.45068}
+  m_AnchoredPosition: {x: 65, y: -440}
   m_SizeDelta: {x: 1285.8514, y: 35.6582}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &774234793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774234791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9a8272f540fee4ba47e139264b698b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bossName: {fileID: 1194653821}
 --- !u!1 &814997705
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,6 +869,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a250bbbb851ed341a24896128e442c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1194653821 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4459712680674095194, guid: b61115b622216a740b611e1e4072ccb5, type: 3}
+  m_PrefabInstance: {fileID: 1945841270}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1508570947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,7 +1078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3053872921105081157, guid: 9e198360079bda74a9c7a98573b87eed, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 95.75
+      value: 112.46
       objectReference: {fileID: 0}
     - target: {fileID: 3053872921105081157, guid: 9e198360079bda74a9c7a98573b87eed, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1398,6 +1423,10 @@ PrefabInstance:
     - target: {fileID: 4184272913058658036, guid: b472891c16645a8408f2b9384550923f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8151444918155195727, guid: b472891c16645a8408f2b9384550923f, type: 3}
+      propertyPath: _isBoss
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b472891c16645a8408f2b9384550923f, type: 3}
