@@ -22,7 +22,6 @@ public class DamageCollider : MonoBehaviour
 
     public void EnableDamagecollider()
     {
-
         _damageCollider.enabled = true;
     }
 

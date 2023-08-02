@@ -43,7 +43,7 @@ public class CharacterSoundFXManager : MonoBehaviour
 
         if(_characterManager.isUsingRightHand)
         {
-            foreach(var whooshSound in _characterManager._playerInventoryManager._rightWeapon.weaponWhooshes)
+            foreach(var whooshSound in _characterManager._playerInventoryManager._currentWeapon.weaponWhooshes)
             {
                 if(whooshSound != lastWeaponWhooshes)
                 {
@@ -52,7 +52,7 @@ public class CharacterSoundFXManager : MonoBehaviour
 
                 int randomValue = Random.Range(0, potentialWeaponWhooshes.Count);
                 lastWeaponWhooshes = takingDamageSounds[randomValue];
-                _audioSource.PlayOneShot(_characterManager._playerInventoryManager._rightWeapon.weaponWhooshes[randomValue]);
+                _audioSource.PlayOneShot(_characterManager._playerInventoryManager._currentWeapon.weaponWhooshes[randomValue]);
             }
         }
     }

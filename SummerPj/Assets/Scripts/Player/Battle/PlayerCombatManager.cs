@@ -102,13 +102,13 @@ public class PlayerCombatManager : MonoBehaviour
     #region Input Actions
     public void HandleRBAction()
     {
-        if(_playerInventoryManager._rightWeapon.isMeleeWeapon)
+        if(_playerInventoryManager._currentWeapon.isMeleeWeapon)
         {
             PerformRBMeleeAction();
         }
-        else if(_playerInventoryManager._rightWeapon.isSpellCaster || _playerInventoryManager._rightWeapon.isFaithCaster || _playerInventoryManager._rightWeapon.isPyroCaster) 
+        else if(_playerInventoryManager._currentWeapon.isSpellCaster || _playerInventoryManager._currentWeapon.isFaithCaster || _playerInventoryManager._currentWeapon.isPyroCaster) 
         {
-            PerformRBMagicAction(_playerInventoryManager._rightWeapon);
+            PerformRBMagicAction(_playerInventoryManager._currentWeapon);
         }
     }
 
@@ -119,18 +119,14 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void HandleLTAction()
     {
-        if(_playerInventoryManager._rightWeapon.isMeleeWeapon)
+        if(_playerInventoryManager._currentWeapon.isMeleeWeapon)
         {
             PerformLTWeaponArt(_inputHandler._twoHandFlag);
         }
-        /*        if(_playerInventory._leftWeapon.isShieldWeapon)
-                {
-                    PerformLTWeaponArt(_inputHandler._twoHandFlag);
-                }*/
-        else if(_playerInventoryManager._leftWeapon.isMeleeWeapon)
+      /*if(_playerInventory._leftWeapon.isShieldWeapon)
         {
-
-        }
+                    PerformLTWeaponArt(_inputHandler._twoHandFlag);
+        }*/
     }
     #endregion
 
@@ -140,7 +136,7 @@ public class PlayerCombatManager : MonoBehaviour
         if (_playerManager._canDoCombo)
         {
             _inputHandler._comboFlag = true;
-            HandleWeaponCombo(_playerInventoryManager._rightWeapon);
+            HandleWeaponCombo(_playerInventoryManager._currentWeapon);
             _inputHandler._comboFlag = false;
         }
         else
@@ -151,7 +147,7 @@ public class PlayerCombatManager : MonoBehaviour
                 return;
 
             _playerAnimatorManager._anim.SetBool("isUsingRightHand", true);
-            HandleLightAttack(_playerInventoryManager._rightWeapon);
+            HandleLightAttack(_playerInventoryManager._currentWeapon);
         }
 
         _playerEffectsManager.PlayWeaponFX(false); 
@@ -166,7 +162,7 @@ public class PlayerCombatManager : MonoBehaviour
             transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
         {
             CharacterManager _enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
-            DamageCollider rightWeapon = _playerWeaponSlotManager._rightHandDamageCollider;
+            DamageCollider _currentWeapon = _playerWeaponSlotManager._currentDamageCollider;
 
 /*            if(_enemyCharacterManager != null )
             {
@@ -191,7 +187,7 @@ public class PlayerCombatManager : MonoBehaviour
         else if (Physics.Raycast(_inputHandler.criticalAttackRayCastStartPoint.position, transform.TransformDirection(Vector3.forward), out hit, 0.7f, backStabLayer))
         {
             CharacterManager _enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
-            DamageCollider rightWeapon = _playerWeaponSlotManager._rightHandDamageCollider;
+            DamageCollider _currentWeapon = _playerWeaponSlotManager._currentDamageCollider;
 
             if(_enemyCharacterManager != null && _enemyCharacterManager.canBeRiposted)
             {
@@ -205,7 +201,7 @@ public class PlayerCombatManager : MonoBehaviour
                 Quaternion targetRotation = Quaternion.Slerp(_playerManager.transform.rotation, tr, 500 * Time.deltaTime);
                 _playerManager.transform.rotation = targetRotation;
 
-                int criticalDamage = _playerInventoryManager._rightWeapon.criticalDamageMultiplier * rightWeapon._currentWeaponDamage;
+                int criticalDamage = _playerInventoryManager._currentWeapon.criticalDamageMultiplier * _currentWeapon._currentWeaponDamage;
                 _enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
                 _playerAnimatorManager.PlayTargetAnimation("Riposte", true);
@@ -268,7 +264,7 @@ public class PlayerCombatManager : MonoBehaviour
         }
         else 
         {
-            _playerAnimatorManager.PlayTargetAnimation(_playerInventoryManager._rightWeapon.weapon_art, true);
+            _playerAnimatorManager.PlayTargetAnimation(_playerInventoryManager._currentWeapon.weapon_art, true);
         }
 
     }

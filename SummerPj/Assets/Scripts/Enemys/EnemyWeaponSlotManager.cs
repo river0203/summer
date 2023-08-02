@@ -7,7 +7,7 @@ public class EnemyWeaponSlotManager : MonoBehaviour
     public WeaponItem rightHandWeapon;
     public WeaponItem leftHandWeapon;
 
-    WeaponHolderSlot rightHandSlot;
+    WeaponHolderSlot HandSlot;
     WeaponHolderSlot leftHandSlot;
 
     DamageCollider leftHandDamageCollider;
@@ -20,13 +20,9 @@ public class EnemyWeaponSlotManager : MonoBehaviour
         WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
         foreach (WeaponHolderSlot weaponslot in weaponHolderSlots)
         {
-            if (weaponslot._isLeftHandSlot)
+            if (weaponslot._isWeaponHandSlot)
             {
-                leftHandSlot = weaponslot;
-            }
-            else if (weaponslot._isRightHandSlot)
-            {
-                rightHandSlot = weaponslot;
+                HandSlot = weaponslot;
             }
         }
     }
@@ -41,14 +37,14 @@ public class EnemyWeaponSlotManager : MonoBehaviour
     {
         if(isleft) 
         { 
-            leftHandSlot.currentWeapon = weapon;
+            leftHandSlot._currentWeapon = weapon;
             leftHandSlot.LoadWeaponModel(weapon);
             LoadWeaponsDamageCollider(true);
         }
         else
         {
-            rightHandSlot.currentWeapon = weapon;
-            rightHandSlot.LoadWeaponModel(weapon);
+            HandSlot._currentWeapon = weapon;
+            HandSlot.LoadWeaponModel(weapon);
             LoadWeaponsDamageCollider(false);
         }
     }
@@ -72,7 +68,7 @@ public class EnemyWeaponSlotManager : MonoBehaviour
             leftHandDamageCollider = leftHandSlot._currentWeaponModel.GetComponent<DamageCollider>();
             leftHandDamageCollider._characterManager = GetComponentInParent<CharacterManager>();
         }
-        else rightHandDamageCollider = rightHandSlot._currentWeaponModel.GetComponent<DamageCollider>();
+        else rightHandDamageCollider = HandSlot._currentWeaponModel.GetComponent<DamageCollider>();
         rightHandDamageCollider._characterManager = GetComponentInParent<CharacterManager>();
     }
 

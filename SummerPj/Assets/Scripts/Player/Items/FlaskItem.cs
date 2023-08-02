@@ -20,10 +20,10 @@ public class FlaskItem : ConsumableItem
     {
         base.AttemptToConsumeItem(_playerAnimatorManager, _weaponSlotManager, _playerEffectsManager);
         
-        GameObject flask = Instantiate(itemModel, _weaponSlotManager._rightHandSlot.transform);
+        GameObject flask = Instantiate(itemModel, _weaponSlotManager._WeaponSlot.transform);
         _playerEffectsManager.currentParticleFX = recoveryFX;
         _playerEffectsManager.amountToBeHealed = healthRecoverAmount;
         _playerEffectsManager.instantiatedFXModel = flask;
-        _weaponSlotManager._rightHandSlot.UnloadWeapon();
+        _weaponSlotManager._WeaponSlot.UnloadWeapon();
     }
 }

@@ -203,7 +203,7 @@ public class InputHandler : MonoBehaviour
         }
         if (ha_input)
         {
-            _playerCombatManager.HandleHeavyAttack(_playerInventoryManager._rightWeapon);
+            _playerCombatManager.HandleHeavyAttack(_playerInventoryManager._currentWeapon);
         }
 
         if(lb_Input)
@@ -236,16 +236,12 @@ public class InputHandler : MonoBehaviour
     private void HandleQuickSlotsInput()
     {
         _inputActions.PlayerQuickSlots.DPadRight.performed += i => { d_Pad_Right = true; };
-        _inputActions.PlayerQuickSlots.DPadLeft.performed += i => { d_Pad_Left = true; };
+
         if (!_playerManager._isInteracting)
         {
             if (d_Pad_Right)
             {
-                _playerInventoryManager.ChangeRightWeapon();
-            }
-            else if (d_Pad_Left)
-            {
-                _playerInventoryManager.ChangeLeftWeapon();
+                _playerInventoryManager.ChangeWeapon();
             }
         }
     }
@@ -332,12 +328,11 @@ public class InputHandler : MonoBehaviour
 
             if(_twoHandFlag)
             {
-                _weaponSlotManager.LoadWeaponOnSlot(_playerInventoryManager._rightWeapon, false);
+                _weaponSlotManager.LoadWeaponOnSlot(_playerInventoryManager._currentWeapon);
             }
             else
             {
-                _weaponSlotManager.LoadWeaponOnSlot(_playerInventoryManager._rightWeapon, false);
-                _weaponSlotManager.LoadWeaponOnSlot(_playerInventoryManager._leftWeapon, true);
+                _weaponSlotManager.LoadWeaponOnSlot(_playerInventoryManager._currentWeapon);
             }
         }
     }
