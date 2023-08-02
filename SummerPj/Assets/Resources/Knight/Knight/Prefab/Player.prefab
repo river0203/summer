@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 3099296631056935911}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -571,8 +571,8 @@ MonoBehaviour:
   _rotationSpeed: 10
   _fallingSpeed: 300
   rollStaminaCost: 15
-  characterCollider: {fileID: 3099296630638564482}
-  characterCollisionBlockerCollider: {fileID: 0}
+  _characterCollider: {fileID: 0}
+  _characterCollisionBlockerCollider: {fileID: 0}
 --- !u!114 &3099296630638564485
 MonoBehaviour:
   m_ObjectHideFlags: 0

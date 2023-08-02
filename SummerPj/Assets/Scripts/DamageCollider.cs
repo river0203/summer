@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DamageCollider : MonoBehaviour
 {
+    bool _isAttacked = false;
     public CharacterManager _characterManager;
     Collider _damageCollider;
     public bool enabledDamageColliderOnStartUp = false;   
@@ -22,11 +23,13 @@ public class DamageCollider : MonoBehaviour
 
     public void EnableDamagecollider()
     {
+        _isAttacked = true;
         _damageCollider.enabled = true;
     }
 
     public void DisableDamagecollider()
     {
+        _isAttacked = false;
         _damageCollider.enabled = false;
     }
 
@@ -50,12 +53,13 @@ public class DamageCollider : MonoBehaviour
             }
 
 
-            if (playerStats != null)
+            if (playerStats != null && _isAttacked)
             {
                 Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                 // _playerEffectsManager.PlayBloodSplatterFX(contactPoint);
 
                 playerStats.TakeDamage(_currentWeaponDamage, currentDamageAnimation);
+                _isAttacked = false;
             }
         }
         

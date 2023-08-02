@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterStatsManager : MonoBehaviour
 {
-    [HideInInspector] public int _healthLevel = 10;
+    [HideInInspector] public int _healthLevel = 100000;
     [HideInInspector] public int _maxHealth;
     [HideInInspector] public int _currentHealth;
 
