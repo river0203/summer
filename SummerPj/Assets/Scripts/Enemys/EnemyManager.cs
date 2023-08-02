@@ -20,7 +20,7 @@ public class EnemyManager : CharacterManager
     public float maximumAttackRange = 1.5f;
     public bool isInteracting;
 
-    public float rotationSpeed = 15;
+    public float rotationSpeed = 3;
 
     [Header("AI Setting")]
     public float detectionRadius = 20;
