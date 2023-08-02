@@ -36,7 +36,6 @@ public class InputHandler : MonoBehaviour
     public bool d_Pad_Left;
     public bool d_Pad_Right;
 
-    public bool _twoHandFlag;
     public bool _dodgeFlag;
     public bool _sprintFlag;
     public bool _comboFlag;
@@ -222,14 +221,7 @@ public class InputHandler : MonoBehaviour
 
         if(lt_Input)
         {
-            if(_twoHandFlag)
-            {
-
-            }
-            else
-            {
-                _playerCombatManager.HandleLTAction();
-            }
+            _playerCombatManager.HandleLTAction();
         }
     }
 
@@ -324,16 +316,7 @@ public class InputHandler : MonoBehaviour
     {
         if(y_Input)
         {
-            _twoHandFlag = !_twoHandFlag;
-
-            if(_twoHandFlag)
-            {
-                _weaponSlotManager.LoadWeaponOnSlot(_playerInventoryManager._currentWeapon);
-            }
-            else
-            {
-                _weaponSlotManager.LoadWeaponOnSlot(_playerInventoryManager._currentWeapon);
-            }
+            _weaponSlotManager.LoadWeaponOnSlot(_playerInventoryManager._currentWeapon);
         }
     }
 

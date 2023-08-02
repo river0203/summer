@@ -69,16 +69,9 @@ public class PlayerCombatManager : MonoBehaviour
 
         _playerWeaponSlotManager._attackingWeapon = weapon;
 
-        if (_inputHandler._twoHandFlag) 
-        {
-            _playerAnimatorManager.PlayTargetAnimation(weapon.TH_Light_Attack_01, true);
-            _lastAttack = weapon.TH_Light_Attack_01; 
-        }
-        else
-        {
-            _playerAnimatorManager.PlayTargetAnimation(weapon.OH_Light_Attack_1, true);
-            _lastAttack = weapon.OH_Light_Attack_1;
-        }
+
+        _playerAnimatorManager.PlayTargetAnimation(weapon.OH_Light_Attack_1, true);
+        _lastAttack = weapon.OH_Light_Attack_1;
     }
 
     public void HandleHeavyAttack(WeaponItem weapon)
@@ -87,14 +80,6 @@ public class PlayerCombatManager : MonoBehaviour
 
         _playerWeaponSlotManager._attackingWeapon = weapon;
 
-        if (_inputHandler._twoHandFlag)
-        {
-
-        }
-        else
-        {
-
-        }
         _playerAnimatorManager.PlayTargetAnimation(weapon.OH_Heavy_Attack_1, true);
         _lastAttack = weapon.OH_Heavy_Attack_1;
     }
@@ -121,7 +106,7 @@ public class PlayerCombatManager : MonoBehaviour
     {
         if(_playerInventoryManager._currentWeapon.isMeleeWeapon)
         {
-            PerformLTWeaponArt(_inputHandler._twoHandFlag);
+            PerformLTWeaponArt();
         }
       /*if(_playerInventory._leftWeapon.isShieldWeapon)
         {
@@ -255,17 +240,11 @@ public class PlayerCombatManager : MonoBehaviour
         }
     }
 
-    private void PerformLTWeaponArt(bool isTwoHanding)
+    private void PerformLTWeaponArt()
     {
         if (_playerManager._isInteracting) return;
 
-        if (isTwoHanding)
-        {
-        }
-        else 
-        {
-            _playerAnimatorManager.PlayTargetAnimation(_playerInventoryManager._currentWeapon.weapon_art, true);
-        }
+        _playerAnimatorManager.PlayTargetAnimation(_playerInventoryManager._currentWeapon.weapon_art, true);
 
     }
 

@@ -59,9 +59,9 @@ public class PlayerInventoryManager : MonoBehaviour
         }
 
         #region Change Spell & Anim
-        if (_currentWeapon.itemName == "Sword") { _currentSpell = _Spells[0]; _anim.Play("Locomotion_Sword"); }
-        else if (_currentWeapon.itemName == "Halberd") { _currentSpell = _Spells[1]; _anim.Play("Locomotion_Halberd"); }
-        else if (_currentWeapon.itemName == "Rapier") { _currentSpell = _Spells[2]; _anim.Play("Locomotion_Rapier"); }
+        if (_currentWeapon.itemName == "Sword") { _currentSpell = _Spells[0]; _anim.CrossFade("Locomotion_Sword", 0.2f); }
+        else if (_currentWeapon.itemName == "Halberd") { _currentSpell = _Spells[1]; _anim.CrossFade("Locomotion_Halberd", 0.2f); }
+        else if (_currentWeapon.itemName == "Rapier") { _currentSpell = _Spells[2]; _anim.CrossFade("Locomotion_Rapier", 0.2f); }
         else { _currentSpell = null; _anim.Play("Locomotion_Sword"); }
         #endregion
     }
