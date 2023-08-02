@@ -76,6 +76,8 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void HandleHeavyAttack(WeaponItem weapon)
     {
+        if (_playerManager._isInteracting) return;
+
         if (_playerStatsManager._currentStamina <= 0) return;
 
         _playerWeaponSlotManager._attackingWeapon = weapon;
