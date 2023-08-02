@@ -20,13 +20,12 @@ public class SpellItem : Item
     [TextArea]
     public string spellDescription;
 
-    public virtual void AttemptToCastSpell(PlayerAnimatorManager _animatorHandler, PlayerStats _playerStats)
+    public virtual void AttemptToCastSpell(PlayerAnimatorManager _animatorHandler, PlayerStatsManager _playerStats, PlayerWeaponSlotManager _weaponSlotManager)
     {
         Debug.Log("You attempt to cast a spell!");
-
     }
 
-    public virtual void SucessfullyCastSpell(PlayerAnimatorManager _animatorHandler, PlayerStats _playerStats)
+    public virtual void SucessfullyCastSpell(PlayerAnimatorManager _animatorHandler, PlayerStatsManager _playerStats, CameraHandler _cameraHandler, PlayerWeaponSlotManager _weaponSlotManager)
     {
         Debug.Log("You Sucessfully cast a spell!");
         _playerStats.DeductFocusPoints(focusPointCost);

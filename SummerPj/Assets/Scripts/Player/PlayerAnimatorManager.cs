@@ -1,4 +1,3 @@
-using SG;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,20 +5,17 @@ using UnityEngine;
 // Animator의 파라미터 변수를 변경시켜줌 
 public class PlayerAnimatorManager : AnimatorManager
 {
-    PlayerManager _playerManager;
-    PlayerStats _playerStats;
     InputHandler _inputHandler;
-    PlayerLocomotion _playerLocomotion;
+    PlayerLocomotionManager _playerLocomotionManager;
     int _vertical;
     int _horizontal;
 
-    public void Init()
+    protected override void Awake()
     {
-        _playerStats = GetComponentInParent<PlayerStats>();
-        _playerManager = GetComponentInParent<PlayerManager>();
-        _anim = GetComponent<Animator>();
+        base.Awake();
+        _anim = GetComponentInChildren<Animator>();
         _inputHandler = GetComponentInParent<InputHandler>();
-        _playerLocomotion = GetComponentInParent<PlayerLocomotion>();
+        _playerLocomotionManager = GetComponentInParent<PlayerLocomotionManager>();
         _vertical = Animator.StringToHash("Vertical");
         _horizontal = Animator.StringToHash("Horizontal");
     }
@@ -66,64 +62,17 @@ public class PlayerAnimatorManager : AnimatorManager
         _anim.SetFloat(_horizontal, h, 0.1f, Time.deltaTime);
     }
 
-    public void CanRotate() 
-    {
-        _anim.SetBool("canRotate", true);
-    }
-    public void StopRotate() 
-    {
-        _anim.SetBool("canRotate", false);
-    }
-
-    public void EnableCombo()
-    {
-        _anim.SetBool("canDoCombo", true);
-    }
-    public void Disablecombo()
-    {
-        _anim.SetBool("canDoCombo", false);
-    }
-
-    public override void TakeCriticalDamageAnimationEvent()
-    {
-        _playerStats.TakeDamageNoAnimation(_playerManager.pendingCriticalDamage);
-        _playerManager.pendingCriticalDamage = 0;
-    }
-    public void EnableParrying()
-    {
-        _playerManager.isParrying = true;
-    }
-    public void DisableParrying()
-    {
-        _playerManager.isParrying = false;
-    }
-    public void EnableCanBeRiposted()
-    {
-        _playerManager.canBeRiposted = true;
-    }
-    public void DisableCanBeRiposted()
-    {
-        _playerManager.canBeRiposted = false;
-    }
-    public void EnableIsInvulerable()
-    {
-        _anim.SetBool("isInvulnerable", true);
-    }
-    public void DisableIsvulerable()
-    {
-        _anim.SetBool("isInvulnerable", false);
-    }
 
     private void OnAnimatorMove()
     {
-        if (_playerManager._isInteracting == false)
+        if (_characterManager._isInteracting == false)
             return;
 
         float delta = Time.deltaTime;
-        _playerLocomotion._rigid.drag = 0;
+        _playerLocomotionManager._rigid.drag = 0;
         Vector3 deltaPosition = _anim.deltaPosition;
         deltaPosition.y = 0;
         Vector3 velocity = deltaPosition / delta;
-        _playerLocomotion._rigid.velocity = velocity;
+        _playerLocomotionManager._rigid.velocity = velocity;
     }
 }

@@ -17,10 +17,14 @@ public class WeaponItem : Item
     public string left_hand_idle;
     public string th_idle;
 
+    [Header("Absorption")]
+    public float physicalDamageAbsorption;
+
     [Header("One Handed Attack Animations")]
     public string OH_Light_Attack_1;
     public string OH_Light_Attack_2;
     public string OH_Light_Attack_3;
+    public string OH_Light_Attack_4;
     public string OH_Heavy_Attack_1;
 
     [Header("Two Handed Attack Animations")]

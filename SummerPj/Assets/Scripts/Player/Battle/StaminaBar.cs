@@ -8,11 +8,12 @@ public class StaminaBar : MonoBehaviour
 {
     public Slider _slider;
 
+    public void Awake()
+    {
+        _slider = GetComponent<Slider>();
+    }
     public void Init(float maxStamina)
     {
-        if (_slider == null)
-            _slider = GetComponent<Slider>();
-
         _slider.maxValue = maxStamina;
         _slider.value = maxStamina;
     }

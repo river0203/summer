@@ -15,8 +15,8 @@ public class WeaponPickUp : Interactable
 
     public void PickUpItem(PlayerManager playerManager)
     {
-        PlayerInventory _playerInventory = playerManager.GetComponent<PlayerInventory>();
-        PlayerLocomotion _playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
+        PlayerInventoryManager _playerInventory = playerManager.GetComponent<PlayerInventoryManager>();
+        PlayerLocomotionManager _playerLocomotion = playerManager.GetComponent<PlayerLocomotionManager>();
         PlayerAnimatorManager _animHandler = playerManager.GetComponentInChildren<PlayerAnimatorManager>();
 
         _playerLocomotion._rigid.velocity = Vector3.zero;

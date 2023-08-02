@@ -8,11 +8,11 @@ public class DamagePlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerStats playerStats = other.GetComponent<PlayerStats>();
+        PlayerStatsManager playerStats = other.GetComponent<PlayerStatsManager>();
 
         if (playerStats != null)
         {
-            playerStats.TakeDamage(_damage);
+            //playerStats.TakeDamage(_damage, );
         }
     }
 }

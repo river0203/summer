@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -16,10 +16,12 @@ public class InputHandler : MonoBehaviour
 
     public bool b_input;
     public bool a_input;
+    public bool x_Input;
     public bool y_Input;
     public bool la_input;
     public bool ha_input;
     public bool lt_Input;
+    public bool lb_Input;
     public bool critical_Attack_Input;
     public bool jump_Input;
     public bool inventory_Input;
@@ -46,17 +48,33 @@ public class InputHandler : MonoBehaviour
     #endregion
 
     PlayerInputAction _inputActions;
-    PlayerAttacker _playerAttacker;
-    PlayerInventory _playerInventory;
+    PlayerCombatManager _playerCombatManager;
+    PlayerInventoryManager _playerInventoryManager;
     PlayerManager _playerManager;
-    WeaponSlotManager _weaponSlotManager;
-    PlayerStats _playerStats;
+    PlayerWeaponSlotManager _weaponSlotManager;
+    PlayerStatsManager _playerStatsManager;
     CameraHandler _cameraHandler;
+    PlayerEffectsManager _playerEffectsManager;
+    BlockingCollider _blockingCollider;
     UIManager _uiManager;
-    PlayerAnimatorManager _animatorHandler;
+    PlayerAnimatorManager _playerAnimatorManager;
 
     Vector2 _movementInput;
     Vector2 _cameraInput;
+
+    private void Awake()
+    {
+        _playerEffectsManager = GetComponent<PlayerEffectsManager>();
+        _blockingCollider = GetComponentInChildren<BlockingCollider>();
+        _playerCombatManager = GetComponent<PlayerCombatManager>();
+        _playerInventoryManager = GetComponent<PlayerInventoryManager>();
+        _playerManager = GetComponent<PlayerManager>();
+        _cameraHandler = FindObjectOfType<CameraHandler>();
+        _uiManager = FindObjectOfType<UIManager>();
+        _weaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
+        _playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
+        _playerStatsManager = GetComponent<PlayerStatsManager>();
+    }
 
     public void Update()
     {
@@ -67,20 +85,7 @@ public class InputHandler : MonoBehaviour
             {
                 _canLockOnMove = true;
             }
-                
         }
-    }
-
-    private void Awake()
-    {
-        _playerAttacker = GetComponentInChildren<PlayerAttacker>();
-        _playerInventory = GetComponent<PlayerInventory>();
-        _playerManager = GetComponent<PlayerManager>();
-        _cameraHandler = FindObjectOfType<CameraHandler>();
-        _uiManager = FindObjectOfType<UIManager>();
-        _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
-        _animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
-        _playerStats = GetComponent<PlayerStats>();
     }
 
     #region '인풋에 따라 변하는 변수'를 변환시켜주는 함수들
@@ -94,12 +99,15 @@ public class InputHandler : MonoBehaviour
             _inputActions.PlayerMovement.Look.performed += i => { _cameraInput = i.ReadValue<Vector2>(); } ;
             _inputActions.PlayerActions.LightAttack.performed += i => { la_input = true; };
             _inputActions.PlayerActions.HeavyAttack.performed += i => { ha_input = true; };
+            _inputActions.PlayerActions.Block.performed += i => { lb_Input = true; };
+            _inputActions.PlayerActions.Block.canceled += i => { lb_Input = false; };
             _inputActions.PlayerActions.Parry.performed += i => { lt_Input = true; };
             _inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
             _inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
             _inputActions.PlayerActions.Interact.performed += i => { a_input = true; };
-            _inputActions.PlayerActions.Dodge.performed += i => { b_input = true; };
+            _inputActions.PlayerActions.Dodge.performed += i => { b_input = true; }; 
             _inputActions.PlayerActions.Dodge.canceled += i => { b_input = false; };
+            _inputActions.PlayerActions.X.performed += i => { x_Input = true; };
             _inputActions.PlayerActions.Jump.performed += i => { jump_Input = true; };
             _inputActions.PlayerActions.Inventory.performed += i => { inventory_Input = true; };
             _inputActions.PlayerMovement.LockOn.performed += i => { lockOnInput = true; };
@@ -125,8 +133,9 @@ public class InputHandler : MonoBehaviour
         }
 
         _inputActions.Enable();
+        #endregion
     }
-     
+
     private void OnDisable() { _inputActions.Disable(); }
 
     // 업데이트류 함수에서 실행
@@ -134,12 +143,13 @@ public class InputHandler : MonoBehaviour
     {
         HandleMoveInput(delta); 
         HandleRollInput(delta);
-        HandleAttackInput(delta);
+        HandleCombatInput(delta);
         HandleQuickSlotsInput();
         HandleInventoryInput();
         HandleLockOnInput();
         HandleTwoHandInput();
         HandleCriticalAttackInput();
+        HandleUseConsumableInput();
     }
 
     // 이동 및 마우스 포지션 갱신 (TickInput에서 실행)
@@ -161,13 +171,13 @@ public class InputHandler : MonoBehaviour
         {
             _dodgeInputTimer += delta;
 
-            if(_playerStats._currentStamina <= 0)
+            if(_playerStatsManager._currentStamina <= 0)
             {
                 b_input = false;
                 _sprintFlag = false;
             }
 
-            if(_moveAmount> 0.5f && _playerStats._currentStamina > 0)
+            if(_moveAmount> 0.5f && _playerStatsManager._currentStamina > 0)
             {
                 _sprintFlag = true;
             }
@@ -185,16 +195,31 @@ public class InputHandler : MonoBehaviour
         }    
     }
 
-    private void HandleAttackInput(float delta)
+    private void HandleCombatInput(float delta)
     {
         if (la_input)
         {
-            _playerAttacker.HandleRBAction();
+            _playerCombatManager.HandleRBAction();
         }
         if (ha_input)
         {
-            _playerAttacker.HandleHeavyAttack(_playerInventory._rightWeapon);
+            _playerCombatManager.HandleHeavyAttack(_playerInventoryManager._rightWeapon);
         }
+
+        if(lb_Input)
+        {
+            _playerCombatManager.HandleLBAtcion();
+        }
+        else
+        {
+            _playerManager.isBlocking = false;
+
+            if(_blockingCollider.blockingCollider.enabled)
+            {
+                _blockingCollider.DisableBlockingCollider();
+            }
+        }
+
         if(lt_Input)
         {
             if(_twoHandFlag)
@@ -203,7 +228,7 @@ public class InputHandler : MonoBehaviour
             }
             else
             {
-                _playerAttacker.HandleLTAction();
+                _playerCombatManager.HandleLTAction();
             }
         }
     }
@@ -212,14 +237,16 @@ public class InputHandler : MonoBehaviour
     {
         _inputActions.PlayerQuickSlots.DPadRight.performed += i => { d_Pad_Right = true; };
         _inputActions.PlayerQuickSlots.DPadLeft.performed += i => { d_Pad_Left = true; };
-
-        if (d_Pad_Right)
+        if (!_playerManager._isInteracting)
         {
-            _playerInventory.ChangeRightWeapon();
-        }
-        else if (d_Pad_Left)
-        {
-            _playerInventory.ChangeLeftWeapon();
+            if (d_Pad_Right)
+            {
+                _playerInventoryManager.ChangeRightWeapon();
+            }
+            else if (d_Pad_Left)
+            {
+                _playerInventoryManager.ChangeLeftWeapon();
+            }
         }
     }
 
@@ -305,12 +332,12 @@ public class InputHandler : MonoBehaviour
 
             if(_twoHandFlag)
             {
-                _weaponSlotManager.LoadWeaponOnSlot(_playerInventory._rightWeapon, false);
+                _weaponSlotManager.LoadWeaponOnSlot(_playerInventoryManager._rightWeapon, false);
             }
             else
             {
-                _weaponSlotManager.LoadWeaponOnSlot(_playerInventory._rightWeapon, false);
-                _weaponSlotManager.LoadWeaponOnSlot(_playerInventory._leftWeapon, true);
+                _weaponSlotManager.LoadWeaponOnSlot(_playerInventoryManager._rightWeapon, false);
+                _weaponSlotManager.LoadWeaponOnSlot(_playerInventoryManager._leftWeapon, true);
             }
         }
     }
@@ -318,7 +345,15 @@ public class InputHandler : MonoBehaviour
     private void HandleCriticalAttackInput()
     {
         critical_Attack_Input = false;
-        _playerAttacker.AttemptBackStabOrRiposte(); 
+        _playerCombatManager.AttemptBackStabOrRiposte(); 
     }
-#endregion
+
+    void HandleUseConsumableInput()
+    {
+        if(x_Input)
+        {
+            x_Input = false;
+            _playerInventoryManager.currentConsumable.AttemptToConsumeItem(_playerAnimatorManager, _weaponSlotManager, _playerEffectsManager);
+        }
+    }
 }

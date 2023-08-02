@@ -7,7 +7,7 @@ public class EquipmentWindowUI : MonoBehaviour
     public List<HandEquipmentSlotUI> _rightHandEquipmentSlotUI = new List<HandEquipmentSlotUI>();
     public List<HandEquipmentSlotUI> _leftHandEquipmentSlotUI = new List<HandEquipmentSlotUI>();
 
-    public void LoadWeaponsOnEquipmentScreen(PlayerInventory playerInventory) 
+    public void LoadWeaponsOnEquipmentScreen(PlayerInventoryManager playerInventory) 
     { 
         for (int i = 0; i < _rightHandEquipmentSlotUI.Count; i++)
         {
