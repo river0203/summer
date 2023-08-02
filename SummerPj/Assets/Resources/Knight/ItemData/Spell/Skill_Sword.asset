@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3a7eaea89b7c74185d48bb5f4236de, type: 3}
   m_Name: Skill_Sword
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   itemName: Sword_Spell
   spellWarmUpFX: {fileID: 0}
   spellCastFX: {fileID: 0}

@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerInventoryManager : MonoBehaviour
 {
     PlayerWeaponSlotManager _playerWeaponSlotManager;
 
+    Animator _animator;
     public ConsumableItem currentConsumable;
     public SpellItem _currentSpell;
     public WeaponItem _rightWeapon;
@@ -24,6 +27,7 @@ public class PlayerInventoryManager : MonoBehaviour
     private void Awake()
     {
         _playerWeaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -55,9 +59,11 @@ public class PlayerInventoryManager : MonoBehaviour
             _playerWeaponSlotManager.LoadWeaponOnSlot(_playerWeaponSlotManager._unarmedWeapon, false);
         }
 
+        #region Change Spell
         if (_rightWeapon.itemName == "Sword") { _currentSpell = _Spells[0]; }
         else if (_rightWeapon.itemName == "Halberd") { _currentSpell = _Spells[1]; }
         else if (_rightWeapon.itemName == "Rapier") { _currentSpell = _Spells[2]; }
+        #endregion
     }
 
     public void ChangeLeftWeapon()

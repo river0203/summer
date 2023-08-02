@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
+    public CharacterSoundFXManager _characterSoundFXManager;
+    public PlayerInventoryManager _playerInventoryManager;
+
     [Header("Lock On Transform")]
     public Transform _lockOnTransform;
     
@@ -34,4 +37,10 @@ public class CharacterManager : MonoBehaviour
     public bool isFiringSpell;
 
     public int pendingCriticalDamage;
+
+    private void Awake()
+    {
+        _characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
+        _playerInventoryManager = GetComponent<PlayerInventoryManager>();
+    }
 }

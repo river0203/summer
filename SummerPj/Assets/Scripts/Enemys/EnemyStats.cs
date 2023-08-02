@@ -3,45 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyStats : CharacterStatsManager
-{   
+{
+    AudioSource _audioSource;
     Animator _anim;
 
     private void Awake()
     {
         _anim = GetComponentInChildren<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        _currentHealth = SetMaxHealthFromHealthLevel();
+        currentHealth = SetMaxHealthFromHealthLevel();
     }
 
     private int SetMaxHealthFromHealthLevel()
     {
-        _maxHealth = _healthLevel * 10;
-        return _maxHealth;
+        maxHealth = healthLevel * 10;
+        return maxHealth;
     }
 
     public void TakeDamageNoAnimation(int damage)
     {
-        _currentHealth -= damage;
+        currentHealth -= damage;
 
-        if (_currentHealth <= 0)
+        if (currentHealth <= 0)
         {
-            _currentHealth = 0;
+            currentHealth = 0;
             _isDead = true;
         }
     }
 
-    public override void TakeDamage(int damege, string damageAnimation = "Damage_01")
+    public override void TakeDamage(int damege, string damageAnimation /*= "Damage_01"*/)
     {
         if (_isDead) return;
 
-        _currentHealth -= damege;
+        currentHealth -= damege;
 
-        if (_currentHealth <= 0)
+
+        if (currentHealth <= 0)
         {
-            _currentHealth = 0;
+            currentHealth = 0;
             _anim.Play("Dead");
             _isDead = true;
         }

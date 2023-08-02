@@ -22,6 +22,7 @@ public class DamageCollider : MonoBehaviour
 
     public void EnableDamagecollider()
     {
+
         _damageCollider.enabled = true;
     }
 
@@ -55,6 +56,7 @@ public class DamageCollider : MonoBehaviour
                 _playerEffectsManager.PlayBloodSplatterFX(contactPoint);
 
                 playerStats.TakeDamage(_currentWeaponDamage, currentDamageAnimation);
+                
             }
         }
         
@@ -70,7 +72,7 @@ public class DamageCollider : MonoBehaviour
 
             if (enemyStats != null)
             {
-                enemyStats.TakeDamage(_currentWeaponDamage);
+                enemyStats.TakeDamage(_currentWeaponDamage, currentDamageAnimation);
             }
             else if (shield != null && _enemycharacterManager.isBlocking)
             {

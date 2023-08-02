@@ -15,6 +15,7 @@ public class PlayerLocomotionManager : MonoBehaviour
     InputHandler _inputHandler;
     PlayerStatsManager _playerStatsManager;
     public Vector3 _moveDirection;
+    Animator _animator;
 
     [HideInInspector]
     public Transform _myTransform;
@@ -55,6 +56,7 @@ public class PlayerLocomotionManager : MonoBehaviour
 
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
         _cameraHandler = FindObjectOfType<CameraHandler>();
         _playerManager = GetComponent<PlayerManager>();
         _rigid = GetComponent<Rigidbody>();
@@ -306,7 +308,6 @@ public class PlayerLocomotionManager : MonoBehaviour
             _myTransform.position = _targetPosition;
         }
     }
-
     // มกวม
     public void HandleJumping()
     {

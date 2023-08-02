@@ -8,13 +8,14 @@ public class QuickSlotsUI : MonoBehaviour
     public Image _leftWeaponIcon;
     public Image _rightWeaponIcon;
 
-    public void UpdateWeaponQuickSlotsUI(bool isLeft, WeaponItem weapon)
+    public void UpdateWeaponQuickSlotsUI(bool isLeft, WeaponItem weapon, SpellItem spell)
     {
         if (isLeft == false)
         {
             if (weapon.itemIcon != null)
             {
                 _rightWeaponIcon.sprite = weapon.itemIcon;
+                _leftWeaponIcon.sprite = spell.itemIcon;
                 _rightWeaponIcon.enabled = true;
             }
             else
@@ -27,7 +28,7 @@ public class QuickSlotsUI : MonoBehaviour
         {
             if (weapon.itemIcon != null)
             {
-                _leftWeaponIcon.sprite = weapon.itemIcon;
+                _leftWeaponIcon.sprite = spell.itemIcon;
                 _leftWeaponIcon.enabled = true;
             }
             else

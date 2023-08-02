@@ -62,7 +62,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
                 _leftHandSlot.currentWeapon = weaponItem;
                 _leftHandSlot.LoadWeaponModel(weaponItem);
                 LoadLeftWeaponDamageCollider();
-                _quickSlotsUI.UpdateWeaponQuickSlotsUI(true, weaponItem);
+                _quickSlotsUI.UpdateWeaponQuickSlotsUI(true, weaponItem, _playerInventoryManager._currentSpell);
                 animator.CrossFade(weaponItem.left_hand_idle, 0.2f);
             }
             else
@@ -82,7 +82,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
                 _rightHandSlot.currentWeapon = weaponItem;
                 _rightHandSlot.LoadWeaponModel(weaponItem);
                 LoadRightWeaponDamageCollider();
-                _quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
+                _quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem, _playerInventoryManager._currentSpell);
             }
         }
         else
@@ -95,7 +95,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
                 _leftHandSlot.currentWeapon = _unarmedWeapon;
                 _leftHandSlot.LoadWeaponModel(_unarmedWeapon);
                 LoadLeftWeaponDamageCollider();
-                _quickSlotsUI.UpdateWeaponQuickSlotsUI(true, _unarmedWeapon);
+                _quickSlotsUI.UpdateWeaponQuickSlotsUI(true, _unarmedWeapon, _playerInventoryManager._currentSpell);
             }
             else
             {
@@ -104,14 +104,14 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
                 _rightHandSlot.currentWeapon = _unarmedWeapon;
                 _rightHandSlot.LoadWeaponModel(_unarmedWeapon);
                 LoadRightWeaponDamageCollider();
-                _quickSlotsUI.UpdateWeaponQuickSlotsUI(false, _unarmedWeapon);
+                _quickSlotsUI.UpdateWeaponQuickSlotsUI(false, _unarmedWeapon, _playerInventoryManager._currentSpell);
             }
         }
         // 무기 로드
 
 
         // 슬롯 UI 로드
-        _quickSlotsUI.UpdateWeaponQuickSlotsUI(isLeft, weaponItem);
+        _quickSlotsUI.UpdateWeaponQuickSlotsUI(isLeft, weaponItem, _playerInventoryManager._currentSpell);
     }
 
     #region 데미지 콜라이더
@@ -144,6 +144,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
     }
     public void OpenRightDamageCollier()
     {
+        _characterManager._characterSoundFXManager.PlayRandomWeaponWhoosh();
         _rightHandDamageCollider.EnableDamagecollider();
     }
     public void CloseRightDamageCollier()
