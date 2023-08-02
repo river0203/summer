@@ -7,7 +7,7 @@ public class WorldEventManager : MonoBehaviour
     //안개 벽 
 
     public UIBossHealthBar _bossHealthBar;
-    public EnemyBossManager _enemyBossManager;
+    public EnemyBossManager _boss;
 
     public bool _bossFightIsActive;
     public bool _bossHasBeenAwaken; //wake 상태나 컷신 관리

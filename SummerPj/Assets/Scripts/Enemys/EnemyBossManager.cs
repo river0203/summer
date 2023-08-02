@@ -13,7 +13,7 @@ public class EnemyBossManager : MonoBehaviour
 
     private void Awake()
     {
-        _bossHealthBar = FindAnyObjectByType<UIBossHealthBar>();
+        _bossHealthBar = FindObjectOfType<UIBossHealthBar>();
         _enemyStats = GetComponent<EnemyStats>();
     }
 
