@@ -3,6 +3,7 @@ using SG;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerCombatManager : MonoBehaviour
@@ -17,7 +18,7 @@ public class PlayerCombatManager : MonoBehaviour
     PlayerEffectsManager _playerEffectsManager;
     CameraHandler _cameraHandler;
     public string _lastAttack;
-
+    BlendTree blendTree;
     LayerMask riposteLayer = 1 << 12;
     LayerMask backStabLayer = 1 << 11;
 
@@ -93,10 +94,6 @@ public class PlayerCombatManager : MonoBehaviour
         {
             PerformRBMeleeAction();
         }
-        else if(_playerInventoryManager._currentWeapon.isSpellCaster || _playerInventoryManager._currentWeapon.isFaithCaster || _playerInventoryManager._currentWeapon.isPyroCaster) 
-        {
-            PerformRBMagicAction(_playerInventoryManager._currentWeapon);
-        }
     }
 
     public void HandleLBAtcion()
@@ -114,6 +111,11 @@ public class PlayerCombatManager : MonoBehaviour
         {
                     PerformLTWeaponArt(_inputHandler._twoHandFlag);
         }*/
+    }
+
+    public void HandleUltimateAction()
+    {
+        PerformUltimateAction(_playerInventoryManager._currentWeapon);
     }
     #endregion
 
@@ -207,37 +209,20 @@ public class PlayerCombatManager : MonoBehaviour
         _playerEquipmentHandler.OpenBlockingCollider();
         _playerManager.isBlocking = true;
     }
-    private void PerformRBMagicAction(WeaponItem weapon)
+    private void PerformUltimateAction(WeaponItem weapon)
     {
         if (_playerManager._isInteracting)
             return;
 
-        if(weapon.isFaithCaster)
+        if (_playerInventoryManager._currentSpell != null)
         {
-            if(_playerInventoryManager._currentSpell != null && _playerInventoryManager._currentSpell.isFaithSpell)
+            if (_playerStatsManager._currentFocusPoints >= _playerInventoryManager._currentSpell.focusPointCost)
             {
-                if(_playerStatsManager._currentFocusPoints >= _playerInventoryManager._currentSpell.focusPointCost)
-                {
-                    _playerInventoryManager._currentSpell.AttemptToCastSpell(_playerAnimatorManager, _playerStatsManager, _playerWeaponSlotManager);
-                }
-                else
-                {
-                    _playerAnimatorManager.PlayTargetAnimation("Shrug", true);
-                }
+                _playerInventoryManager._currentSpell.AttemptToCastSpell(_playerAnimatorManager, _playerStatsManager, _playerWeaponSlotManager);
             }
-        }
-        else if(weapon.isPyroCaster)
-        {
-            if (_playerInventoryManager._currentSpell != null && _playerInventoryManager._currentSpell.isPyroSpell)
+            else
             {
-                if (_playerStatsManager._currentFocusPoints >= _playerInventoryManager._currentSpell.focusPointCost)
-                {
-                    _playerInventoryManager._currentSpell.AttemptToCastSpell(_playerAnimatorManager, _playerStatsManager, _playerWeaponSlotManager);
-                }
-                else
-                {
-                    _playerAnimatorManager.PlayTargetAnimation("Shrug", true);
-                }
+                _playerAnimatorManager.PlayTargetAnimation("Shrug", true);
             }
         }
     }

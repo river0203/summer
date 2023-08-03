@@ -89,7 +89,7 @@ public class PlayerStatsManager : CharacterStatsManager
 
     public void RegenerateStamina()
     {
-        if(_playerManager._isInteracting)
+        if(_playerManager._isInteracting && !_playerManager._isSprinting)
         {
             _staminaRegenTimer = 0;
         }
@@ -103,7 +103,6 @@ public class PlayerStatsManager : CharacterStatsManager
                 _currentStamina += _staminaRegenerationAmount * Time.deltaTime;
                 _staminaBar.SetCurrentStamina(Mathf.RoundToInt(_currentStamina));
             }
-
         }
     }
 

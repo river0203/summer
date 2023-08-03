@@ -24,6 +24,6 @@ public class FlaskItem : ConsumableItem
         _playerEffectsManager.currentParticleFX = recoveryFX;
         _playerEffectsManager.amountToBeHealed = healthRecoverAmount;
         _playerEffectsManager.instantiatedFXModel = flask;
-        _weaponSlotManager._WeaponSlot.UnloadWeapon();
+        _weaponSlotManager._WeaponSlot.UnloadWeapon();  
     }
 }

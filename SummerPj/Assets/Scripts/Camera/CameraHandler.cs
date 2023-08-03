@@ -92,9 +92,9 @@ public class CameraHandler : MonoBehaviour
             targetRotation = Quaternion.LookRotation(diraction);
             Vector3 eulerAngle = targetRotation.eulerAngles;
             eulerAngle.y = 0;
-            _cameraPivotTransform.localEulerAngles = eulerAngle; 
+            // _cameraPivotTransform.localEulerAngles = eulerAngle;
+            _cameraPivotTransform.localEulerAngles = Vector3.Lerp(_cameraPivotTransform.localEulerAngles, eulerAngle, 0.01f);
         }
-        
     }
 
     void HandleCameraCollisions(float delta)

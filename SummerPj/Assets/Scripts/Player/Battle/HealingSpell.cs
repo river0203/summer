@@ -20,7 +20,5 @@ public class HealingSpell : SpellItem
         base.SucessfullyCastSpell(_animatorHandler, _playerStats, _cameraHandler, _weaponSlotManager);
         GameObject instantiatedSpellFX = Instantiate(spellCastFX, _animatorHandler.transform);
         _playerStats.HealPlayer(healAmount);
-        Debug.Log("Spell cast successful");
-
     }
 }

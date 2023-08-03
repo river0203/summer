@@ -18,6 +18,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 
     private void Awake()
     {
+        _characterManager = GetComponent<CharacterManager>();
         _playerEffectsManager = GetComponent<PlayerEffectsManager>();
         _playerManager = GetComponent<PlayerManager>();
         _playerInventoryManager = GetComponent<PlayerInventoryManager>();
@@ -93,7 +94,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 
     public void OpenDamageCollier()
     {
-        _characterManager._characterSoundFXManager.PlayRandomWeaponWhoosh();
+        GameObject.FindWithTag("Player").GetComponent<CharacterSoundFXManager>().PlayRandomWeaponWhoosh();
         _currentDamageCollider.EnableDamagecollider();
     }
     public void CloseDamageCollier()

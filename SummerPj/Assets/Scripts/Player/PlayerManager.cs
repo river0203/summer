@@ -50,8 +50,7 @@ public class PlayerManager : CharacterManager
         // 플레이어 이동
         _isSprinting = _inputHandler.b_input;
 
-        CheckForInteractableObject();
-        
+        CheckForInteractableObject();  
     }
 
     private void FixedUpdate()

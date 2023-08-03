@@ -36,7 +36,6 @@ public class PlayerInventoryManager : MonoBehaviour
         _currentWeaponIndex = 0;
         _playerWeaponSlotManager.LoadWeaponOnSlot(_currentWeapon);
     }
-
     public void ChangeWeapon()
     {
         if (_currentWeaponIndex < _maxInventorySlotCount - 1 && _currentWeaponIndex < _weaponSlots.Count - 1)
@@ -59,10 +58,10 @@ public class PlayerInventoryManager : MonoBehaviour
         }
 
         #region Change Spell & Anim
-        if (_currentWeapon.itemName == "Sword") { _currentSpell = _Spells[0]; _anim.CrossFade("Locomotion_Sword", 0.2f); }
-        else if (_currentWeapon.itemName == "Halberd") { _currentSpell = _Spells[1]; _anim.CrossFade("Locomotion_Halberd", 0.2f); }
-        else if (_currentWeapon.itemName == "Rapier") { _currentSpell = _Spells[2]; _anim.CrossFade("Locomotion_Rapier", 0.2f); }
-        else { _currentSpell = null; _anim.Play("Locomotion_Sword"); }
+                if (_currentWeapon.itemName == "Sword") { _currentSpell = _Spells[0]; _anim.CrossFade("Locomotion_Sword", 0.2f); }
+                else if (_currentWeapon.itemName == "Halberd") { _currentSpell = _Spells[1]; _anim.CrossFade("Locomotion_Halberd", 0.2f); }
+                else if (_currentWeapon.itemName == "Rapier") { _currentSpell = _Spells[2]; _anim.CrossFade("Locomotion_Rapier", 0.2f); }
+                else { _currentSpell = null; _anim.Play("Locomotion_Sword"); }
         #endregion
     }
 }

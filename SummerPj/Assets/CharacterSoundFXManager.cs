@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterSoundFXManager : MonoBehaviour
 {
-    CharacterManager _characterManager;
+    PlayerInventoryManager _playerInventoryManager;
     AudioSource _audioSource;
 
     [Header("Taking Damage Sounds")]
@@ -19,7 +19,7 @@ public class CharacterSoundFXManager : MonoBehaviour
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
-        _characterManager = GetComponent<CharacterManager>();
+        _playerInventoryManager = GetComponent<PlayerInventoryManager>();
     }
     public virtual void PlayRandomDamageSoundFX()
     {
@@ -41,19 +41,17 @@ public class CharacterSoundFXManager : MonoBehaviour
     {
         potentialWeaponWhooshes = new List<AudioClip>();
 
-        if(_characterManager.isUsingRightHand)
+        foreach (var whooshSound in _playerInventoryManager._currentWeapon.weaponWhooshes)
         {
-            foreach(var whooshSound in _characterManager._playerInventoryManager._currentWeapon.weaponWhooshes)
+            if (whooshSound != lastWeaponWhooshes)
             {
-                if(whooshSound != lastWeaponWhooshes)
-                {
-                    potentialWeaponWhooshes.Add(whooshSound);
-                }
-
-                int randomValue = Random.Range(0, potentialWeaponWhooshes.Count);
-                lastWeaponWhooshes = takingDamageSounds[randomValue];
-                _audioSource.PlayOneShot(_characterManager._playerInventoryManager._currentWeapon.weaponWhooshes[randomValue]);
+                potentialWeaponWhooshes.Add(whooshSound);
             }
         }
+
+        int randomValue = Random.Range(0, potentialWeaponWhooshes.Count);
+        lastWeaponWhooshes = _playerInventoryManager._currentWeapon.weaponWhooshes[randomValue];
+        _audioSource.PlayOneShot(_playerInventoryManager._currentWeapon.weaponWhooshes[randomValue]);
+
     }
 }

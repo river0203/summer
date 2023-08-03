@@ -29,7 +29,6 @@ public class InputHandler : MonoBehaviour
     public bool right_Stick_Right_Input;
     public bool right_Stick_Left_Input;
     public bool _canLockOnMove = false;
-    float _lockOnInputMoveTimer;
 
     public bool d_Pad_Up;
     public bool d_Pad_Down;
@@ -46,6 +45,7 @@ public class InputHandler : MonoBehaviour
     public Transform criticalAttackRayCastStartPoint;
     #endregion
 
+    float _lockOnCool;
     PlayerInputAction _inputActions;
     PlayerCombatManager _playerCombatManager;
     PlayerInventoryManager _playerInventoryManager;
@@ -79,12 +79,16 @@ public class InputHandler : MonoBehaviour
     {
         if (_canLockOnMove == false)
         {
-            _lockOnInputMoveTimer += Time.deltaTime;
-            if (_lockOnInputMoveTimer > 0.5)
+            _lockOnCool += Time.deltaTime;
+            if(_lockOnCool > 1.5f)
             {
                 _canLockOnMove = true;
             }
         }
+        else { _lockOnCool = 0f; }
+
+        if (_mouseX < -50) right_Stick_Left_Input = true;
+        if (_mouseX > 50) right_Stick_Right_Input = true;
     }
 
     #region '인풋에 따라 변하는 변수'를 변환시켜주는 함수들
@@ -95,7 +99,7 @@ public class InputHandler : MonoBehaviour
         {
             _inputActions = new PlayerInputAction();
             _inputActions.PlayerMovement.Move.performed += _inputActions => { _movementInput = _inputActions.ReadValue<Vector2>(); };
-            _inputActions.PlayerMovement.Look.performed += i => { _cameraInput = i.ReadValue<Vector2>(); } ;
+            _inputActions.PlayerMovement.Look.performed += i => { _cameraInput = i.ReadValue<Vector2>(); };
             _inputActions.PlayerActions.LightAttack.performed += i => { la_input = true; };
             _inputActions.PlayerActions.HeavyAttack.performed += i => { ha_input = true; };
             _inputActions.PlayerActions.Block.performed += i => { lb_Input = true; };
@@ -104,35 +108,21 @@ public class InputHandler : MonoBehaviour
             _inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
             _inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
             _inputActions.PlayerActions.Interact.performed += i => { a_input = true; };
-            _inputActions.PlayerActions.Dodge.performed += i => { b_input = true; }; 
+            _inputActions.PlayerActions.Dodge.performed += i => { b_input = true; };
             _inputActions.PlayerActions.Dodge.canceled += i => { b_input = false; };
-            _inputActions.PlayerActions.X.performed += i => { x_Input = true; };
+            _inputActions.PlayerActions.UseItem.performed += i => { x_Input = true; };
             _inputActions.PlayerActions.Jump.performed += i => { jump_Input = true; };
             _inputActions.PlayerActions.Inventory.performed += i => { inventory_Input = true; };
             _inputActions.PlayerMovement.LockOn.performed += i => { lockOnInput = true; };
-            _inputActions.PlayerActions.Y.performed += i => y_Input = true;
             _inputActions.PlayerMovement.LockOnTargetLeft.performed += i => { right_Stick_Left_Input = true; };
+            _inputActions.PlayerMovement.LockOnTargetRight.performed += i => { right_Stick_Right_Input = true; };
             _inputActions.PlayerMovement.LockOnTargetLeftMouce.performed += i =>
             _inputActions.PlayerActions.CriticalAttack.performed += i => critical_Attack_Input = true;
 
-            {
-                if (_mouseX < -10)
-                {
-                    right_Stick_Left_Input = true;
-                }
-            };
-            _inputActions.PlayerMovement.LockOnTargetRight.performed += i => { right_Stick_Right_Input = true; };
-            _inputActions.PlayerMovement.LockOnTargetRightMouce.performed += i => 
-            {
-                if (_mouseX > 10)
-                {
-                    right_Stick_Right_Input = true;
-                }
-            };
+            _inputActions.Enable();
         }
-
-        _inputActions.Enable();
         #endregion
+
     }
 
     private void OnDisable() { _inputActions.Disable(); }
@@ -270,7 +260,6 @@ public class InputHandler : MonoBehaviour
             {
                 _cameraHandler._currentLockOnTarget = _cameraHandler._nearestLockOnTarget;
                 _canLockOnMove = false;
-                _lockOnInputMoveTimer = 0;
                 _lockOnFlag = true;
             }
         }
@@ -284,11 +273,9 @@ public class InputHandler : MonoBehaviour
         if (_lockOnFlag && right_Stick_Left_Input && _canLockOnMove)
         {
             right_Stick_Left_Input = false;
-            _cameraHandler.HandleLockOn();
-
             _canLockOnMove = false;
-            _lockOnInputMoveTimer = 0;
 
+            _cameraHandler.HandleLockOn();
             if (_cameraHandler._leftLockTaregt != null)
             {
                 _cameraHandler._currentLockOnTarget = _cameraHandler._leftLockTaregt;
@@ -298,11 +285,9 @@ public class InputHandler : MonoBehaviour
         if (_lockOnFlag && right_Stick_Right_Input && _canLockOnMove)
         {
             right_Stick_Right_Input = false;
-            _cameraHandler.HandleLockOn();
-            
             _canLockOnMove = false;
-            _lockOnInputMoveTimer = 0;
-
+                        
+            _cameraHandler.HandleLockOn();
             if (_cameraHandler._rightLockTaregt != null)
             {
                 _cameraHandler._currentLockOnTarget = _cameraHandler._rightLockTaregt;
