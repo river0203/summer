@@ -15,16 +15,7 @@ public class PlayerEquipmentManager : MonoBehaviour
     }
     
     public void OpenBlockingCollider()
-    {
-        if (_inputHandler._twoHandFlag)
-        {
-            _blockingCollider.SetColliderDamageAbsorption(_playerInventoryManager._rightWeapon);
-        }
-        else
-        {
-            _blockingCollider.SetColliderDamageAbsorption(_playerInventoryManager._leftWeapon);
-        }
-
+    {   
         _blockingCollider.EnableBlockingCollider();
     }
 

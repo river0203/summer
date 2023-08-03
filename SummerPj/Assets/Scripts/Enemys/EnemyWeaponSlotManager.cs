@@ -7,23 +7,29 @@ public class EnemyWeaponSlotManager : MonoBehaviour
     public WeaponItem rightHandWeapon;
     public WeaponItem leftHandWeapon;
 
-    WeaponHolderSlot rightHandSlot;
+    WeaponHolderSlot HandSlot;
     WeaponHolderSlot leftHandSlot;
-    EnemyEffactManager _enemyEffactManager;
 
     DamageCollider leftHandDamageCollider;
-    public DamageCollider rightHandDamageCollider;
+    DamageCollider rightHandDamageCollider;
 
     Animator _anim;
 
     private void Awake()
     {
-        _enemyEffactManager = GetComponent<EnemyEffactManager>();
-        rightHandDamageCollider = GetComponentInChildren<DamageCollider>(true);
+        WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
+        foreach (WeaponHolderSlot weaponslot in weaponHolderSlots)
+        {
+            if (weaponslot._isWeaponHandSlot)
+            {
+                HandSlot = weaponslot;
+            }
+        }
     }
 
     private void Start()
-    {   
+    {
+        _anim = GetComponent<Animator>();
         LoadWeaponsOnBothHands();
     }
 
@@ -31,14 +37,14 @@ public class EnemyWeaponSlotManager : MonoBehaviour
     {
         if(isleft) 
         { 
-            leftHandSlot.currentWeapon = weapon;
+            leftHandSlot._currentWeapon = weapon;
             leftHandSlot.LoadWeaponModel(weapon);
             LoadWeaponsDamageCollider(true);
         }
         else
         {
-            rightHandSlot.currentWeapon = weapon;
-            rightHandSlot.LoadWeaponModel(weapon);
+            HandSlot._currentWeapon = weapon;
+            HandSlot.LoadWeaponModel(weapon);
             LoadWeaponsDamageCollider(false);
         }
     }
@@ -57,19 +63,14 @@ public class EnemyWeaponSlotManager : MonoBehaviour
 
     public void LoadWeaponsDamageCollider(bool isleft)
     {
-        if (isleft)
+        if(isleft)
         {
-            leftHandDamageCollider = leftHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>(true);
+            leftHandDamageCollider = leftHandSlot._currentWeaponModel.GetComponent<DamageCollider>();
             leftHandDamageCollider._characterManager = GetComponentInParent<CharacterManager>();
-            _enemyEffactManager._leftWeaponFX = leftHandSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
         }
-        else
-        {
-            rightHandDamageCollider = rightHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>(true);
-            rightHandDamageCollider._characterManager = GetComponentInParent<CharacterManager>();
-            _enemyEffactManager._rightWeaponFX = rightHandSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
-        }
-    }   
+        else rightHandDamageCollider = HandSlot._currentWeaponModel.GetComponent<DamageCollider>();
+        rightHandDamageCollider._characterManager = GetComponentInParent<CharacterManager>();
+    }
 
     public void OpenDamageCollider()
     {
@@ -84,7 +85,6 @@ public class EnemyWeaponSlotManager : MonoBehaviour
     {
 
     }
-
     public void DrainStaminaHeavyAttack()
     {
 

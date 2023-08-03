@@ -11,14 +11,8 @@ public class EquipmentWindowUI : MonoBehaviour
     { 
         for (int i = 0; i < _rightHandEquipmentSlotUI.Count; i++)
         {
-            if (i < playerInventory._weaponsInRightHandSlots.Count)
-                _rightHandEquipmentSlotUI[i].AddItem(playerInventory._weaponsInRightHandSlots[i]);
-        }
-
-        for (int i = 0; i < _leftHandEquipmentSlotUI.Count; ++i)
-        {
-            if (i < playerInventory._weaponsInLeftHandSlots.Count)
-                _leftHandEquipmentSlotUI[i].AddItem(playerInventory._weaponsInLeftHandSlots[i]);
+            if (playerInventory._weaponSlots.Count > i)
+                _rightHandEquipmentSlotUI[i].AddItem(playerInventory._weaponSlots[i]);
         }
     }
 }

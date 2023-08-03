@@ -35,7 +35,6 @@ public class PlayerManager : CharacterManager
         _isInteracting = _anim.GetBool("isInteracting");
         _canDoCombo = _anim.GetBool("canDoCombo");
         isUsingRightHand = _anim.GetBool("isUsingRightHand");
-        isUsingLeftHand = _anim.GetBool("isUsingLeftHand");
         isInvulerable = _anim.GetBool("isInvulnerable");
         isFiringSpell = _anim.GetBool("isFiringSpell");
         _anim.SetBool("isBlocking", isBlocking);
@@ -51,8 +50,7 @@ public class PlayerManager : CharacterManager
         // 플레이어 이동
         _isSprinting = _inputHandler.b_input;
 
-        CheckForInteractableObject();
-        
+        CheckForInteractableObject();  
     }
 
     private void FixedUpdate()

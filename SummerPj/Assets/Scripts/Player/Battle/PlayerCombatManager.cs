@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerCombatManager : MonoBehaviour
@@ -16,7 +17,7 @@ public class PlayerCombatManager : MonoBehaviour
     PlayerEffectsManager _playerEffectsManager;
     CameraHandler _cameraHandler;
     public string _lastAttack;
-
+    BlendTree blendTree;
     LayerMask riposteLayer = 1 << 12;
     LayerMask backStabLayer = 1 << 11;
 
@@ -68,32 +69,19 @@ public class PlayerCombatManager : MonoBehaviour
 
         _playerWeaponSlotManager._attackingWeapon = weapon;
 
-        if (_inputHandler._twoHandFlag) 
-        {
-            _playerAnimatorManager.PlayTargetAnimation(weapon.TH_Light_Attack_01, true);
-            _lastAttack = weapon.TH_Light_Attack_01; 
-        }
-        else
-        {
-            _playerAnimatorManager.PlayTargetAnimation(weapon.OH_Light_Attack_1, true);
-            _lastAttack = weapon.OH_Light_Attack_1;
-        }
+
+        _playerAnimatorManager.PlayTargetAnimation(weapon.OH_Light_Attack_1, true);
+        _lastAttack = weapon.OH_Light_Attack_1;
     }
 
     public void HandleHeavyAttack(WeaponItem weapon)
     {
+        if (_playerManager._isInteracting) return;
+
         if (_playerStatsManager._currentStamina <= 0) return;
 
         _playerWeaponSlotManager._attackingWeapon = weapon;
 
-        if (_inputHandler._twoHandFlag)
-        {
-
-        }
-        else
-        {
-
-        }
         _playerAnimatorManager.PlayTargetAnimation(weapon.OH_Heavy_Attack_1, true);
         _lastAttack = weapon.OH_Heavy_Attack_1;
     }
@@ -101,13 +89,9 @@ public class PlayerCombatManager : MonoBehaviour
     #region Input Actions
     public void HandleRBAction()
     {
-        if(_playerInventoryManager._rightWeapon.isMeleeWeapon)
+        if(_playerInventoryManager._currentWeapon.isMeleeWeapon)
         {
             PerformRBMeleeAction();
-        }
-        else if(_playerInventoryManager._rightWeapon.isSpellCaster || _playerInventoryManager._rightWeapon.isFaithCaster || _playerInventoryManager._rightWeapon.isPyroCaster) 
-        {
-            PerformRBMagicAction(_playerInventoryManager._rightWeapon);
         }
     }
 
@@ -118,18 +102,19 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void HandleLTAction()
     {
-        if(_playerInventoryManager._rightWeapon.isMeleeWeapon)
+        if(_playerInventoryManager._currentWeapon.isMeleeWeapon)
         {
-            PerformLTWeaponArt(_inputHandler._twoHandFlag);
+            PerformLTWeaponArt();
         }
-        /*        if(_playerInventory._leftWeapon.isShieldWeapon)
-                {
+      /*if(_playerInventory._leftWeapon.isShieldWeapon)
+        {
                     PerformLTWeaponArt(_inputHandler._twoHandFlag);
-                }*/
-        else if(_playerInventoryManager._leftWeapon.isMeleeWeapon)
-        {
+        }*/
+    }
 
-        }
+    public void HandleUltimateAction()
+    {
+        PerformUltimateAction(_playerInventoryManager._currentWeapon);
     }
     #endregion
 
@@ -139,7 +124,7 @@ public class PlayerCombatManager : MonoBehaviour
         if (_playerManager._canDoCombo)
         {
             _inputHandler._comboFlag = true;
-            HandleWeaponCombo(_playerInventoryManager._rightWeapon);
+            HandleWeaponCombo(_playerInventoryManager._currentWeapon);
             _inputHandler._comboFlag = false;
         }
         else
@@ -150,10 +135,10 @@ public class PlayerCombatManager : MonoBehaviour
                 return;
 
             _playerAnimatorManager._anim.SetBool("isUsingRightHand", true);
-            HandleLightAttack(_playerInventoryManager._rightWeapon);
+            HandleLightAttack(_playerInventoryManager._currentWeapon);
         }
 
-        _playerEffectsManager.PlayWeaponFX(false); 
+        _playerEffectsManager.PlayWeaponFX(); 
     }
     public void AttemptBackStabOrRiposte()
     {
@@ -165,7 +150,7 @@ public class PlayerCombatManager : MonoBehaviour
             transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
         {
             CharacterManager _enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
-            DamageCollider rightWeapon = _playerWeaponSlotManager._rightHandDamageCollider;
+            DamageCollider _currentWeapon = _playerWeaponSlotManager._currentDamageCollider;
 
 /*            if(_enemyCharacterManager != null )
             {
@@ -190,7 +175,7 @@ public class PlayerCombatManager : MonoBehaviour
         else if (Physics.Raycast(_inputHandler.criticalAttackRayCastStartPoint.position, transform.TransformDirection(Vector3.forward), out hit, 0.7f, backStabLayer))
         {
             CharacterManager _enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
-            DamageCollider rightWeapon = _playerWeaponSlotManager._rightHandDamageCollider;
+            DamageCollider _currentWeapon = _playerWeaponSlotManager._currentDamageCollider;
 
             if(_enemyCharacterManager != null && _enemyCharacterManager.canBeRiposted)
             {
@@ -204,7 +189,7 @@ public class PlayerCombatManager : MonoBehaviour
                 Quaternion targetRotation = Quaternion.Slerp(_playerManager.transform.rotation, tr, 500 * Time.deltaTime);
                 _playerManager.transform.rotation = targetRotation;
 
-                int criticalDamage = _playerInventoryManager._rightWeapon.criticalDamageMultiplier * rightWeapon._currentWeaponDamage;
+                int criticalDamage = _playerInventoryManager._currentWeapon.criticalDamageMultiplier * _currentWeapon._currentWeaponDamage;
                 _enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
                 _playerAnimatorManager.PlayTargetAnimation("Riposte", true);
@@ -223,52 +208,29 @@ public class PlayerCombatManager : MonoBehaviour
         _playerEquipmentHandler.OpenBlockingCollider();
         _playerManager.isBlocking = true;
     }
-    private void PerformRBMagicAction(WeaponItem weapon)
+    private void PerformUltimateAction(WeaponItem weapon)
     {
         if (_playerManager._isInteracting)
             return;
 
-        if(weapon.isFaithCaster)
+        if (_playerInventoryManager._currentSpell != null)
         {
-            if(_playerInventoryManager._currentSpell != null && _playerInventoryManager._currentSpell.isFaithSpell)
+            if (_playerStatsManager._currentFocusPoints >= _playerInventoryManager._currentSpell.focusPointCost)
             {
-                if(_playerStatsManager._currentFocusPoints >= _playerInventoryManager._currentSpell.focusPointCost)
-                {
-                    _playerInventoryManager._currentSpell.AttemptToCastSpell(_playerAnimatorManager, _playerStatsManager, _playerWeaponSlotManager);
-                }
-                else
-                {
-                    _playerAnimatorManager.PlayTargetAnimation("Shrug", true);
-                }
+                _playerInventoryManager._currentSpell.AttemptToCastSpell(_playerAnimatorManager, _playerStatsManager, _playerWeaponSlotManager);
             }
-        }
-        else if(weapon.isPyroCaster)
-        {
-            if (_playerInventoryManager._currentSpell != null && _playerInventoryManager._currentSpell.isPyroSpell)
+            else
             {
-                if (_playerStatsManager._currentFocusPoints >= _playerInventoryManager._currentSpell.focusPointCost)
-                {
-                    _playerInventoryManager._currentSpell.AttemptToCastSpell(_playerAnimatorManager, _playerStatsManager, _playerWeaponSlotManager);
-                }
-                else
-                {
-                    _playerAnimatorManager.PlayTargetAnimation("Shrug", true);
-                }
+                _playerAnimatorManager.PlayTargetAnimation("Shrug", true);
             }
         }
     }
 
-    private void PerformLTWeaponArt(bool isTwoHanding)
+    private void PerformLTWeaponArt()
     {
         if (_playerManager._isInteracting) return;
 
-        if (isTwoHanding)
-        {
-        }
-        else 
-        {
-            _playerAnimatorManager.PlayTargetAnimation(_playerInventoryManager._rightWeapon.weapon_art, true);
-        }
+        _playerAnimatorManager.PlayTargetAnimation(_playerInventoryManager._currentWeapon.weapon_art, true);
 
     }
 

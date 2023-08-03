@@ -69,15 +69,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LockOnTargetLeftMouce",
-                    "type": "Value",
-                    "id": "6768426b-9e2f-4cbf-9fda-de9dc06281f9",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "LockOnTargetRight",
                     "type": "Button",
                     "id": "9f0ef325-ce69-49e7-bd9c-527e9a8a3990",
@@ -85,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LockOnTargetLeftMouce",
+                    "type": "Value",
+                    "id": "6768426b-9e2f-4cbf-9fda-de9dc06281f9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "LockOnTargetRightMouce",
@@ -286,22 +286,11 @@
                 },
                 {
                     "name": "",
-                    "id": "c2dcecb8-6805-4881-9984-631b5f96ca49",
-                    "path": "<Mouse>/delta/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LockOnTargetLeftMouce",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "395cd72b-c305-4e0e-bae6-fffee08e0c49",
                     "path": "<Mouse>/delta/right",
                     "interactions": "",
-                    "processors": "",
-                    "groups": "",
+                    "processors": "StickDeadzone(min=10,max=99)",
+                    "groups": "Keyboard&Mouse",
                     "action": "LockOnTargetRightMouce",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -314,6 +303,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "LockOnTargetRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c2dcecb8-6805-4881-9984-631b5f96ca49",
+                    "path": "<Mouse>/delta/left",
+                    "interactions": "",
+                    "processors": "StickDeadzone(min=10,max=99)",
+                    "groups": "Keyboard&Mouse",
+                    "action": "LockOnTargetLeftMouce",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -387,15 +387,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Y",
-                    "type": "Button",
-                    "id": "5b245f46-63a1-42ed-b4f0-9a74b208498a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "CriticalAttack",
                     "type": "Button",
                     "id": "7dc26978-ac46-401e-b1d8-2f3ad811d0a2",
@@ -423,9 +414,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "X",
+                    "name": "UseItem",
                     "type": "Button",
                     "id": "d2696dc0-ce75-4641-9928-c43b5f19d66d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ultimate",
+                    "type": "Button",
+                    "id": "3f9016f4-d90b-4155-bb38-080fda012778",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -589,17 +589,6 @@
                 },
                 {
                     "name": "",
-                    "id": "1952e1a6-fa0e-4614-aa19-367ad97fcbc7",
-                    "path": "<Keyboard>/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Y",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "62fd2b61-2f24-40f2-bda7-e87473ae5a53",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "Hold",
@@ -660,7 +649,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "X",
+                    "action": "UseItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f90074a4-511b-44f7-8d0b-d044811c232d",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ultimate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
