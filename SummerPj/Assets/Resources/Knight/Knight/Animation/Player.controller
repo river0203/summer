@@ -34,6 +34,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -244,6 +246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -262,6 +266,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -355,6 +361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -373,6 +381,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -391,6 +401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -672,6 +684,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -787,6 +801,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -893,6 +909,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -1084,6 +1102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -1133,7 +1153,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 254addc1859c60544b32b781effd961c, type: 2}
+  m_Motion: {fileID: 2795890236039980262, guid: 4491033fe7d724049b6861eee3e2cdf9, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1301,6 +1321,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -1319,6 +1341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -1359,6 +1383,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -1377,6 +1403,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -1508,6 +1536,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -1995,6 +2025,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -2536,6 +2568,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -2603,6 +2637,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -2921,6 +2957,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -2939,6 +2977,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -3042,6 +3082,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -3060,6 +3102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -3078,6 +3122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -3567,6 +3613,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
@@ -3607,6 +3655,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f278381e8d4d241b3e6ea632421be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPreformingAction: isPreformingAction
+  _isPreformingStatus: 0
   _isInteractingBool: isInteracting
   _isInteractingStatus: 0
   _isFiringSpellBool: isFiringSpell
