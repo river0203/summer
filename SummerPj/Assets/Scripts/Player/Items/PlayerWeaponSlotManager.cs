@@ -89,7 +89,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
         //_rightHandDamageCollider._characterManager = _characterManager;
         _currentDamageCollider = _WeaponSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>(); 
         _currentDamageCollider._currentWeaponDamage = _playerInventoryManager._currentWeapon.baseDamage;
-        _playerEffectsManager._WeaponFX = _WeaponSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
+        _playerEffectsManager._weaponFX = _WeaponSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
     }
 
     public void OpenDamageCollier()

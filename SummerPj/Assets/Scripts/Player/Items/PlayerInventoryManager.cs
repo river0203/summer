@@ -8,7 +8,6 @@ using UnityEngine.Rendering;
 public class PlayerInventoryManager : MonoBehaviour
 {
     public PlayerWeaponSlotManager _playerWeaponSlotManager;
-    public AnimatorStateMachine _animStateMachine;
     public Animator _anim;
 
     public ConsumableItem currentConsumable;
