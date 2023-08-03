@@ -20,6 +20,7 @@ public class ConsumableItem : Item
         if(currentItemAmount > 0)
         {
             _playerAnimatorManager.PlayTargetAnimation(consumeAnimation, isInteracting, true);
+            _playerAnimatorManager._anim.applyRootMotion = true;
         }
         else
         {

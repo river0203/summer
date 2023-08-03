@@ -75,4 +75,9 @@ public class PlayerAnimatorManager : AnimatorManager
         Vector3 velocity = deltaPosition / delta;
         _playerLocomotionManager._rigid.velocity = velocity;
     }
+
+    public void FinishApplyRootMotion()
+    {
+        _anim.applyRootMotion = false;
+    }
 }
