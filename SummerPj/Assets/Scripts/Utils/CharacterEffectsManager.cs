@@ -10,22 +10,12 @@ public class CharacterEffectsManager : MonoBehaviour
     [Header("Weapon FX")]
     public WeaponFX _WeaponFX;
     public WeaponFX _leftWeaponFX;
-    public virtual void PlayWeaponFX(bool isLeft)
+    public virtual void PlayWeaponFX()
     {
-        if(!isLeft)
-        {
-            if(_WeaponFX != null)
-            {
-                _WeaponFX.PlayWeaponFX();
-            }
-        }
-        else
-        {
             if (_WeaponFX != null)
             {
                 _leftWeaponFX.PlayWeaponFX();
             }
-        }
     }
 
     public virtual void PlayBloodSplatterFX(Vector3 bloodSplatterLocation)

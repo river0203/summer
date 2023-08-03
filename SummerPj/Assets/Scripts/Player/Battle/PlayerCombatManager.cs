@@ -139,7 +139,7 @@ public class PlayerCombatManager : MonoBehaviour
             HandleLightAttack(_playerInventoryManager._currentWeapon);
         }
 
-        _playerEffectsManager.PlayWeaponFX(false); 
+        _playerEffectsManager.PlayWeaponFX(); 
     }
     public void AttemptBackStabOrRiposte()
     {

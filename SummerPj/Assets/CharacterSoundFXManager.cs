@@ -36,7 +36,6 @@ public class CharacterSoundFXManager : MonoBehaviour
         lastDamageSoundPlayed = takingDamageSounds[randomValue];
         _audioSource.PlayOneShot(takingDamageSounds[randomValue]);
     }
-
     public virtual void PlayRandomWeaponWhoosh()
     {
         potentialWeaponWhooshes = new List<AudioClip>();
@@ -54,4 +53,26 @@ public class CharacterSoundFXManager : MonoBehaviour
         _audioSource.PlayOneShot(_playerInventoryManager._currentWeapon.weaponWhooshes[randomValue]);
 
     }
+
+    public void PlayOnFootStep()
+    {
+
+    }
+
+    public void PlayJumpSound()
+    {
+
+    }
+
+    public void PlayLandSound()
+    {
+
+    }
+
+    public void PlayDodgeSound()
+    {
+
+    }
+
+
 }
