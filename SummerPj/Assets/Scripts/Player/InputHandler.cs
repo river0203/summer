@@ -313,10 +313,13 @@ public class InputHandler : MonoBehaviour
 
     void HandleUseConsumableInput()
     {
-        if(x_Input)
+        if (!_playerManager._isInteracting)
         {
-            x_Input = false;
-            _playerInventoryManager.currentConsumable.AttemptToConsumeItem(_playerAnimatorManager, _weaponSlotManager, _playerEffectsManager);
+            if (x_Input)
+            {
+                x_Input = false;
+                _playerInventoryManager.currentConsumable.AttemptToConsumeItem(_playerAnimatorManager, _weaponSlotManager, _playerEffectsManager);
+            }
         }
     }
 }

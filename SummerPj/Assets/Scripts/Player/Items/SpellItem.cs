@@ -11,11 +11,6 @@ public class SpellItem : Item
     [Header("Spell Cost")]
     public int focusPointCost;
 
-    [Header("Spell Type")]
-    public bool isFaithSpell;
-    public bool isMagicSpell;
-    public bool isPyroSpell;
-
     [Header("Spell Description")]
     [TextArea]
     public string spellDescription;

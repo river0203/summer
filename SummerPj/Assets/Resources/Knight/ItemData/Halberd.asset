@@ -18,9 +18,7 @@ MonoBehaviour:
   _isUnarmed: 0
   baseDamage: 25
   criticalDamageMultiplier: 4
-  right_hand_idle: Spear_Right_Arm_Idle_01
-  left_hand_idle: Spear_Left_Arm_Idle_01
-  th_idle: Locomotion
+  _Locomotion: Locomotion_Halberd
   physicalDamageAbsorption: 99
   OH_Light_Attack_1: Halberd_LightAttack_1
   OH_Light_Attack_2: Halberd_LightAttack_2
@@ -33,8 +31,7 @@ MonoBehaviour:
   baseStaminar: 20
   lightAttackMultiplier: 1
   heavyAttackMultiplier: 2
-  isSpellCaster: 0
-  isFaithCaster: 0
-  isPyroCaster: 0
   isMeleeWeapon: 1
   isShieldWeapon: 0
+  weaponWhooshes: []
+  _skill: {fileID: 11400000, guid: 9b6b8eb2a0c670b4b82a31fdb3037617, type: 2}

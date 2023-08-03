@@ -238,11 +238,12 @@ GameObject:
   - component: {fileID: 2346760526354013303}
   - component: {fileID: 2346760526354013302}
   - component: {fileID: 5727040219544053319}
+  - component: {fileID: 3053872920303439431}
   - component: {fileID: 2346760525969171220}
   - component: {fileID: 2346760526354013296}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -441,9 +442,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33701b096a7c0646867b9af08e7733e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unarmedWeapon: {fileID: 0}
-  _WeaponSlot: {fileID: 0}
-  _backSlot: {fileID: 0}
+  _unarmedWeapon: {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
+  _WeaponSlot: {fileID: 2346760524998812108}
+  _backSlot: {fileID: 2346760526937381677}
   _currentDamageCollider: {fileID: 0}
   _attackingWeapon: {fileID: 0}
 --- !u!114 &2346760526354013298
@@ -458,14 +459,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c76f432e8efc65449958d344859dd4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerWeaponSlotManager: {fileID: 0}
-  _animStateMachine: {fileID: 0}
+  _playerWeaponSlotManager: {fileID: 2346760526354013299}
   _anim: {fileID: 0}
   currentConsumable: {fileID: 11400000, guid: 92183ebf3ac258b48ab9e2e839769c2d, type: 2}
   _currentSpell: {fileID: 11400000, guid: e54aaed16fc9fdf48997a8a01ccfd8bc, type: 2}
   _currentWeapon: {fileID: 0}
   _maxInventorySlotCount: 4
-  _weaponSlots: []
+  _weaponSlots:
+  - {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
+  - {fileID: 11400000, guid: b583315338c63984680536c9c224c831, type: 2}
   _Spells:
   - {fileID: 11400000, guid: 0f0677a3507a70d43858f3e080fa9222, type: 2}
   - {fileID: 11400000, guid: 9b6b8eb2a0c670b4b82a31fdb3037617, type: 2}
@@ -485,8 +487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bloodSplatterFX: {fileID: 1671474790284636, guid: 4d7746559804f034daa8e1c8ee23a78a, type: 3}
-  _WeaponFX: {fileID: 0}
-  _leftWeaponFX: {fileID: 0}
+  _weaponFX: {fileID: 0}
   currentParticleFX: {fileID: 0}
   amountToBeHealed: 30
   instantiatedFXModel: {fileID: 0}
@@ -562,6 +563,25 @@ MonoBehaviour:
   _isGrounded: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
+--- !u!114 &3053872920303439431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2346760525969171212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6447c3852dbb44dba2204d4cfb6c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  takingDamageSounds: []
+  WalkSound: {fileID: 0}
+  RunSound: {fileID: 0}
+  JumpSound: {fileID: 0}
+  LandSound: {fileID: 0}
+  dodgeSound: {fileID: 0}
+  DeadSound: {fileID: 0}
 --- !u!82 &2346760525969171220
 AudioSource:
   m_ObjectHideFlags: 0

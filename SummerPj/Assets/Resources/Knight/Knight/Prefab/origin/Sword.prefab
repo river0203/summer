@@ -5237,6 +5237,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bloodSplatterFX: {fileID: 0}
-  _rightWeaponFX: {fileID: 3576330684459610564}
-  _leftWeaponFX: {fileID: 3576330684459610564}
+  _weaponFX: {fileID: 3576330684459610564}
   _normalWeaponTrail: {fileID: 5438866302584083773}

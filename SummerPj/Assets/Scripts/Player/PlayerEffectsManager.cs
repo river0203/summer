@@ -6,17 +6,21 @@ public class PlayerEffectsManager : CharacterEffectsManager
 {
     PlayerStatsManager _playerStatsManager;
     PlayerWeaponSlotManager _playerWeaponSlotManager;
+    PlayerInventoryManager _playerInventoryManager;
+
     public GameObject currentParticleFX;
     public int amountToBeHealed;
     public GameObject instantiatedFXModel;
 
     void Awake()
     {
+        _playerInventoryManager = GetComponent<PlayerInventoryManager>();
         _playerStatsManager = GetComponentInParent<PlayerStatsManager>();
         _playerWeaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
     }
     public void HealPlayerFromEffect()
     {
+        _playerInventoryManager.currentConsumable.currentItemAmount--;
         _playerStatsManager.HealPlayer(amountToBeHealed);
         GameObject healParticles = Instantiate(currentParticleFX, _playerStatsManager.transform);
         Destroy(instantiatedFXModel.gameObject);

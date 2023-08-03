@@ -7,7 +7,7 @@ public class WeaponFX : CharacterEffectsManager
     [Header("Weapon FX")]
     public ParticleSystem _normalWeaponTrail;
 
-    public void PlayWeaponFX()
+    public override void PlayWeaponFX()
     {
         _normalWeaponTrail.Stop();
 

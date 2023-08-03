@@ -20,7 +20,7 @@ namespace SG
             _enemyStats.TakeDamageNoAnimation(_enemyManager.pendingCriticalDamage);
             _enemyManager.pendingCriticalDamage = 0;
         }
-        public void EnableParrying()
+/*        public void EnableParrying()
         {
             _enemyManager.isParrying = true;
         }
@@ -35,7 +35,7 @@ namespace SG
         public void DisableCanBeRiposted()
         {
             _enemyManager.canBeRiposted = false;
-        }
+        }*/
         private void OnAnimatorMove()
         {
             float delta = Time.deltaTime;

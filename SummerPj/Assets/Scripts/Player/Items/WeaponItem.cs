@@ -13,9 +13,7 @@ public class WeaponItem : Item
     public int criticalDamageMultiplier = 4;
 
     [Header("Idle Animations")]
-    public string right_hand_idle;
-    public string left_hand_idle;
-    public string th_idle;
+    public string _Locomotion;
 
     [Header("Absorption")]
     public float physicalDamageAbsorption;
@@ -40,12 +38,12 @@ public class WeaponItem : Item
     public float heavyAttackMultiplier;
 
     [Header("Weapon Type")]
-    public bool isSpellCaster;
-    public bool isFaithCaster;
-    public bool isPyroCaster;
     public bool isMeleeWeapon;
     public bool isShieldWeapon;
 
     [Header("Sound FX")]
     public AudioClip[] weaponWhooshes;
+
+    [Header("Skill")]
+    public SpellItem _skill;
 }

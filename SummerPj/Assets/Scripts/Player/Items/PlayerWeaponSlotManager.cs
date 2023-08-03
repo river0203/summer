@@ -53,8 +53,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
     {
         if(weaponItem != null)
         {
-             animator.CrossFade("Both Arms Empty", 0.2f);
-             animator.CrossFade(weaponItem.right_hand_idle, 0.2f);
+             //animator.CrossFade(weaponItem.right_hand_idle, 0.2f);
              _backSlot.UnloadWeaponAndDestroy();
 
              _WeaponSlot._currentWeapon = weaponItem;
@@ -67,7 +66,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
         {
             weaponItem = _unarmedWeapon;
 
-            animator.CrossFade("Right Arm Empty", 0.2f);
+            //animator.CrossFade("Right Arm Empty", 0.2f);
             _playerInventoryManager._currentWeapon = _unarmedWeapon;
             _WeaponSlot._currentWeapon = _unarmedWeapon;
             _WeaponSlot.LoadWeaponModel(_unarmedWeapon);
