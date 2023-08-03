@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DamageCollider : MonoBehaviour
 {
+    public CharacterEffectsManager _characterEffectsManager;
+
     public CharacterManager _characterManager;
     Collider _damageCollider;
     public bool enabledDamageColliderOnStartUp = false;   
@@ -18,15 +20,18 @@ public class DamageCollider : MonoBehaviour
         _damageCollider.gameObject.SetActive(true);
         _damageCollider.isTrigger = true;
         _damageCollider.enabled = enabledDamageColliderOnStartUp;
+        _characterEffectsManager = GetComponentInChildren<CharacterEffectsManager>();
     }
 
     public void EnableDamagecollider()
     {
+        _characterEffectsManager.PlayWeaponFX();
         _damageCollider.enabled = true;
     }
 
     public void DisableDamagecollider()
     {
+        _characterEffectsManager.StopWeaponFX();
         _damageCollider.enabled = false;
     }
 

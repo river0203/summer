@@ -137,8 +137,6 @@ public class PlayerCombatManager : MonoBehaviour
             _playerAnimatorManager._anim.SetBool("isUsingRightHand", true);
             HandleLightAttack(_playerInventoryManager._currentWeapon);
         }
-
-        _playerEffectsManager.PlayWeaponFX(); 
     }
     public void AttemptBackStabOrRiposte()
     {

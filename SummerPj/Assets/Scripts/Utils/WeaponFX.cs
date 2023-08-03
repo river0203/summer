@@ -9,11 +9,10 @@ public class WeaponFX : CharacterEffectsManager
 
     public void PlayWeaponFX()
     {
+        _normalWeaponTrail.Play();
+    }
+    public void StopWeaponFX()
+    {
         _normalWeaponTrail.Stop();
-
-        if(_normalWeaponTrail.isStopped)
-        {
-            _normalWeaponTrail.Play();
-        }
     }
 }

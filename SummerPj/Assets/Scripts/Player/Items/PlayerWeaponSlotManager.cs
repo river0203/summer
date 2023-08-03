@@ -94,8 +94,8 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 
     public void OpenDamageCollier()
     {
-        GameObject.FindWithTag("Player").GetComponent<CharacterSoundFXManager>().PlayRandomWeaponWhoosh();
         _currentDamageCollider.EnableDamagecollider();
+        GameObject.FindWithTag("Player").GetComponent<CharacterSoundFXManager>().PlayRandomWeaponWhoosh();
     }
     public void CloseDamageCollier()
     {
