@@ -13,9 +13,10 @@ public class EventColliderBeginBossFight : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "player")
+        /*if(other.tag == "player")
         {
             _worldEventManager.ActivateBossFight();
-        }
+        }*/
+        _worldEventManager.ActivateBossFight();
     }
 }

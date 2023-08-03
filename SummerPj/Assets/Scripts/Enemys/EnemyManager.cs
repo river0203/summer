@@ -20,12 +20,12 @@ public class EnemyManager : CharacterManager
     public float maximumAttackRange = 1.5f;
     public bool isInteracting;
 
-    public float rotationSpeed = 15;
+    public float rotationSpeed = 3;
 
     [Header("AI Setting")]
     public float detectionRadius = 20;
-    public float maximumDetectionAngle = 50;
-    public float minimumDetectionAngle = -50;
+    public float maximumDetectionAngle = 10;
+    public float minimumDetectionAngle = -10;
 
     void Awake()
     {
@@ -51,6 +51,8 @@ public class EnemyManager : CharacterManager
         isPreformingAction = enemyAnimatorManager._anim.GetBool("isPreformingAction");
         enemyAnimatorManager._anim.SetBool("isDead", enemyStats._isDead);
         _characterState.DestroyObj();
+        enemyRigidBody.velocity = Vector3.zero;
+        LookTarget();
     }
 
     private void FixedUpdate()
@@ -79,5 +81,13 @@ public class EnemyManager : CharacterManager
         currentState = state;
     }
 
-
+    
+    private void LookTarget()
+    {
+        if(!_characterState._isDead)
+        {
+            Vector3 _targetDirection = currentTarget.transform.position - this.transform.position;
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(_targetDirection), rotationSpeed * Time.deltaTime);
+        }
+    }
 }

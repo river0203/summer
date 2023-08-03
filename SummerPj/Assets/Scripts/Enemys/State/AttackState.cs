@@ -13,6 +13,8 @@ public class AttackState : State
         float distanceFromTarget = Vector3.Distance(enemyManger.currentTarget.transform.position, enemyManger.transform.position); ;
         float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
+
+
         // 뭘 하고 있으면 공격하지 말고 돌아가라
         if (enemyManger.isPreformingAction)
             return combatStanceState;
@@ -62,6 +64,7 @@ public class AttackState : State
         // 자신이 보는 방향과 타겟의 위치간의 각도
         float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
         #endregion
+
 
         #region 최대 점수를 정함
         int maxScore = 0;
