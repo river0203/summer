@@ -21,9 +21,11 @@ MonoBehaviour:
   right_hand_idle: Sword_Right_Arm_Idle_01
   left_hand_idle: Sword_Left_Arm_Idle_01
   th_idle: Locomotion
+  physicalDamageAbsorption: 0
   OH_Light_Attack_1: Sword_LightAttack_1
   OH_Light_Attack_2: Sword_LightAttack_2
   OH_Light_Attack_3: Sword_LightAttack_3
+  OH_Light_Attack_4: 
   OH_Heavy_Attack_1: Sword_HeavyAttack
   TH_Light_Attack_01: TH_Sword_Attack_01
   TH_Light_Attack_02: TH_Sword_Attack_02
@@ -36,3 +38,5 @@ MonoBehaviour:
   isPyroCaster: 0
   isMeleeWeapon: 1
   isShieldWeapon: 0
+  weaponWhooshes:
+  - {fileID: 8300000, guid: dbff103b3da0f474db148f7d921488d6, type: 3}
