@@ -6,7 +6,7 @@ public class CharacterWeaponSlotManager : MonoBehaviour
 {
     public WeaponItem _unarmedWeapon;
 
-    public WeaponHolderSlot _WeaponSlot;
+    public WeaponHolderSlot _weaponSlot;
     public WeaponHolderSlot _backSlot;
     public DamageCollider _currentDamageCollider;
 }

@@ -7,8 +7,8 @@ public class CharacterStatsManager : MonoBehaviour
     CharacterManager _characterManager;
 
     public int healthLevel = 10;
-    [HideInInspector] public int maxHealth;
-    [HideInInspector] public int currentHealth;
+    [HideInInspector] public int _maxHealth;
+    [HideInInspector] public int _currentHealth;
 
     public int staminaLevel = 10;
     [HideInInspector] public float _maxStamina;
@@ -29,11 +29,11 @@ public class CharacterStatsManager : MonoBehaviour
 
     public virtual void TakeDamageNoAnimation(int damage)
     {
-        currentHealth -= damage;
+        _currentHealth -= damage;
 
-        if (currentHealth <= 0)
+        if (_currentHealth <= 0)
         {
-            currentHealth = 0;
+            _currentHealth = 0;
             _isDead = true;
         }
     }
