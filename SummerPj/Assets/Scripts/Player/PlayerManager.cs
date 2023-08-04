@@ -11,7 +11,6 @@ public class PlayerManager : CharacterManager
     Animator _anim;
     CameraHandler _cameraHandler;
     PlayerLocomotionManager _playerLocomotion;
-    PlayerAnimatorManager _playerAnimatorManager;
     interactableUI _interactableUI;
     public GameObject interactableUIGameObject;
 
@@ -37,7 +36,8 @@ public class PlayerManager : CharacterManager
         _canDoCombo = _anim.GetBool("canDoCombo");
         isUsingRightHand = _anim.GetBool("isUsingRightHand");
         isInvulerable = _anim.GetBool("isInvulnerable");
-        isFiringSpell = _anim.GetBool("isFiringSpell");
+        
+        _anim.SetBool("isFiringSpell", isFiringSpell);
         _anim.SetBool("isBlocking", isBlocking);
         _anim.SetBool("isInAir", _isInAir);
         _anim.SetBool("isDead", _playerStatsManager._isDead);

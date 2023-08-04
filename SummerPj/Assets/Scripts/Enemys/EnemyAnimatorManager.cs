@@ -7,7 +7,7 @@ public class EnemyAnimatorManager : AnimatorManager
     EnemyManager _enemyManager;
     EnemyEffactManager _enemyEffactManager;
 
-    private void Awake()
+    new private void Awake()
     {
         _anim = GetComponent<Animator>();
         _enemyManager = GetComponentInParent<EnemyManager>();

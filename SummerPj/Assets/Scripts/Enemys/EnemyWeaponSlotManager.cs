@@ -29,7 +29,7 @@ public class EnemyWeaponSlotManager : MonoBehaviour
     {
         if(_isWeapon) 
         {
-            currentWeaponSlot.currentWeapon = weapon;
+            currentWeaponSlot._currentWeapon = weapon;
             currentWeaponSlot.LoadWeaponModel(weapon);
             LoadWeaponsDamageCollider(false);
         }
@@ -49,7 +49,7 @@ public class EnemyWeaponSlotManager : MonoBehaviour
         {
             bossWeaponCollider = currentWeaponSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>(true);
             bossWeaponCollider._characterManager = GetComponentInParent<CharacterManager>();
-            _enemyEffactManager._rightWeaponFX = currentWeaponSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
+            //_enemyEffactManager._rightWeaponFX = currentWeaponSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
         }
     }   
 

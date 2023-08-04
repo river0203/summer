@@ -6,6 +6,7 @@ public class CharacterManager : MonoBehaviour
 {
     public CharacterSoundFXManager _characterSoundFXManager;
     public PlayerInventoryManager _playerInventoryManager;
+    public PlayerAnimatorManager _playerAnimatorManager;
 
     [Header("Lock On Transform")]
     public Transform _lockOnTransform;
@@ -40,6 +41,7 @@ public class CharacterManager : MonoBehaviour
 
     private void Awake()
     {
+        _playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         _characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
         _playerInventoryManager = GetComponent<PlayerInventoryManager>();
     }

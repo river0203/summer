@@ -7,6 +7,9 @@ public class UIManager : MonoBehaviour
     public PlayerInventoryManager _playerInventory;
     public EquipmentWindowUI _equipmentWindowUI;
 
+    [Header("Pop Ups")]
+    public BonfireLitPopUpUI _bonfireLitPopUpUI;
+
     [Header("UI Windows")]
     public GameObject _hudWindow;
     public GameObject _selectWindow;
@@ -22,31 +25,32 @@ public class UIManager : MonoBehaviour
     [Header("Weapon Inventory")]
     public GameObject weaponInventorySlotPrefab;
     public Transform weaponInventorySlotsParent;
-    WeaponInventorySlot[] weaponInventorySlots;
+    WeaponInventorySlot[] _weaponInventorySlots;
 
     private void Start()
     {
-        weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
+        _bonfireLitPopUpUI = GetComponentInChildren<BonfireLitPopUpUI>();
+        _weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
         _equipmentWindowUI.LoadWeaponsOnEquipmentScreen(_playerInventory);
     }
 
     public void UpdateUI()
     {
         #region Weapon Inventory Slots
-        for(int i = 0; i < weaponInventorySlots.Length; i++) 
+        for(int i = 0; i < _weaponInventorySlots.Length; i++) 
         { 
             if (i < _playerInventory._weaponsInventory.Count)
             {
-                if(weaponInventorySlots.Length < _playerInventory._weaponsInventory.Count)
+                if(_weaponInventorySlots.Length < _playerInventory._weaponsInventory.Count)
                 {
                     Instantiate(weaponInventorySlotPrefab, weaponInventorySlotsParent);
-                    weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
+                    _weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
                 }
-                weaponInventorySlots[i].AddItem(_playerInventory._weaponsInventory[i]);
+                _weaponInventorySlots[i].AddItem(_playerInventory._weaponsInventory[i]);
             }
             else
             {
-                weaponInventorySlots[i].ClearInventorySlot();
+                _weaponInventorySlots[i].ClearInventorySlot();
             }
         }
         #endregion 
@@ -76,5 +80,10 @@ public class UIManager : MonoBehaviour
         rightHandSlot02Selected = false;
         leftHandSlot01Selected = false;
         leftHandSlot02Selected = false;
+    }
+
+    public void ActivateBonfirePopUp()
+    {
+        _bonfireLitPopUpUI.DisplayBonfireLitPopUp();
     }
 }

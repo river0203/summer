@@ -23,7 +23,6 @@ public class DamageCollider : MonoBehaviour
         _characterEffectsManager = GetComponentInChildren<CharacterEffectsManager>();
     }
 
-
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.tag == "Player")
@@ -48,8 +47,7 @@ public class DamageCollider : MonoBehaviour
                 Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                 _playerEffectsManager.PlayBloodSplatterFX(contactPoint);
 
-                playerStats.TakeDamage(_currentWeaponDamage, currentDamageAnimation);
-                
+                playerStats.TakeDamage(_currentWeaponDamage, currentDamageAnimation = "Damage_Foward_01"); 
             }
         }
         
