@@ -50,6 +50,8 @@ public class EnemyStats : CharacterStatsManager
         if (_isDead)
             return;
 
+        _currentHealth -= _damege;
+
         if (!_isBoss)
         {
             _enemyHealthBar.SetHealth(_currentHealth);
@@ -59,7 +61,6 @@ public class EnemyStats : CharacterStatsManager
             _enemyBossManager.UpdateBossHealthBar(_currentHealth);
         }
 
-        _currentHealth -= _damege;
         _enemyAnimatorManager.PlayTargetAnimation(_damageAnimation, true);
 
         if (_currentHealth <= 0)

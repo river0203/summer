@@ -23,17 +23,6 @@ public class DamageCollider : MonoBehaviour
         _characterEffectsManager = GetComponentInChildren<CharacterEffectsManager>();
     }
 
-    public void EnableDamagecollider()
-    {
-        _characterEffectsManager.PlayWeaponFX();
-        _damageCollider.enabled = true;
-    }
-
-    public void DisableDamagecollider()
-    {
-        _characterEffectsManager.StopWeaponFX();
-        _damageCollider.enabled = false;
-    }
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -72,7 +61,7 @@ public class DamageCollider : MonoBehaviour
             CharacterManager _enemycharacterManager = collision.GetComponent<CharacterManager>();
 
             Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-            _enemyEffectsManager.PlayBloodSplatterFX(contactPoint);
+            //_enemyEffectsManager.PlayBloodSplatterFX(contactPoint);
 
             if (enemyStats != null)
             {
@@ -95,6 +84,17 @@ public class DamageCollider : MonoBehaviour
 
             _illusionaryWall.wallHasBeenHit = true;
         }*/
+    }
+    public void EnableDamagecollider()
+    {
+        _characterEffectsManager.PlayWeaponFX();
+        _damageCollider.enabled = true;
+    }
+
+    public void DisableDamagecollider()
+    {
+        _characterEffectsManager.StopWeaponFX();
+        _damageCollider.enabled = false;
     }
 
     public void ChooseWhichDirectionDamageCameFrom(float direction)
