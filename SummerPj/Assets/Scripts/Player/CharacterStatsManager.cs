@@ -18,6 +18,8 @@ public class CharacterStatsManager : MonoBehaviour
 
     [HideInInspector] public bool _isDead;
 
+    private RebirthState _rebirthState;
+
     public virtual void TakeDamage(int damege, string damageAnimation = "Damage_01")
     {
 
@@ -30,7 +32,14 @@ public class CharacterStatsManager : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _currentHealth = 0;
-            _isDead = true;
+            if(_rebirthState.Phase == false)
+            {
+                _isDead = true;
+            }
+            else
+            {
+                _isDead = false;
+            }
         }
     }
 

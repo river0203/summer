@@ -7,6 +7,7 @@ public class RebirthState : State
     private IdleState IdleState;
     private LayerMask _detectionLayer;
     private CharacterStatsManager _characterStatsManager;
+    public bool Phase;
     public override State Tick(EnemyManager enemyManger, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManger.detectionRadius, _detectionLayer);
@@ -19,10 +20,12 @@ public class RebirthState : State
             if(_mobState != null && _characterStatsManager._isDead == true)
             {
                 _characterStatsManager._currentHealth += 50;
+                Phase = true;
                 return IdleState;
             }
             else
             {
+                Phase = false;
                 return this;
             }
 
