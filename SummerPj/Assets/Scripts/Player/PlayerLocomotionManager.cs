@@ -315,7 +315,6 @@ public class PlayerLocomotionManager : MonoBehaviour
 
         if (_playerStatsManager._currentStamina <= 0) return;
 
-
         if (_inputHandler.jump_Input)
         {
             if(_inputHandler._moveAmount > 0)

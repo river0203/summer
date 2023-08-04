@@ -14,11 +14,11 @@ public class PlayerInventoryManager : MonoBehaviour
     public SpellItem _currentSpell;
     public WeaponItem _currentWeapon;
 
-    public int _maxInventorySlotCount = 4;
+    public int _maxInventorySlotCount = 3;
     public List<WeaponItem> _weaponSlots = new List<WeaponItem>();
     public List<SpellItem> _Spells = new List<SpellItem>();
 
-    public int _currentWeaponIndex = -1;
+    public int _currentWeaponIndex = 0;
 
     AnimatorState _animState;
     public List<WeaponItem> _weaponsInventory;
