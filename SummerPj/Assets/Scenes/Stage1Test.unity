@@ -1226,6 +1226,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2346760525969171221, guid: 227efc09c65e2134e9d7be024da37706, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2346760525969171222, guid: 227efc09c65e2134e9d7be024da37706, type: 3}
       propertyPath: _healthBar
       value: 
@@ -1238,6 +1242,10 @@ PrefabInstance:
       propertyPath: _focusPointBar
       value: 
       objectReference: {fileID: 4125550490166220012}
+    - target: {fileID: 3053872920303439431, guid: 227efc09c65e2134e9d7be024da37706, type: 3}
+      propertyPath: dodgeSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 92d36e3918f801040955df1c202559df, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 227efc09c65e2134e9d7be024da37706, type: 3}
 --- !u!1001 &3538025449707858012

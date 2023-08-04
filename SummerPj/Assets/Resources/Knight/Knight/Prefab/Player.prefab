@@ -580,7 +580,7 @@ MonoBehaviour:
   RunSound: {fileID: 8300000, guid: ae2642e81a6c40a4fbcf1d7389e38c04, type: 3}
   JumpSound: {fileID: 0}
   LandSound: {fileID: 0}
-  dodgeSound: {fileID: 0}
+  dodgeSound: {fileID: 8300000, guid: 92d36e3918f801040955df1c202559df, type: 3}
   DeadSound: {fileID: 0}
 --- !u!82 &2346760525969171220
 AudioSource:
