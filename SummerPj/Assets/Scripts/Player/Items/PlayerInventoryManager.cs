@@ -17,7 +17,7 @@ public class PlayerInventoryManager : MonoBehaviour
     public int _maxInventorySlotCount = 3;
     public List<WeaponItem> _weaponSlots = new List<WeaponItem>();
 
-    public int _currentWeaponIndex = 0;
+    public int _currentWeaponIndex = 0; 
 
     AnimatorState _animState;
     public List<WeaponItem> _weaponsInventory;
@@ -46,6 +46,7 @@ public class PlayerInventoryManager : MonoBehaviour
                 _currentWeapon = _weaponSlots[_currentWeaponIndex];
                 _currentSpell = _currentWeapon._skill;
                 _playerWeaponSlotManager.LoadWeaponOnSlot(_weaponSlots[_currentWeaponIndex]);
+                
                 _anim.CrossFade(_currentWeapon._Locomotion, 0.2f);
             }
         }

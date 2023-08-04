@@ -9,8 +9,8 @@ using UnityEngine;
         protected CharacterStatsManager _characterStatsManager;
         public Animator _anim;
         public bool canRotate;
-
-        protected virtual void Awake()
+  
+    protected virtual void Awake()
         {
             _characterManager = GetComponent<CharacterManager>();
             _characterStatsManager = GetComponent<CharacterStatsManager>();

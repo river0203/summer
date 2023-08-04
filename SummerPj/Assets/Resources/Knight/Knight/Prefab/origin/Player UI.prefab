@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a780c006255ca164bb28157a53e4c1fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftWeaponIcon: {fileID: 4125550490545268730}
+  _magicIcon: {fileID: 4125550490545268730}
   _rightWeaponIcon: {fileID: 4125550491897208823}
 --- !u!1 &4125550490512059881
 GameObject:
@@ -1129,12 +1129,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28770513c64c8674ab1a75b46b159cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInventory: {fileID: 0}
+  _playerInventory: {fileID: 0}
   _equipmentWindowUI: {fileID: 4459712680076991002}
-  hudWindow: {fileID: 7704265846421697321}
-  selectWindow: {fileID: 4459712679286753108}
-  equipmentScreentWindow: {fileID: 4459712680725851060}
-  weaponInventoryWindow: {fileID: 4459712679851714601}
+  _bonfireLitPopUpUI: {fileID: 0}
+  _hudWindow: {fileID: 0}
+  _selectWindow: {fileID: 0}
+  _equipmentScreentWindow: {fileID: 0}
+  _weaponInventoryWindow: {fileID: 0}
   rightHandSlot01Selected: 0
   rightHandSlot02Selected: 0
   leftHandSlot01Selected: 0

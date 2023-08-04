@@ -166,7 +166,7 @@ MonoBehaviour:
   _cameraPivotTransform: {fileID: 576586990596784752}
   _ignoreLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1537
   _lookSpeed: 0.01
   _followSpeed: 0.1
   _pivotSpeed: 0.03

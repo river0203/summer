@@ -383,6 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterSoundFXManager: {fileID: 3053872920303439431}
   _playerInventoryManager: {fileID: 2346760526354013298}
+  _playerAnimatorManager: {fileID: 0}
   _lockOnTransform: {fileID: 2346760525124739900}
   _backStabBoxCollider: {fileID: 2346760526895657239}
   _backStabCollider: {fileID: 2346760526895657238}
@@ -401,6 +402,7 @@ MonoBehaviour:
   _isGrounded: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
+  _playerStatsManager: {fileID: 0}
   interactableUIGameObject: {fileID: 0}
 --- !u!114 &2346760525969171222
 MonoBehaviour:
@@ -442,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33701b096a7c0646867b9af08e7733e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unarmedWeapon: {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
+  _unarmedWeapon: {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
   _weaponSlot: {fileID: 2346760524998812108}
   _backSlot: {fileID: 2346760526937381677}
   _currentDamageCollider: {fileID: 0}
@@ -468,10 +470,6 @@ MonoBehaviour:
   _weaponSlots:
   - {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
   - {fileID: 11400000, guid: b583315338c63984680536c9c224c831, type: 2}
-  _Spells:
-  - {fileID: 11400000, guid: 0f0677a3507a70d43858f3e080fa9222, type: 2}
-  - {fileID: 11400000, guid: 9b6b8eb2a0c670b4b82a31fdb3037617, type: 2}
-  - {fileID: 11400000, guid: f69f2c60332fe164e83ade3c80019a08, type: 2}
   _currentWeaponIndex: -1
   _weaponsInventory: []
 --- !u!114 &2346760526354013301
@@ -545,6 +543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterSoundFXManager: {fileID: 0}
   _playerInventoryManager: {fileID: 0}
+  _playerAnimatorManager: {fileID: 0}
   _lockOnTransform: {fileID: 0}
   _backStabBoxCollider: {fileID: 0}
   _backStabCollider: {fileID: 0}
@@ -575,10 +574,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6447c3852dbb44dba2204d4cfb6c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _audioSource: {fileID: 0}
   takingDamageSounds: []
   WalkSound: {fileID: 8300000, guid: 428c9bbeb64627249bd5c24845b9ffa5, type: 3}
   RunSound: {fileID: 8300000, guid: ae2642e81a6c40a4fbcf1d7389e38c04, type: 3}
-  JumpSound: {fileID: 0}
+  JumpSound: {fileID: 8300000, guid: f8cde5839aa2d6d448319d7c803afe16, type: 3}
   LandSound: {fileID: 0}
   dodgeSound: {fileID: 8300000, guid: 92d36e3918f801040955df1c202559df, type: 3}
   DeadSound: {fileID: 0}
