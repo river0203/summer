@@ -87,13 +87,19 @@ public class DamageCollider : MonoBehaviour
     }
     public void EnableDamagecollider()
     {
-        _characterEffectsManager.PlayWeaponFX();
+        if (_characterEffectsManager != null)
+        {
+            _characterEffectsManager.PlayWeaponFX();
+        }
         _damageCollider.enabled = true;
     }
 
     public void DisableDamagecollider()
     {
-        _characterEffectsManager.StopWeaponFX();
+        if (_characterEffectsManager != null)
+        {
+            _characterEffectsManager.StopWeaponFX();
+        }
         _damageCollider.enabled = false;
     }
 

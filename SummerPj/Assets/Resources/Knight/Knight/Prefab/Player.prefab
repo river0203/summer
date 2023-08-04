@@ -367,8 +367,8 @@ MonoBehaviour:
   _rotationSpeed: 10
   _fallingSpeed: 300
   rollStaminaCost: 15
-  characterCollider: {fileID: 2346760525969171221}
-  characterCollisionBlockerCollider: {fileID: 0}
+  _characterCollider: {fileID: 0}
+  _characterCollisionBlockerCollider: {fileID: 0}
 --- !u!114 &2346760525969171218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,9 +384,9 @@ MonoBehaviour:
   _characterSoundFXManager: {fileID: 3053872920303439431}
   _playerInventoryManager: {fileID: 2346760526354013298}
   _lockOnTransform: {fileID: 2346760525124739900}
-  _backStabBoxCollider: {fileID: 0}
-  _backStabCollider: {fileID: 0}
-  _riposteCollider: {fileID: 0}
+  _backStabBoxCollider: {fileID: 2346760526895657239}
+  _backStabCollider: {fileID: 2346760526895657238}
+  _riposteCollider: {fileID: 2346760524988306201}
   _isInteracting: 0
   canBeRiposted: 0
   canBeParried: 0
@@ -414,13 +414,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3504c82d872e8c8439df46b7d9e80b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthLevel: 10
-  maxHealth: 0
-  currentHealth: 0
-  staminaLevel: 10
+  _healthLevel: 10
+  _maxHealth: 0
+  _currentHealth: 0
+  _staminaLevel: 10
   _maxStamina: 0
   _currentStamina: 0
-  focusLevel: 10
+  _focusLevel: 10
   _maxFocusPoints: 0
   _currentFocusPoints: 0
   _isDead: 0
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unarmedWeapon: {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
-  _WeaponSlot: {fileID: 2346760524998812108}
+  _weaponSlot: {fileID: 2346760524998812108}
   _backSlot: {fileID: 2346760526937381677}
   _currentDamageCollider: {fileID: 0}
   _attackingWeapon: {fileID: 0}
@@ -486,7 +486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db9e916b368875498b49f8e11585628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bloodSplatterFX: {fileID: 1671474790284636, guid: 4d7746559804f034daa8e1c8ee23a78a, type: 3}
+  _bloodSplatterFX: {fileID: 643780837689315891}
   _weaponFX: {fileID: 0}
   currentParticleFX: {fileID: 0}
   amountToBeHealed: 30
@@ -1037,6 +1037,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
+--- !u!1 &643780837689315891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2917898256570119739, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
+  m_PrefabInstance: {fileID: 2346760526957847560}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1769177761962686014 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4043176448623989302, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
