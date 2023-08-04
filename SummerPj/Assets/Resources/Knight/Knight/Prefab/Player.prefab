@@ -381,8 +381,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baebc102fd3605a499fe1d634ee596dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterSoundFXManager: {fileID: 0}
-  _playerInventoryManager: {fileID: 0}
+  _characterSoundFXManager: {fileID: 3053872920303439431}
+  _playerInventoryManager: {fileID: 2346760526354013298}
   _lockOnTransform: {fileID: 2346760525124739900}
   _backStabBoxCollider: {fileID: 0}
   _backStabCollider: {fileID: 0}
@@ -576,8 +576,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   takingDamageSounds: []
-  WalkSound: {fileID: 0}
-  RunSound: {fileID: 0}
+  WalkSound: {fileID: 8300000, guid: 428c9bbeb64627249bd5c24845b9ffa5, type: 3}
+  RunSound: {fileID: 8300000, guid: ae2642e81a6c40a4fbcf1d7389e38c04, type: 3}
   JumpSound: {fileID: 0}
   LandSound: {fileID: 0}
   dodgeSound: {fileID: 0}

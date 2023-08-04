@@ -16,12 +16,13 @@ public class PlayerStatsManager : CharacterStatsManager
     public FocusPointBar _focusPointBar;
     private void Awake()
     {
-        _inputHandler = GetComponent<InputHandler>();
         _focusPointBar = FindObjectOfType<FocusPointBar>();
-        _playerManager = GetComponent<PlayerManager>();
-        _healthBar = FindObjectOfType<HealthBar>();
         _staminaBar = FindObjectOfType<StaminaBar>();
+        _healthBar = FindObjectOfType<HealthBar>();
+        
+        _inputHandler = GetComponent<InputHandler>();
         _playerAnimationManager = GetComponent<PlayerAnimatorManager>();
+        _playerManager = GetComponent<PlayerManager>();
     }
 
     private void Start()

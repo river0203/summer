@@ -15,7 +15,7 @@ public class PlayerEffectsManager : CharacterEffectsManager
     void Awake()
     {
         _playerInventoryManager = GetComponent<PlayerInventoryManager>();
-        _playerStatsManager = GetComponentInParent<PlayerStatsManager>();
+        _playerStatsManager = GetComponent<PlayerStatsManager>();
         _playerWeaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
     }
     public void HealPlayerFromEffect()

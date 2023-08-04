@@ -63,13 +63,14 @@ public class InputHandler : MonoBehaviour
 
     private void Awake()
     {
-        _playerEffectsManager = GetComponent<PlayerEffectsManager>();
         _blockingCollider = GetComponentInChildren<BlockingCollider>();
+        _cameraHandler = FindObjectOfType<CameraHandler>();
+        _uiManager = FindObjectOfType<UIManager>();
+
+        _playerEffectsManager = GetComponent<PlayerEffectsManager>();
         _playerCombatManager = GetComponent<PlayerCombatManager>();
         _playerInventoryManager = GetComponent<PlayerInventoryManager>();
         _playerManager = GetComponent<PlayerManager>();
-        _cameraHandler = FindObjectOfType<CameraHandler>();
-        _uiManager = FindObjectOfType<UIManager>();
         _weaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
         _playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         _playerStatsManager = GetComponent<PlayerStatsManager>();

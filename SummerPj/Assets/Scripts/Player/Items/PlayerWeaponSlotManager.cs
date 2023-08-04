@@ -8,7 +8,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
     CharacterManager _characterManager;
     PlayerManager _playerManager;
     PlayerInventoryManager _playerInventoryManager;
-    Animator animator;
+    Animator _animator;
     QuickSlotsUI _quickSlotsUI;
     PlayerStatsManager _playerStats;
     InputHandler _inputHandler;
@@ -18,14 +18,16 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 
     private void Awake()
     {
+        _quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
+
         _characterManager = GetComponent<CharacterManager>();
         _playerEffectsManager = GetComponent<PlayerEffectsManager>();
         _playerManager = GetComponent<PlayerManager>();
         _playerInventoryManager = GetComponent<PlayerInventoryManager>();
-        animator = GetComponentInChildren<Animator>();
-        _quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
+        _animator = GetComponent<Animator>();
         _playerStats = GetComponent<PlayerStatsManager>();
         _inputHandler = GetComponent<InputHandler>();
+        
         LoadWeaponHolderSlots();
     }
 

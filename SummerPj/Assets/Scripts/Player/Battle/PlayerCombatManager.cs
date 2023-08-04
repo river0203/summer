@@ -25,6 +25,7 @@ public class PlayerCombatManager : MonoBehaviour
     private void Awake()
     {
         _cameraHandler = FindObjectOfType<CameraHandler>();
+
         _playerEffectsManager = GetComponent<PlayerEffectsManager>();
         _playerEquipmentHandler = GetComponent<PlayerEquipmentManager>();
         _playerStatsManager = GetComponent<PlayerStatsManager>();

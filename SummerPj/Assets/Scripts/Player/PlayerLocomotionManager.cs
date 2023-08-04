@@ -56,8 +56,9 @@ public class PlayerLocomotionManager : MonoBehaviour
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
         _cameraHandler = FindObjectOfType<CameraHandler>();
+
+        _animator = GetComponent<Animator>();
         _playerManager = GetComponent<PlayerManager>();
         _rigid = GetComponent<Rigidbody>();
         _inputHandler = GetComponent<InputHandler>();

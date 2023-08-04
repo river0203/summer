@@ -34,7 +34,9 @@ MonoBehaviour:
   isMeleeWeapon: 1
   isShieldWeapon: 0
   weaponWhooshes:
-  - {fileID: 8300000, guid: d39f08b9a91d69f4582b504d21d23b17, type: 3}
-  - {fileID: 8300000, guid: f26c253a715d9864f941686fc49be4c2, type: 3}
-  - {fileID: 8300000, guid: f26c253a715d9864f941686fc49be4c2, type: 3}
+  - {fileID: 8300000, guid: 3042d2a127b750d4294f9fbaefa29b9e, type: 3}
+  - {fileID: 8300000, guid: 5594d423716fc0942b16b6bc07a75985, type: 3}
+  - {fileID: 8300000, guid: 74066063062d8654eb5ee3a177f589f3, type: 3}
+  - {fileID: 8300000, guid: bfcbf6954f7a8ac48874c60bbe3843dc, type: 3}
+  - {fileID: 8300000, guid: bc98c2208af882e41b7e906070838cae, type: 3}
   _skill: {fileID: 11400000, guid: 0f0677a3507a70d43858f3e080fa9222, type: 2}
