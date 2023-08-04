@@ -13,9 +13,9 @@ public class PlayerAnimatorManager : AnimatorManager
     protected override void Awake()
     {
         base.Awake();
-        _anim = GetComponentInChildren<Animator>();
-        _inputHandler = GetComponentInParent<InputHandler>();
-        _playerLocomotionManager = GetComponentInParent<PlayerLocomotionManager>();
+        _anim = GetComponent<Animator>();
+        _inputHandler = GetComponent<InputHandler>();
+        _playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         _vertical = Animator.StringToHash("Vertical");
         _horizontal = Animator.StringToHash("Horizontal");
     }

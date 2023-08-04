@@ -19,11 +19,12 @@ public class PlayerManager : CharacterManager
     {
         _cameraHandler = FindObjectOfType<CameraHandler>();
         _backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
+        _interactableUI = FindObjectOfType<interactableUI>();
+
         _inputHandler = GetComponent<InputHandler>();
         _playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         _anim = GetComponent<Animator>();
         _playerLocomotion = GetComponent<PlayerLocomotionManager>();
-        _interactableUI = FindObjectOfType<interactableUI>();
         _playerStatsManager = GetComponent<PlayerStatsManager>();
     }
 

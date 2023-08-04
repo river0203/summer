@@ -9,20 +9,11 @@ public class CharacterEffectsManager : MonoBehaviour
 
     [Header("Weapon FX")]
     public WeaponFX _weaponFX;
-
     public virtual void PlayWeaponFX()
     {
         if (_weaponFX != null)
         {
             _weaponFX.PlayWeaponFX();
-        }
-    }
-
-    public virtual void StopWeaponFX()
-    {
-        if (_weaponFX != null)
-        {
-            _weaponFX.StopWeaponFX();
         }
     }
 
