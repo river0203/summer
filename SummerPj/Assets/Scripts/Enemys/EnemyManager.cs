@@ -50,9 +50,8 @@ public class EnemyManager : CharacterManager
         isInteracting = enemyAnimatorManager._anim.GetBool("isInteracting");
         isPreformingAction = enemyAnimatorManager._anim.GetBool("isPreformingAction");
         enemyAnimatorManager._anim.SetBool("isDead", enemyStats._isDead);
-        //_characterState.DestroyObj();
+        _characterState.DestroyObj();
         enemyRigidBody.velocity = Vector3.zero;
-        LookTarget();
     }
 
     private void FixedUpdate()
@@ -79,15 +78,5 @@ public class EnemyManager : CharacterManager
     private void SwitchToNextState(State state)
     {
         currentState = state;
-    }
-
-    
-    private void LookTarget()
-    {
-        if(!_characterState._isDead && currentTarget != null)
-        {
-            Vector3 _targetDirection = currentTarget.transform.position - this.transform.position;
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(_targetDirection), rotationSpeed * Time.deltaTime);
-        }
     }
 }
