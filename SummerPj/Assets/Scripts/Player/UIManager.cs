@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     public GameObject weaponInventorySlotPrefab;
     public Transform weaponInventorySlotsParent;
     WeaponInventorySlot[] weaponInventorySlots;
-
+    
     private void Start()
     {
         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();

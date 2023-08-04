@@ -7,8 +7,8 @@ using UnityEngine.Rendering;
 
 public class PlayerInventoryManager : MonoBehaviour
 {
-    public PlayerWeaponSlotManager _playerWeaponSlotManager;
-    public Animator _anim;
+    PlayerWeaponSlotManager _playerWeaponSlotManager;
+    Animator _anim;
 
     public ConsumableItem currentConsumable;
     public SpellItem _currentSpell;
@@ -16,7 +16,6 @@ public class PlayerInventoryManager : MonoBehaviour
 
     public int _maxInventorySlotCount = 3;
     public List<WeaponItem> _weaponSlots = new List<WeaponItem>();
-    public List<SpellItem> _Spells = new List<SpellItem>();
 
     public int _currentWeaponIndex = 0;
 

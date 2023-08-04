@@ -5,28 +5,21 @@ using UnityEngine;
 
 public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 {
-    CharacterManager _characterManager;
-    PlayerManager _playerManager;
     PlayerInventoryManager _playerInventoryManager;
-    Animator _animator;
     QuickSlotsUI _quickSlotsUI;
     PlayerStatsManager _playerStats;
-    InputHandler _inputHandler;
     PlayerEffectsManager _playerEffectsManager;
 
     public WeaponItem _attackingWeapon;
 
     private void Awake()
     {
-        _quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
+        _WeaponSlot = GameObject.Find("hand_r").GetComponent<WeaponHolderSlot>();      
 
-        _characterManager = GetComponent<CharacterManager>();
+        _quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
         _playerEffectsManager = GetComponent<PlayerEffectsManager>();
-        _playerManager = GetComponent<PlayerManager>();
         _playerInventoryManager = GetComponent<PlayerInventoryManager>();
-        _animator = GetComponent<Animator>();
         _playerStats = GetComponent<PlayerStatsManager>();
-        _inputHandler = GetComponent<InputHandler>();
         
         LoadWeaponHolderSlots();
     }
