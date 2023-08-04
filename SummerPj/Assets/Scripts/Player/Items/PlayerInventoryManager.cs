@@ -16,7 +16,6 @@ public class PlayerInventoryManager : MonoBehaviour
 
     public int _maxInventorySlotCount = 3;
     public List<WeaponItem> _weaponSlots = new List<WeaponItem>();
-    public List<SpellItem> _Spells = new List<SpellItem>();
 
     public int _currentWeaponIndex = 0;
 

@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : CharacterManager
 {
-    PlayerStatsManager _playerStatsManager;
+    public PlayerStatsManager _playerStatsManager;
     InputHandler _inputHandler;
     Animator _anim;
     CameraHandler _cameraHandler;

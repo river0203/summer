@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterSoundFXManager : MonoBehaviour
 {
     PlayerInventoryManager _playerInventoryManager;
-    AudioSource _audioSource;
+    public AudioSource _audioSource;
 
     [Header("Taking Damage Sounds")]
     public AudioClip[] takingDamageSounds;

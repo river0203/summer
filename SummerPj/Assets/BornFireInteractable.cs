@@ -6,7 +6,7 @@ public class BornFireInteractable : Interactable
 {
     AudioSource _audioSource;
 
-    public UIManager _uiManager;
+    public UIManager _UIManager;
     public AudioClip bonfireActivationSoundFX;
 
     public Transform bonfireTeleportTransform;
@@ -19,6 +19,7 @@ public class BornFireInteractable : Interactable
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
+        _UIManager = GameObject.FindWithTag("Player").GetComponent<UIManager>();
 
         if(hasbeenActivated)
         {
@@ -37,12 +38,14 @@ public class BornFireInteractable : Interactable
 
         if(hasbeenActivated)
         {
-
+            _playerManager._playerAnimatorManager.PlayTargetAnimation("Bonfire_Activate", true);
+            _playerManager._playerStatsManager._currentHealth = _playerManager._playerStatsManager._maxHealth;
+            _playerManager._playerInventoryManager.currentConsumable.currentItemAmount = _playerManager._playerInventoryManager.currentConsumable.maxItemAmount;
         }
         else
         {
             _playerManager._playerAnimatorManager.PlayTargetAnimation("Bonfire_Activate", true);
-            _uiManager.ActivateBonfirePopUp();
+            _UIManager.ActivateBonfirePopUp();
             hasbeenActivated = true;
             _interactableText = "Rest";
             activationFX.gameObject.SetActive(true);

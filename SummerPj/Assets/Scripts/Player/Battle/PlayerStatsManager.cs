@@ -10,16 +10,20 @@ public class PlayerStatsManager : CharacterStatsManager
 
     public HealthBar _healthBar;
     public StaminaBar _staminaBar;
+    public FocusPointBar _focusPointBar;
+
+    CharacterSoundFXManager _characterSoundFXManager;
     PlayerAnimatorManager _playerAnimationManager;
     InputHandler _inputHandler;
     PlayerManager _playerManager;
-    public FocusPointBar _focusPointBar;
+
     private void Awake()
     {
         _focusPointBar = FindObjectOfType<FocusPointBar>();
         _staminaBar = FindObjectOfType<StaminaBar>();
         _healthBar = FindObjectOfType<HealthBar>();
-        
+
+        _characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
         _inputHandler = GetComponent<InputHandler>();
         _playerAnimationManager = GetComponent<PlayerAnimatorManager>();
         _playerManager = GetComponent<PlayerManager>();
@@ -71,8 +75,11 @@ public class PlayerStatsManager : CharacterStatsManager
 
         if (_currentHealth <= 0)
         {
+            _characterSoundFXManager._audioSource.PlayOneShot(_characterSoundFXManager.DeadSound);
+
             _currentHealth = 0;
             _playerAnimationManager.PlayTargetAnimation("Dead", true);
+
             _isDead = true;
         }
     }
@@ -101,7 +108,7 @@ public class PlayerStatsManager : CharacterStatsManager
             _staminaRegenTimer += Time.deltaTime;
             if (_currentStamina < _maxStamina && _staminaRegenTimer > _staminaRegenTime)
             {
-                if (_inputHandler._sprintFlag) return;
+                if (_playerManager._isSprinting) return;
 
                 _currentStamina += _staminaRegenerationAmount * Time.deltaTime;
                 _staminaBar.SetCurrentStamina(Mathf.RoundToInt(_currentStamina));
