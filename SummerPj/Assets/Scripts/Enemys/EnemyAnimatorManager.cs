@@ -19,19 +19,19 @@ public class EnemyAnimatorManager : AnimatorManager
         //_enemyStats.TakeDamageNoAnimation(_enemyManager.pendingCriticalDamage);
         _enemyManager.pendingCriticalDamage = 0;
     }
-    public void EnableParrying()
+    public override void EnableParrying()
     {
         _enemyManager.isParrying = true;
     }
-    public void DisableParrying()
+    public override void DisableParrying()
     {
         _enemyManager.isParrying = false;
     }
-    public void EnableCanBeRiposted()
+    public override void EnableCanBeRiposted()
     {
         _enemyManager.canBeRiposted = true;
     }
-    public void DisableCanBeRiposted()
+    public override void DisableCanBeRiposted()
     {
         _enemyManager.canBeRiposted = false;
     }

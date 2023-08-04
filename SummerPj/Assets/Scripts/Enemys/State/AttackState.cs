@@ -18,18 +18,18 @@ public class AttackState : State
         // 뭘 하고 있으면 공격하지 말고 돌아가라
         if (enemyManger.isPreformingAction)
             return combatStanceState;
-        
+
         // 현재 공격한게 있으면
-        if(currentAttack != null)
+        if (currentAttack != null)
         {
             // 너무 가까워서 공격 범위가 벗어나면 공격 멈추고 다시 생각함
-            if(distanceFromTarget < currentAttack.minimumDistanceNeededToAttack)
+            if (distanceFromTarget < currentAttack.minimumDistanceNeededToAttack)
                 return this;
             //사거리 안에 들어오면
-            else if(distanceFromTarget < currentAttack.maximumAttackAngle)
+            else if (distanceFromTarget < currentAttack.maximumAttackAngle)
             {
                 //시아각 내에 들어오면
-                if(viewableAngle <= currentAttack.maximumAttackAngle 
+                if (viewableAngle <= currentAttack.maximumAttackAngle
                     && viewableAngle >= currentAttack.minimumAttackAngle)
                 {
 
@@ -73,11 +73,11 @@ public class AttackState : State
             EnemyAttackAction enemyAttackAction = enemyAttacks[i];
 
             // 거리 조건에 맞고
-            if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack 
+            if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
                 && distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
             {
                 // 각도 조건에 맞으면
-                if (viewableAngle <= enemyAttackAction.maximumAttackAngle 
+                if (viewableAngle <= enemyAttackAction.maximumAttackAngle
                     && viewableAngle >= enemyAttackAction.minimumAttackAngle)
                 {
                     // 조건에 맞는 공격들의 점수들을 모음 
@@ -97,11 +97,11 @@ public class AttackState : State
             EnemyAttackAction enemyAttackAction = enemyAttacks[i];
 
             // 거리 조건이 맞고
-            if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack 
+            if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
                 && distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
             {
                 // 각도 조건이 맞으면
-                if (viewableAngle <= enemyAttackAction.maximumAttackAngle 
+                if (viewableAngle <= enemyAttackAction.maximumAttackAngle
                     && viewableAngle >= enemyAttackAction.minimumAttackAngle)
                 {
                     // 방금 공격한게 있으면 아무것도 안 함
@@ -124,5 +124,6 @@ public class AttackState : State
             }
         }
         #endregion
+
     }
 }
