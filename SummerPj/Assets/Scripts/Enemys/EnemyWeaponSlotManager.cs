@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class EnemyWeaponSlotManager : MonoBehaviour
 {
-    public WeaponItem rightHandWeapon;
-    public WeaponItem leftHandWeapon;
+    public WeaponItem currentHandWeapon;
 
-    WeaponHolderSlot rightHandSlot;
-    WeaponHolderSlot leftHandSlot;
+    WeaponHolderSlot currentWeaponSlot;
     EnemyEffactManager _enemyEffactManager;
 
-    DamageCollider leftHandDamageCollider;
-    public DamageCollider rightHandDamageCollider;
+    public DamageCollider bossWeaponCollider;
 
     Animator _anim;
 
     private void Awake()
     {
         _enemyEffactManager = GetComponent<EnemyEffactManager>();
-        rightHandDamageCollider = GetComponentInChildren<DamageCollider>(true);
+        bossWeaponCollider = GetComponentInChildren<DamageCollider>(true);
     }
 
     private void Start()
@@ -27,68 +24,43 @@ public class EnemyWeaponSlotManager : MonoBehaviour
         LoadWeaponsOnBothHands();
     }
 
-    public void LoadWeaponOnSlot(WeaponItem weapon, bool isleft)
+    public void LoadWeaponOnSlot(WeaponItem weapon, bool _isWeapon)
     {
-        if(isleft) 
-        { 
-            leftHandSlot.currentWeapon = weapon;
-            leftHandSlot.LoadWeaponModel(weapon);
-            LoadWeaponsDamageCollider(true);
-        }
-        else
+        if(_isWeapon) 
         {
-            rightHandSlot.currentWeapon = weapon;
-            rightHandSlot.LoadWeaponModel(weapon);
+            currentWeaponSlot.currentWeapon = weapon;
+            currentWeaponSlot.LoadWeaponModel(weapon);
             LoadWeaponsDamageCollider(false);
         }
     }
 
     public void LoadWeaponsOnBothHands()
     {
-        if (rightHandWeapon != null)
+        if (currentHandWeapon != null)
         {
-            LoadWeaponOnSlot(rightHandWeapon, false);
-        }
-        if (leftHandWeapon != null)
-        {
-            LoadWeaponOnSlot(leftHandWeapon, true);
+            LoadWeaponOnSlot(currentHandWeapon, false);
         }
     }
 
-    public void LoadWeaponsDamageCollider(bool isleft)
+    public void LoadWeaponsDamageCollider(bool _isWeapon)
     {
-        if (isleft)
+        if (_isWeapon)
         {
-            leftHandDamageCollider = leftHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>(true);
-            leftHandDamageCollider._characterManager = GetComponentInParent<CharacterManager>();
-            _enemyEffactManager._leftWeaponFX = leftHandSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
-        }
-        else
-        {
-            rightHandDamageCollider = rightHandSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>(true);
-            rightHandDamageCollider._characterManager = GetComponentInParent<CharacterManager>();
-            _enemyEffactManager._rightWeaponFX = rightHandSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
+            bossWeaponCollider = currentWeaponSlot._currentWeaponModel.GetComponentInChildren<DamageCollider>(true);
+            bossWeaponCollider._characterManager = GetComponentInParent<CharacterManager>();
+            _enemyEffactManager._rightWeaponFX = currentWeaponSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
         }
     }   
 
     public void OpenDamageCollider()
     {
-        rightHandDamageCollider.EnableDamagecollider();
+        bossWeaponCollider.EnableDamagecollider();
     }
     public void CloseDamageCollider()
     {
-        rightHandDamageCollider.DisableDamagecollider();
+        bossWeaponCollider.DisableDamagecollider();
     }
 
-    public void DrainStaminaLightAttack()
-    {
-
-    }
-
-    public void DrainStaminaHeavyAttack()
-    {
-
-    }
 
     public void EnableCombo()
     {
