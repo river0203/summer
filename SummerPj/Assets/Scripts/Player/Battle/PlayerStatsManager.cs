@@ -39,19 +39,19 @@ public class PlayerStatsManager : CharacterStatsManager
 
     private int SetMaxHealthFromHealthLevel()
     {
-        _maxHealth = healthLevel * 10;
+        _maxHealth = _healthLevel * 10;
         return _maxHealth;
     }
 
     private float SetMaxStaminaFromStaminaLevel()
     {
-        _maxStamina = staminaLevel * 10;
+        _maxStamina = _staminaLevel * 10;
         return _maxStamina;
     }
 
     private float SetMaxFocusPointsFromFocusLevel()
     {
-        _maxFocusPoints = focusLevel * 10;
+        _maxFocusPoints = _focusLevel * 10;
         return _maxFocusPoints;
     }
 

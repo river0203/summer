@@ -6,15 +6,15 @@ public class CharacterStatsManager : MonoBehaviour
 {
     CharacterManager _characterManager;
 
-    public int healthLevel = 10;
+    public int _healthLevel = 10;
     [HideInInspector] public int _maxHealth;
     [HideInInspector] public int _currentHealth;
 
-    public int staminaLevel = 10;
+    public int _staminaLevel = 10;
     [HideInInspector] public float _maxStamina;
     [HideInInspector] public float _currentStamina;
 
-    public int focusLevel = 10;
+    public int _focusLevel = 10;
     [HideInInspector] public float _maxFocusPoints;
     [HideInInspector] public float _currentFocusPoints;
 

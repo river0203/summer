@@ -31,7 +31,7 @@ public class DamageCollider : MonoBehaviour
 
     public void DisableDamagecollider()
     {
-        // _characterEffectsManager.StopWeaponFX();
+        _characterEffectsManager.StopWeaponFX();
         _damageCollider.enabled = false;
     }
 
