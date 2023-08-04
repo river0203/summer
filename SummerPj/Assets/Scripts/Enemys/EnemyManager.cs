@@ -11,7 +11,7 @@ public class EnemyManager : CharacterManager
     EnemyStats enemyStats;
     public Rigidbody enemyRigidBody;
     public CharacterStatsManager _characterState;
-
+    public EnemyAnimatorManager _enemyAnimatorManger;
     public NavMeshAgent navmeshAgent;
 
     public State currentState;
@@ -52,6 +52,7 @@ public class EnemyManager : CharacterManager
         enemyAnimatorManager._anim.SetBool("isDead", enemyStats._isDead);
         _characterState.DestroyObj();
         enemyRigidBody.velocity = Vector3.zero;
+        LookTarget();
     }
 
     private void FixedUpdate()
@@ -78,5 +79,17 @@ public class EnemyManager : CharacterManager
     private void SwitchToNextState(State state)
     {
         currentState = state;
+    }
+
+    private void LookTarget()
+    {
+        if(isPreformingAction)
+        {
+            if (!_characterState._isDead)
+            {
+                Vector3 _targetDirection = currentTarget.transform.position - this.transform.position;
+                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(_targetDirection), rotationSpeed * Time.deltaTime);
+            }
+        }
     }
 }
