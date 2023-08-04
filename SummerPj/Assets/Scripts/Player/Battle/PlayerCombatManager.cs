@@ -71,7 +71,6 @@ public class PlayerCombatManager : MonoBehaviour
 
         _playerWeaponSlotManager._attackingWeapon = weapon;
 
-
         _playerAnimatorManager.PlayTargetAnimation(weapon.OH_Light_Attack_1, true);
         _lastAttack = weapon.OH_Light_Attack_1;
     }
