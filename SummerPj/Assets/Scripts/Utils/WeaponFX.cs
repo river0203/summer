@@ -11,7 +11,7 @@ public class WeaponFX : CharacterEffectsManager
     {
         _normalWeaponTrail.Play();
     }
-    public void StopWeaponFX()
+    public override void StopWeaponFX()
     {
         _normalWeaponTrail.Stop();
     }

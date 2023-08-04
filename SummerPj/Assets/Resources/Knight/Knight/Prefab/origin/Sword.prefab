@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5819420559745446185
 Transform:
   m_ObjectHideFlags: 0
@@ -4944,6 +4944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 086c3b467dbebed40b2ccb4512c36b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterEffectsManager: {fileID: 0}
   _characterManager: {fileID: 0}
   enabledDamageColliderOnStartUp: 0
   _currentWeaponDamage: 25

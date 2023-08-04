@@ -17,6 +17,14 @@ public class CharacterEffectsManager : MonoBehaviour
         }
     }
 
+    public virtual void StopWeaponFX()
+    {
+        if( _weaponFX != null )
+        {
+            _weaponFX.StopWeaponFX();
+        }
+    }
+
     public virtual void PlayBloodSplatterFX(Vector3 bloodSplatterLocation)
     {
         GameObject blood = Instantiate(_bloodSplatterFX, bloodSplatterLocation, Quaternion.identity);

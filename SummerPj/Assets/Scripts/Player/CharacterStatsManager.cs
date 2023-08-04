@@ -20,8 +20,6 @@ public class CharacterStatsManager : MonoBehaviour
 
     [HideInInspector] public bool _isDead;
 
-
-
     public virtual void TakeDamage(int damege, string damageAnimation)
     {
         _characterManager._characterSoundFXManager.PlayRandomDamageSoundFX();    
@@ -36,5 +34,20 @@ public class CharacterStatsManager : MonoBehaviour
             _currentHealth = 0;
             _isDead = true;
         }
+    }
+
+    public void DestroyObj()
+    {
+        if (_isDead == true)
+        {
+            StartCoroutine(DestroyChar());
+        }
+    }
+
+    private IEnumerator DestroyChar()
+    {
+        yield return new WaitForSeconds(15);
+        Destroy(gameObject);
+
     }
 }

@@ -38,6 +38,6 @@ public class EnemyAnimatorManager : AnimatorManager
 
     public void PlayWeaponTrailFX()
     {
-        _enemyEffactManager.PlayWeaponFX(false);
+        _enemyEffactManager.PlayWeaponFX();
     }
 }
