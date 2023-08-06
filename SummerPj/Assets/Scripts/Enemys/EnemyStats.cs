@@ -15,22 +15,22 @@ public class EnemyStats : CharacterStatsManager
 
     private void Start()
     {
-        currentHealth = SetMaxHealthFromHealthLevel();
+        _currentHealth = SetMaxHealthFromHealthLevel();
     }
 
     private int SetMaxHealthFromHealthLevel()
     {
-        maxHealth = healthLevel * 10;
-        return maxHealth;
+        _maxHealth = _healthLevel * 10;
+        return _maxHealth;
     }
 
     public void TakeDamageNoAnimation(int damage)
     {
-        currentHealth -= damage;
+        _currentHealth -= damage;
 
-        if (currentHealth <= 0)
+        if (_currentHealth <= 0)
         {
-            currentHealth = 0;
+            _currentHealth = 0;
             _isDead = true;
         }
     }
@@ -39,12 +39,12 @@ public class EnemyStats : CharacterStatsManager
     {
         if (_isDead) return;
 
-        currentHealth -= damege;
+        _currentHealth -= damege;
 
 
-        if (currentHealth <= 0)
+        if (_currentHealth <= 0)
         {
-            currentHealth = 0;
+            _currentHealth = 0;
             _anim.Play("Dead");
             _isDead = true;
         }

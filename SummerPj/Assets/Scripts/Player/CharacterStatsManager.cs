@@ -6,15 +6,15 @@ public class CharacterStatsManager : MonoBehaviour
 {
     CharacterManager _characterManager;
 
-    public int healthLevel = 10;
-    [HideInInspector] public int maxHealth;
-    [HideInInspector] public int currentHealth;
+    public int _healthLevel = 10;
+    [HideInInspector] public int _maxHealth;
+    [HideInInspector] public int _currentHealth;
 
-    public int staminaLevel = 10;
+    public int _staminaLevel = 10;
     [HideInInspector] public float _maxStamina;
     [HideInInspector] public float _currentStamina;
 
-    public int focusLevel = 10;
+    public int _focusLevel = 10;
     [HideInInspector] public float _maxFocusPoints;
     [HideInInspector] public float _currentFocusPoints;
 
@@ -29,11 +29,11 @@ public class CharacterStatsManager : MonoBehaviour
 
     public virtual void TakeDamageNoAnimation(int damage)
     {
-        currentHealth -= damage;
+        _currentHealth -= damage;
 
-        if (currentHealth <= 0)
+        if (_currentHealth <= 0)
         {
-            currentHealth = 0;
+            _currentHealth = 0;
             _isDead = true;
         }
     }

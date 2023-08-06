@@ -28,8 +28,8 @@ public class PlayerStatsManager : CharacterStatsManager
 
     private void Start()
     {
-        currentHealth = SetMaxHealthFromHealthLevel();
-        _healthBar.Init(maxHealth);
+        _currentHealth = SetMaxHealthFromHealthLevel();
+        _healthBar.Init(_maxHealth);
             
         _currentStamina = SetMaxStaminaFromStaminaLevel();
         _staminaBar.Init(_maxStamina);
@@ -40,19 +40,19 @@ public class PlayerStatsManager : CharacterStatsManager
 
     private int SetMaxHealthFromHealthLevel()
     {
-        maxHealth = healthLevel * 10;
-        return maxHealth;
+        _maxHealth = _healthLevel * 10;
+        return _maxHealth;
     }
 
     private float SetMaxStaminaFromStaminaLevel()
     {
-        _maxStamina = staminaLevel * 10;
+        _maxStamina = _staminaLevel * 10;
         return _maxStamina;
     }
 
     private float SetMaxFocusPointsFromFocusLevel()
     {
-        _maxFocusPoints = focusLevel * 10;
+        _maxFocusPoints = _focusLevel * 10;
         return _maxFocusPoints;
     }
 
@@ -62,15 +62,15 @@ public class PlayerStatsManager : CharacterStatsManager
 
         if (_isDead) return;
 
-        currentHealth -= damege;
+        _currentHealth -= damege;
 
-        _healthBar.SetCurrentHealth(currentHealth);
+        _healthBar.SetCurrentHealth(_currentHealth);
 
         _playerAnimationManager.PlayTargetAnimation(damageAnimation, true);
 
-        if (currentHealth <= 0)
+        if (_currentHealth <= 0)
         {
-            currentHealth = 0;
+            _currentHealth = 0;
             _playerAnimationManager.PlayTargetAnimation("Dead", true);
             _isDead = true;
         }
@@ -79,7 +79,7 @@ public class PlayerStatsManager : CharacterStatsManager
     public override void TakeDamageNoAnimation(int damage)
     {
         base.TakeDamageNoAnimation(damage);
-        _healthBar.SetCurrentHealth(currentHealth);
+        _healthBar.SetCurrentHealth(_currentHealth);
     }
 
     public void TakeStaminaDamage(int damege)
@@ -108,14 +108,14 @@ public class PlayerStatsManager : CharacterStatsManager
 
     public void HealPlayer(int healAmount)
     {
-        currentHealth = currentHealth + healAmount;
+        _currentHealth = _currentHealth + healAmount;
 
-        if(currentHealth > maxHealth)
+        if(_currentHealth > _maxHealth)
         {
-            currentHealth = maxHealth;
+            _currentHealth = _maxHealth;
         }
 
-        _healthBar.SetCurrentHealth(currentHealth);
+        _healthBar.SetCurrentHealth(_currentHealth);
     }
 
     public void DeductFocusPoints(float focusPoints) 
