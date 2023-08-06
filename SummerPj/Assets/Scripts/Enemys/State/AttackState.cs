@@ -119,6 +119,12 @@ public class AttackState : State
                     {
                         // 지금 공격을 함
                         currentAttack = enemyAttackAction;
+                        // Debug.Log(currentAttack);
+                        // attack Score로 구분
+                        if(currentAttack.attackScore == 4)
+                        {
+                            Debug.Log("잡몹 생성");
+                        }
                     }
                 }
             }
