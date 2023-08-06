@@ -16,6 +16,7 @@ public class PlayerManager : CharacterManager
 
     private void Awake()
     {
+        interactableUIGameObject = GameObject.Find("Interaction Pop Up");
         _cameraHandler = FindObjectOfType<CameraHandler>();
         _backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
         _interactableUI = FindObjectOfType<interactableUI>();

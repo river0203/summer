@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public PlayerInventoryManager _playerInventory;
+    public PlayerInventoryManager playerInventory;
     public EquipmentWindowUI _equipmentWindowUI;
 
-    [Header("Pop Ups")]
-    public BonfireLitPopUpUI _bonfireLitPopUpUI;
-
     [Header("UI Windows")]
-    public GameObject _hudWindow;
-    public GameObject _selectWindow;
-    public GameObject _equipmentScreentWindow;
-    public GameObject _weaponInventoryWindow;
+    public GameObject hudWindow;
+    public GameObject selectWindow;
+    public GameObject equipmentScreentWindow;
+    public GameObject weaponInventoryWindow;
 
     [Header("Equipment Window Slot Selected")]
     public bool rightHandSlot01Selected;
@@ -25,32 +22,31 @@ public class UIManager : MonoBehaviour
     [Header("Weapon Inventory")]
     public GameObject weaponInventorySlotPrefab;
     public Transform weaponInventorySlotsParent;
-    WeaponInventorySlot[] _weaponInventorySlots;
-
+    WeaponInventorySlot[] weaponInventorySlots;
+    
     private void Start()
     {
-        _bonfireLitPopUpUI = GetComponentInChildren<BonfireLitPopUpUI>();
-        _weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
-        _equipmentWindowUI.LoadWeaponsOnEquipmentScreen(_playerInventory);
+        weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
+        _equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);
     }
 
     public void UpdateUI()
     {
         #region Weapon Inventory Slots
-        for(int i = 0; i < _weaponInventorySlots.Length; i++) 
+        for(int i = 0; i < weaponInventorySlots.Length; i++) 
         { 
-            if (i < _playerInventory._weaponsInventory.Count)
+            if (i < playerInventory._weaponsInventory.Count)
             {
-                if(_weaponInventorySlots.Length < _playerInventory._weaponsInventory.Count)
+                if(weaponInventorySlots.Length < playerInventory._weaponsInventory.Count)
                 {
                     Instantiate(weaponInventorySlotPrefab, weaponInventorySlotsParent);
-                    _weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
+                    weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
                 }
-                _weaponInventorySlots[i].AddItem(_playerInventory._weaponsInventory[i]);
+                weaponInventorySlots[i].AddItem(playerInventory._weaponsInventory[i]);
             }
             else
             {
-                _weaponInventorySlots[i].ClearInventorySlot();
+                weaponInventorySlots[i].ClearInventorySlot();
             }
         }
         #endregion 
@@ -58,20 +54,19 @@ public class UIManager : MonoBehaviour
 
     public void OpenSelectWindow()
     {
-        _selectWindow.SetActive(true);
-        
+        selectWindow.SetActive(true);
     }
 
     public void CloseSelectWindow()
     {
-        _selectWindow.SetActive(false);
+        selectWindow.SetActive(false);
     }
 
     public void CloseAllInventoryWindows()
     {
         ResetAllSelectedSlots();
-        _weaponInventoryWindow.SetActive(false);
-        _equipmentScreentWindow.SetActive(false);
+        weaponInventoryWindow.SetActive(false);
+        equipmentScreentWindow.SetActive(false);
     }
 
     public void ResetAllSelectedSlots()
@@ -80,10 +75,5 @@ public class UIManager : MonoBehaviour
         rightHandSlot02Selected = false;
         leftHandSlot01Selected = false;
         leftHandSlot02Selected = false;
-    }
-
-    public void ActivateBonfirePopUp()
-    {
-        _bonfireLitPopUpUI.DisplayBonfireLitPopUp();
     }
 }

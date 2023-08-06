@@ -12,18 +12,15 @@ public class PlayerStatsManager : CharacterStatsManager
     public StaminaBar _staminaBar;
     public FocusPointBar _focusPointBar;
 
-    CharacterSoundFXManager _characterSoundFXManager;
     PlayerAnimatorManager _playerAnimationManager;
     InputHandler _inputHandler;
     PlayerManager _playerManager;
-
     private void Awake()
     {
         _focusPointBar = FindObjectOfType<FocusPointBar>();
         _staminaBar = FindObjectOfType<StaminaBar>();
         _healthBar = FindObjectOfType<HealthBar>();
-
-        _characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
+        
         _inputHandler = GetComponent<InputHandler>();
         _playerAnimationManager = GetComponent<PlayerAnimatorManager>();
         _playerManager = GetComponent<PlayerManager>();
@@ -31,8 +28,8 @@ public class PlayerStatsManager : CharacterStatsManager
 
     private void Start()
     {
-        _currentHealth = SetMaxHealthFromHealthLevel();
-        _healthBar.Init(_maxHealth);
+        currentHealth = SetMaxHealthFromHealthLevel();
+        _healthBar.Init(maxHealth);
             
         _currentStamina = SetMaxStaminaFromStaminaLevel();
         _staminaBar.Init(_maxStamina);
@@ -43,43 +40,38 @@ public class PlayerStatsManager : CharacterStatsManager
 
     private int SetMaxHealthFromHealthLevel()
     {
-        _maxHealth = _healthLevel * 10;
-        return _maxHealth;
+        maxHealth = healthLevel * 10;
+        return maxHealth;
     }
 
     private float SetMaxStaminaFromStaminaLevel()
     {
-        _maxStamina = _staminaLevel * 10;
+        _maxStamina = staminaLevel * 10;
         return _maxStamina;
     }
 
     private float SetMaxFocusPointsFromFocusLevel()
     {
-        _maxFocusPoints = _focusLevel * 10;
+        _maxFocusPoints = focusLevel * 10;
         return _maxFocusPoints;
     }
 
     public override void TakeDamage(int damege, string damageAnimation)
     {
-        if (_playerManager.isInvulerable) 
-            return;
+        if (_playerManager.isInvulerable) return;
 
-        if (_isDead) 
-            return;
+        if (_isDead) return;
 
-        _currentHealth -= damege;
+        currentHealth -= damege;
 
-        _healthBar.SetCurrentHealth(_currentHealth);
+        _healthBar.SetCurrentHealth(currentHealth);
 
         _playerAnimationManager.PlayTargetAnimation(damageAnimation, true);
 
-        if (_currentHealth <= 0)
+        if (currentHealth <= 0)
         {
-            _characterSoundFXManager._audioSource.PlayOneShot(_characterSoundFXManager.DeadSound);
-
-            _currentHealth = 0;
+            currentHealth = 0;
             _playerAnimationManager.PlayTargetAnimation("Dead", true);
-
             _isDead = true;
         }
     }
@@ -87,7 +79,7 @@ public class PlayerStatsManager : CharacterStatsManager
     public override void TakeDamageNoAnimation(int damage)
     {
         base.TakeDamageNoAnimation(damage);
-        _healthBar.SetCurrentHealth(_currentHealth);
+        _healthBar.SetCurrentHealth(currentHealth);
     }
 
     public void TakeStaminaDamage(int damege)
@@ -99,7 +91,7 @@ public class PlayerStatsManager : CharacterStatsManager
 
     public void RegenerateStamina()
     {
-        if(_playerManager._isInteracting && !_playerManager._isSprinting)
+        if(_playerManager._isInteracting || _inputHandler._sprintFlag)
         {
             _staminaRegenTimer = 0;
         }
@@ -108,8 +100,6 @@ public class PlayerStatsManager : CharacterStatsManager
             _staminaRegenTimer += Time.deltaTime;
             if (_currentStamina < _maxStamina && _staminaRegenTimer > _staminaRegenTime)
             {
-                if (_playerManager._isSprinting) return;
-
                 _currentStamina += _staminaRegenerationAmount * Time.deltaTime;
                 _staminaBar.SetCurrentStamina(Mathf.RoundToInt(_currentStamina));
             }
@@ -118,14 +108,14 @@ public class PlayerStatsManager : CharacterStatsManager
 
     public void HealPlayer(int healAmount)
     {
-        _currentHealth = _currentHealth + healAmount;
+        currentHealth = currentHealth + healAmount;
 
-        if(_currentHealth > _maxHealth)
+        if(currentHealth > maxHealth)
         {
-            _currentHealth = _maxHealth;
+            currentHealth = maxHealth;
         }
 
-        _healthBar.SetCurrentHealth(_currentHealth);
+        _healthBar.SetCurrentHealth(currentHealth);
     }
 
     public void DeductFocusPoints(float focusPoints) 

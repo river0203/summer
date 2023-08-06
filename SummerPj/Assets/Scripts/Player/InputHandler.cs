@@ -312,7 +312,7 @@ public class InputHandler : MonoBehaviour
         _playerCombatManager.AttemptBackStabOrRiposte(); 
     }
 
-    void HandleUseConsumableInput()
+    private void HandleUseConsumableInput()
     {
         if (!_playerManager._isInteracting)
         {
