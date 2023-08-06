@@ -291,16 +291,18 @@ GameObject:
   - component: {fileID: 3053872921105081167}
   - component: {fileID: 3053872921105081156}
   - component: {fileID: 3053872921105081152}
-  - component: {fileID: 3053872920688811046}
   - component: {fileID: 3053872920688811045}
   - component: {fileID: 3053872920688811044}
   - component: {fileID: 3053872920688811043}
   - component: {fileID: 3053872920688811042}
   - component: {fileID: 3053872920688811041}
   - component: {fileID: 3053872920688811040}
+  - component: {fileID: 4163090296149436582}
+  - component: {fileID: 3053872920688811046}
+  - component: {fileID: 6412725370071102931}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -391,7 +393,6 @@ MonoBehaviour:
   d_Pad_Down: 0
   d_Pad_Left: 0
   d_Pad_Right: 0
-  _twoHandFlag: 0
   _dodgeFlag: 0
   _sprintFlag: 0
   _comboFlag: 0
@@ -439,25 +440,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baebc102fd3605a499fe1d634ee596dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterSoundFXManager: {fileID: 0}
+  _playerInventoryManager: {fileID: 0}
   _lockOnTransform: {fileID: 3053872919702807402}
   _backStabBoxCollider: {fileID: 0}
   _backStabCollider: {fileID: 0}
   _riposteCollider: {fileID: 0}
+  _isInteracting: 0
   canBeRiposted: 0
   canBeParried: 0
   isParrying: 0
   isBlocking: 0
-  isFiringSpell: 0
-  pendingCriticalDamage: 0
-  interactableUIGameObject: {fileID: 0}
-  _isInteracting: 0
+  _canDoCombo: 0
+  isInvulerable: 0
+  isUsingRightHand: 0
+  isUsingLeftHand: 0
   _isSprinting: 0
   _isInAir: 0
   _isGrounded: 0
-  _canDoCombo: 0
-  isUsingRightHand: 0
-  isUsingLeftHand: 0
-  isInvulerable: 0
+  isFiringSpell: 0
+  pendingCriticalDamage: 0
+  interactableUIGameObject: {fileID: 0}
 --- !u!114 &3053872921105081152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,13 +473,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3504c82d872e8c8439df46b7d9e80b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthLevel: 10
-  _maxHealth: 0
-  _currentHealth: 0
-  _staminaLevel: 10
+  healthLevel: 10
+  maxHealth: 0
+  currentHealth: 0
+  staminaLevel: 10
   _maxStamina: 0
   _currentStamina: 0
-  _focusLevel: 10
+  focusLevel: 10
   _maxFocusPoints: 0
   _currentFocusPoints: 0
   _isDead: 0
@@ -486,32 +489,6 @@ MonoBehaviour:
   _healthBar: {fileID: 0}
   _staminaBar: {fileID: 0}
   _focusPointBar: {fileID: 0}
---- !u!95 &3053872920688811046
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3053872921105081178}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: bf383386034ad6d4a8b4e0cd3a9fb3ab, type: 3}
-  m_Controller: {fileID: 9100000, guid: a7dc57d81491c1d49942c887e4948f2d, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'neck_01'\n\tTransform 'index_03_r'\n\tTransform
-    'ring_03_r'\n\tTransform 'middle_02_r'\n\tTransform 'pelvis'\n\tTransform 'thumb_03_r'\n\tTransform
-    'thumb_02_r'\n\tTransform 'index_02_r'\n\tTransform 'lowerarm_l'\n\tTransform
-    'neck_01'\n\tand more ...\n\tFrom animation clip 'heal2'"
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3053872920688811045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,12 +501,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33701b096a7c0646867b9af08e7733e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unarmedWeapon: {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
+  _WeaponSlot: {fileID: 3053872919862878618}
+  _backSlot: {fileID: 0}
+  _currentDamageCollider: {fileID: 0}
   _attackingWeapon: {fileID: 0}
-  _unarmedWeapon: {fileID: 0}
-  _leftHandSlot: {fileID: 0}
-  _rightHandSlot: {fileID: 0}
-  _leftHandDamageCollider: {fileID: 0}
-  _rightHandDamageCollider: {fileID: 0}
 --- !u!114 &3053872920688811044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,17 +518,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c76f432e8efc65449958d344859dd4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentConsumable: {fileID: 0}
+  currentConsumable: {fileID: 11400000, guid: 92183ebf3ac258b48ab9e2e839769c2d, type: 2}
   _currentSpell: {fileID: 0}
-  _rightWeapon: {fileID: 0}
-  _leftWeapon: {fileID: 0}
+  _currentWeapon: {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
   _maxInventorySlotCount: 4
-  _weaponsInRightHandSlots:
+  _weaponSlots:
   - {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
-  - {fileID: 11400000, guid: b583315338c63984680536c9c224c831, type: 2}
-  _weaponsInLeftHandSlots: []
-  _currentRightWeaponIndex: -1
-  _currentLeftWeaponIndex: -1
+  _currentWeaponIndex: 0
   _weaponsInventory: []
 --- !u!114 &3053872920688811043
 MonoBehaviour:
@@ -566,6 +538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db9e916b368875498b49f8e11585628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bloodSplatterFX: {fileID: 0}
+  _weaponFX: {fileID: 0}
   currentParticleFX: {fileID: 0}
   amountToBeHealed: 0
   instantiatedFXModel: {fileID: 0}
@@ -609,6 +583,142 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anim: {fileID: 0}
   canRotate: 1
+--- !u!114 &4163090296149436582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3053872921105081178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6447c3852dbb44dba2204d4cfb6c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  takingDamageSounds: []
+  WalkSound: {fileID: 0}
+  RunSound: {fileID: 0}
+  JumpSound: {fileID: 0}
+  LandSound: {fileID: 0}
+  dodgeSound: {fileID: 0}
+  DeadSound: {fileID: 0}
+--- !u!95 &3053872920688811046
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3053872921105081178}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: bf383386034ad6d4a8b4e0cd3a9fb3ab, type: 3}
+  m_Controller: {fileID: 9100000, guid: a7dc57d81491c1d49942c887e4948f2d, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!82 &6412725370071102931
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3053872921105081178}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3053872921218658628
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,7 +787,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3053872921277160316}
-  - component: {fileID: 3053872921277160315}
+  - component: {fileID: 656564456}
   m_Layer: 0
   m_Name: BackWeaponSlot
   m_TagString: Untagged
@@ -700,7 +810,7 @@ Transform:
   m_Father: {fileID: 4578804475941424031}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3053872921277160315
+--- !u!114 &656564456
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -713,9 +823,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentOverride: {fileID: 0}
-  currentWeapon: {fileID: 0}
-  _isLeftHandSlot: 0
-  _isRightHandSlot: 0
+  _currentWeapon: {fileID: 0}
+  _isWeaponHandSlot: 0
   _isBackSlot: 1
   _currentWeaponModel: {fileID: 0}
 --- !u!1 &3053872921382741454
@@ -832,13 +941,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: a7dc57d81491c1d49942c887e4948f2d, type: 2}
     - target: {fileID: 2228911262984671357, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'neck_01'\n\tTransform 'index_03_r'\n\tTransform
-        'ring_03_r'\n\tTransform 'middle_02_r'\n\tTransform 'pelvis'\n\tTransform
-        'thumb_03_r'\n\tTransform 'thumb_02_r'\n\tTransform 'index_02_r'\n\tTransform
-        'lowerarm_l'\n\tTransform 'neck_01'\n\tand more ...\n\tFrom animation clip
-        'heal2'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2228911262984671357, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
       propertyPath: m_ApplyRootMotion
@@ -912,32 +1015,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentOverride: {fileID: 4215731853831362950}
-  currentWeapon: {fileID: 0}
-  _isLeftHandSlot: 0
-  _isRightHandSlot: 1
-  _isBackSlot: 0
-  _currentWeaponModel: {fileID: 0}
---- !u!1 &1550694010596091615 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4603983671009395329, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
-  m_PrefabInstance: {fileID: 3053872921292383326}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3053872920693328317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550694010596091615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66a7d3a88fc5dd84ebe97c3936c92912, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _parentOverride: {fileID: 3053872920473602067}
-  currentWeapon: {fileID: 0}
-  _isLeftHandSlot: 1
-  _isRightHandSlot: 0
+  _currentWeapon: {fileID: 0}
+  _isWeaponHandSlot: 1
   _isBackSlot: 0
   _currentWeaponModel: {fileID: 0}
 --- !u!4 &4215731853831362950 stripped

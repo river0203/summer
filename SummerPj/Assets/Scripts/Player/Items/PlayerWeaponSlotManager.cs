@@ -9,13 +9,15 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
     QuickSlotsUI _quickSlotsUI;
     PlayerStatsManager _playerStats;
     PlayerEffectsManager _playerEffectsManager;
+    CharacterSoundFXManager _playerSoundFXManager;
 
     public WeaponItem _attackingWeapon;
 
     private void Awake()
     {
-        _WeaponSlot = GameObject.Find("hand_r").GetComponent<WeaponHolderSlot>();      
+        _WeaponSlot = GameObject.Find("hand_r").GetComponent<WeaponHolderSlot>();
 
+        _playerSoundFXManager = GetComponent<CharacterSoundFXManager>();
         _quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
         _playerEffectsManager = GetComponent<PlayerEffectsManager>();
         _playerInventoryManager = GetComponent<PlayerInventoryManager>();
@@ -88,7 +90,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 
     public void OpenDamageCollier()
     {
-        GameObject.FindWithTag("Player").GetComponent<CharacterSoundFXManager>().PlayRandomWeaponWhoosh();
+        _playerSoundFXManager.PlayRandomWeaponWhoosh();
         _currentDamageCollider.EnableDamagecollider();
     }
     public void CloseDamageCollier()
