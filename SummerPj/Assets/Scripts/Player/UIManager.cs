@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
     public EquipmentWindowUI _equipmentWindowUI;
 
     [Header("UI Windows")]
-    public GameObject hudWindow;
+    public GameObject _hudWindow;
     public GameObject selectWindow;
     public GameObject equipmentScreentWindow;
     public GameObject weaponInventoryWindow;

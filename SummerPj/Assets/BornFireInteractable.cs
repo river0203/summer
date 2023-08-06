@@ -45,7 +45,7 @@ public class BornFireInteractable : Interactable
         else
         {
             _playerManager._playerAnimatorManager.PlayTargetAnimation("Bonfire_Activate", true);
-            _UIManager.ActivateBonfirePopUp();
+            // _UIManager.ActivateBonfirePopUp();
             hasbeenActivated = true;
             _interactableText = "Rest";
             activationFX.gameObject.SetActive(true);
