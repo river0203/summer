@@ -15,6 +15,8 @@ public class PlayerStatsManager : CharacterStatsManager
     PlayerAnimatorManager _playerAnimationManager;
     InputHandler _inputHandler;
     PlayerManager _playerManager;
+
+    int a;
     private void Awake()
     {
         _focusPointBar = FindObjectOfType<FocusPointBar>();
