@@ -966,6 +966,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EventCollider
       objectReference: {fileID: 0}
+    - target: {fileID: 3898304931129600107, guid: fcdc21128a1d41b458cf16033e645903, type: 3}
+      propertyPath: _inAnim
+      value: In
+      objectReference: {fileID: 0}
+    - target: {fileID: 3898304931129600107, guid: fcdc21128a1d41b458cf16033e645903, type: 3}
+      propertyPath: _outAnim
+      value: Idle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcdc21128a1d41b458cf16033e645903, type: 3}
 --- !u!1 &7486492882353566081
