@@ -38,19 +38,27 @@ public class AmbushState : State
                     && viewableAngle < enemyManger.maximumDetectionAngle)
                 {
                     // 감지가 되면
+                    enemyAnimatorManger._anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+                    enemyAnimatorManger._anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
+                    enemyAnimatorManger.PlayTargetAnimation(wakeAnimation, true);
+                    StartCoroutine(WaitSeconds());
 
                     enemyManger.currentTarget = characterStats; // 타겟 설정
-                    isSleeping = false; // 잠 상태 해제
-
-                    enemyAnimatorManger.PlayTargetAnimation(wakeAnimation, true); // 일어나는 애니메이션 실행
                 }
             }
         }
 
         // 타겟이 있으면 추격 시작
-        if (enemyManger.currentTarget != null)
+        if (enemyManger.currentTarget != null && isSleeping == false)
             return pursueTargetState;
         else
             return this;
+    }
+
+    IEnumerator WaitSeconds()
+    {
+        yield return new WaitForSeconds(5);
+
+        isSleeping = false; // 잠 상태 해제
     }
 }
