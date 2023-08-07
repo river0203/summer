@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PassThou : MonoBehaviour
+public class PassThou : Interactable
 {
-    // Start is called before the first frame update
-    void Start()
+    WorldEventManager _worldEventManager;
+
+    private void Awake()
     {
-        
+        _worldEventManager = FindObjectOfType<WorldEventManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Interact(PlayerManager playerManager)
     {
-        
+        base.Interact(playerManager);
     }
 }

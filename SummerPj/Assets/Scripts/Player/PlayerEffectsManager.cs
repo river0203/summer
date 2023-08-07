@@ -22,8 +22,8 @@ public class PlayerEffectsManager : CharacterEffectsManager
     {
         _playerInventoryManager.currentConsumable.currentItemAmount--;
         _playerStatsManager.HealPlayer(amountToBeHealed);
-        GameObject healParticles = Instantiate(currentParticleFX, _playerStatsManager.transform);
-        Destroy(instantiatedFXModel.gameObject);
+/*        GameObject healParticles = Instantiate(currentParticleFX, _playerStatsManager.transform);
+        Destroy(instantiatedFXModel.gameObject);*/
         _playerWeaponSlotManager.LoadBothWeaponsOnSlot();
     }
 }
