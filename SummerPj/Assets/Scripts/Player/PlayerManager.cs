@@ -8,12 +8,11 @@ public class PlayerManager : CharacterManager
 {
     public float _sprintTimeDelta;
 
-    PlayerStatsManager _playerStatsManager;
+    public PlayerStatsManager _playerStatsManager;
     InputHandler _inputHandler;
     Animator _anim;
     CameraHandler _cameraHandler;
     PlayerLocomotionManager _playerLocomotion;
-    PlayerAnimatorManager _playerAnimatorManager;
     interactableUI _interactableUI;
     public GameObject interactableUIGameObject;
 
