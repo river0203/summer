@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd6084ef071f91249bf5dd1c18cc54e5, type: 3}
-  m_Name: Skill2
+  m_Name: Skill1
   m_EditorClassIdentifier: 
-  actionAnimation: Skill2
+  actionAnimation: Skill1
   attackScore: 3
-  recoveryTime: 2
+  recoveryTime: 3
   maximumAttackAngle: 35
   minimumAttackAngle: -35
   minimumDistanceNeededToAttack: 0

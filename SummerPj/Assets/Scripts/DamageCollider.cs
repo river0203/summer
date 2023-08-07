@@ -52,7 +52,7 @@ public class DamageCollider : MonoBehaviour
             if (playerStats != null)
             {
                 Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-                _playerEffectsManager.PlayBloodSplatterFX(contactPoint);
+                // _playerEffectsManager.PlayBloodSplatterFX(contactPoint);
 
                 playerStats.TakeDamage(_currentWeaponDamage, currentDamageAnimation);
                 
@@ -67,7 +67,7 @@ public class DamageCollider : MonoBehaviour
             CharacterManager _enemycharacterManager = collision.GetComponent<CharacterManager>();
 
             Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-            _enemyEffectsManager.PlayBloodSplatterFX(contactPoint);
+            //_enemyEffectsManager.PlayBloodSplatterFX(contactPoint);
 
             if (enemyStats != null)
             {

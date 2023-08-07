@@ -60,9 +60,11 @@ public class PlayerStatsManager : CharacterStatsManager
 
     public override void TakeDamage(int damege, string damageAnimation)
     {
-        if (_playerManager.isInvulerable) return;
+        if (_playerManager.isInvulerable) 
+            return;
 
-        if (_isDead) return;
+        if (_isDead) 
+            return;
 
         _currentHealth -= damege;
 
