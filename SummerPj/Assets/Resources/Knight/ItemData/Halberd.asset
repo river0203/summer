@@ -27,7 +27,6 @@ MonoBehaviour:
   OH_Heavy_Attack_1: Halberd_HeavyAttack
   TH_Light_Attack_01: TH_Halberd_Attack_01
   TH_Light_Attack_02: TH_Halberd_Attack_02
-  Running_Attack_01: Halberd_Sprint_Attack_01
   weapon_art: 
   baseStaminar: 20
   lightAttackMultiplier: 1
