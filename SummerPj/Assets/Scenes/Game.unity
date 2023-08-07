@@ -141,6 +141,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1875152935397245502, guid: b472891c16645a8408f2b9384550923f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875152935397245502, guid: b472891c16645a8408f2b9384550923f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4678471233030361779, guid: b472891c16645a8408f2b9384550923f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -9.165403
@@ -1195,6 +1203,71 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b472891c16645a8408f2b9384550923f, type: 3}
+--- !u!1001 &460520691
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7836377724858549693, guid: 8f350bad1b02a3448bb823e4e0c8ef08, type: 3}
+      propertyPath: m_Name
+      value: BackGround 1 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259270513069913177, guid: 8f350bad1b02a3448bb823e4e0c8ef08, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259270513069913177, guid: 8f350bad1b02a3448bb823e4e0c8ef08, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259270513069913177, guid: 8f350bad1b02a3448bb823e4e0c8ef08, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259270513069913177, guid: 8f350bad1b02a3448bb823e4e0c8ef08, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 143.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259270513069913177, guid: 8f350bad1b02a3448bb823e4e0c8ef08, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.753575
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259270513069913177, guid: 8f350bad1b02a3448bb823e4e0c8ef08, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259270513069913177, guid: 8f350bad1b02a3448bb823e4e0c8ef08, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.657362
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259270513069913177, guid: 8f350bad1b02a3448bb823e4e0c8ef08, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259270513069913177, guid: 8f350bad1b02a3448bb823e4e0c8ef08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259270513069913177, guid: 8f350bad1b02a3448bb823e4e0c8ef08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 82.198
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259270513069913177, guid: 8f350bad1b02a3448bb823e4e0c8ef08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8663435505395112135, guid: 8f350bad1b02a3448bb823e4e0c8ef08, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8663435505395112135, guid: 8f350bad1b02a3448bb823e4e0c8ef08, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.67
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8f350bad1b02a3448bb823e4e0c8ef08, type: 3}
 --- !u!1 &814997705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,7 +1361,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &814997708
 MonoBehaviour:
@@ -1667,8 +1740,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6447c3852dbb44dba2204d4cfb6c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _audioSource: {fileID: 0}
   takingDamageSounds:
   - {fileID: 8300000, guid: 5f5c12f2d3c28c245a387c4df6dd9e02, type: 3}
+  WalkSound: {fileID: 0}
+  RunSound: {fileID: 0}
+  JumpSound: {fileID: 0}
+  LandSound: {fileID: 0}
+  dodgeSound: {fileID: 0}
+  DeadSound: {fileID: 0}
 --- !u!82 &1690241076
 AudioSource:
   m_ObjectHideFlags: 0
