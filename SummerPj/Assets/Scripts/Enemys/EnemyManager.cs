@@ -19,7 +19,6 @@ public class EnemyManager : CharacterManager
     public bool isPreformingAction;
     public float maximumAttackRange = 1.5f;
     public bool isInteracting;
-
     public float rotationSpeed = 3;
 
     [Header("AI Setting")]

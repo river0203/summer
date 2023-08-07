@@ -52,6 +52,5 @@ public class IdleState : State
             return this;
         }
         #endregion
-
     }
 }

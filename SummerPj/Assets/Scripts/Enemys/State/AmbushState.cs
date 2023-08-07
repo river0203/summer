@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AmbushState : State
 {
+    private EventColliderBeginBossFight _eventCollider;
+
     public bool isSleeping;
     public float detectionRadius = 2;
     public string sleepAnimation;
@@ -15,6 +17,7 @@ public class AmbushState : State
 
     public override State Tick(EnemyManager enemyManger, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
+
         // 자고 있으면 자는 애니메이션 실행
         if(isSleeping && enemyManger.isInteracting == false)
             enemyAnimatorManger.PlayTargetAnimation(sleepAnimation, true);

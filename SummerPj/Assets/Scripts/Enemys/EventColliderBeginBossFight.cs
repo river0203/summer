@@ -7,7 +7,8 @@ public class EventColliderBeginBossFight : MonoBehaviour
     WorldEventManager _worldEventManager;
     EnemyAnimatorManager _enemyAnimatorManger;
 
-    public bool _inAnim;
+    public string _inAnim;
+    public bool _startingAnim;
 
     private void Awake()
     {
@@ -22,7 +23,6 @@ public class EventColliderBeginBossFight : MonoBehaviour
             _worldEventManager.ActivateBossFight();
         }*/
         _worldEventManager.ActivateBossFight();
-        _inAnim = true;
     }
 
 }

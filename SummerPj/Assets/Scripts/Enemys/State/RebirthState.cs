@@ -5,8 +5,9 @@ using UnityEngine;
 public class RebirthState : State
 {
     private IdleState IdleState;
-    private LayerMask _detectionLayer;
+    public LayerMask _detectionLayer;
     private CharacterStatsManager _characterStatsManager;
+    public string _inAnim;
     public bool Phase;
     public override State Tick(EnemyManager enemyManger, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
@@ -14,11 +15,11 @@ public class RebirthState : State
 
         for (int i = 0; i < colliders.Length; i++)
         {
-            // CharacterStats를 가져옴 (캐릭터인지 아닌지 판별)
             MobState _mobState = colliders[i].transform.GetComponent<MobState>();
 
-            if(_mobState != null && _characterStatsManager._isDead == true)
+            if(_mobState != null && _characterStatsManager._currentHealth <= 40)
             {
+                enemyAnimatorManger.PlayTargetAnimation(_inAnim, true);
                 _characterStatsManager._currentHealth += 50;
                 Phase = true;
                 return IdleState;
