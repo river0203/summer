@@ -16,5 +16,5 @@ MonoBehaviour:
   attackScore: 3
   maximumAttackAngle: 35
   minimumAttackAngle: -35
-  minimumDistanceNeededToAttack: 5
-  maximumDistanceNeededToAttack: 10
+  maximumDistanceNeededToAttack: 3
+  minimumDistanceNeededToAttack: 0

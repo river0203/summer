@@ -538,7 +538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bloodSplatterFX: {fileID: 0}
   _weaponFX: {fileID: 3576330684459610564}
-  _normalWeaponTrail: {fileID: 0}
+  _normalWeaponTrail: {fileID: 5895974326321938107}
 --- !u!1001 &6282252478677096282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -612,6 +612,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdb4fea1716e2a741884ec3ad1a54944, type: 3}
+--- !u!198 &5895974326321938107 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 503767852774353377, guid: cdb4fea1716e2a741884ec3ad1a54944, type: 3}
+  m_PrefabInstance: {fileID: 6282252478677096282}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6143961920338288917 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 174716281572292175, guid: cdb4fea1716e2a741884ec3ad1a54944, type: 3}
