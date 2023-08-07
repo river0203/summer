@@ -3261,7 +3261,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8997959141759600048}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -3489,7 +3489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a780c006255ca164bb28157a53e4c1fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftWeaponIcon: {fileID: 8997959141759600054}
+  _magicIcon: {fileID: 8997959141759600054}
   _rightWeaponIcon: {fileID: 8997959143093730747}
 --- !u!1 &8997959141823476245
 GameObject:
@@ -4177,7 +4177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 0}
   _equipmentWindowUI: {fileID: 8681778411022563414}
-  hudWindow: {fileID: 3419576327195283813}
+  _hudWindow: {fileID: 3419576327195283813}
   selectWindow: {fileID: 8681778409130272024}
   equipmentScreentWindow: {fileID: 8681778410375399928}
   weaponInventoryWindow: {fileID: 8681778410712795749}

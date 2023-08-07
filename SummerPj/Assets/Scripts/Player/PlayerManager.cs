@@ -132,4 +132,15 @@ public class PlayerManager : CharacterManager
             }
         }
     }
+
+    public void PassThroughFogWallInteraction(Transform fogWallEntrance)
+    {
+        _playerLocomotion._rigid.velocity = Vector3.zero;
+
+        Vector3 rotationDirection = fogWallEntrance.transform.forward;
+        Quaternion turnRotation = Quaternion.LookRotation(rotationDirection);
+        transform.rotation = turnRotation;
+
+        _playerAnimatorManager.PlayTargetAnimation("Pass Through Fog", true);
+    }
 }

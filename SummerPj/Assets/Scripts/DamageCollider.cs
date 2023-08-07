@@ -44,6 +44,7 @@ public class DamageCollider : MonoBehaviour
 
             if (playerStats != null)
             {
+                if (_playercharacterManager.isInvulerable) return;
                 Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                 _playerEffectsManager.PlayBloodSplatterFX(contactPoint);
 
