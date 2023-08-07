@@ -27,6 +27,7 @@ MonoBehaviour:
   OH_Heavy_Attack_1: Sword_HeavyAttack
   TH_Light_Attack_01: TH_Sword_Attack_01
   TH_Light_Attack_02: TH_Sword_Attack_02
+  Running_Attack_01: Sword_Sprint_Attack_01
   weapon_art: 
   baseStaminar: 20
   lightAttackMultiplier: 1

@@ -87,6 +87,16 @@ public class PlayerCombatManager : MonoBehaviour
         _lastAttack = weapon.OH_Heavy_Attack_1;
     }
 
+    public void HandleRunningAttack(WeaponItem weapon)
+    {
+        if (_playerStatsManager._currentStamina <= 0) return;
+
+        _playerWeaponSlotManager._attackingWeapon = weapon;
+
+        _playerAnimatorManager.PlayTargetAnimation(weapon.Running_Attack_01, true);
+        _lastAttack = weapon.Running_Attack_01;
+    }
+
     #region Input Actions
     public void HandleRBAction()
     {
@@ -122,6 +132,14 @@ public class PlayerCombatManager : MonoBehaviour
     #region Attack Actions
     private void PerformRBMeleeAction()
     {
+        _playerAnimatorManager._anim.SetBool("isUsingRightHand", true);
+
+        if (_playerManager._isSprinting && _playerManager._sprintTimeDelta >= 0.3f)
+        {
+            HandleRunningAttack(_playerInventoryManager._currentWeapon);
+            return;
+        }
+
         if (_playerManager._canDoCombo)
         {
             _inputHandler._comboFlag = true;
@@ -135,7 +153,6 @@ public class PlayerCombatManager : MonoBehaviour
             if (_playerManager._canDoCombo)
                 return;
 
-            _playerAnimatorManager._anim.SetBool("isUsingRightHand", true);
             HandleLightAttack(_playerInventoryManager._currentWeapon);
         }
 

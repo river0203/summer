@@ -29,6 +29,9 @@ public class WeaponItem : Item
     public string TH_Light_Attack_01;
     public string TH_Light_Attack_02;
 
+    [Header("Running Attack Animations")]
+    public string Running_Attack_01;
+
     [Header("Weapon Art")]
     public string weapon_art;
 

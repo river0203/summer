@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : CharacterManager
 {
+    public float _sprintTimeDelta;
+
     PlayerStatsManager _playerStatsManager;
     InputHandler _inputHandler;
     Animator _anim;
@@ -51,6 +53,13 @@ public class PlayerManager : CharacterManager
 
         // 플레이어 이동
         _isSprinting = _inputHandler.b_input;
+        if(_isSprinting)
+        {
+            _sprintTimeDelta += Time.deltaTime;
+        } else
+        {
+            _sprintTimeDelta = 0;
+        }
 
         CheckForInteractableObject();  
     }
