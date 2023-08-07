@@ -62,6 +62,11 @@ public class PlayerAnimatorManager : AnimatorManager
         _anim.SetFloat(_horizontal, h, 0.1f, Time.deltaTime);
     }
 
+    public void Disablecollision()
+    {
+        _playerLocomotionManager._characterCollider.enabled = false;
+        _playerLocomotionManager._characterCollisionBlockerCollider.enabled = false;
+    }
 
     private void OnAnimatorMove()
     {
