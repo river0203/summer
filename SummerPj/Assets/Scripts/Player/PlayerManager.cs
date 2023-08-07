@@ -6,11 +6,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : CharacterManager
 {
-    public PlayerStatsManager _playerStatsManager;
+    public float _sprintTimeDelta;
+
+    PlayerStatsManager _playerStatsManager;
     InputHandler _inputHandler;
     Animator _anim;
     CameraHandler _cameraHandler;
     PlayerLocomotionManager _playerLocomotion;
+    PlayerAnimatorManager _playerAnimatorManager;
     interactableUI _interactableUI;
     public GameObject interactableUIGameObject;
 
@@ -37,8 +40,7 @@ public class PlayerManager : CharacterManager
         _canDoCombo = _anim.GetBool("canDoCombo");
         isUsingRightHand = _anim.GetBool("isUsingRightHand");
         isInvulerable = _anim.GetBool("isInvulnerable");
-        
-        _anim.SetBool("isFiringSpell", isFiringSpell);
+        isFiringSpell = _anim.GetBool("isFiringSpell");
         _anim.SetBool("isBlocking", isBlocking);
         _anim.SetBool("isInAir", _isInAir);
         _anim.SetBool("isDead", _playerStatsManager._isDead);
@@ -51,6 +53,13 @@ public class PlayerManager : CharacterManager
 
         // 플레이어 이동
         _isSprinting = _inputHandler.b_input;
+        if(_isSprinting)
+        {
+            _sprintTimeDelta += Time.deltaTime;
+        } else
+        {
+            _sprintTimeDelta = 0;
+        }
 
         CheckForInteractableObject();  
     }
