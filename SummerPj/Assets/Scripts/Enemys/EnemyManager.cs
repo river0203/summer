@@ -13,6 +13,7 @@ public class EnemyManager : CharacterManager
     public CharacterStatsManager _characterState;
     public EnemyAnimatorManager _enemyAnimatorManger;
     public NavMeshAgent navmeshAgent;
+    public EnemyStats _enemyStats;
 
     public State currentState;
     public CharacterStatsManager currentTarget;
@@ -53,7 +54,6 @@ public class EnemyManager : CharacterManager
         _characterState.DestroyObj();
         enemyRigidBody.velocity = Vector3.zero;
         LookTarget();
-        Phase2();
     }
 
     private void FixedUpdate()
@@ -64,7 +64,7 @@ public class EnemyManager : CharacterManager
         navmeshAgent.transform.localRotation = Quaternion.identity;
     }
 
-    private void HandleStateMachine()
+    public void HandleStateMachine()
     {
        if(currentState != null)
         {
@@ -94,22 +94,4 @@ public class EnemyManager : CharacterManager
         }
     }
 
-    private void Phase2()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
-
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            MobState _mobState = colliders[i].transform.GetComponent<MobState>();
-
-            if(_mobState != null && _characterState._currentHealth <= 40)
-            {
-                Debug.Log("Phase 2");
-                _characterState._currentHealth += 40;
-                
-                HandleStateMachine();
-            }
-
-        }
-    }
 }

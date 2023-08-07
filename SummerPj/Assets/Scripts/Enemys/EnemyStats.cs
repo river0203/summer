@@ -9,6 +9,8 @@ public class EnemyStats : CharacterStatsManager
     EnemyBossManager _enemyBossManager;
     EnemyAnimatorManager _enemyAnimatorManager;
     public bool _isBoss;
+    EnemyManager _enemyManager;
+    CharacterStatsManager _characterState;
 
     private void Awake()
     {
@@ -38,10 +40,13 @@ public class EnemyStats : CharacterStatsManager
         _currentHealth -= _damage;
         _enemyHealthBar.SetHealth(_currentHealth);
 
-        if (_currentHealth <= 0)
+        if (_currentHealth <= 0 && _enemyManager.isPhase == false)
         {
-            _currentHealth = 0;
             _isDead = true;
+        }
+        else
+        {
+            _isDead = false;
         }
     }
 
@@ -73,5 +78,28 @@ public class EnemyStats : CharacterStatsManager
         _currentHealth = 0;
         _enemyAnimatorManager.PlayTargetAnimation("Dead", true);
         _isDead = true;
+    }
+
+    private void Phase2()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _enemyManager.detectionRadius);
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            MobState _mobState = colliders[i].transform.GetComponent<MobState>();
+
+            if(_mobState != null && _characterState._currentHealth < 0)
+            {
+                _enemyManager.isPhase = true;
+                Debug.Log("Phase 2");
+                _characterState._currentHealth += 40;
+
+                _enemyManager.HandleStateMachine();
+            }
+            else
+            {
+                _enemyManager.isPhase = false;
+            }
+        }
     }
 }
