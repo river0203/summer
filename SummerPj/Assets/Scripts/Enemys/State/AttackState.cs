@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.XR;
 using UnityEngine;
 
 public class AttackState : State
@@ -7,6 +8,7 @@ public class AttackState : State
     public CombatStanceState combatStanceState;
     public EnemyAttackAction[] enemyAttacks;
     public EnemyAttackAction currentAttack;
+    public bool _spawingMobs;
     public override State Tick(EnemyManager enemyManger, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
         Vector3 targetDirection = enemyManger.currentTarget.transform.position - transform.position;
@@ -124,6 +126,7 @@ public class AttackState : State
                         if(currentAttack.attackScore == 4)
                         {
                             Debug.Log("説光 持失");
+                            _spawingMobs = true;
                         }
                     }
                 }

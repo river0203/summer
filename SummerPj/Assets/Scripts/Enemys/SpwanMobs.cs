@@ -7,25 +7,31 @@ public class SpwanMobs : MonoBehaviour
     public GameObject rangeObject;
     BoxCollider rangeCollider;
     public GameObject capsul;
-    private void Start()
+    private AttackState _attackState;
+    private int _countMobs = 0;     
+    private void Update()
     {
-        StartCoroutine(RandomRespawn_Coroutine());
+        if(_attackState._spawingMobs)
+        {
+            RandomRespawn_Coroutine();
+        }
     }
 
-    IEnumerator RandomRespawn_Coroutine()
+    void RandomRespawn_Coroutine()
     {
-        while (true)
+        while (_countMobs <5)
         {
-            yield return new WaitForSeconds(1f);
 
             // 생성 위치 부분에 위에서 만든 함수 Return_RandomPosition() 함수 대입
             GameObject instantCapsul = Instantiate(capsul, Return_RandomPosition(), Quaternion.identity);
+            _countMobs++;
         }
     }
 
     private void Awake()
     {
         rangeCollider = rangeObject.GetComponent<BoxCollider>();
+        _attackState = FindObjectOfType<AttackState>();
     }
 
     Vector3 Return_RandomPosition()
