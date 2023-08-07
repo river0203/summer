@@ -22,6 +22,7 @@ public class InputHandler : MonoBehaviour
     public bool ha_input;
     public bool lt_Input;
     public bool lb_Input;
+    public bool up_Arrow_Input;
     public bool critical_Attack_Input;
     public bool jump_Input;
     public bool inventory_Input;
@@ -103,6 +104,7 @@ public class InputHandler : MonoBehaviour
             _inputActions.PlayerMovement.Look.performed += i => { _cameraInput = i.ReadValue<Vector2>(); };
             _inputActions.PlayerActions.LightAttack.performed += i => { la_input = true; };
             _inputActions.PlayerActions.HeavyAttack.performed += i => { ha_input = true; };
+            _inputActions.PlayerActions.Ultimate.performed += i => { up_Arrow_Input = true; };
             _inputActions.PlayerActions.Block.performed += i => { lb_Input = true; };
             _inputActions.PlayerActions.Block.canceled += i => { lb_Input = false; };
             _inputActions.PlayerActions.Parry.performed += i => { lt_Input = true; };
@@ -195,7 +197,10 @@ public class InputHandler : MonoBehaviour
         {
             _playerCombatManager.HandleHeavyAttack(_playerInventoryManager._currentWeapon);
         }
-
+        if(up_Arrow_Input)
+        {
+            _playerCombatManager.HandleUltimateAction();
+        }
         if(lb_Input)
         {
             _playerCombatManager.HandleLBAtcion();
