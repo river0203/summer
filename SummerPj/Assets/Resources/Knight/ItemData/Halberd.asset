@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d950b705f1cd8c34eaa10d13fe4f4281, type: 3}
   m_Name: Halberd
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: a604e1559ced88d47889e9c5cbc82715, type: 3}
+  itemIcon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   itemName: Halberd
   _modelPrefabe: {fileID: 3024973028223165133, guid: f6421486fe73bc845a0047da6bbdcb3e, type: 3}
   _isUnarmed: 0

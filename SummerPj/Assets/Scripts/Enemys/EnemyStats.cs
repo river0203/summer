@@ -4,39 +4,29 @@ using UnityEngine;
 
 public class EnemyStats : CharacterStatsManager
 {
-
-    public UIEnemyHealthBar _enemyHealthBar;
-    EnemyBossManager _enemyBossManager;
-    EnemyAnimatorManager _enemyAnimatorManager;
-    public bool _isBoss;
+    AudioSource _audioSource;
+    Animator _anim;
 
     private void Awake()
     {
-        _enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
-        _enemyBossManager = GetComponent<EnemyBossManager>();
-        _maxHealth = SetMaxHealthFromHealthLevel();
-        _currentHealth = _maxHealth;
+        _anim = GetComponentInChildren<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        if(!_isBoss)
-        {
-            _enemyHealthBar.SetMaXHealth(_maxHealth);
-        }
+        _currentHealth = SetMaxHealthFromHealthLevel();
     }
 
     private int SetMaxHealthFromHealthLevel()
     {
         _maxHealth = _healthLevel * 10;
         return _maxHealth;
-
     }
 
-    public void TakeDamageAnimation(int _damage)
+    public void TakeDamageNoAnimation(int damage)
     {
-        _currentHealth -= _damage;
-        _enemyHealthBar.SetHealth(_currentHealth);
+        _currentHealth -= damage;
 
         if (_currentHealth <= 0)
         {
@@ -45,33 +35,18 @@ public class EnemyStats : CharacterStatsManager
         }
     }
 
-    public override void TakeDamage(int _damege, string _damageAnimation = "Stage2")
+    public override void TakeDamage(int damege, string damageAnimation /*= "Damage_01"*/)
     {
-        if (_isDead)
-            return;
+        if (_isDead) return;
 
-        if(!_isBoss)
-        {
-            _enemyHealthBar.SetHealth(_currentHealth);
-        }
-        else if(_isBoss && _enemyBossManager != null)
-        {
-            _enemyBossManager.UpdateBossHealthBar(_currentHealth);
-        }
+        _currentHealth -= damege;
 
-        _currentHealth -= _damege;
-        _enemyAnimatorManager.PlayTargetAnimation(_damageAnimation, true);
 
         if (_currentHealth <= 0)
         {
-            HandleDeath();
+            _currentHealth = 0;
+            _anim.Play("Dead");
+            _isDead = true;
         }
-    }
-
-    private void HandleDeath()
-    {
-        _currentHealth = 0;
-        _enemyAnimatorManager.PlayTargetAnimation("Dead", true);
-        _isDead = true;
     }
 }
