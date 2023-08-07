@@ -417,9 +417,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentOverride: {fileID: 0}
-  currentWeapon: {fileID: 0}
-  _isLeftHandSlot: 0
-  _isRightHandSlot: 0
+  _currentWeapon: {fileID: 0}
+  _isWeaponHandSlot: 0
   _isBackSlot: 1
   _currentWeaponModel: {fileID: 0}
 --- !u!1 &3099296630638564507
@@ -443,10 +442,12 @@ GameObject:
   - component: {fileID: 3099296631056935907}
   - component: {fileID: 3099296631056935904}
   - component: {fileID: 3099296631056935905}
+  - component: {fileID: 1690241075}
   - component: {fileID: 3099296631056935911}
+  - component: {fileID: 1690241076}
   m_Layer: 7
   m_Name: Player - Copy
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -526,6 +527,7 @@ MonoBehaviour:
   ha_input: 0
   lt_Input: 0
   lb_Input: 0
+  up_Arrow_Input: 0
   critical_Attack_Input: 0
   jump_Input: 0
   inventory_Input: 0
@@ -537,7 +539,6 @@ MonoBehaviour:
   d_Pad_Down: 0
   d_Pad_Left: 0
   d_Pad_Right: 0
-  _twoHandFlag: 0
   _dodgeFlag: 0
   _sprintFlag: 0
   _comboFlag: 0
@@ -566,13 +567,13 @@ MonoBehaviour:
   _minimumDistanceNeededToBeginFall: 1
   _groundDirectionRayDistance: 0.2
   _inAirTimer: 0
-  _movementSpeed: 1.5
-  _sprintSpeed: 3
+  _movementSpeed: 3
+  _sprintSpeed: 5
   _rotationSpeed: 10
   _fallingSpeed: 300
   rollStaminaCost: 15
-  characterCollider: {fileID: 3099296630638564482}
-  characterCollisionBlockerCollider: {fileID: 0}
+  _characterCollider: {fileID: 3099296630638564482}
+  _characterCollisionBlockerCollider: {fileID: 3099296630638564482}
 --- !u!114 &3099296630638564485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,6 +586,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baebc102fd3605a499fe1d634ee596dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterSoundFXManager: {fileID: 0}
+  _playerInventoryManager: {fileID: 0}
+  _playerAnimatorManager: {fileID: 0}
   _lockOnTransform: {fileID: 3099296629811041451}
   _backStabBoxCollider: {fileID: 0}
   _backStabCollider: {fileID: 0}
@@ -603,6 +607,8 @@ MonoBehaviour:
   _isGrounded: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
+  _sprintTimeDelta: 0
+  _playerStatsManager: {fileID: 0}
   interactableUIGameObject: {fileID: 0}
 --- !u!114 &3099296630638564481
 MonoBehaviour:
@@ -644,12 +650,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33701b096a7c0646867b9af08e7733e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unarmedWeapon: {fileID: 0}
-  _leftHandSlot: {fileID: 0}
-  _rightHandSlot: {fileID: 0}
-  _backSlot: {fileID: 0}
-  _leftHandDamageCollider: {fileID: 0}
-  _rightHandDamageCollider: {fileID: 0}
+  _unarmedWeapon: {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
+  _weaponSlot: {fileID: 3099296629669058139}
+  _backSlot: {fileID: 3099296630533860538}
+  _currentDamageCollider: {fileID: 0}
   _attackingWeapon: {fileID: 0}
 --- !u!114 &3099296631056935909
 MonoBehaviour:
@@ -665,15 +669,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentConsumable: {fileID: 11400000, guid: 92183ebf3ac258b48ab9e2e839769c2d, type: 2}
   _currentSpell: {fileID: 0}
-  _rightWeapon: {fileID: 0}
-  _leftWeapon: {fileID: 0}
+  _currentWeapon: {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
   _maxInventorySlotCount: 4
-  _weaponsInRightHandSlots:
-  - {fileID: 11400000, guid: d0ca661455077ac4d9b5db05579ba631, type: 2}
-  - {fileID: 11400000, guid: b583315338c63984680536c9c224c831, type: 2}
-  _weaponsInLeftHandSlots: []
-  _currentRightWeaponIndex: -1
-  _currentLeftWeaponIndex: -1
+  _weaponSlots:
+  - {fileID: 11400000, guid: 22911ac5c66e3984bbb7604c5a7e4f69, type: 2}
+  _currentWeaponIndex: 0
   _weaponsInventory: []
 --- !u!114 &3099296631056935906
 MonoBehaviour:
@@ -687,9 +687,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db9e916b368875498b49f8e11585628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bloodSplatterFX: {fileID: 0}
-  _rightWeaponFX: {fileID: 0}
-  _leftWeaponFX: {fileID: 0}
+  _bloodSplatterFX: {fileID: 8926484042661614526, guid: 3bd68b72d7ded8d459a7d9a3dc1ea546, type: 3}
+  _weaponFX: {fileID: 0}
   currentParticleFX: {fileID: 0}
   amountToBeHealed: 0
   instantiatedFXModel: {fileID: 0}
@@ -733,6 +732,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anim: {fileID: 0}
   canRotate: 1
+--- !u!114 &1690241075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3099296630638564507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6447c3852dbb44dba2204d4cfb6c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSource: {fileID: 0}
+  takingDamageSounds:
+  - {fileID: 8300000, guid: 5f5c12f2d3c28c245a387c4df6dd9e02, type: 3}
+  WalkSound: {fileID: 0}
+  RunSound: {fileID: 0}
+  JumpSound: {fileID: 0}
+  LandSound: {fileID: 0}
+  dodgeSound: {fileID: 0}
+  DeadSound: {fileID: 0}
 --- !u!95 &3099296631056935911
 Animator:
   serializedVersion: 5
@@ -749,16 +769,107 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'neck_01'\n\tTransform 'index_03_r'\n\tTransform
-    'ring_03_r'\n\tTransform 'middle_02_r'\n\tTransform 'pelvis'\n\tTransform 'thumb_03_r'\n\tTransform
-    'thumb_02_r'\n\tTransform 'index_02_r'\n\tTransform 'lowerarm_l'\n\tTransform
-    'neck_01'\n\tand more ...\n\tFrom animation clip 'heal2'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!82 &1690241076
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3099296630638564507}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3099296630858551707
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,13 +947,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: a7dc57d81491c1d49942c887e4948f2d, type: 2}
     - target: {fileID: 2228911262984671357, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'neck_01'\n\tTransform 'index_03_r'\n\tTransform
-        'ring_03_r'\n\tTransform 'middle_02_r'\n\tTransform 'pelvis'\n\tTransform
-        'thumb_03_r'\n\tTransform 'thumb_02_r'\n\tTransform 'index_02_r'\n\tTransform
-        'lowerarm_l'\n\tTransform 'neck_01'\n\tand more ...\n\tFrom animation clip
-        'heal2'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2228911262984671357, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
       propertyPath: m_ApplyRootMotion
@@ -916,9 +1021,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentOverride: {fileID: 4315056645933313607}
-  currentWeapon: {fileID: 0}
-  _isLeftHandSlot: 0
-  _isRightHandSlot: 1
+  _currentWeapon: {fileID: 0}
+  _isWeaponHandSlot: 0
   _isBackSlot: 0
   _currentWeaponModel: {fileID: 0}
 --- !u!1 &1505973709595611422 stripped
@@ -939,9 +1043,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentOverride: {fileID: 3099296629239480274}
-  currentWeapon: {fileID: 0}
-  _isLeftHandSlot: 1
-  _isRightHandSlot: 0
+  _currentWeapon: {fileID: 0}
+  _isWeaponHandSlot: 0
   _isBackSlot: 0
   _currentWeaponModel: {fileID: 0}
 --- !u!4 &4315056645933313607 stripped

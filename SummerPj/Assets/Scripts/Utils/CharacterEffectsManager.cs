@@ -1,11 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class CharacterEffectsManager : MonoBehaviour
 {
     [Header("Damage FX")]
-    public GameObject _bloodSplatterFX;
+    public VisualEffectAsset _bloodSplatterFX;
 
     [Header("Weapon FX")]
     public WeaponFX _weaponFX;
@@ -27,6 +27,6 @@ public class CharacterEffectsManager : MonoBehaviour
 
     public virtual void PlayBloodSplatterFX(Vector3 bloodSplatterLocation)
     {
-        GameObject blood = Instantiate(_bloodSplatterFX, bloodSplatterLocation, Quaternion.identity);
+        VisualEffectAsset blood = Instantiate(_bloodSplatterFX, bloodSplatterLocation, Quaternion.identity);
     }
 }
