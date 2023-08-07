@@ -77,6 +77,7 @@ public class PlayerManager : CharacterManager
         _inputHandler._dodgeFlag = false;
         _inputHandler.la_input = false;
         _inputHandler.ha_input = false;
+        _inputHandler.up_Arrow_Input = false;
         _inputHandler.lt_Input = false;
         _inputHandler.d_Pad_Up = false;
         _inputHandler.d_Pad_Down = false;

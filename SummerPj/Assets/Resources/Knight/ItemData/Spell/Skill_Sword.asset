@@ -16,14 +16,7 @@ MonoBehaviour:
   itemName: Sword_Spell
   spellWarmUpFX: {fileID: 0}
   spellCastFX: {fileID: 0}
-  spellAnimation: 
-  focusPointCost: 0
-  isFaithSpell: 0
-  isMagicSpell: 0
-  isPyroSpell: 0
+  spellAnimation: Sword_Ultimate
+  focusPointCost: 100
   spellDescription: 
   baseDamage: 0
-  projectileVelocity: 0
-  projectileUpwardVelocity: 0
-  projectileMass: 0
-  isEffectedbyGravity: 0
