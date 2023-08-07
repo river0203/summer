@@ -39,7 +39,7 @@ public class BornFireInteractable : Interactable
         if(hasbeenActivated)
         {
             _playerManager._playerAnimatorManager.PlayTargetAnimation("Bonfire_Activate", true);
-            _playerManager._playerStatsManager._currentHealth = _playerManager._playerStatsManager._maxHealth;
+            //_playerManager._playerStatsManager._currentHealth = _playerManager._playerStatsManager._maxHealth;
             _playerManager._playerInventoryManager.currentConsumable.currentItemAmount = _playerManager._playerInventoryManager.currentConsumable.maxItemAmount;
         }
         else

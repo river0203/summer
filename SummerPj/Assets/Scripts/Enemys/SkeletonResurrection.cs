@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class SkeletonResurrection : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Transform _origin;
+    public Transform _target;
 
-    // Update is called once per frame
-    void Update()
+    public void SetPos(Vector3 origin, Vector3 target)
     {
-        
+        _origin.position = origin;
+        _target.position = target;
     }
 }
