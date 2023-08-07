@@ -14,8 +14,8 @@ public class EnemyStats : CharacterStatsManager
     {
         _enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
         _enemyBossManager = GetComponent<EnemyBossManager>();
-        _maxHealth = SetMaxHealthFromHealthLevel();
         _currentHealth = _maxHealth;
+        _maxHealth = SetMaxHealthFromHealthLevel();
     }
 
     private void Start()
