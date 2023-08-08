@@ -23,6 +23,8 @@ public class EventColliderBeginBossFight : MonoBehaviour
             _worldEventManager.ActivateBossFight();
         }*/
         _worldEventManager.ActivateBossFight();
+
+        _enemyAnimatorManger.PlayTargetAnimation(_inAnim, true);
     }
 
 }
