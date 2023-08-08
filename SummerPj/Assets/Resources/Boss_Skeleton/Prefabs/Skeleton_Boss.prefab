@@ -1383,10 +1383,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08483c8485091ac4b9d613e5e0d98fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSleeping: 1
-  detectionRadius: 15
-  sleepAnimation: In_1
-  wakeAnimation: In_2
+  isSleeping: 0
+  detectionRadius: 30
+  sleepAnimation: In
+  wakeAnimation: In
   detectionLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -1826,6 +1826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 086c3b467dbebed40b2ccb4512c36b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterEffectsManager: {fileID: 0}
   _characterManager: {fileID: 0}
   enabledDamageColliderOnStartUp: 0
   _currentWeaponDamage: 25
@@ -2413,6 +2414,7 @@ GameObject:
   - component: {fileID: 7779246349679498963}
   - component: {fileID: 7779246349679498972}
   - component: {fileID: 7779246349679498973}
+  - component: {fileID: 1987528271}
   m_Layer: 6
   m_Name: Skeleton_Boss
   m_TagString: Enemy
@@ -2427,7 +2429,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7779246349679498974}
-  m_LocalRotation: {x: -0, y: 0.9952301, z: -0, w: 0.097556196}
+  m_LocalRotation: {x: 0, y: 0.99522996, z: 0, w: 0.09755702}
   m_LocalPosition: {x: 0, y: 0.96, z: 124.78}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
@@ -2524,6 +2526,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9682cbd0d3a0e2748925b762d4bc014c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterSoundFXManager: {fileID: 0}
+  _playerInventoryManager: {fileID: 0}
+  _playerAnimatorManager: {fileID: 0}
   _lockOnTransform: {fileID: 0}
   _backStabBoxCollider: {fileID: 0}
   _backStabCollider: {fileID: 0}
@@ -2571,6 +2576,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bossName: Skell
+--- !u!114 &1987528271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7779246349679498974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a447eb247158c4047b569dab5a426006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7779246349681243424
 GameObject:
   m_ObjectHideFlags: 0

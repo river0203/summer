@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    public CharacterSoundFXManager _characterSoundFXManager;
+    public PlayerSoundFXManager _characterSoundFXManager;
     public PlayerInventoryManager _playerInventoryManager;
     public PlayerAnimatorManager _playerAnimatorManager;
 
@@ -42,7 +42,7 @@ public class CharacterManager : MonoBehaviour
     private void Awake()
     {
         _playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
-        _characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
+        _characterSoundFXManager = GetComponent<PlayerSoundFXManager>();
         _playerInventoryManager = GetComponent<PlayerInventoryManager>();
     }
 }

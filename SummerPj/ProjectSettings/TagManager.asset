@@ -16,7 +16,7 @@ TagManager:
   - UI
   - Enemy
   - Player
-  - 
+  - Ignore_Enemy
   - Character
   - Controller
   - BackStab

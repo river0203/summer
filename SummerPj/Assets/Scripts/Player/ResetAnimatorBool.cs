@@ -24,4 +24,9 @@ public class ResetAnimatorBool : StateMachineBehaviour
         animator.SetBool(_canRotate, _canRotateStatus);
         animator.SetBool(_isPreformingAction, _isPreformingStatus);
     }
+
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        //animator.SetBool(_isPreformingAction, _isPreformingStatus);
+    }
 }

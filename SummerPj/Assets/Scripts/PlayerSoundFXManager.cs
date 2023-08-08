@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterSoundFXManager : MonoBehaviour
+public class PlayerSoundFXManager : MonoBehaviour
 {
     PlayerInventoryManager _playerInventoryManager;
     public AudioSource _audioSource;
