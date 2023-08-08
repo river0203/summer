@@ -21,11 +21,6 @@ public class SpwanMobs : MonoBehaviour
         }
     }
 
-    void CheckSpawnRange()
-    {
-        
-    }
-
     void RandomRespawn_Coroutine()
     {
         while (_countMobs <5)

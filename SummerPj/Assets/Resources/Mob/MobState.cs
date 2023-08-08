@@ -49,6 +49,7 @@ public class MobState : MonoBehaviour
     private void UpdateAttack()
     {
         agent.speed = 0;
+        anim.Play("attack02");
         float distance = Vector3.Distance(transform.position, target.transform.position);
         if (distance > 2)
         {
@@ -65,6 +66,7 @@ public class MobState : MonoBehaviour
         {
             state = State.Attack;
             anim.Play("attack02");
+            StartCoroutine(AttackDelay());
         }
 
         agent.speed = 3.5f;
@@ -80,5 +82,10 @@ public class MobState : MonoBehaviour
             state = State.Run;
             anim.Play("walk");
         }
+    }
+
+    IEnumerator AttackDelay()
+    {
+        yield return new WaitForSeconds(4);
     }
 }
