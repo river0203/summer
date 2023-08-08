@@ -105,7 +105,7 @@ public class EnemyManager : CharacterManager
             if (_mobs != null)
             {
                 isPhase = true;
-                HandleStateMachine();
+                //HandleStateMachine();
             }
             else
             {

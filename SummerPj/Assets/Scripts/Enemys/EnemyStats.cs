@@ -85,6 +85,7 @@ public class EnemyStats : CharacterStatsManager
             _currentHealth += 40;
             Debug.Log("∆‰¿Ã¡Ó 2");
             //_enemyAnimatorManager.PlayTargetAnimation(_PhaseAnim, true);
+            //_enemyManager.currentState = _idleState;
         }
         else
         {
