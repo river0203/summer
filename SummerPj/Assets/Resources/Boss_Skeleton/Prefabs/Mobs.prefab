@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1882605113370164747}
   m_Layer: 14
   m_Name: Mobs
-  m_TagString: Untagged
+  m_TagString: Mobs
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
