@@ -9,8 +9,10 @@ public class EnemyStats : CharacterStatsManager
     EnemyBossManager _enemyBossManager;
     EnemyAnimatorManager _enemyAnimatorManager;
     public bool _isBoss;
-    EnemyManager _enemyManager;
+    public EnemyManager _enemyManager;
     CharacterStatsManager _characterState;
+    public string _PhaseAnim;
+    public IdleState _idleState;
 
     private void Awake()
     {
@@ -18,6 +20,8 @@ public class EnemyStats : CharacterStatsManager
         _enemyBossManager = GetComponent<EnemyBossManager>();
         _currentHealth = _maxHealth;
         _maxHealth = SetMaxHealthFromHealthLevel();
+        _enemyManager = GetComponent<EnemyManager>();
+        _idleState = GetComponentInChildren<IdleState>();
     }
 
     private void Start()
@@ -73,33 +77,21 @@ public class EnemyStats : CharacterStatsManager
         }
     }
 
-    private void HandleDeath()
-    {
-        _currentHealth = 0;
-        _enemyAnimatorManager.PlayTargetAnimation("Dead", true);
-        _isDead = true;
-    }
-
-    private void Phase2()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _enemyManager.detectionRadius);
-
-        for (int i = 0; i < colliders.Length; i++)
+    public void HandleDeath()
+    { 
+        if(_enemyManager.isPhase)
         {
-            MobState _mobState = colliders[i].transform.GetComponent<MobState>();
-
-            if(_mobState != null && _characterState._currentHealth < 0)
-            {
-                _enemyManager.isPhase = true;
-                Debug.Log("Phase 2");
-                _characterState._currentHealth += 40;
-
-                _enemyManager.HandleStateMachine();
-            }
-            else
-            {
-                _enemyManager.isPhase = false;
-            }
+            _isDead = false;
+            _currentHealth += 40;
+            Debug.Log("ÆäÀÌÁî 2");
+            _enemyAnimatorManager.PlayTargetAnimation(_PhaseAnim, true);
         }
+        else
+        {
+            _currentHealth = 0;
+            _enemyAnimatorManager.PlayTargetAnimation("Dead", true);
+            _isDead = true;
+        }
+
     }
 }
