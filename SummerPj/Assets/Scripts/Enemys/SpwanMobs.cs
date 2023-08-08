@@ -35,6 +35,7 @@ public class SpwanMobs : MonoBehaviour
             GameObject instantCapsul = Instantiate(capsul, Return_RandomPosition(), Quaternion.identity);
             _countMobs++;
         }
+        _countMobs = 0;
     }
 
     private void Awake()
