@@ -13,7 +13,6 @@ public class SpwanMobs : MonoBehaviour
     public Transform _boss;
     private void Update()
     {
-
         if(_attackState._spawingMobs)
         {
             RandomRespawn_Coroutine();
@@ -21,20 +20,17 @@ public class SpwanMobs : MonoBehaviour
         }
     }
 
-    void CheckSpawnRange()
-    {
-        
-    }
-
     void RandomRespawn_Coroutine()
     {
-        while (_countMobs <5)
-        {
 
+        while (_countMobs < 5)
+        {
             // 생성 위치 부분에 위에서 만든 함수 Return_RandomPosition() 함수 대입
             GameObject instantCapsul = Instantiate(capsul, Return_RandomPosition(), Quaternion.identity);
             _countMobs++;
         }
+        
+        _countMobs = 0;
     }
 
     private void Awake()

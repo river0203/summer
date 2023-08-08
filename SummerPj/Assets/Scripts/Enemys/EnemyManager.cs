@@ -43,7 +43,6 @@ public class EnemyManager : CharacterManager
     private void Start()
     {
         navmeshAgent.enabled = false;
-        enemyRigidBody.isKinematic = false;
     }
 
     void Update()

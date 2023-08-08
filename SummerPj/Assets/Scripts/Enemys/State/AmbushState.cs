@@ -40,6 +40,7 @@ public class AmbushState : State
                     // 감지가 되면
                     enemyAnimatorManger._anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
                     enemyAnimatorManger._anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
+                    enemyAnimatorManger._anim.SetBool("isPreformingAction", true);
                     enemyAnimatorManger.PlayTargetAnimation(wakeAnimation, true);
                     StartCoroutine(WaitSeconds());
 
@@ -57,7 +58,7 @@ public class AmbushState : State
 
     IEnumerator WaitSeconds()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10f);
 
         isSleeping = false; // 잠 상태 해제
     }
