@@ -8,13 +8,22 @@ public class SpwanMobs : MonoBehaviour
     BoxCollider rangeCollider;
     public GameObject capsul;
     private AttackState _attackState;
-    private int _countMobs = 0;     
+    private int _countMobs = 0;
+    private float _spawnRange = 8f;
+    public Transform _boss;
     private void Update()
     {
+
         if(_attackState._spawingMobs)
         {
             RandomRespawn_Coroutine();
+            _attackState._spawingMobs = false;
         }
+    }
+
+    void CheckSpawnRange()
+    {
+        
     }
 
     void RandomRespawn_Coroutine()
