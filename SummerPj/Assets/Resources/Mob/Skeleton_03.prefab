@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 1210422584928655322}
   - component: {fileID: 1210422584928654372}
   - component: {fileID: 1210422584928654373}
+  - component: {fileID: 699941978236503039}
   m_Layer: 0
   m_Name: Skeleton_03
   m_TagString: Untagged
@@ -456,6 +457,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &699941978236503039
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210422584928654375}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1ed3c66dc9c92aa4babec4a6ca2e33c8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1210422584930969490
 GameObject:
   m_ObjectHideFlags: 0

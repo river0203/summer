@@ -6,12 +6,19 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 
 
-public class MobState : CharacterStatsManager
+public class MobState : MonoBehaviour
 {
+    public float _rotationSpeed = 3;
     public Transform target;
+
     NavMeshAgent agent;
     Animation anim;
-   
+    
+    int _damage = 25;
+    int _maxHealth;
+    int _currentHealth;
+    bool _isDie;
+
     enum State
     {
         Idle,
@@ -29,14 +36,14 @@ public class MobState : CharacterStatsManager
 
     void Start()
     {
-        state = State.Idle;
+        _maxHealth = 50;
         _currentHealth = _maxHealth;
-        _maxHealth = SetMaxHealthFromHealthLevel();
+        state = State.Idle;
+        _isDie = false;
     }
 
     void Update()
     {
-
         if (state == State.Idle)
         {
             UpdateIdle();
@@ -55,7 +62,7 @@ public class MobState : CharacterStatsManager
     private void UpdateAttack()
     {
         agent.speed = 0;
-        StartCoroutine(AttackDelay());
+        //anim.Play("attack02");
         float distance = Vector3.Distance(transform.position, target.transform.position);
         if (distance > 2)
         {
@@ -66,12 +73,11 @@ public class MobState : CharacterStatsManager
 
     private void UpdateRun()
     {
-
         float distance = Vector3.Distance(transform.position, target.transform.position);
         if (distance <= 2)
         {
             state = State.Attack;
-            StartCoroutine(AttackDelay());
+            //anim.Play("attack02");
         }
 
         agent.speed = 3.5f;
@@ -91,52 +97,46 @@ public class MobState : CharacterStatsManager
 
     IEnumerator AttackDelay()
     {
-        anim.Play("attack02");
+
         yield return new WaitForSeconds(5);
+        //anim.Play("attack02");
     }
+
 
     #region ÇÇ°Ý
 
-    private int SetMaxHealthFromHealthLevel()
+
+    private void OnCollisionEnter(Collision collision)
     {
-        _maxHealth = 20;
-        return _maxHealth;
-
-    }
-
-    public void TakeDamageAnimation(int _damage)
-    {
-        _currentHealth -= _damage;
-
-        if (_currentHealth <= 0)
+        if(collision.gameObject.tag == "Player")
         {
-            _isDead = true;
-        }
-        else
-        {
-            _isDead = false;
+            anim.Play("hit");
+            _currentHealth -= _damage;
+            StartCoroutine(HitDelay());
+            if(_currentHealth < 0)
+            {
+                HandleDeath();
+            }
         }
     }
 
-    public override void TakeDamage(int _damege, string _damageAnimation = "Stage2")
+    IEnumerator HitDelay()
     {
-        if (_isDead)
-            return;
-
-        _currentHealth -= _damege;
-        anim.Play("hit");
-
-        if (_currentHealth <= 0)
-        {
-            HandleDeath();
-        }
+        yield return new WaitForSeconds(2);
+        state = State.Idle;
     }
 
     public void HandleDeath()
     {
         _currentHealth = 0;
         anim.Play("die01");
-        _isDead = true;
+        StartCoroutine(DestroyMobs());
+    }
+
+    IEnumerator DestroyMobs()
+    {
+        yield return new WaitForSeconds(1);
+        Destroy(this.gameObject);
     }
 
     #endregion
