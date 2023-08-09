@@ -17,6 +17,7 @@ public class EnemyWeaponSlotManager : MonoBehaviour
     {
         _enemyEffactManager = GetComponent<EnemyEffactManager>();
         bossWeaponCollider = GetComponentInChildren<DamageCollider>(true);
+        
     }
 
     private void Start()
@@ -26,6 +27,7 @@ public class EnemyWeaponSlotManager : MonoBehaviour
 
     public void LoadWeaponOnSlot(WeaponItem weapon, bool _isWeapon)
     {
+    
         if(_isWeapon) 
         {
             currentWeaponSlot.currentWeapon = weapon;
