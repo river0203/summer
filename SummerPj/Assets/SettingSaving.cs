@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class SettingSaving : MonoBehaviour
 {
@@ -36,14 +37,27 @@ public class SettingSaving : MonoBehaviour
         _Bright = 1;
         _sensitivity_x = 1f;
         _sensitivity_y = 1f;
+
+        SettingOptions();
     }
 
     private void OnSceneLoaded(Scene scene)
     {
+        SettingOptions();
+
         if (scene.name == "Game")
         {
-            ApplySettings();   
+            ApplySettings();
         }
+    }
+
+    void SettingOptions()
+    {
+        _soundVolumeText.text = "º¼·ý : " + Mathf.Round(_soundVolume);
+        _FOVText.text = "FOV : " + _FOV;
+        _BrightText.text = "¹à±â : " + _Bright;
+        _sensitivity_X_Text.text = "XÃà ¹Î°¨µµ : " + _sensitivity_x;
+        _sensitivity_Y_Text.text = "YÃà ¹Î°¨µµ : " + _sensitivity_y;
     }
 
     public void ApplySettings()
