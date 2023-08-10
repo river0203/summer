@@ -49,11 +49,12 @@ public class CameraHandler : MonoBehaviour
     [SerializeField]
     CameraMode _mode = CameraMode.Scenematic;
 
+    public Canvas _playerUI;
+
     private void Awake()
     {
         _myTransform = transform;
         _defaultPosition = _cameraTransform.localPosition.z;
-        //_ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
         _targetTransform = FindObjectOfType<PlayerManager>().transform;
         
         _inputHandler = _targetTransform.GetComponent<InputHandler>();
@@ -61,6 +62,9 @@ public class CameraHandler : MonoBehaviour
 
     public void FollowTarget(float delta)
     {
+        if (_mode == CameraMode.Scenematic)
+            return; 
+
         Vector3 targetPosition = Vector3.SmoothDamp(_myTransform.position, _targetTransform.position, ref _cameraFollowVelocity, delta / _followSpeed);
         _myTransform.position = targetPosition;
 
@@ -69,6 +73,9 @@ public class CameraHandler : MonoBehaviour
 
     public void HandlerCameraRotation(float delta, float mouseXInput, float mouseYInput)
     {
+        if (_mode == CameraMode.Scenematic)
+            return;
+
         if (_inputHandler._lockOnFlag == false && _currentLockOnTarget == null)
         {
             _lookAngle += (mouseXInput * _lookSpeed) / delta;
@@ -101,13 +108,15 @@ public class CameraHandler : MonoBehaviour
             targetRotation = Quaternion.LookRotation(diraction);
             Vector3 eulerAngle = targetRotation.eulerAngles;
             eulerAngle.y = 0;
-            // _cameraPivotTransform.localEulerAngles = eulerAngle;
             _cameraPivotTransform.localEulerAngles = Vector3.Lerp(_cameraPivotTransform.localEulerAngles, eulerAngle, 0.01f);
         }
     }
 
     void HandleCameraCollisions(float delta)
     {
+        if (_mode == CameraMode.Scenematic)
+            return;
+
         _targetPosition = _defaultPosition;
         RaycastHit hit;
         Vector3 direction = _cameraTransform.position - _cameraPivotTransform.position;
@@ -132,6 +141,9 @@ public class CameraHandler : MonoBehaviour
 
     public void HandleLockOn()
     {
+        if (_mode == CameraMode.Scenematic)
+            return;
+
         float shortestDistance = Mathf.Infinity;
         float shortesDistanceLeftTaret = Mathf.Infinity;
         float shortesDistanceRightTarget = Mathf.Infinity;
@@ -197,6 +209,9 @@ public class CameraHandler : MonoBehaviour
 
     public void SetCameraHeight()
     {
+        if (_mode == CameraMode.Scenematic)
+            return;
+
         Vector3 velocity = Vector3.zero;
         Vector3 newLockedPosition = new Vector3(0, _lockedPivotPosition);
         Vector3 newUnlockedPosition = new Vector3(0, _unlockedPivotPosition);
@@ -209,5 +224,22 @@ public class CameraHandler : MonoBehaviour
         {
             _cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(_cameraPivotTransform.transform.localPosition, newUnlockedPosition, ref velocity, Time.deltaTime);
         }
+    }
+
+    public void PlayerMode()
+    {
+        _mode = CameraMode.Game;
+        transform.position = _targetTransform.position;
+        transform.rotation = Quaternion.identity;
+        ClearLockOnTargets();
+        _playerUI.gameObject.SetActive(true);
+    }
+
+    public void ScenematicMode()
+    {
+        _mode = CameraMode.Scenematic;
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+        _playerUI.gameObject.SetActive(false);
     }
 }

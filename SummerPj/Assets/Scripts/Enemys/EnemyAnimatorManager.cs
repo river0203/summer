@@ -7,6 +7,9 @@ public class EnemyAnimatorManager : AnimatorManager
     EnemyManager _enemyManager;
     EnemyEffactManager _enemyEffactManager;
 
+    public Animator _cameraAnim;
+    public GameObject _player;
+
     new private void Awake()
     {
         _anim = GetComponent<Animator>();
@@ -39,5 +42,10 @@ public class EnemyAnimatorManager : AnimatorManager
     public void PlayWeaponTrailFX()
     {
         _enemyEffactManager.PlayWeaponFX();
+    }
+
+    public void PlaySpawnScenematic()
+    {
+        _cameraAnim.Play("BossScenematic");
     }
 }
