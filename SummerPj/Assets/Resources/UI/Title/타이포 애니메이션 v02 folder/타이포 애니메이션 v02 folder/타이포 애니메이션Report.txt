@@ -1,0 +1,52 @@
+Report created: 
+	2023-08-07	오후 7:08:23
+
+Project name: 타이포 애니메이션.aep
+
+Source files collected to: 
+	C:\Users\laete\OneDrive\바탕 화면\타이포 애니메이션 v02 folder
+
+Source files collected: All
+
+Collected comps:  
+	타이포 애니
+	물방울
+	
+Number of collected files:  14
+
+Size of collected files:  626 KB
+
+Collected source files: 
+	C:\Users\laete\Downloads\ドーン（映画風）.mp3
+	C:\Users\laete\Downloads\過去を思い出す.mp3
+	C:\Users\laete\Downloads\金属ロゴ表示1.mp3
+	C:\Users\laete\OneDrive\바탕 화면\타이포 애니메이션 folder\(Footage)\타이포\검.png
+	C:\Users\laete\OneDrive\바탕 화면\타이포 애니메이션 folder\(Footage)\타이포\담.png
+	C:\Users\laete\OneDrive\바탕 화면\타이포 애니메이션 folder\(Footage)\타이포\망.png
+	C:\Users\laete\OneDrive\바탕 화면\타이포 애니메이션 folder\(Footage)\타이포\미.png
+	C:\Users\laete\OneDrive\바탕 화면\타이포 애니메이션 folder\(Footage)\타이포\사.png
+	C:\Users\laete\OneDrive\바탕 화면\타이포 애니메이션 folder\(Footage)\타이포\상.png
+	C:\Users\laete\OneDrive\바탕 화면\타이포 애니메이션 folder\(Footage)\타이포\용.png
+	C:\Users\laete\OneDrive\바탕 화면\타이포 애니메이션 folder\(Footage)\타이포\취.png
+	C:\Users\laete\OneDrive\바탕 화면\타이포 애니메이션 folder\(Footage)\타이포\학.png
+	C:\Users\laete\OneDrive\바탕 화면\타이포 애니메이션 folder\(Footage)\효과음\우웅 효과음.mp3
+	C:\Users\laete\OneDrive\바탕 화면\타이포 애니메이션 folder\(Footage)\효과음\칼 효과음.mp3
+	
+Rendering plug-ins:
+	Classic 3D
+	
+Effects used:  6
+
+Effect:  CC Mr. Mercury
+	
+Effect:  CC Radial Fast Blur
+	
+Effect:  Drop Shadow
+	
+Effect:  Gaussian Blur (Legacy)
+	
+Effect:  Transform
+	
+Effect:  Wiggle - position
+	
+
