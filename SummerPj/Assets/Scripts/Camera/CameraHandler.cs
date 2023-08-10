@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class CameraHandler : MonoBehaviour
 {
+    enum CameraMode
+    {
+        Game,
+        Scenematic
+    }
+
     InputHandler _inputHandler;
 
     public Transform _targetTransform;
@@ -39,6 +45,9 @@ public class CameraHandler : MonoBehaviour
     public Transform _leftLockTaregt;
     public Transform _rightLockTaregt;
     public float _maximumLockOnDistance = 30f;
+
+    [SerializeField]
+    CameraMode _mode = CameraMode.Scenematic;
 
     private void Awake()
     {
