@@ -54,17 +54,30 @@ public class DamageCollider : MonoBehaviour
         
         if (collision.tag == "Enemy")
         {
+            PlayerStatsManager playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStatsManager>();
             EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
             BlockingCollider shield = collision.transform.GetComponentInChildren<BlockingCollider>();
             CharacterEffectsManager _enemyEffectsManager = collision.GetComponent<CharacterEffectsManager>();
             CharacterManager _enemycharacterManager = collision.GetComponent<CharacterManager>();
 
             Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-            //_enemyEffectsManager.PlayBloodSplatterFX(contactPoint);
 
             if (enemyStats != null)
             {
+                // 적 타격시 마나 회복
+                if (playerStats._currentFocusPoints < playerStats._maxFocusPoints)
+                {
+                    playerStats._currentFocusPoints += playerStats._hitFocusPlus;
+                    if (playerStats._currentFocusPoints > playerStats._maxFocusPoints)
+                    {
+                        playerStats._currentFocusPoints = playerStats._maxFocusPoints;
+                    }
+                    playerStats._focusPointBar.SetCurrentFocusPoints(playerStats._currentFocusPoints);
+                }
+
                 enemyStats.TakeDamage(_currentWeaponDamage, currentDamageAnimation);
+                _enemyEffectsManager.PlayBloodSplatterFX(contactPoint);
+
             }
             else if (shield != null && _enemycharacterManager.isBlocking)
             {
@@ -76,13 +89,6 @@ public class DamageCollider : MonoBehaviour
                 }
             }
         }
-
-/*        if(collision.tag == "Illusionary Wall")
-        {
-            IllusionaryWall _illusionaryWall = collision.GetComponent<IllusionaryWall>();
-
-            _illusionaryWall.wallHasBeenHit = true;
-        }*/
     }
     public void EnableDamagecollider()
     {

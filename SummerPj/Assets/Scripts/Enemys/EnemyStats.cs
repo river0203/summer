@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class EnemyStats : CharacterStatsManager
 {
-
+    EnemySoundManager _soundManager;
     public UIEnemyHealthBar _enemyHealthBar;
     EnemyBossManager _enemyBossManager;
     EnemyAnimatorManager _enemyAnimatorManager;
     public bool _isBoss;
     public EnemyManager _enemyManager;
     CharacterStatsManager _characterState;
-    public string _PhaseAnim;
     public IdleState _idleState;
+    List<string> _PhaseAnim;
 
     private void Awake()
     {
+        _soundManager = GetComponentInChildren<EnemySoundManager>();
         _enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
         _enemyBossManager = GetComponent<EnemyBossManager>();
         _currentHealth = _maxHealth;
@@ -30,6 +31,8 @@ public class EnemyStats : CharacterStatsManager
         {
             _enemyHealthBar.SetMaXHealth(_maxHealth);
         }
+
+        List<string> _PhaseAnim = new List<string>();
     }
 
     private int SetMaxHealthFromHealthLevel()
@@ -54,7 +57,7 @@ public class EnemyStats : CharacterStatsManager
         }
     }
 
-    public override void TakeDamage(int _damege, string _damageAnimation = "Stage2")
+    public override void TakeDamage(int _damege ,string _damageAnimation)
     {
         if (_isDead)
             return;
@@ -68,11 +71,13 @@ public class EnemyStats : CharacterStatsManager
             _enemyBossManager.UpdateBossHealthBar(_currentHealth);
         }
 
+        _soundManager.PlayBossHitSound();
         _currentHealth -= _damege;
 
         if (_currentHealth <= 0)
         {
             HandleDeath();
+            _soundManager.PlayBossDeadSound();
         }
     }
 
@@ -83,7 +88,9 @@ public class EnemyStats : CharacterStatsManager
             _isDead = false;
             _currentHealth += 40;
             Debug.Log("ÆäÀÌÁî 2");
-            _enemyAnimatorManager.PlayTargetAnimation(_PhaseAnim, true);
+            
+            int randomValue = Random.Range(0, _PhaseAnim.Count);
+            _enemyAnimatorManager.PlayTargetAnimation(_PhaseAnim[randomValue], true);
             //_enemyManager.currentState = _idleState;
         }
         else

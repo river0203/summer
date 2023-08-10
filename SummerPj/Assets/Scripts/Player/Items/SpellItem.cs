@@ -23,6 +23,6 @@ public class SpellItem : Item
     public virtual void SucessfullyCastSpell(PlayerAnimatorManager _animatorHandler, PlayerStatsManager _playerStats, CameraHandler _cameraHandler, PlayerWeaponSlotManager _weaponSlotManager)
     {
         Debug.Log("You Sucessfully cast a spell!");
-       // _playerStats.DeductFocusPoints(focusPointCost);
+        _playerStats.DeductFocusPoints(focusPointCost);
     }
 }
