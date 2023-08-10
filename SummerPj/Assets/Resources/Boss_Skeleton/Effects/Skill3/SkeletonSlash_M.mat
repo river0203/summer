@@ -58,7 +58,7 @@ Material:
     - _Blend: 0
     - _CastShadows: 1
     - _Cull: 2
-    - _Dissolve: 0.1
+    - _Dissolve: -2.18
     - _DstBlend: 0
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -72,5 +72,5 @@ Material:
     m_Colors:
     - _MainColor: {r: 0, g: 0.6320754, b: 0.061451823, a: 0}
     - _Offset: {r: -1, g: 0, b: 0, a: 0}
-    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Tiling: {r: 2.49, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
