@@ -8,7 +8,7 @@ public class PlayerSoundFXManager : MonoBehaviour
     public AudioSource _audioSource;
 
     [Header("Taking Damage Sounds")]
-    public AudioClip[] takingDamageSounds;
+    [SerializeField] AudioClip[] takingDamageSounds;
     List<AudioClip> potentialDamageSounds;
     AudioClip lastDamageSoundPlayed;
 
@@ -16,12 +16,12 @@ public class PlayerSoundFXManager : MonoBehaviour
     List<AudioClip> potentialWeaponWhooshes;
     AudioClip lastWeaponWhooshes;
 
-    public AudioClip WalkSound;
-    public AudioClip RunSound;
-    public AudioClip JumpSound;
-    public AudioClip LandSound;
-    public AudioClip dodgeSound;
-    public AudioClip DeadSound;
+    [SerializeField] AudioClip WalkSound;
+    [SerializeField] AudioClip RunSound;
+    [SerializeField] AudioClip JumpSound;
+    [SerializeField] AudioClip LandSound;
+    [SerializeField] AudioClip dodgeSound;
+    [SerializeField] AudioClip DeadSound;
 
     private void Awake()
     {

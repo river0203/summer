@@ -12,6 +12,8 @@ public class PlayerStatsManager : CharacterStatsManager
     public StaminaBar _staminaBar;
     public FocusPointBar _focusPointBar;
 
+    public float _hitFocusPlus = 5f;
+
     PlayerAnimatorManager _playerAnimationManager;
     InputHandler _inputHandler;
     PlayerManager _playerManager;

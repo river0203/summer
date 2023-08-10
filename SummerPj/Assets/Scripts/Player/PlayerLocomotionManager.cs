@@ -269,7 +269,7 @@ public class PlayerLocomotionManager : MonoBehaviour
                 }
                 else
                 {
-                    _PlayerAnimationManager.PlayTargetAnimation("Locomotion", false);
+                    _PlayerAnimationManager.PlayTargetAnimation("Locomotion", true);
                     _inAirTimer = 0;
                 }
 

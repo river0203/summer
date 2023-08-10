@@ -16,7 +16,7 @@ public class CharacterStatsManager : MonoBehaviour
 
     public int _focusLevel = 10;
     [HideInInspector] public float _maxFocusPoints;
-    [HideInInspector] public float _currentFocusPoints;
+    public float _currentFocusPoints;
 
     [HideInInspector] public bool _isDead;
 
