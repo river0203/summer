@@ -5,10 +5,15 @@ using UnityEngine;
 public class EventColliderBeginBossFight : MonoBehaviour
 {
     WorldEventManager _worldEventManager;
+    EnemyAnimatorManager _enemyAnimatorManger;
+
+    public string _inAnim;
+    public bool _startingAnim;
 
     private void Awake()
     {
         _worldEventManager = FindObjectOfType<WorldEventManager>();
+        _enemyAnimatorManger = FindObjectOfType<EnemyAnimatorManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -18,5 +23,8 @@ public class EventColliderBeginBossFight : MonoBehaviour
             _worldEventManager.ActivateBossFight();
         }*/
         _worldEventManager.ActivateBossFight();
+
+        _enemyAnimatorManger.PlayTargetAnimation(_inAnim, true);
     }
+
 }

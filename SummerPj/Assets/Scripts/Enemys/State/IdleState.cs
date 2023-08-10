@@ -6,6 +6,7 @@ public class IdleState : State
 {
     public PursueTargetState pursueTargetState;
     public LayerMask detectionLayer;
+    private EventColliderBeginBossFight _eventCollider;
 
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
@@ -51,6 +52,5 @@ public class IdleState : State
             return this;
         }
         #endregion
-
     }
 }

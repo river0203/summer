@@ -6,7 +6,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
     QuickSlotsUI _quickSlotsUI;
     PlayerStatsManager _playerStats;
     PlayerEffectsManager _playerEffectsManager;
-    CharacterSoundFXManager _playerSoundFXManager;
+    PlayerSoundFXManager _playerSoundFXManager;
 
     public WeaponItem _attackingWeapon;
 
@@ -14,7 +14,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
     {
         _weaponSlot = GameObject.Find("hand_r").GetComponent<WeaponHolderSlot>();
 
-        _playerSoundFXManager = GetComponent<CharacterSoundFXManager>();
+        _playerSoundFXManager = GetComponent<PlayerSoundFXManager>();
         _quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
         _playerEffectsManager = GetComponent<PlayerEffectsManager>();
         _playerInventoryManager = GetComponent<PlayerInventoryManager>();

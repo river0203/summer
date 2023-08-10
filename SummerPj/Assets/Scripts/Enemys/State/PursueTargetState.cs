@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class PursueTargetState : State
 {
     public CombatStanceState combatStanceState;
+    public EventColliderBeginBossFight _eventCollider;
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
         
@@ -24,6 +25,7 @@ public class PursueTargetState : State
         float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
         // 적의 위치와 내가 바라보는 방향 사이의 각도
         float veiwableAngle = Vector3.Angle(targetDirection, transform.forward);
+       
         #endregion
 
         if (distanceFromTarget > enemyManager.maximumAttackRange)
@@ -33,6 +35,7 @@ public class PursueTargetState : State
 
         // 회전 및 이동
         HandleRotateTarget(enemyManager);
+
 
         // 다음 상황 추천
         if(distanceFromTarget <= enemyManager.maximumAttackRange)

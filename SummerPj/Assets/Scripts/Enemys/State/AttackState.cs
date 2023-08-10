@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.XR;
 using UnityEngine;
 
 public class AttackState : State
@@ -7,6 +8,7 @@ public class AttackState : State
     public CombatStanceState combatStanceState;
     public EnemyAttackAction[] enemyAttacks;
     public EnemyAttackAction currentAttack;
+    public bool _spawingMobs;
     public override State Tick(EnemyManager enemyManger, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
         Vector3 targetDirection = enemyManger.currentTarget.transform.position - transform.position;
@@ -119,6 +121,13 @@ public class AttackState : State
                     {
                         // 지금 공격을 함
                         currentAttack = enemyAttackAction;
+                        // Debug.Log(currentAttack);
+                        // attack Score로 구분
+                        if(currentAttack.attackScore == 4)
+                        {
+                            Debug.Log("잡몹 생성");
+                            _spawingMobs = true;
+                        }
                     }
                 }
             }

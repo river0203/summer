@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 3099296631056935907}
   - component: {fileID: 3099296631056935904}
   - component: {fileID: 3099296631056935905}
-  - component: {fileID: 1690241075}
+  - component: {fileID: 5293563906771166492}
   - component: {fileID: 3099296631056935911}
   - component: {fileID: 1690241076}
   m_Layer: 7
@@ -732,7 +732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anim: {fileID: 0}
   canRotate: 1
---- !u!114 &1690241075
+--- !u!114 &5293563906771166492
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -741,12 +741,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3099296630638564507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b6447c3852dbb44dba2204d4cfb6c93, type: 3}
+  m_Script: {fileID: 11500000, guid: 92b4570bf090c9d4abbe86183841f23f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSource: {fileID: 0}
-  takingDamageSounds:
-  - {fileID: 8300000, guid: 5f5c12f2d3c28c245a387c4df6dd9e02, type: 3}
+  _audioSource: {fileID: 1690241076}
+  takingDamageSounds: []
   WalkSound: {fileID: 0}
   RunSound: {fileID: 0}
   JumpSound: {fileID: 0}
@@ -1001,7 +1000,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2228911262984671357, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
 --- !u!1 &1377774190941536681 stripped
 GameObject:
