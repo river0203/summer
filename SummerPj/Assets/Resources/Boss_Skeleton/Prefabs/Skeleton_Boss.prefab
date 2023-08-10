@@ -2575,7 +2575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c156f829cb4bc46a9b28d7796fb82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bossName: Skell
+  _bossName: "\uC2A4\uCF08\uB808\uD1A4 \uD0B9"
 --- !u!114 &1987528271
 MonoBehaviour:
   m_ObjectHideFlags: 0
