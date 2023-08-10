@@ -14,6 +14,8 @@ public class EnemyStats : CharacterStatsManager
     public IdleState _idleState;
     List<string> _PhaseAnim;
 
+    
+
     private void Awake()
     {
         _soundManager = GetComponentInChildren<EnemySoundManager>();
@@ -99,6 +101,7 @@ public class EnemyStats : CharacterStatsManager
             _enemyAnimatorManager.PlayTargetAnimation("Dead", true);
             _isDead = true;
         }
-
     }
+
+    
 }

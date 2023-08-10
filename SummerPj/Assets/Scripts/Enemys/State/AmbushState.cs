@@ -13,7 +13,7 @@ public class AmbushState : State
 
     public LayerMask detectionLayer;
 
-    public PursueTargetState pursueTargetState; 
+    public PursueTargetState pursueTargetState;
 
     public override State Tick(EnemyManager enemyManger, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
@@ -42,7 +42,7 @@ public class AmbushState : State
                     enemyAnimatorManger._anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
                     enemyAnimatorManger._anim.SetBool("isPreformingAction", true);
                     StartCoroutine(WaitSeconds());
-
+                    
                     enemyManger.currentTarget = characterStats; // Å¸°Ù ¼³Á¤
                 }
             }
