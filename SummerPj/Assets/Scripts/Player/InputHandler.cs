@@ -47,6 +47,8 @@ public class InputHandler : MonoBehaviour
     #endregion
 
     float _lockOnCool;
+    public float _sensitivity_x;
+    public float _sensitivity_y;
     PlayerInputAction _inputActions;
     PlayerCombatManager _playerCombatManager;
     PlayerInventoryManager _playerInventoryManager;
@@ -150,8 +152,8 @@ public class InputHandler : MonoBehaviour
         _horizontal = _movementInput.x;
         _vertical = _movementInput.y;
         _moveAmount = Mathf.Clamp01(Mathf.Abs(_horizontal) + Mathf.Abs(_vertical));
-        _mouseX = _cameraInput.x;
-        _mouseY = _cameraInput.y;
+        _mouseX = _cameraInput.x * _sensitivity_x;
+        _mouseY = _cameraInput.y * _sensitivity_y;
     }
 
     // 구르기, 달리기 상태 갱신 (TickInput에서 실행)
