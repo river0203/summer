@@ -87,7 +87,7 @@ public class SettingSaving : MonoBehaviour
         _inputHandler._sensitivity_y = _sensitivity_y;
 
         // 그림자 조절
-        _light.shadowStrength = _Shadow ? 1 : 0;
+        _light.shadows = _Shadow ? LightShadows.Soft : LightShadows.None;
     }
 
     public void ChangeSoundVolume(float value)
