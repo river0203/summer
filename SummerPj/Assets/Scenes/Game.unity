@@ -273,6 +273,7 @@ MonoBehaviour:
   _Bright: 0
   _sensitivity_x: 1
   _sensitivity_y: 1
+  _Shadow: 1
   _soundVolumeText: {fileID: 302723748}
   _FOVText: {fileID: 798173163}
   _BrightText: {fileID: 1359058857}
@@ -3022,7 +3023,7 @@ Light:
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -3693,6 +3694,10 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 192483177}
+    - target: {fileID: 2049484539, guid: 478c12105e3de7e448864407b43008e3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 192483177}
     - target: {fileID: 8997959141763765942, guid: 478c12105e3de7e448864407b43008e3, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4014,6 +4019,10 @@ PrefabInstance:
       propertyPath: _playerUI
       value: 
       objectReference: {fileID: 1724411579}
+    - target: {fileID: 5336107799871721913, guid: 71e3256d9c4736446ba6960209b094bd, type: 3}
+      propertyPath: _ignoreLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5336107800553575381, guid: 71e3256d9c4736446ba6960209b094bd, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
