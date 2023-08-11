@@ -15,6 +15,7 @@ using UnityEngine;
         {
             _characterManager = GetComponent<CharacterManager>();
             _characterStatsManager = GetComponent<CharacterStatsManager>();
+            _playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         }
         public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool canRotate = false)
         {

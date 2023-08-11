@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerAnimatorManager : AnimatorManager
 {
     InputHandler _inputHandler;
-    PlayerLocomotionManager _playerLocomotionManager;
     int _vertical;
     int _horizontal;
 
@@ -15,7 +14,6 @@ public class PlayerAnimatorManager : AnimatorManager
         base.Awake();
         _anim = GetComponent<Animator>();
         _inputHandler = GetComponent<InputHandler>();
-        _playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         _vertical = Animator.StringToHash("Vertical");
         _horizontal = Animator.StringToHash("Horizontal");
     }

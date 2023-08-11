@@ -32,12 +32,13 @@ public class SettingSaving : MonoBehaviour
     }
     private void Start()
     {
-        _soundVolume = 1;
+        _soundVolume = 100;
         _FOV = 40f;
         _Bright = 1;
         _sensitivity_x = 1f;
         _sensitivity_y = 1f;
-
+        
+        ApplySettings();
         SettingOptions();
     }
 
