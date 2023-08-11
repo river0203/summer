@@ -7,6 +7,7 @@ using UnityEngine;
     {
         protected CharacterManager _characterManager;
         protected CharacterStatsManager _characterStatsManager;
+        protected PlayerLocomotionManager _playerLocomotionManager;
         public Animator _anim;
         public bool canRotate;
   

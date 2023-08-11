@@ -80,6 +80,29 @@ public class PlayerLocomotionManager : MonoBehaviour
     Vector3 normalVector;
     Vector3 _targetPosition;
 
+    public void HandleAttackRotation()
+    {
+        Vector3 targetDirection = Vector3.zero;
+        float moveOverride = _inputHandler._moveAmount;
+
+        targetDirection = _cameraObject.forward * _inputHandler._vertical;
+        targetDirection += _cameraObject.right * _inputHandler._horizontal;
+
+        targetDirection.Normalize();
+        targetDirection.y = 0;
+
+        if (targetDirection == Vector3.zero)
+        {
+            targetDirection = _myTransform.forward;
+        }
+
+        float _rs = _rotationSpeed;
+
+        Quaternion _tr = Quaternion.LookRotation(targetDirection);
+
+        _myTransform.rotation = _tr;
+    }
+
     // 로테이션 변경
     public void HandleRotation(float delta)
     {
@@ -89,18 +112,18 @@ public class PlayerLocomotionManager : MonoBehaviour
             {
                 if (_inputHandler._sprintFlag || _inputHandler._dodgeFlag)
                 {
-                    Vector3 targetDirection = Vector3.zero;
-                    targetDirection = _cameraHandler._cameraTransform.forward * _inputHandler._vertical;
-                    targetDirection = _cameraHandler._cameraTransform.right * _inputHandler._horizontal;
-                    targetDirection.Normalize();
-                    targetDirection.y = 0;
+                    Vector3 targetDir= Vector3.zero;
+                    targetDir = _cameraHandler._cameraTransform.forward * _inputHandler._vertical;
+                    targetDir = _cameraHandler._cameraTransform.right * _inputHandler._horizontal;
+                    targetDir.Normalize();
+                    targetDir.y = 0;
 
-                    if (targetDirection == Vector3.zero)
+                    if (targetDir == Vector3.zero)
                     {
-                        targetDirection = transform.forward;
+                        targetDir = transform.forward;
                     }
 
-                    Quaternion tr = Quaternion.LookRotation(targetDirection);
+                    Quaternion tr = Quaternion.LookRotation(targetDir);
                     Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, _rotationSpeed * Time.deltaTime);
 
                     transform.rotation = targetRotation;
@@ -119,7 +142,6 @@ public class PlayerLocomotionManager : MonoBehaviour
             else
             {
                 Vector3 targetDir = Vector3.zero;
-                float moveOverride = _inputHandler._moveAmount;
 
                 targetDir = _cameraObject.forward * _inputHandler._vertical;
                 targetDir += _cameraObject.right * _inputHandler._horizontal;

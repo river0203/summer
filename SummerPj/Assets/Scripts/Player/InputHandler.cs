@@ -50,6 +50,7 @@ public class InputHandler : MonoBehaviour
     public float _sensitivity_x;
     public float _sensitivity_y;
     PlayerInputAction _inputActions;
+    PlayerLocomotionManager _playerLocomotionManager;
     PlayerCombatManager _playerCombatManager;
     PlayerInventoryManager _playerInventoryManager;
     PlayerManager _playerManager;
@@ -70,6 +71,7 @@ public class InputHandler : MonoBehaviour
         _cameraHandler = FindObjectOfType<CameraHandler>();
         _uiManager = FindObjectOfType<UIManager>();
 
+        _playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         _playerEffectsManager = GetComponent<PlayerEffectsManager>();
         _playerCombatManager = GetComponent<PlayerCombatManager>();
         _playerInventoryManager = GetComponent<PlayerInventoryManager>();
