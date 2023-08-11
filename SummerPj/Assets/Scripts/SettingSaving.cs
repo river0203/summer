@@ -4,27 +4,31 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
+using System;
 
 public class SettingSaving : MonoBehaviour
 {
     LightingSettings _lightingSettings;
     PlayerInputAction _inputActions;
+    Light _light;
 
-    public float _soundVolume = 1;
-    public float _FOV = 40;
-    public float _Bright;
-    public float _sensitivity_x = 1f;
-    public float _sensitivity_y = 1f;
+    [SerializeField] float _soundVolume = 1;
+    [SerializeField] float _FOV = 40;
+    [SerializeField] float _Bright;
+    [SerializeField] float _sensitivity_x = 1f;
+    [SerializeField] float _sensitivity_y = 1f;
+    [SerializeField] bool _Shadow = true;
 
-    public Text _soundVolumeText;
-    public Text _FOVText;
-    public Text _BrightText;
-    public Text _sensitivity_X_Text;
-    public Text _sensitivity_Y_Text;
+    [SerializeField] Text _soundVolumeText;
+    [SerializeField] Text _FOVText;
+    [SerializeField] Text _BrightText;
+    [SerializeField] Text _sensitivity_X_Text;
+    [SerializeField] Text _sensitivity_Y_Text;
 
 
     private void Awake()
     {
+        _light = FindAnyObjectByType<Light>();
         _inputActions = new PlayerInputAction();
         _lightingSettings = new LightingSettings();
 
@@ -32,7 +36,7 @@ public class SettingSaving : MonoBehaviour
     }
     private void Start()
     {
-        _soundVolume = 100;
+        _soundVolume = 1;
         _FOV = 40f;
         _Bright = 1;
         _sensitivity_x = 1f;
@@ -81,12 +85,15 @@ public class SettingSaving : MonoBehaviour
         InputHandler _inputHandler = FindObjectOfType<InputHandler>();
         _inputHandler._sensitivity_x = _sensitivity_x;
         _inputHandler._sensitivity_y = _sensitivity_y;
+
+        // 그림자 조절
+        _light.shadowStrength = _Shadow ? 1 : 0;
     }
 
     public void ChangeSoundVolume(float value)
     {
-        _soundVolume = value;
         _soundVolumeText.text = "볼륨 : " + Mathf.Round(value);
+        _soundVolume = value / 100;
     }
 
     public void ChangeFOV(float value)
@@ -111,5 +118,19 @@ public class SettingSaving : MonoBehaviour
     {
         _sensitivity_y = value;
         _sensitivity_Y_Text.text= "Y축 민감도 : " + value;
+    }
+
+    public void ChangeShadow()
+    {
+        if(_Shadow)
+        {
+            _Shadow = false;
+        }
+        else
+        {
+            _Shadow = true;
+        }
+        
+        // 아이콘 변경
     }
 }
