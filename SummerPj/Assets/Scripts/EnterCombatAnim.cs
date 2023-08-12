@@ -23,7 +23,7 @@ public class EnterCombatAnim : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _player.transform.rotation = Quaternion.Lerp(_player.transform.rotation, _targetRotation, _rotationSpeed * Time.deltaTime);    
+        _player.transform.rotation = Quaternion.Slerp(_player.transform.rotation, _targetRotation, _rotationSpeed * Time.deltaTime);    
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
