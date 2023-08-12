@@ -146,6 +146,7 @@ public class InputHandler : MonoBehaviour
         HandleTwoHandInput();
         HandleCriticalAttackInput();
         HandleUseConsumableInput();
+        HandleAttackRotation();
     }
 
     // 이동 및 마우스 포지션 갱신 (TickInput에서 실행)
@@ -331,5 +332,10 @@ public class InputHandler : MonoBehaviour
                 _playerInventoryManager.currentConsumable.AttemptToConsumeItem(_playerAnimatorManager, _weaponSlotManager, _playerEffectsManager);
             }
         }
+    }
+
+    private void HandleAttackRotation()
+    {
+        _playerLocomotionManager.HandleAttackRotation();
     }
 }

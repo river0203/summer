@@ -51,6 +51,7 @@ public class PlayerLocomotionManager : MonoBehaviour
     int backstepStaminaCost = 12;
     int sprintStaminaCost = 1;
 
+    public Quaternion _tr;
     public CapsuleCollider _characterCollider;
     public CapsuleCollider _characterCollisionBlockerCollider;
 
@@ -83,7 +84,6 @@ public class PlayerLocomotionManager : MonoBehaviour
     public void HandleAttackRotation()
     {
         Vector3 targetDirection = Vector3.zero;
-        float moveOverride = _inputHandler._moveAmount;
 
         targetDirection = _cameraObject.forward * _inputHandler._vertical;
         targetDirection += _cameraObject.right * _inputHandler._horizontal;
@@ -96,11 +96,8 @@ public class PlayerLocomotionManager : MonoBehaviour
             targetDirection = _myTransform.forward;
         }
 
-        float _rs = _rotationSpeed;
-
-        Quaternion _tr = Quaternion.LookRotation(targetDirection);
-
-        _myTransform.rotation = _tr;
+        _tr = Quaternion.LookRotation(targetDirection);
+        //transform.rotation = _tr;
     }
 
     // 로테이션 변경
