@@ -5,26 +5,29 @@ using UnityEngine;
 public class EnemyStats : CharacterStatsManager
 {
     EnemySoundManager _soundManager;
-    public UIEnemyHealthBar _enemyHealthBar;
     EnemyBossManager _enemyBossManager;
     EnemyAnimatorManager _enemyAnimatorManager;
-    public bool _isBoss;
-    public EnemyManager _enemyManager;
-    CharacterStatsManager _characterState;
-    public IdleState _idleState;
-    List<string> _PhaseAnim;
+    EnemyManager _enemyManager;
+    UIEnemyHealthBar _enemyHealthBar;
 
+    public IdleState _idleState;
     
+    [SerializeField] bool _isBoss;
+    
+    [SerializeField] List<string> _PhaseAnim;
+    [SerializeField] float detectionRadius = 20;
+    [SerializeField] LayerMask _MobLayer;
 
     private void Awake()
     {
+        _enemyBossManager = GetComponent<EnemyBossManager>();
+        _enemyManager = GetComponent<EnemyManager>();
         _soundManager = GetComponentInChildren<EnemySoundManager>();
         _enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
-        _enemyBossManager = GetComponent<EnemyBossManager>();
+        _idleState = GetComponentInChildren<IdleState>();
+
         _currentHealth = _maxHealth;
         _maxHealth = SetMaxHealthFromHealthLevel();
-        _enemyManager = GetComponent<EnemyManager>();
-        _idleState = GetComponentInChildren<IdleState>();
     }
 
     private void Start()
@@ -33,8 +36,6 @@ public class EnemyStats : CharacterStatsManager
         {
             _enemyHealthBar.SetMaXHealth(_maxHealth);
         }
-
-        List<string> _PhaseAnim = new List<string>();
     }
 
     private int SetMaxHealthFromHealthLevel()
@@ -44,7 +45,7 @@ public class EnemyStats : CharacterStatsManager
 
     }
 
-    public void TakeDamageAnimation(int _damage)
+/*    public void TakeDamageAnimation(int _damage)
     {
         _currentHealth -= _damage;
         _enemyHealthBar.SetHealth(_currentHealth);
@@ -57,12 +58,15 @@ public class EnemyStats : CharacterStatsManager
         {
             _isDead = false;
         }
-    }
+    }*/
 
     public override void TakeDamage(int _damege ,string _damageAnimation)
     {
         if (_isDead)
             return;
+
+        // HP가 줄어들고 UI에 반영
+        _currentHealth -= _damege;
 
         if (!_isBoss)
         {
@@ -74,7 +78,6 @@ public class EnemyStats : CharacterStatsManager
         }
 
         _soundManager.PlayBossHitSound();
-        _currentHealth -= _damege;
 
         if (_currentHealth <= 0)
         {
@@ -85,12 +88,15 @@ public class EnemyStats : CharacterStatsManager
 
     public void HandleDeath()
     {
-        if (_enemyManager.isPhase)
+        Collider[] Mobcollider = Physics.OverlapSphere(transform.position, detectionRadius, _MobLayer);
+
+        if (Mobcollider != null)
         {
             _isDead = false;
             _currentHealth += 40;
             Debug.Log("페이즈 2");
             
+            // 부활 애니메이션을 랜덤으로 출력
             int randomValue = Random.Range(0, _PhaseAnim.Count);
             _enemyAnimatorManager.PlayTargetAnimation(_PhaseAnim[randomValue], true);
             //_enemyManager.currentState = _idleState;
@@ -99,9 +105,14 @@ public class EnemyStats : CharacterStatsManager
         {
             _currentHealth = 0;
             _enemyAnimatorManager.PlayTargetAnimation("Dead", true);
+            StartCoroutine(DestroyChar());
             _isDead = true;
         }
     }
 
-    
+    private IEnumerator DestroyChar()
+    {
+        yield return new WaitForSeconds(15);
+        Destroy(gameObject);
+    }
 }

@@ -8,7 +8,6 @@ public class EventColliderBeginBossFight : MonoBehaviour
     EnemyAnimatorManager _enemyAnimatorManger;
 
     public string _inAnim;
-    public bool _startingAnim;
 
     private void Awake()
     {
@@ -24,7 +23,9 @@ public class EventColliderBeginBossFight : MonoBehaviour
         }*/
         _worldEventManager.ActivateBossFight();
 
-        _enemyAnimatorManger.PlayTargetAnimation(_inAnim, true);
+        // _enemyAnimatorManger.PlayTargetAnimation(_inAnim, true);
+        _enemyAnimatorManger._anim.Play(_inAnim);
+        _enemyAnimatorManger._anim.SetBool("isPreformingAction", true);
     }
 
 }

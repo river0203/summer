@@ -194,7 +194,6 @@ public class PlayerCombatManager : MonoBehaviour
     private void SuccessfullyCastSpell()
     {
         _playerInventoryManager._currentSpell.SucessfullyCastSpell(_playerAnimatorManager, _playerStatsManager, _cameraHandler, _playerWeaponSlotManager);
-        _playerAnimatorManager._anim.SetBool("isFiringSpell", true);
     }
 
     public void AttemptBackStabOrRiposte()

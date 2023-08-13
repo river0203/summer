@@ -48,7 +48,7 @@ public class DamageCollider : MonoBehaviour
                 Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                 _playerEffectsManager.PlayBloodSplatterFX(contactPoint);
 
-                playerStats.TakeDamage(_currentWeaponDamage, currentDamageAnimation = "Damage_Foward_01"); 
+                playerStats.TakeDamage(_currentWeaponDamage, currentDamageAnimation); 
             }
         }
         
@@ -64,7 +64,7 @@ public class DamageCollider : MonoBehaviour
 
             if (enemyStats != null)
             {
-                // 적 타격시 마나 회복
+                #region 적 타격시 마나 회복
                 if (playerStats._currentFocusPoints < playerStats._maxFocusPoints)
                 {
                     playerStats._currentFocusPoints += playerStats._hitFocusPlus;
@@ -74,19 +74,10 @@ public class DamageCollider : MonoBehaviour
                     }
                     playerStats._focusPointBar.SetCurrentFocusPoints(playerStats._currentFocusPoints);
                 }
+                #endregion
 
                 enemyStats.TakeDamage(_currentWeaponDamage, currentDamageAnimation);
                 _enemyEffectsManager.PlayBloodSplatterFX(contactPoint);
-
-            }
-            else if (shield != null && _enemycharacterManager.isBlocking)
-            {
-                float physicalDamageAfterBlock = _currentWeaponDamage - (_currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
-                if (enemyStats != null)
-                {
-                    enemyStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard");
-                    return;
-                }
             }
         }
     }

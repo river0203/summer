@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyWeaponSlotManager : MonoBehaviour
@@ -21,11 +19,11 @@ public class EnemyWeaponSlotManager : MonoBehaviour
 
     private void Start()
     {
-        _anim = GetComponent<Animator>();
-        LoadWeaponsOnBothHands();
+        // _anim = GetComponent<Animator>();
+        // LoadWeaponsOnBothHands();
     }
 
-    public void LoadWeaponOnSlot(WeaponItem weapon, bool _isWeapon)
+    /*public void LoadWeaponOnSlot(WeaponItem weapon, bool _isWeapon)
     {
         if(_isWeapon) 
         {
@@ -51,7 +49,7 @@ public class EnemyWeaponSlotManager : MonoBehaviour
             bossWeaponCollider._characterManager = GetComponentInParent<CharacterManager>();
             //_enemyEffactManager._rightWeaponFX = currentWeaponSlot._currentWeaponModel.GetComponentInChildren<WeaponFX>();
         }
-    }   
+    }   */
 
     public void OpenDamageCollider()
     {
@@ -60,15 +58,5 @@ public class EnemyWeaponSlotManager : MonoBehaviour
     public void CloseDamageCollider()
     {
         bossWeaponCollider.DisableDamagecollider();
-    }
-
-
-    public void EnableCombo()
-    {
-        //_anim.SetBool("canDoCombo", true);
-    }
-    public void DisableCombo()
-    {
-        //_anim.SetBool("canDoCombo", false);
     }
 }

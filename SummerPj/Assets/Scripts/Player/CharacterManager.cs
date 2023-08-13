@@ -34,9 +34,6 @@ public class CharacterManager : MonoBehaviour
     public bool _isInAir;
     public bool _isGrounded;
 
-    [Header("Spells")]
-    public bool isFiringSpell;
-
     public int pendingCriticalDamage;
 
     private void Awake()

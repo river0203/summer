@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAnimatorManager : AnimatorManager
@@ -20,9 +18,9 @@ public class EnemyAnimatorManager : AnimatorManager
     public override void TakeCriticalDamageAnimationEvent()
     {
         //_enemyStats.TakeDamageNoAnimation(_enemyManager.pendingCriticalDamage);
-        _enemyManager.pendingCriticalDamage = 0;
+        // _enemyManager.pendingCriticalDamage = 0;
     }
-    public override void EnableParrying()
+/*    public override void EnableParrying()
     {
         _enemyManager.isParrying = true;
     }
@@ -37,7 +35,7 @@ public class EnemyAnimatorManager : AnimatorManager
     public override void DisableCanBeRiposted()
     {
         _enemyManager.canBeRiposted = false;
-    }
+    }*/
 
     public void PlayWeaponTrailFX()
     {

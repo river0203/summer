@@ -1,74 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Transactions;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyManager : CharacterManager
+public class EnemyManager : MonoBehaviour
 {
-    EnemyLocomotionManager enemyLocomotionManager;
-    public EnemyAnimatorManager enemyAnimatorManager;
-    EnemyStats enemyStats;
-    public Rigidbody enemyRigidBody;
-    public CharacterStatsManager _characterState;
-    public EnemyAnimatorManager _enemyAnimatorManger;
-    public NavMeshAgent navmeshAgent;
-    public EnemyStats _enemyStats;
+    [HideInInspector] public NavMeshAgent _navmeshAgent;
+    [HideInInspector] public EnemyStats _enemyStats;
+    [HideInInspector] public Rigidbody _enemyRigidBody;
 
-    public State currentState;
-    public CharacterStatsManager currentTarget;
+    EnemyAnimatorManager _enemyAnimatorManager;
+    CharacterStatsManager _characterState;
+
+    public State _currentState;
+    public CharacterStatsManager _currentTarget;
     public bool isPreformingAction;
-    public float maximumAttackRange = 1.5f;
-    public bool isInteracting;
-    public float rotationSpeed = 3;
-    public bool isPhase;
 
     [Header("AI Setting")]
     public float detectionRadius = 20;
     public float maximumDetectionAngle = 10;
     public float minimumDetectionAngle = -10;
+    public float maximumAttackRange = 1.5f;
+    public float rotationSpeed = 3;
+
+    public LayerMask _MobLayer;
 
     void Awake()
-    {
-        enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
-        enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
-        enemyStats = GetComponent<EnemyStats>();
-        enemyRigidBody = GetComponent<Rigidbody>();
-        navmeshAgent = GetComponentInChildren<NavMeshAgent>();
-        _backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
-        navmeshAgent.enabled = false;
+    {   
+        _enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
+        _enemyStats = GetComponent<EnemyStats>();
+        _enemyRigidBody = GetComponent<Rigidbody>();
+        _navmeshAgent = GetComponentInChildren<NavMeshAgent>();
         _characterState = GetComponent<CharacterStatsManager>();
     }
 
     private void Start()
     {
-        navmeshAgent.enabled = false;
+        _navmeshAgent.enabled = false;
     }
 
     void Update()
     {
-        isInteracting = enemyAnimatorManager._anim.GetBool("isInteracting");
-        isPreformingAction = enemyAnimatorManager._anim.GetBool("isPreformingAction");
-        enemyAnimatorManager._anim.SetBool("isDead", enemyStats._isDead);
-        _characterState.DestroyObj();
-        enemyRigidBody.velocity = Vector3.zero;
+        isPreformingAction = _enemyAnimatorManager._anim.GetBool("isPreformingAction");
+        _enemyAnimatorManager._anim.SetBool("isDead", _enemyStats._isDead);
+        _enemyRigidBody.velocity = Vector3.zero;
+        
         LookTarget();
-        Phase2();
     }
 
     private void FixedUpdate()
     {
         HandleStateMachine();
+
         // 네비게이션이 혼자서 튀어 나가는거 막기
-        navmeshAgent.transform.localPosition = Vector3.zero;
-        navmeshAgent.transform.localRotation = Quaternion.identity;
+        _navmeshAgent.transform.localPosition = Vector3.zero;
+        _navmeshAgent.transform.localRotation = Quaternion.identity;
     }
 
+    // 적 스테이트 관리
     public void HandleStateMachine()
     {
-       if(currentState != null)
+       if(_currentState != null)
         {
-            State nextState = currentState.Tick(this, enemyStats, enemyAnimatorManager);
+            State nextState = _currentState.Tick(this, _enemyStats, _enemyAnimatorManager);
 
             if(nextState != null)
             {
@@ -79,36 +71,18 @@ public class EnemyManager : CharacterManager
 
     private void SwitchToNextState(State state)
     {
-        currentState = state;
+        _currentState = state;
     }
 
+    // 공격중에 적이 회전하도록 하는 코드
     private void LookTarget()
     {
         if(isPreformingAction)
         {
-            if (!_characterState._isDead)
+            if (!_characterState._isDead && _currentTarget != null)
             {
-                Vector3 _targetDirection = currentTarget.transform.position - this.transform.position;
+                Vector3 _targetDirection = _currentTarget.transform.position - this.transform.position;
                 this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(_targetDirection), rotationSpeed * Time.deltaTime);
-            }
-        }
-    }
-
-    private void Phase2()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
-
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            GameObject _mobs = GameObject.FindWithTag("Mobs");
-            if (_mobs != null)
-            {
-                isPhase = true;
-                //HandleStateMachine();
-            }
-            else
-            {
-                isPhase = false;
             }
         }
     }

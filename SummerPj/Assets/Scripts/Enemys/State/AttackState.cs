@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.XR;
 using UnityEngine;
 
 public class AttackState : State
@@ -9,13 +6,12 @@ public class AttackState : State
     public EnemyAttackAction[] enemyAttacks;
     public EnemyAttackAction currentAttack;
     public bool _spawingMobs;
+
     public override State Tick(EnemyManager enemyManger, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManger)
     {
-        Vector3 targetDirection = enemyManger.currentTarget.transform.position - transform.position;
-        float distanceFromTarget = Vector3.Distance(enemyManger.currentTarget.transform.position, enemyManger.transform.position); ;
+        Vector3 targetDirection = enemyManger._currentTarget.transform.position - transform.position;
+        float distanceFromTarget = Vector3.Distance(enemyManger._currentTarget.transform.position, enemyManger.transform.position); ;
         float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
-
-
 
         // 뭘 하고 있으면 공격하지 말고 돌아가라
         if (enemyManger.isPreformingAction)
@@ -60,13 +56,12 @@ public class AttackState : State
     {
         #region 공격에 참고할 수치 가져오기
         // 나와 적을 가로지르는 화살표
-        Vector3 targetDirection = enemyManger.currentTarget.transform.position - transform.position;
+        Vector3 targetDirection = enemyManger._currentTarget.transform.position - transform.position;
         // 적과 나의 거리
-        float distanceFromTarget = Vector3.Distance(enemyManger.currentTarget.transform.position, enemyManger.transform.position);
+        float distanceFromTarget = Vector3.Distance(enemyManger._currentTarget.transform.position, enemyManger.transform.position);
         // 자신이 보는 방향과 타겟의 위치간의 각도
         float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
         #endregion
-
 
         #region 최대 점수를 정함
         int maxScore = 0;
@@ -89,7 +84,7 @@ public class AttackState : State
         }
         #endregion
 
-        #region 렌덤을 렌덤으로 뽑음
+        #region 렌덤을 랜덤으로 뽑음
         // 점수중에 숫자 하나를 뽑음
         int randomValue = Random.Range(0, maxScore);
         // 임시 점수?
@@ -121,8 +116,7 @@ public class AttackState : State
                     {
                         // 지금 공격을 함
                         currentAttack = enemyAttackAction;
-                        // Debug.Log(currentAttack);
-                        // attack Score로 구분
+
                         if(currentAttack.attackScore == 4)
                         {
                             Debug.Log("잡몹 생성");
@@ -133,6 +127,5 @@ public class AttackState : State
             }
         }
         #endregion
-
     }
 }
