@@ -10,6 +10,7 @@ public class EnemyManager : MonoBehaviour
     EnemyAnimatorManager _enemyAnimatorManager;
     CharacterStatsManager _characterState;
 
+    public Transform _lockOnTransform;
     public State _currentState;
     public CharacterStatsManager _currentTarget;
     public bool isPreformingAction;
