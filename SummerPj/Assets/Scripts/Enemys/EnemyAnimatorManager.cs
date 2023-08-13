@@ -15,35 +15,23 @@ public class EnemyAnimatorManager : AnimatorManager
         _enemyEffactManager = GetComponent<EnemyEffactManager>();
     }
 
-    public override void TakeCriticalDamageAnimationEvent()
-    {
-        //_enemyStats.TakeDamageNoAnimation(_enemyManager.pendingCriticalDamage);
-        // _enemyManager.pendingCriticalDamage = 0;
-    }
-/*    public override void EnableParrying()
-    {
-        _enemyManager.isParrying = true;
-    }
-    public override void DisableParrying()
-    {
-        _enemyManager.isParrying = false;
-    }
-    public override void EnableCanBeRiposted()
-    {
-        _enemyManager.canBeRiposted = true;
-    }
-    public override void DisableCanBeRiposted()
-    {
-        _enemyManager.canBeRiposted = false;
-    }*/
-
     public void PlayWeaponTrailFX()
     {
         _enemyEffactManager.PlayWeaponFX();
     }
-
+        
     public void PlaySpawnScenematic()
     {
         _cameraAnim.Play("BossScenematic");
+    }
+
+    public override void CanRotate()
+    {
+        base.CanRotate();
+    }
+
+    public override void StopRotate()
+    {
+        base.StopRotate();  
     }
 }

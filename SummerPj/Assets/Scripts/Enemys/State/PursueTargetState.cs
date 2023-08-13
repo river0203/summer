@@ -8,7 +8,7 @@ public class PursueTargetState : State
     {
         
         // 무언가 하고 있으면 제자리에 멈추고 그냥 현재 상태 유지하는걸 추천
-        if (enemyManager.isPreformingAction)
+        if (enemyManager._isPreformingAction)
         {
             enemyAnimatorManger._anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
             return this;
@@ -48,7 +48,7 @@ public class PursueTargetState : State
     private void HandleRotateTarget(EnemyManager enemyManager)
     {
         // 뭔가 하고 있다면 타겟을 바라보기만 함
-        if (enemyManager.isPreformingAction)
+        if (enemyManager._isPreformingAction)
         {
             Vector3 direction = enemyManager._currentTarget.transform.position - transform.position; // 나와 적의 화살표
             direction.y = 0; // 높낮이는 뺌

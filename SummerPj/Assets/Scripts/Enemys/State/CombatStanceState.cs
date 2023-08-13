@@ -11,12 +11,12 @@ public class CombatStanceState : State
         float distanceFromTarget = Vector3.Distance(enemyManager._currentTarget.transform.position, enemyManager.transform.position);
 
         // 적이 공격 하고 있었으면 이속을 0으로 밀어버림 (공격하고 달리는 애니메이션으로 넘어가는거 방지)
-        if (enemyManager.isPreformingAction)
+        if (enemyManager._isPreformingAction)
         {
             enemyAnimatorManger._anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
         }
 
-        if (!enemyManager.isPreformingAction// 공격 상태 체크
+        if (!enemyManager._isPreformingAction// 공격 상태 체크
             && distanceFromTarget <= enemyManager.maximumAttackRange) // 공격 가능 범위 체크
         {
             return attackState; // 그때 공격 추천

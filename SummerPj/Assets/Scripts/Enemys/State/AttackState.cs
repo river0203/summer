@@ -14,7 +14,7 @@ public class AttackState : State
         float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
         // 뭘 하고 있으면 공격하지 말고 돌아가라
-        if (enemyManger.isPreformingAction)
+        if (enemyManger._isPreformingAction)
             return combatStanceState;
 
         // 현재 공격한게 있으면
@@ -30,8 +30,7 @@ public class AttackState : State
                 if (viewableAngle <= currentAttack.maximumAttackAngle
                     && viewableAngle >= currentAttack.minimumAttackAngle)
                 {
-
-                    if (!enemyManger.isPreformingAction && enemyManger.isPreformingAction == false)
+                    if (!enemyManger._isPreformingAction && enemyManger._isPreformingAction == false)
                     {
                         enemyAnimatorManger._anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
                         enemyAnimatorManger._anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);

@@ -13,7 +13,8 @@ public class EnemyManager : MonoBehaviour
     public Transform _lockOnTransform;
     public State _currentState;
     public CharacterStatsManager _currentTarget;
-    public bool isPreformingAction;
+    public bool _isPreformingAction;
+    public bool _canRotate;
 
     [Header("AI Setting")]
     public float detectionRadius = 20;
@@ -40,7 +41,8 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
-        isPreformingAction = _enemyAnimatorManager._anim.GetBool("isPreformingAction");
+        _canRotate = _enemyAnimatorManager._anim.GetBool("canRotate");
+        _isPreformingAction = _enemyAnimatorManager._anim.GetBool("isPreformingAction");
         _enemyAnimatorManager._anim.SetBool("isDead", _enemyStats._isDead);
         _enemyRigidBody.velocity = Vector3.zero;
         
@@ -78,7 +80,7 @@ public class EnemyManager : MonoBehaviour
     // 공격중에 적이 회전하도록 하는 코드
     private void LookTarget()
     {
-        if(isPreformingAction)
+        if(_canRotate)
         {
             if (!_characterState._isDead && _currentTarget != null)
             {

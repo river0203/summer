@@ -15,7 +15,7 @@ public class EnemyStats : CharacterStatsManager
     [SerializeField] bool _isBoss;
     
     [SerializeField] List<string> _PhaseAnim;
-    [SerializeField] float detectionRadius = 20;
+    [SerializeField] float detectionRadius = 100;
     [SerializeField] LayerMask _MobLayer;
 
     private void Awake()
@@ -98,14 +98,14 @@ public class EnemyStats : CharacterStatsManager
             
             // 부활 애니메이션을 랜덤으로 출력
             int randomValue = Random.Range(0, _PhaseAnim.Count);
-            _enemyManager.isPreformingAction = true;
+            _enemyManager._isPreformingAction = true;
             _enemyAnimatorManager.PlayTargetAnimation(_PhaseAnim[randomValue], true);
             //_enemyManager.currentState = _idleState;
         }
         else
         {
             _currentHealth = 0;
-            _enemyManager.isPreformingAction = true;
+            _enemyManager._isPreformingAction = true;
             _enemyAnimatorManager.PlayTargetAnimation("Dead", true);
             StartCoroutine(DestroyChar());
             _isDead = true;
