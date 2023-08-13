@@ -37,6 +37,7 @@ public class AttackState : State
                         enemyAnimatorManger.PlayTargetAnimation(currentAttack.actionAnimation, true);
                         enemyAnimatorManger._anim.SetBool("isPreformingAction", true);
                         currentAttack = null;
+
                         return combatStanceState;
                     }
                 }

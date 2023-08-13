@@ -570,10 +570,11 @@ MonoBehaviour:
   _groundDirectionRayDistance: 0.2
   _inAirTimer: 0
   _movementSpeed: 3
-  _sprintSpeed: 5
+  _sprintSpeed: 50
   _rotationSpeed: 10
   _fallingSpeed: 300
   rollStaminaCost: 15
+  _tr: {x: 0, y: 0, z: 0, w: 0}
   _characterCollider: {fileID: 3099296630638564482}
   _characterCollisionBlockerCollider: {fileID: 3099296630638564482}
 --- !u!114 &3099296630638564485
@@ -607,7 +608,6 @@ MonoBehaviour:
   _isSprinting: 0
   _isInAir: 0
   _isGrounded: 0
-  isFiringSpell: 0
   pendingCriticalDamage: 0
   _sprintTimeDelta: 0
   _playerStatsManager: {fileID: 0}
@@ -1853,7 +1853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5878205055498121566, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.029114679
+      value: -0.029114682
       objectReference: {fileID: 0}
     - target: {fileID: 5878205055498121566, guid: adf586ab7ac5e9148bfb41762bf18fb7, type: 3}
       propertyPath: m_LocalPosition.y
