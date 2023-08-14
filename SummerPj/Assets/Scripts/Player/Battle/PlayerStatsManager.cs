@@ -60,7 +60,7 @@ public class PlayerStatsManager : CharacterStatsManager
         return _maxFocusPoints;
     }
 
-    public override void TakeDamage(int damege, string damageAnimation)
+    public override void TakeDamage(int damege, string damageAnimation = "Damage_Foward_01")
     {
         if (_playerManager.isInvulerable) return;
 

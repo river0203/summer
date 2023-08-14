@@ -6,7 +6,7 @@ public class EnemyBossManager : MonoBehaviour
     //공격 패턴
     public string _bossName;
 
-    UIBossHealthBar _bossHealthBar;
+    public UIBossHealthBar _bossHealthBar;
     EnemyStats _enemyStats;
 
     private void Awake()

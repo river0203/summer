@@ -175,6 +175,9 @@ public class PlayerCombatManager : MonoBehaviour
             if (_playerStatsManager._currentFocusPoints >= _playerInventoryManager._currentSpell.focusPointCost)
             {
                 _playerInventoryManager._currentSpell.AttemptToCastSpell(_playerAnimatorManager, _playerStatsManager, _playerWeaponSlotManager);
+                
+                _playerStatsManager._currentFocusPoints = 0;
+                _playerStatsManager._focusPointBar.SetCurrentFocusPoints(_playerStatsManager._currentFocusPoints);
             }
             else
             {

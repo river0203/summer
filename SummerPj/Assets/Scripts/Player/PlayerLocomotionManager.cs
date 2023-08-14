@@ -201,7 +201,7 @@ public class PlayerLocomotionManager : MonoBehaviour
         Vector3 projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, normalVector);
         _rigid.velocity = projectedVelocity;
 
-        if (_inputHandler.lockOnInput && _inputHandler._sprintFlag == false)
+        if (_inputHandler._lockOnFlag && _inputHandler._sprintFlag == false)
         {
             _PlayerAnimationManager.UpdateAnimatorValues(_inputHandler._vertical, _inputHandler._horizontal, _playerManager._isSprinting); // 애니메이션에게도 정보를 넘김
         }
