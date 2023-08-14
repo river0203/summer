@@ -23,7 +23,7 @@ public class MobHealthBar : MonoBehaviour
     {
         _timeUntillBarIsHidden -= Time.deltaTime;
 
-        if (_slider != null)
+        if(_slider != null)
         {
             if (_timeUntillBarIsHidden <= 0)
             {
@@ -45,3 +45,4 @@ public class MobHealthBar : MonoBehaviour
         }
     }
 }
+
