@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2558086216769696100}
   - component: {fileID: 2558086216769696099}
+  - component: {fileID: 1802968657}
+  - component: {fileID: 1802968656}
   m_Layer: 0
   m_Name: World Event Manager
   m_TagString: Untagged
@@ -44,8 +46,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c6ff66b407398243a820ebe75cd3b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bossHealthBar: {fileID: 0}
-  _boss: {fileID: 0}
-  _bossFightIsActive: 0
-  _bossHasBeenAwaken: 0
-  _bossHasBeanDefeated: 0
+--- !u!114 &1802968657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558086216769696098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37631c10d22042f4a86d643195d79d7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangeObject: {fileID: 2558086216769696098}
+  _mobs: {fileID: 0}
+  _spawnMobs: 3
+--- !u!65 &1802968656
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558086216769696098}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 28, y: 1, z: 55}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -11,7 +11,9 @@ public class AttackState : State
     {
         Vector3 targetDirection = enemyManger._currentTarget.transform.position - transform.position;
         float distanceFromTarget = Vector3.Distance(enemyManger._currentTarget.transform.position, enemyManger.transform.position); ;
-        float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+        float viewableAngle = Vector3.Angle(targetDirection, transform.forward) - 180;
+
+        Debug.Log(viewableAngle);
 
         // 뭘 하고 있으면 공격하지 말고 돌아가라
         if (enemyManger._isPreformingAction)
@@ -34,6 +36,7 @@ public class AttackState : State
                     {
                         enemyAnimatorManger._anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
                         enemyAnimatorManger._anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
+
                         enemyAnimatorManger.PlayTargetAnimation(currentAttack.actionAnimation, true);
                         enemyAnimatorManger._anim.SetBool("isPreformingAction", true);
                         currentAttack = null;
@@ -60,7 +63,7 @@ public class AttackState : State
         // 적과 나의 거리
         float distanceFromTarget = Vector3.Distance(enemyManger._currentTarget.transform.position, transform.position);
         // 자신이 보는 방향과 타겟의 위치간의 각도
-        float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+        float viewableAngle = Vector3.Angle(targetDirection, transform.forward) - 180;
         #endregion
 
         #region 최대 점수를 정함

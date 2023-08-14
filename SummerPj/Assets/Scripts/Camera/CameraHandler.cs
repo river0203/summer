@@ -95,17 +95,17 @@ public class CameraHandler : MonoBehaviour
         }
         else
         {
-            Vector3 diraction = _currentLockOnTarget.position - transform.position;
+            Vector3 direction = _currentLockOnTarget.position - transform.position;
 
-            diraction.Normalize();
-            diraction.y = 0;
-            Quaternion targetRotation = Quaternion.LookRotation(diraction);
+            direction.Normalize();
+            direction.y = 0;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = targetRotation;
 
-            diraction = _currentLockOnTarget.position - _cameraPivotTransform.position;
-            diraction.Normalize();
+            direction = _currentLockOnTarget.position - _cameraPivotTransform.position;
+            direction.Normalize();
 
-            targetRotation = Quaternion.LookRotation(diraction);
+            targetRotation = Quaternion.LookRotation(direction);
             Vector3 eulerAngle = targetRotation.eulerAngles;
             eulerAngle.y = 0;
             _cameraPivotTransform.localEulerAngles = Vector3.Lerp(_cameraPivotTransform.localEulerAngles, eulerAngle, 0.01f);

@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class SpwanMobs : MonoBehaviour
 {
-    public GameObject rangeObject;
+    [SerializeField] GameObject rangeObject;
+    [SerializeField] GameObject _mobs;
+
+    [SerializeField] int _spawnMobs;
+
+    int _spawnCount = 0;
+    AttackState _attackState;
     BoxCollider rangeCollider;
-    public GameObject capsul;
-    private AttackState _attackState;
-    private int _countMobs = 0;
-    private float _spawnRange = 8f;
-    public Transform _boss;
+
     private void Update()
     {
         if(_attackState._spawingMobs)
@@ -23,14 +25,14 @@ public class SpwanMobs : MonoBehaviour
     void RandomRespawn_Coroutine()
     {
 
-        while (_countMobs < 5)
+        while (_spawnCount < _spawnMobs)
         {
             // 생성 위치 부분에 위에서 만든 함수 Return_RandomPosition() 함수 대입
-            GameObject instantCapsul = Instantiate(capsul, Return_RandomPosition(), Quaternion.identity);
-            _countMobs++;
+            GameObject instantCapsul = Instantiate(_mobs, Return_RandomPosition(), Quaternion.identity);
+            _spawnCount++;
         }
         
-        _countMobs = 0;
+        _spawnCount = 0;
     }
 
     private void Awake()
