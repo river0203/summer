@@ -2557,6 +2557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bossName: "\uC2A4\uCF08\uB808\uD1A4 \uD0B9"
+  _bossHealthBar: {fileID: 0}
 --- !u!114 &1987528271
 MonoBehaviour:
   m_ObjectHideFlags: 0
