@@ -80,6 +80,21 @@ public class DamageCollider : MonoBehaviour
                 _enemyEffectsManager.PlayBloodSplatterFX(contactPoint);
             }
         }
+
+        if (collision.tag == "Mobs")
+        {
+            MobState mobStats = collision.GetComponent<MobState>();
+            CharacterEffectsManager _characterEffectsManager = collision.GetComponent<CharacterEffectsManager>();
+
+            Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+
+            if (mobStats != null)
+            {
+                mobStats.TakeDamage(_currentWeaponDamage);
+                _characterEffectsManager.PlayBloodSplatterFX(contactPoint);
+            }
+        }
+
     }
     public void EnableDamagecollider()
     {
