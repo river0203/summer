@@ -10,6 +10,7 @@ public class MobState : MonoBehaviour
 {
     public float _rotationSpeed = 3;
     public Transform target;
+    public CharacterManager _characterManager;
 
     NavMeshAgent agent;
     Animation anim;
@@ -77,7 +78,7 @@ public class MobState : MonoBehaviour
         if (distance <= 2)
         {
             state = State.Attack;
-            //anim.Play("attack02");
+            anim.Play("attack02");
         }
 
         agent.speed = 3.5f;
@@ -95,27 +96,32 @@ public class MobState : MonoBehaviour
         }
     }
 
-    IEnumerator AttackDelay()
-    {
-
-        yield return new WaitForSeconds(5);
-        //anim.Play("attack02");
-    }
-
-
     #region ÇÇ°Ý
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.tag == "Player")
         {
-            anim.Play("hit");
-            _currentHealth -= _damage;
-            StartCoroutine(HitDelay());
-            if(_currentHealth < 0)
+            PlayerStatsManager playerStats = collision.GetComponent<PlayerStatsManager>();
+            CharacterEffectsManager _playerEffectsManager = collision.GetComponent<CharacterEffectsManager>();
+            CharacterManager _playercharacterManager = collision.GetComponent<CharacterManager>();
+
+            if (_playercharacterManager != null)
             {
-                HandleDeath();
+                if (_playercharacterManager.isParrying)
+                {
+                    _characterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
+                    return;
+                }
+            }
+
+            if (playerStats != null)
+            {
+                Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+                // _playerEffectsManager.PlayBloodSplatterFX(contactPoint);
+
+                playerStats.TakeDamage(_damage);
             }
         }
     }
@@ -126,7 +132,7 @@ public class MobState : MonoBehaviour
         state = State.Idle;
     }
 
-    public void HandleDeath()
+    public void Death()
     {
         _currentHealth = 0;
         anim.Play("die01");

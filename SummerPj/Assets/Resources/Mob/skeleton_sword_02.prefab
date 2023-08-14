@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5465802642864167525}
   - component: {fileID: 2189247233536768606}
   - component: {fileID: 1747874861621665778}
+  - component: {fileID: 7143535106036044582}
   m_Layer: 0
   m_Name: skeleton_sword_02
   m_TagString: Untagged
@@ -98,3 +99,18 @@ CapsuleCollider:
   m_Height: 0.8
   m_Direction: 2
   m_Center: {x: 0.011477919, y: -0.009772389, z: -0.3570606}
+--- !u!114 &7143535106036044582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3254516310939950874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 086c3b467dbebed40b2ccb4512c36b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterManager: {fileID: 0}
+  enabledDamageColliderOnStartUp: 0
+  _currentWeaponDamage: 25

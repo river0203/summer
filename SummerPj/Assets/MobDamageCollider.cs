@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
 
-public class DamageCollider : MonoBehaviour
+public class MobDamageCollider : MonoBehaviour
 {
     public CharacterManager _characterManager;
     Collider _damageCollider;
-    public bool enabledDamageColliderOnStartUp = false;   
+    public bool enabledDamageColliderOnStartUp = false;
 
     public int _currentWeaponDamage = 25;
 
@@ -37,9 +37,9 @@ public class DamageCollider : MonoBehaviour
             CharacterEffectsManager _playerEffectsManager = collision.GetComponent<CharacterEffectsManager>();
             CharacterManager _playercharacterManager = collision.GetComponent<CharacterManager>();
 
-            if(_playercharacterManager != null)
+            if (_playercharacterManager != null)
             {
-                if(_playercharacterManager.isParrying)
+                if (_playercharacterManager.isParrying)
                 {
                     _characterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
                     return;
@@ -54,7 +54,7 @@ public class DamageCollider : MonoBehaviour
                 playerStats.TakeDamage(_currentWeaponDamage);
             }
         }
-        
+
         if (collision.tag == "Enemy")
         {
             EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
