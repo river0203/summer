@@ -58,7 +58,7 @@ public class AttackState : State
         // 나와 적을 가로지르는 화살표
         Vector3 targetDirection = enemyManger._currentTarget.transform.position - transform.position;
         // 적과 나의 거리
-        float distanceFromTarget = Vector3.Distance(enemyManger._currentTarget.transform.position, enemyManger.transform.position);
+        float distanceFromTarget = Vector3.Distance(enemyManger._currentTarget.transform.position, transform.position);
         // 자신이 보는 방향과 타겟의 위치간의 각도
         float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
         #endregion

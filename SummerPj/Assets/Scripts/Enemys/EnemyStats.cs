@@ -9,6 +9,7 @@ public class EnemyStats : CharacterStatsManager
     EnemyAnimatorManager _enemyAnimatorManager;
     EnemyManager _enemyManager;
     UIEnemyHealthBar _enemyHealthBar;
+    CameraHandler _cameraHandler;
 
     public IdleState _idleState;
     
@@ -22,9 +23,12 @@ public class EnemyStats : CharacterStatsManager
     {
         _enemyBossManager = GetComponent<EnemyBossManager>();
         _enemyManager = GetComponent<EnemyManager>();
+
         _soundManager = GetComponentInChildren<EnemySoundManager>();
         _enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
         _idleState = GetComponentInChildren<IdleState>();
+
+        _cameraHandler = FindAnyObjectByType<CameraHandler>();
 
         _currentHealth = _maxHealth;
         _maxHealth = SetMaxHealthFromHealthLevel();
@@ -42,23 +46,7 @@ public class EnemyStats : CharacterStatsManager
     {
         _maxHealth = _healthLevel * 10;
         return _maxHealth;
-
     }
-
-/*    public void TakeDamageAnimation(int _damage)
-    {
-        _currentHealth -= _damage;
-        _enemyHealthBar.SetHealth(_currentHealth);
-
-        if (_currentHealth <= 0 && _enemyManager.isPhase == false)
-        {
-            _isDead = true;
-        }
-        else
-        {
-            _isDead = false;
-        }
-    }*/
 
     public override void TakeDamage(int _damege ,string _damageAnimation)
     {
@@ -88,33 +76,26 @@ public class EnemyStats : CharacterStatsManager
 
     public void HandleDeath()
     {
-        Collider[] Mobcollider = Physics.OverlapSphere(transform.position, detectionRadius, _MobLayer);
+        GameObject[] Mobs = GameObject.FindGameObjectsWithTag("Mobs");
 
-        if (Mobcollider != null)
+        if (Mobs == null)
         {
             _isDead = false;
+
             _currentHealth += 40;
-            Debug.Log("페이즈 2");
-            
+            _enemyBossManager._bossHealthBar.SetBossMaxHealth(_currentHealth);
+
             // 부활 애니메이션을 랜덤으로 출력
-            int randomValue = Random.Range(0, _PhaseAnim.Count);
             _enemyManager._isPreformingAction = true;
+            int randomValue = Random.Range(0, _PhaseAnim.Count);
             _enemyAnimatorManager.PlayTargetAnimation(_PhaseAnim[randomValue], true);
-            //_enemyManager.currentState = _idleState;
         }
         else
         {
             _currentHealth = 0;
             _enemyManager._isPreformingAction = true;
             _enemyAnimatorManager.PlayTargetAnimation("Dead", true);
-            StartCoroutine(DestroyChar());
             _isDead = true;
         }
-    }
-
-    private IEnumerator DestroyChar()
-    {
-        yield return new WaitForSeconds(15);
-        Destroy(gameObject);
     }
 }

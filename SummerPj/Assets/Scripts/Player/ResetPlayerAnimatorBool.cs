@@ -12,5 +12,6 @@ public class ResetPlayerAnimatorBool : StateMachineBehaviour
     {
         animator.SetBool(_isInteractingBool, _isInteractingStatus);
         animator.SetBool(_canRotate, _canRotateStatus);
+        animator.applyRootMotion = true;
     }
 }

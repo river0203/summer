@@ -6,7 +6,7 @@ public class EventColliderBeginBossFight : MonoBehaviour
 {
     WorldEventManager _worldEventManager;
     EnemyAnimatorManager _enemyAnimatorManger;
-    BoxCollider _boxCollider;
+    EnemyManager _enemyManager;
 
     public string _inAnim;
 
@@ -14,18 +14,14 @@ public class EventColliderBeginBossFight : MonoBehaviour
     {
         _worldEventManager = FindObjectOfType<WorldEventManager>();
         _enemyAnimatorManger = FindObjectOfType<EnemyAnimatorManager>();
-        _boxCollider = GetComponent<BoxCollider>();
+        _enemyManager = FindObjectOfType<EnemyManager>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        /*if(other.tag == "player")
-        {
-            _worldEventManager.ActivateBossFight();
-        }*/
+        _enemyManager._currentTarget = other.gameObject.GetComponent<CharacterStatsManager>();
         _worldEventManager.ActivateBossFight();
 
-        // _enemyAnimatorManger.PlayTargetAnimation(_inAnim, true);
         _enemyAnimatorManger._anim.Play(_inAnim);
         _enemyAnimatorManger._anim.SetBool("isPreformingAction", true);
     }
