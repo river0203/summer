@@ -41,10 +41,6 @@ public class MobState : CharacterStatsManager
         _maxHealth = 50;
         _currentHealth = _maxHealth;
         mobHealthBar.SetMaXHealth(_maxHealth);
-        if(_startIdle )
-        {
-           // state = State.Idle;
-        }
     }
 
     public void Playgetup()
@@ -143,8 +139,6 @@ public class MobState : CharacterStatsManager
 
     public override void TakeDamage(int _damege, string _damageAnimation = "hit")
     {
-        anim.Play("hit");
-
         _currentHealth -= _damage;
         mobHealthBar.SetHealth(_currentHealth);
 
@@ -152,6 +146,10 @@ public class MobState : CharacterStatsManager
         if (_currentHealth < 0)
         {
             Death();
+        }
+        else
+        {
+            anim.Play("hit");
         }
     }
 
