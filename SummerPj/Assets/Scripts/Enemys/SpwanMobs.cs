@@ -10,7 +10,7 @@ public class SpwanMobs : MonoBehaviour
     private AttackState _attackState;
     private int _countMobs = 0;
     private float _spawnRange = 8f;
-
+    public Transform _boss;
     private void Update()
     {
 

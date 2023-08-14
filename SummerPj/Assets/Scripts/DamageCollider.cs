@@ -7,7 +7,7 @@ public class DamageCollider : MonoBehaviour
 {
     public CharacterManager _characterManager;
     Collider _damageCollider;
-    public bool enabledDamageColliderOnStartUp = true;   
+    public bool enabledDamageColliderOnStartUp = false;   
 
     public int _currentWeaponDamage = 25;
 

@@ -13,13 +13,11 @@ public class MobState : MonoBehaviour
 
     NavMeshAgent agent;
     Animation anim;
-    EnemyWeaponSlotManager _weaponManager;
-
+    
     int _damage = 25;
     int _maxHealth;
     int _currentHealth;
     bool _isDie;
-    public bool _attack = true;
 
     enum State
     {
@@ -79,7 +77,7 @@ public class MobState : MonoBehaviour
         if (distance <= 2)
         {
             state = State.Attack;
-            anim.Play("attack02");
+            //anim.Play("attack02");
         }
 
         agent.speed = 3.5f;
