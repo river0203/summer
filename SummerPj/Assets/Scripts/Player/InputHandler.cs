@@ -47,7 +47,10 @@ public class InputHandler : MonoBehaviour
     #endregion
 
     float _lockOnCool;
+    public float _sensitivity_x;
+    public float _sensitivity_y;
     PlayerInputAction _inputActions;
+    PlayerLocomotionManager _playerLocomotionManager;
     PlayerCombatManager _playerCombatManager;
     PlayerInventoryManager _playerInventoryManager;
     PlayerManager _playerManager;
@@ -68,6 +71,7 @@ public class InputHandler : MonoBehaviour
         _cameraHandler = FindObjectOfType<CameraHandler>();
         _uiManager = FindObjectOfType<UIManager>();
 
+        _playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         _playerEffectsManager = GetComponent<PlayerEffectsManager>();
         _playerCombatManager = GetComponent<PlayerCombatManager>();
         _playerInventoryManager = GetComponent<PlayerInventoryManager>();
@@ -142,6 +146,7 @@ public class InputHandler : MonoBehaviour
         HandleTwoHandInput();
         HandleCriticalAttackInput();
         HandleUseConsumableInput();
+        HandleAttackRotation();
     }
 
     // 이동 및 마우스 포지션 갱신 (TickInput에서 실행)
@@ -150,8 +155,8 @@ public class InputHandler : MonoBehaviour
         _horizontal = _movementInput.x;
         _vertical = _movementInput.y;
         _moveAmount = Mathf.Clamp01(Mathf.Abs(_horizontal) + Mathf.Abs(_vertical));
-        _mouseX = _cameraInput.x;
-        _mouseY = _cameraInput.y;
+        _mouseX = _cameraInput.x * _sensitivity_x;
+        _mouseY = _cameraInput.y * _sensitivity_y;
     }
 
     // 구르기, 달리기 상태 갱신 (TickInput에서 실행)
@@ -327,5 +332,10 @@ public class InputHandler : MonoBehaviour
                 _playerInventoryManager.currentConsumable.AttemptToConsumeItem(_playerAnimatorManager, _weaponSlotManager, _playerEffectsManager);
             }
         }
+    }
+
+    private void HandleAttackRotation()
+    {
+        _playerLocomotionManager.HandleAttackRotation();
     }
 }

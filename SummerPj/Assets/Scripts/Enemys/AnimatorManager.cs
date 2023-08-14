@@ -7,6 +7,7 @@ using UnityEngine;
     {
         protected CharacterManager _characterManager;
         protected CharacterStatsManager _characterStatsManager;
+        protected PlayerLocomotionManager _playerLocomotionManager;
         public Animator _anim;
         public bool canRotate;
   
@@ -14,6 +15,7 @@ using UnityEngine;
         {
             _characterManager = GetComponent<CharacterManager>();
             _characterStatsManager = GetComponent<CharacterStatsManager>();
+            _playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         }
         public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool canRotate = false)
         {

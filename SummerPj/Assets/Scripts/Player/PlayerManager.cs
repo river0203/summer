@@ -39,7 +39,7 @@ public class PlayerManager : CharacterManager
         _canDoCombo = _anim.GetBool("canDoCombo");
         isUsingRightHand = _anim.GetBool("isUsingRightHand");
         isInvulerable = _anim.GetBool("isInvulnerable");
-        isFiringSpell = _anim.GetBool("isFiringSpell");
+
         _anim.SetBool("isBlocking", isBlocking);
         _anim.SetBool("isInAir", _isInAir);
         _anim.SetBool("isDead", _playerStatsManager._isDead);

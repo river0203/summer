@@ -66,7 +66,7 @@ public class MobState : CharacterStatsManager
         _currentHealth -= _damage;
         _enemyHealthBar.SetHealth(_currentHealth);
 
-        if (_currentHealth <= 0 && _enemyManager.isPhase == false)
+        if (_currentHealth <= 0)
         {
             _isDead = true;
         }

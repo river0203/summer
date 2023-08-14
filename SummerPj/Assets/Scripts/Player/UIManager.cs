@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public PlayerInventoryManager playerInventory;
+    public PlayerInventoryManager _playerInventory;
     public EquipmentWindowUI _equipmentWindowUI;
 
     [Header("UI Windows")]
@@ -27,7 +27,8 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
-        _equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);
+        _equipmentWindowUI.LoadWeaponsOnEquipmentScreen(_playerInventory);
+        _playerInventory = FindAnyObjectByType<PlayerInventoryManager>();
     }
 
     public void UpdateUI()
@@ -35,14 +36,14 @@ public class UIManager : MonoBehaviour
         #region Weapon Inventory Slots
         for(int i = 0; i < weaponInventorySlots.Length; i++) 
         { 
-            if (i < playerInventory._weaponsInventory.Count)
+            if (i < _playerInventory._weaponsInventory.Count)
             {
-                if(weaponInventorySlots.Length < playerInventory._weaponsInventory.Count)
+                if(weaponInventorySlots.Length < _playerInventory._weaponsInventory.Count)
                 {
                     Instantiate(weaponInventorySlotPrefab, weaponInventorySlotsParent);
                     weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
                 }
-                weaponInventorySlots[i].AddItem(playerInventory._weaponsInventory[i]);
+                weaponInventorySlots[i].AddItem(_playerInventory._weaponsInventory[i]);
             }
             else
             {

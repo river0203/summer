@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class PursueTargetState : State
 {
@@ -11,7 +8,7 @@ public class PursueTargetState : State
     {
         
         // 무언가 하고 있으면 제자리에 멈추고 그냥 현재 상태 유지하는걸 추천
-        if (enemyManager.isPreformingAction)
+        if (enemyManager._isPreformingAction)
         {
             enemyAnimatorManger._anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
             return this;
@@ -20,9 +17,9 @@ public class PursueTargetState : State
 
         #region 판단할 정보를 저장
         // 내가 적까지의 화살표
-        Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
+        Vector3 targetDirection = enemyManager._currentTarget.transform.position - transform.position;
         // 적과 나의 거리 저장
-        float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
+        float distanceFromTarget = Vector3.Distance(enemyManager._currentTarget.transform.position, enemyManager.transform.position);
         // 적의 위치와 내가 바라보는 방향 사이의 각도
         float veiwableAngle = Vector3.Angle(targetDirection, transform.forward);
        
@@ -35,7 +32,6 @@ public class PursueTargetState : State
 
         // 회전 및 이동
         HandleRotateTarget(enemyManager);
-
 
         // 다음 상황 추천
         if(distanceFromTarget <= enemyManager.maximumAttackRange)
@@ -52,9 +48,9 @@ public class PursueTargetState : State
     private void HandleRotateTarget(EnemyManager enemyManager)
     {
         // 뭔가 하고 있다면 타겟을 바라보기만 함
-        if (enemyManager.isPreformingAction)
+        if (enemyManager._isPreformingAction)
         {
-            Vector3 direction = enemyManager.currentTarget.transform.position - transform.position; // 나와 적의 화살표
+            Vector3 direction = enemyManager._currentTarget.transform.position - transform.position; // 나와 적의 화살표
             direction.y = 0; // 높낮이는 뺌
             direction.Normalize(); // 정규화
 
@@ -75,16 +71,16 @@ public class PursueTargetState : State
         else
         {
             // 적의 방향을 월드 -> 로컬로 변경
-            Vector3 relativeDirection = transform.InverseTransformDirection(enemyManager.navmeshAgent.desiredVelocity);
+            Vector3 relativeDirection = transform.InverseTransformDirection(enemyManager._navmeshAgent.desiredVelocity);
 
-            enemyManager.navmeshAgent.enabled = true; // 네비게이션 활성화
+            enemyManager._navmeshAgent.enabled = true; // 네비게이션 활성화
 
             // 위치 변환
-            enemyManager.navmeshAgent.SetDestination(enemyManager.currentTarget.transform.position); // 목적지 지정
-            enemyManager.enemyRigidBody.velocity = enemyManager.navmeshAgent.velocity; // 방향과 속도 지정
+            enemyManager._navmeshAgent.SetDestination(enemyManager._currentTarget.transform.position); // 목적지 지정
+            enemyManager._enemyRigidBody.velocity = enemyManager._navmeshAgent.velocity; // 방향과 속도 지정
 
             // 회전 변환
-            enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager.navmeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
+            enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager._navmeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
         }
     }
 }

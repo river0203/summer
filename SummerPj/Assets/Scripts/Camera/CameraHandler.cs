@@ -40,7 +40,7 @@ public class CameraHandler : MonoBehaviour
 
     public Transform _currentLockOnTarget;
 
-    List<CharacterManager> _availableTargets = new List<CharacterManager>();
+    List<EnemyManager> _availableTargets = new List<EnemyManager>();
     public Transform _nearestLockOnTarget;
     public Transform _leftLockTaregt;
     public Transform _rightLockTaregt;
@@ -152,7 +152,7 @@ public class CameraHandler : MonoBehaviour
 
         for (int i = 0; i < colliders.Length; i++)
         {
-            CharacterManager character = colliders[i].GetComponent<CharacterManager>();
+            EnemyManager character = colliders[i].GetComponent<EnemyManager>();
 
             if (character != null)
             {

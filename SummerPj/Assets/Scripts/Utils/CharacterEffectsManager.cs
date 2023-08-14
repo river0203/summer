@@ -27,6 +27,6 @@ public class CharacterEffectsManager : MonoBehaviour
 
     public virtual void PlayBloodSplatterFX(Vector3 bloodSplatterLocation)
     {
-        VisualEffectAsset blood = Instantiate(_bloodSplatterFX, bloodSplatterLocation, Quaternion.identity);
+        Instantiate(_bloodSplatterFX, bloodSplatterLocation, Quaternion.identity);
     }
 }
