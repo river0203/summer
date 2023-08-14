@@ -62,7 +62,7 @@ public class MobState : MonoBehaviour
     private void UpdateAttack()
     {
         agent.speed = 0;
-        anim.Play("attack02");
+        //anim.Play("attack02");
         float distance = Vector3.Distance(transform.position, target.transform.position);
         if (distance > 2)
         {
