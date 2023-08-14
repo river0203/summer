@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 using UnityEngine;
 
 public class DamageCollider : MonoBehaviour
 {
     public CharacterManager _characterManager;
     Collider _damageCollider;
+
     public bool enabledDamageColliderOnStartUp = false;   
 
     public int _currentWeaponDamage = 25;
+
+    [SerializeField] GameObject _weaponParent;
 
     private void Awake()
     {
@@ -65,7 +65,7 @@ public class DamageCollider : MonoBehaviour
             Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
             //_enemyEffectsManager.PlayBloodSplatterFX(contactPoint);
 
-            if (enemyStats != null)
+            if (enemyStats != null && _weaponParent.tag == "Player")
             {
                 enemyStats.TakeDamage(_currentWeaponDamage);
             }
@@ -87,7 +87,7 @@ public class DamageCollider : MonoBehaviour
 
             Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
 
-            if (mobStats != null)
+            if (mobStats != null && _weaponParent.tag == "Player")
             {
                 mobStats.TakeDamage(_currentWeaponDamage);
                 _characterEffectsManager.PlayBloodSplatterFX(contactPoint);
