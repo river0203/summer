@@ -6,19 +6,17 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 
 
-public class MobState : MonoBehaviour
+public class MobState : CharacterStatsManager
 {
-    public float _rotationSpeed = 3;
-    public Transform target;
-    public CharacterManager _characterManager;
+    [SerializeField] Transform target;
 
     NavMeshAgent agent;
     Animation anim;
-    
+
+    public MobHealthBar mobHealthBar;
+
     int _damage = 25;
-    int _maxHealth;
-    int _currentHealth;
-    bool _isDie;
+    public float _rotationSpeed = 3;
 
     enum State
     {
@@ -39,8 +37,8 @@ public class MobState : MonoBehaviour
     {
         _maxHealth = 50;
         _currentHealth = _maxHealth;
+        mobHealthBar.SetMaXHealth(_maxHealth);
         state = State.Idle;
-        _isDie = false;
     }
 
     void Update()
@@ -57,7 +55,6 @@ public class MobState : MonoBehaviour
         {
             UpdateAttack();
         }
-
     }
 
     private void UpdateAttack()
@@ -98,37 +95,24 @@ public class MobState : MonoBehaviour
 
     #region ÇÇ°Ý
 
-
-    private void OnTriggerEnter(Collider collision)
+    public override void TakeDamage(int _damege, string _damageAnimation = "hit")
     {
-        if (collision.tag == "Player")
+        anim.Play("hit");
+
+        _currentHealth -= _damage;
+        mobHealthBar.SetHealth(_currentHealth);
+
+        StartCoroutine(HitDelay());
+        if (_currentHealth < 0)
         {
-            PlayerStatsManager playerStats = collision.GetComponent<PlayerStatsManager>();
-            CharacterEffectsManager _playerEffectsManager = collision.GetComponent<CharacterEffectsManager>();
-            CharacterManager _playercharacterManager = collision.GetComponent<CharacterManager>();
-
-            if (_playercharacterManager != null)
-            {
-                if (_playercharacterManager.isParrying)
-                {
-                    _characterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
-                    return;
-                }
-            }
-
-            if (playerStats != null)
-            {
-                Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-                // _playerEffectsManager.PlayBloodSplatterFX(contactPoint);
-
-                playerStats.TakeDamage(_damage);
-            }
+            Death();
         }
     }
 
+
     IEnumerator HitDelay()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.833f);
         state = State.Idle;
     }
 
