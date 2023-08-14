@@ -78,11 +78,18 @@ public class MobState : CharacterStatsManager
     private void UpdateAttack()
     {
         agent.speed = 0;
-        if(_canAttack)
+        if(_currentHealth > 0)
         {
-            anim.Play("attack02");
+            if (_canAttack)
+            {
+                anim.Play("attack02");
+            }
         }
-        StartCoroutine(HitDelay());
+        else 
+        { 
+            Death(); 
+        }   
+        
         float distance = Vector3.Distance(transform.position, target.transform.position);
         if (distance > 2)
         {
