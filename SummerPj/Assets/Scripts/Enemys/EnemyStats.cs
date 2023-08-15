@@ -10,6 +10,7 @@ public class EnemyStats : CharacterStatsManager
     EnemyManager _enemyManager;
     UIEnemyHealthBar _enemyHealthBar;
     CameraHandler _cameraHandler;
+    CapsuleCollider _thisCollider;
 
     public IdleState _idleState;
     
@@ -23,6 +24,7 @@ public class EnemyStats : CharacterStatsManager
     {
         _enemyBossManager = GetComponent<EnemyBossManager>();
         _enemyManager = GetComponent<EnemyManager>();
+        _thisCollider = FindObjectOfType<CapsuleCollider>();
 
         _soundManager = GetComponentInChildren<EnemySoundManager>();
         _enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
@@ -78,7 +80,7 @@ public class EnemyStats : CharacterStatsManager
     {
         GameObject[] Mobs = GameObject.FindGameObjectsWithTag("Mobs");
 
-        if (Mobs == null)
+        if (Mobs != null)
         {
             _isDead = false;
 
@@ -96,6 +98,7 @@ public class EnemyStats : CharacterStatsManager
             _enemyManager._isPreformingAction = true;
             _enemyAnimatorManager.PlayTargetAnimation("Dead", true);
             _isDead = true;
+            _thisCollider.enabled = false;
         }
     }
 }
