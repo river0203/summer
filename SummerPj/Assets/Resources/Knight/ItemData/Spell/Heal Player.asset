@@ -12,14 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e804f91b774cdd649b286baddf368b85, type: 3}
   m_Name: Heal Player
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: c3a6db4bf555e534b9aa4e51b002e88c, type: 3}
   itemName: Heal Player
   spellWarmUpFX: {fileID: 100294, guid: e1df2960f7294f34887b98dc9c4b198c, type: 3}
   spellCastFX: {fileID: 100294, guid: e1df2960f7294f34887b98dc9c4b198c, type: 3}
   spellAnimation: Heal
   focusPointCost: 30
-  isFaithSpell: 1
-  isMagicSpell: 0
-  isPyroSpell: 0
   spellDescription: 
   healAmount: 50

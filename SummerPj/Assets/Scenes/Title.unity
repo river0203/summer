@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 167377277}
   - component: {fileID: 167377276}
   - component: {fileID: 167377279}
+  - component: {fileID: 167377280}
   m_Layer: 5
   m_Name: EndButton
   m_TagString: Untagged
@@ -232,6 +233,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 610555796}
+        m_TargetAssemblyTypeName: UI_TitleButton, Assembly-CSharp
+        m_MethodName: ClickAnim
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &167377277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +304,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &167377280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167377274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 347ab01b78666d247bac6322a41a8790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &187426468
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +327,7 @@ GameObject:
   - component: {fileID: 187426469}
   - component: {fileID: 187426471}
   - component: {fileID: 187426470}
+  - component: {fileID: 187426472}
   m_Layer: 5
   m_Name: EndButtonImage
   m_TagString: Untagged
@@ -367,6 +393,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187426468}
   m_CullTransparentMesh: 1
+--- !u!328 &187426472
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187426468}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 98c8cf0cabdd7cf47a7e57a6b6ae1547, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 4b3a7caa868e4254daed579d86d2d4bc, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1 &363689484
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,6 +506,7 @@ GameObject:
   - component: {fileID: 610555793}
   - component: {fileID: 610555792}
   - component: {fileID: 610555795}
+  - component: {fileID: 610555796}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -543,6 +603,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 610555796}
+        m_TargetAssemblyTypeName: UI_TitleButton, Assembly-CSharp
+        m_MethodName: ClickAnim
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1281978340}
+        m_TargetAssemblyTypeName: UI_Title, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &610555793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -602,6 +686,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &610555796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610555790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 347ab01b78666d247bac6322a41a8790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &635629855
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,6 +853,7 @@ GameObject:
   - component: {fileID: 1004433563}
   - component: {fileID: 1004433562}
   - component: {fileID: 1004433565}
+  - component: {fileID: 1004433566}
   m_Layer: 5
   m_Name: SystemButton
   m_TagString: Untagged
@@ -853,6 +950,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 610555796}
+        m_TargetAssemblyTypeName: UI_TitleButton, Assembly-CSharp
+        m_MethodName: ClickAnim
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1004433563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,6 +1021,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1004433566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004433560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 347ab01b78666d247bac6322a41a8790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1021032381
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,6 +1044,7 @@ GameObject:
   - component: {fileID: 1021032384}
   - component: {fileID: 1021032383}
   - component: {fileID: 1021032382}
+  - component: {fileID: 1021032385}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -996,6 +1118,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1021032385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021032381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1110311980
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,6 +1394,7 @@ GameObject:
   - component: {fileID: 1653443847}
   - component: {fileID: 1653443849}
   - component: {fileID: 1653443848}
+  - component: {fileID: 1653443850}
   m_Layer: 5
   m_Name: SystemButtonImage
   m_TagString: Untagged
@@ -1304,6 +1460,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1653443846}
   m_CullTransparentMesh: 1
+--- !u!328 &1653443850
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653443846}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: e7a0cacb2ad5be940867338b1ecf8526, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 098b9ee19642f5b4b95de6da24d3dec5, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1 &1894984623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,6 +1504,7 @@ GameObject:
   - component: {fileID: 1894984624}
   - component: {fileID: 1894984626}
   - component: {fileID: 1894984625}
+  - component: {fileID: 1894984627}
   m_Layer: 5
   m_Name: StartButtonImage
   m_TagString: Untagged
@@ -1380,3 +1570,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894984623}
   m_CullTransparentMesh: 1
+--- !u!328 &1894984627
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894984623}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 14657ea59fcfafb40855f0597651c285, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: c5a6de28bc8fb3e4cae1594bb97ea10e, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
