@@ -16,8 +16,6 @@ public class MobState : CharacterStatsManager
     public MobHealthBar mobHealthBar;
 
     int _damage = 25;
-    bool _startIdle = false;
-    bool _canAttack = false;
     public float _rotationSpeed = 3;
 
     enum State
@@ -37,83 +35,49 @@ public class MobState : CharacterStatsManager
 
     void Start()
     {
-        anim.Play("getup");
         _maxHealth = 50;
         _currentHealth = _maxHealth;
         mobHealthBar.SetMaXHealth(_maxHealth);
+        state = State.Idle;
     }
 
-    public void Playgetup()
-    {
-        _startIdle = false;
-    }
-
-    public void EndGetup()
-    {
-        _startIdle = true;
-    }
     void Update()
     {
-        if(_startIdle)
+        if (state == State.Idle)
         {
-            if (state == State.Idle)
-            {
-                UpdateIdle();
-            }
-            else if (state == State.Run)
-            {
-                UpdateRun();
-            }
-            else if (state == State.Attack)
-            {
-                UpdateAttack();
-            }
+            UpdateIdle();
+        }
+        else if (state == State.Run)
+        {
+            UpdateRun();
+        }
+        else if (state == State.Attack)
+        {
+            UpdateAttack();
         }
     }
 
     private void UpdateAttack()
     {
         agent.speed = 0;
-        if(_currentHealth > 0)
-        {
-            if (_canAttack)
-            {
-                anim.Play("attack02");
-            }
-        }
-        else 
-        { 
-            Death(); 
-        }   
-        
         float distance = Vector3.Distance(transform.position, target.transform.position);
         if (distance > 2)
         {
             state = State.Run;
+            anim.Play("walk");
         }
-    }
-
-    public void PlayAttack()
-    {
-        _canAttack = false;
-    }
-
-    public void EndAttack()
-    {
-        _canAttack = true;
     }
 
     private void UpdateRun()
     {
         float distance = Vector3.Distance(transform.position, target.transform.position);
-
-        anim.Play("walk");
-        if (_currentHealth > 0)
+        
+        if(_currentHealth > 0)
         {
             if (distance <= 2)
             {
                 state = State.Attack;
-                _canAttack = true;
+                anim.Play("attack02");
             }
         }
         else
@@ -132,6 +96,7 @@ public class MobState : CharacterStatsManager
         if (target != null)
         {
             state = State.Run;
+            anim.Play("walk");
         }
     }
 
@@ -139,6 +104,8 @@ public class MobState : CharacterStatsManager
 
     public override void TakeDamage(int _damege, string _damageAnimation = "hit")
     {
+        anim.Play("hit");
+
         _currentHealth -= _damage;
         mobHealthBar.SetHealth(_currentHealth);
 
@@ -146,10 +113,6 @@ public class MobState : CharacterStatsManager
         if (_currentHealth < 0)
         {
             Death();
-        }
-        else
-        {
-            anim.Play("hit");
         }
     }
 
