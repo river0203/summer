@@ -414,7 +414,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2212d184175ff19499295b12667d49bb, type: 2}
+  - {fileID: 2100000, guid: 323173d9239f6b04dba391e2ae2f0420, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -614,7 +614,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f300ffbb72ada4343afdc2a99bff8f1a, type: 2}
+  - {fileID: 2100000, guid: 3d989984967fc8f4693b2207316e3264, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -662,6 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 086c3b467dbebed40b2ccb4512c36b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterEffectsManager: {fileID: 0}
   _characterManager: {fileID: 0}
   enabledDamageColliderOnStartUp: 0
   _currentWeaponDamage: 2
@@ -718,7 +719,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5f45f450bc7cc0441a98302a3ee9826a, type: 2}
+  - {fileID: 2100000, guid: 323173d9239f6b04dba391e2ae2f0420, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -809,7 +810,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2212d184175ff19499295b12667d49bb, type: 2}
+  - {fileID: 2100000, guid: 323173d9239f6b04dba391e2ae2f0420, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -968,7 +969,7 @@ MonoBehaviour:
   _currentFocusPoints: 0
   _isDead: 0
   target: {fileID: 0}
-  mobHealthBar: {fileID: 1912817861548026311}
+  mobHealthBar: {fileID: 0}
   _rotationSpeed: 3
 --- !u!195 &1912817860438284988
 NavMeshAgent:
@@ -1299,7 +1300,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2212d184175ff19499295b12667d49bb, type: 2}
+  - {fileID: 2100000, guid: 323173d9239f6b04dba391e2ae2f0420, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1689,7 +1690,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2212d184175ff19499295b12667d49bb, type: 2}
+  - {fileID: 2100000, guid: 323173d9239f6b04dba391e2ae2f0420, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2064,7 +2065,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2212d184175ff19499295b12667d49bb, type: 2}
+  - {fileID: 2100000, guid: 323173d9239f6b04dba391e2ae2f0420, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2144,7 +2145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1912817861548026310}
-  - component: {fileID: 1912817861548026311}
+  - component: {fileID: 4750657390777574197}
   m_Layer: 0
   m_Name: Mob Health Bar
   m_TagString: Untagged
@@ -2173,7 +2174,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1912817861548026311
+--- !u!114 &4750657390777574197
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2182,7 +2183,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1912817861548026360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3192308ed3cd81a4298171a4a43eb640, type: 3}
+  m_Script: {fileID: 11500000, guid: 10585302260a04741ad0a7525dd17215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _slider: {fileID: 1912817860901621271}
@@ -2551,7 +2552,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2212d184175ff19499295b12667d49bb, type: 2}
+  - {fileID: 2100000, guid: 323173d9239f6b04dba391e2ae2f0420, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
