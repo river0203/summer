@@ -136,6 +136,7 @@ MonoBehaviour:
   _characterManager: {fileID: 0}
   enabledDamageColliderOnStartUp: 0
   _currentWeaponDamage: 25
+  _weaponParent: {fileID: 3053872921105081178, guid: 9e198360079bda74a9c7a98573b87eed, type: 3}
 --- !u!136 &7610903363441105478
 CapsuleCollider:
   m_ObjectHideFlags: 0
