@@ -161,9 +161,9 @@ public class PlayerCombatManager : MonoBehaviour
 
         if(_playerManager.isBlocking) { return; }
 
+        _playerManager.isBlocking = true;
         _playerAnimatorManager.PlayTargetAnimation("Block Start", false, true);
         _playerEquipmentHandler.OpenBlockingCollider();
-        _playerManager.isBlocking = true;
     }
     private void PerformUltimateAction(WeaponItem weapon)
     {
