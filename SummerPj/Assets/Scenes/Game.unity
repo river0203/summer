@@ -811,6 +811,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3099296631056935904, guid: 6a97c1afc11461d48b6bbfcdf6c1e2a4, type: 3}
+      propertyPath: _cameraAnim
+      value: 
+      objectReference: {fileID: 688371078}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a97c1afc11461d48b6bbfcdf6c1e2a4, type: 3}
 --- !u!1 &1470353897 stripped
@@ -934,6 +938,10 @@ PrefabInstance:
       propertyPath: _playerUI
       value: 
       objectReference: {fileID: 8997959141834221240}
+    - target: {fileID: 5336107800766398805, guid: 71e3256d9c4736446ba6960209b094bd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71e3256d9c4736446ba6960209b094bd, type: 3}
 --- !u!114 &1922270366 stripped
