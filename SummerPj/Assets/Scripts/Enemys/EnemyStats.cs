@@ -6,13 +6,16 @@ public class EnemyStats : CharacterStatsManager
 {
 
     public UIEnemyHealthBar _enemyHealthBar;
+    public EnemyManager _enemyManager;
+    public IdleState _idleState;
+
     EnemyBossManager _enemyBossManager;
     EnemyAnimatorManager _enemyAnimatorManager;
-    public bool _isBoss;
-    public EnemyManager _enemyManager;
     CharacterStatsManager _characterState;
+    CapsuleCollider _thisCollider;
+
+    public bool _isBoss;
     public string _PhaseAnim;
-    public IdleState _idleState;
 
     private void Awake()
     {
@@ -26,6 +29,7 @@ public class EnemyStats : CharacterStatsManager
 
     private void Start()
     {
+        _thisCollider = FindObjectOfType<CapsuleCollider>();
         if(!_isBoss)
         {
             _enemyHealthBar.SetMaXHealth(_maxHealth);
@@ -92,6 +96,7 @@ public class EnemyStats : CharacterStatsManager
             _currentHealth = 0;
             _enemyAnimatorManager.PlayTargetAnimation("Dead", true);
             _isDead = true;
+            _thisCollider.enabled = false;
         }
 
     }
