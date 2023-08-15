@@ -229,8 +229,6 @@ public class CameraHandler : MonoBehaviour
     public void PlayerMode()
     {
         _mode = CameraMode.Game;
-        transform.position = _targetTransform.position;
-        transform.rotation = Quaternion.identity;
         ClearLockOnTargets();
         _playerUI.gameObject.SetActive(true);
     }
@@ -238,8 +236,6 @@ public class CameraHandler : MonoBehaviour
     public void ScenematicMode()
     {
         _mode = CameraMode.Scenematic;
-        transform.position = Vector3.zero;
-        transform.rotation = Quaternion.identity;
         _playerUI.gameObject.SetActive(false);
     }
 }

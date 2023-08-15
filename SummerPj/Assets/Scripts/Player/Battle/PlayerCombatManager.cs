@@ -21,6 +21,8 @@ public class PlayerCombatManager : MonoBehaviour
     LayerMask riposteLayer = 1 << 12;
     LayerMask backStabLayer = 1 << 11;
 
+    public Animator _cameraAnim;
+
     private void Awake()
     {
         _cameraHandler = FindObjectOfType<CameraHandler>();
@@ -125,6 +127,8 @@ public class PlayerCombatManager : MonoBehaviour
     public void HandleUltimateAction()
     {
         PerformUltimateAction(_playerInventoryManager._currentWeapon);
+        _cameraAnim.Play("SwordSkillCinematic");
+        _cameraAnim.applyRootMotion = true;
     }
     #endregion
 

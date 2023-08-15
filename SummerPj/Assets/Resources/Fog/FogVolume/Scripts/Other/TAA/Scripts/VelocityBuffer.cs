@@ -90,7 +90,7 @@ namespace FogVolumePlaydeadTAA
 
         void OnPreRender()
         {
-           // EnsureDepthTexture(_camera);
+           // EnsureDepthTexture(_cameraHandler);
         }
 
         //void OnPostRender()
