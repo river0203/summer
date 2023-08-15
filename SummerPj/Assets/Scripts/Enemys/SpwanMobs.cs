@@ -28,7 +28,7 @@ public class SpwanMobs : MonoBehaviour
         while (_spawnCount < _spawnMobs)
         {
             // 생성 위치 부분에 위에서 만든 함수 Return_RandomPosition() 함수 대입
-            GameObject instantCapsul = Instantiate(_mobs, Return_RandomPosition(), Quaternion.identity);
+            GameObject instantMobs = Instantiate(_mobs, Return_RandomPosition(), Quaternion.identity);
             _spawnCount++;
         }
         

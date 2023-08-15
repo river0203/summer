@@ -81,7 +81,7 @@ public class DamageCollider : MonoBehaviour
             }
         }
 
-        if (collision.tag == "Mobs")
+        if(collision.tag == "Mobs")
         {
             MobState mobStats = collision.GetComponent<MobState>();
             CharacterEffectsManager _characterEffectsManager = collision.GetComponent<CharacterEffectsManager>();

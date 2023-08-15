@@ -1,15 +1,10 @@
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
-using System;
 
 public class SettingSaving : MonoBehaviour
 {
     LightingSettings _lightingSettings;
-    PlayerInputAction _inputActions;
     Light _light;
 
     [SerializeField] float _soundVolume = 1;
@@ -18,6 +13,8 @@ public class SettingSaving : MonoBehaviour
     [SerializeField] float _sensitivity_x = 1f;
     [SerializeField] float _sensitivity_y = 1f;
     [SerializeField] bool _Shadow = true;
+
+    [SerializeField] GameObject _shadowCheckImage;
 
     [SerializeField] Text _soundVolumeText;
     [SerializeField] Text _FOVText;
@@ -29,7 +26,6 @@ public class SettingSaving : MonoBehaviour
     private void Awake()
     {
         _light = FindAnyObjectByType<Light>();
-        _inputActions = new PlayerInputAction();
         _lightingSettings = new LightingSettings();
 
         DontDestroyOnLoad(gameObject);
@@ -99,38 +95,38 @@ public class SettingSaving : MonoBehaviour
     public void ChangeFOV(float value)
     {
         _FOV = value;
-        _FOVText.text = "FOV : " + value;
+
+        if(_FOVText != null)
+            _FOVText.text = "FOV : " + value;
     }
 
     public void ChangeBright(float value) 
     { 
         _Bright = value;
-        _BrightText.text = "π‡±‚ : " + value;
+
+        if(_BrightText != null)
+            _BrightText.text = "π‡±‚ : " + value;
     }
 
     public void ChangeXSensitivity(float value)
     {
         _sensitivity_x = value;
-        _sensitivity_X_Text.text = "X√‡ πŒ∞®µµ : " + value;
+
+        if(_sensitivity_X_Text != null)
+            _sensitivity_X_Text.text = "X√‡ πŒ∞®µµ : " + value;
     }
 
     public void ChangeYSensitivity(float value)
     {
         _sensitivity_y = value;
-        _sensitivity_Y_Text.text= "Y√‡ πŒ∞®µµ : " + value;
+
+        if(_sensitivity_Y_Text != null)
+            _sensitivity_Y_Text.text= "Y√‡ πŒ∞®µµ : " + value;
     }
 
     public void ChangeShadow()
     {
-        if(_Shadow)
-        {
-            _Shadow = false;
-        }
-        else
-        {
-            _Shadow = true;
-        }
-        
-        // æ∆¿Ãƒ‹ ∫Ø∞Ê
+        _Shadow = _Shadow ? false : true;
+        _shadowCheckImage.SetActive(_Shadow);
     }
 }

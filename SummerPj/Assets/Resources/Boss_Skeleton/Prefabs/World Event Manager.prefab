@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2558086216769696099}
   - component: {fileID: 1802968657}
   - component: {fileID: 1802968656}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: World Event Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rangeObject: {fileID: 2558086216769696098}
-  _mobs: {fileID: 0}
+  _mobs: {fileID: 437459122778293980, guid: 7a4fed8eb5480c84588e0d710e618aa7, type: 3}
   _spawnMobs: 3
 --- !u!65 &1802968656
 BoxCollider:
