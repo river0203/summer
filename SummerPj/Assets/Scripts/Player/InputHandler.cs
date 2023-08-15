@@ -224,6 +224,11 @@ public class InputHandler : MonoBehaviour
         {
             _playerCombatManager.HandleLTAction();
         }
+
+        if(_playerManager.isBlocking)
+        {
+
+        }
     }
 
     private void HandleQuickSlotsInput()

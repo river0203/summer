@@ -41,10 +41,14 @@ public class DamageCollider : MonoBehaviour
                     return;
                 }
             }
-
+            else if(_playercharacterManager != null)
+            {
+                playerStats.TakeDamage(10, "Block Guard");
+            }
             if (playerStats != null)
             {
                 if (_playercharacterManager.isInvulerable) return;
+
                 Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                 _playerEffectsManager.PlayBloodSplatterFX(contactPoint);
 
